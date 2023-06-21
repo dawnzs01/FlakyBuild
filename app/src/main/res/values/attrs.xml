@@ -1,44 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="progress_horizontal_drawable" format="reference" />
+    <!-- Can't refer to colors directly in drawable's xml-->
+    <attr name="toolbar_shadow" format="reference" />
+    <attr name="selector" format="reference" />
+    <attr name="checked_selector" format="reference" />
+    <attr name="focused_selector" format="reference" />
+    <attr name="dashed_border" format="reference" />
 
-    <attr name="title" format="string|reference"/>
-    <attr name="icon" format="reference"/>
-    <attr name="drawer_item_text_color" format="color|reference"/>
-    <attr name="drawer_group_text_color" format="color|reference"/>
-    <attr name="itemBackgroundDark" format="color|reference"/>
+    <attr name="actionColor" format="color" />
+    <attr name="separator_color" format="color" />
+    <attr name="contrast_background_color" format="color" />
+    <attr name="windowBackground" format="color" />
+    <attr name="colorPrimary" format="color" />
+    <attr name="toolbarSearchColor" format="reference|color" />
 
-    <declare-styleable name="ToolbarMenuItem">
-        <attr name="text" format="string|reference"/>
-        <attr name="icon"/>
-        <attr name="icon_color" format="color|reference"/>
-    </declare-styleable>
-
-    <declare-styleable name="PrefSwitch">
-        <attr name="key" format="string|reference"/>
-        <attr name="default_value" format="boolean"/>
-    </declare-styleable>
-
-    <declare-styleable name="DrawerMenuItem">
-        <attr name="title"/>
-        <attr name="icon"/>
-        <attr name="with_switch" format="boolean"/>
-        <attr name="pref_key" format="string|reference"/>
-        <attr name="anti_shake" format="boolean"/>
-    </declare-styleable>
-
-    <declare-styleable name="DrawerMenuGroup">
-        <attr name="title"/>
-    </declare-styleable>
-
-    <declare-styleable name="CircularActionMenu">
-        <attr name="cam_radius" format="dimension|reference"/>
-        <attr name="cam_angle" format="integer"/>
-    </declare-styleable>
-
-    <declare-styleable name="ImageText">
-        <attr name="text"/>
-        <attr name="altSrc"/>
-        <attr name="image_width" format="dimension|reference"/>
-    </declare-styleable>
-
+    <attr name="card_item_background_color" format="color" />
+    <attr name="card_item_contrast_color" format="color" />
+    <attr name="border_color" format="color" />
 </resources>
