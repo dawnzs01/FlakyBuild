@@ -23,8 +23,8 @@ import com.google.cloud.bigquery.FieldValueList;
 import com.google.cloud.bigquery.QueryJobConfiguration;
 import com.google.cloud.bigquery.TableId;
 import com.google.cloud.bigquery.TableResult;
-import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.junit.jupiter.api.AfterEach;
@@ -56,9 +56,9 @@ class BigQuerySampleApplicationIntegrationTests {
 
   private static final String DATASET_NAME = "test_dataset";
 
-  private static final String TABLE_NAME = "bigquery_sample_test_table";
+  private static final String TABLE_NAME_PREFIX = "bigquery_sample_test_table";
 
-  private static final String JSON_TEST_TABLE_NAME = "bigquery_sample_json_test_table";
+  private static String TABLE_NAME;
 
   @Autowired BigQuery bigQuery;
 
@@ -70,24 +70,34 @@ class BigQuerySampleApplicationIntegrationTests {
   @Value("classpath:test.json")
   Resource jsonFile;
 
-  @BeforeEach
   @AfterEach
   void cleanupTestEnvironment() {
     // Clear the previous dataset before beginning the test.
     this.bigQuery.delete(TableId.of(DATASET_NAME, TABLE_NAME));
-    this.bigQuery.delete(TableId.of(DATASET_NAME, JSON_TEST_TABLE_NAME));
+  }
+
+  @BeforeEach
+  void setTableName() {
+    // adds a 5 char pseudo rand number suffix to make the table name unique before every run
+    TABLE_NAME = TABLE_NAME_PREFIX + getRandSuffix();
+  }
+
+  // returns a 5 char pseudo rand number suffix
+  private String getRandSuffix() {
+    return UUID.randomUUID().toString().substring(0, 5);
   }
 
   @Test
   void testJsonTextUpload() throws InterruptedException {
     String jsonTxt =
-        "{\"CompanyName\":\"TALES\",\"Description\":\"mark\",\"SerialNumber\":97,\"Leave\":0,\"EmpName\":\"Mark\"}\n"
-            + "{\"CompanyName\":\"1Q84\",\"Description\":\"ark\",\"SerialNumber\":978,\"Leave\":0,\"EmpName\":\"HARUKI\"}\n"
-            + "{\"CompanyName\":\"MY\",\"Description\":\"M\",\"SerialNumber\":9780,\"Leave\":0,\"EmpName\":\"Mark\"}";
+        """
+            {"CompanyName":"TALES","Description":"mark","SerialNumber":97,"Leave":0,"EmpName":"Mark"}
+            {"CompanyName":"1Q84","Description":"ark","SerialNumber":978,"Leave":0,"EmpName":"HARUKI"}
+            {"CompanyName":"MY","Description":"M","SerialNumber":9780,"Leave":0,"EmpName":"Mark"}""";
 
     LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
     map.add("jsonRows", jsonTxt);
-    map.add("tableName", JSON_TEST_TABLE_NAME);
+    map.add("tableName", TABLE_NAME);
     map.add("createTable", "createTable");
 
     HttpHeaders headers = new HttpHeaders();
@@ -97,25 +107,21 @@ class BigQuerySampleApplicationIntegrationTests {
     assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
     QueryJobConfiguration queryJobConfiguration =
         QueryJobConfiguration.newBuilder(
-                "SELECT * FROM "
-                    + DATASET_NAME
-                    + "."
-                    + JSON_TEST_TABLE_NAME
-                    + " order by SerialNumber desc")
+                "SELECT * FROM " + DATASET_NAME + "." + TABLE_NAME + " order by SerialNumber desc")
             .build();
 
     TableResult queryResult = this.bigQuery.query(queryJobConfiguration);
     assertThat(queryResult.getTotalRows()).isEqualTo(3);
     FieldValueList row = queryResult.getValues().iterator().next(); // match the first record
-    assertThat(row.get("SerialNumber").getLongValue() == 9780);
+    assertThat(row.get("SerialNumber").getLongValue()).isEqualTo(9780L);
     assertThat(row.get("EmpName").getStringValue()).isEqualTo("Mark");
   }
 
   @Test
-  void testJsonFileUpload() throws InterruptedException, IOException {
+  void testJsonFileUpload() throws InterruptedException {
     LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
     map.add("file", jsonFile);
-    map.add("tableName", JSON_TEST_TABLE_NAME);
+    map.add("tableName", TABLE_NAME);
     map.add("createTable", "createTable");
 
     HttpHeaders headers = new HttpHeaders();
@@ -128,22 +134,18 @@ class BigQuerySampleApplicationIntegrationTests {
 
     QueryJobConfiguration queryJobConfiguration =
         QueryJobConfiguration.newBuilder(
-                "SELECT * FROM "
-                    + DATASET_NAME
-                    + "."
-                    + JSON_TEST_TABLE_NAME
-                    + " order by SerialNumber desc")
+                "SELECT * FROM " + DATASET_NAME + "." + TABLE_NAME + " order by SerialNumber desc")
             .build();
 
     TableResult queryResult = this.bigQuery.query(queryJobConfiguration);
     assertThat(queryResult.getTotalRows()).isEqualTo(3);
     FieldValueList row = queryResult.getValues().iterator().next(); // match the first record
-    assertThat(row.get("SerialNumber").getLongValue() == 9780);
+    assertThat(row.get("SerialNumber").getLongValue()).isEqualTo(9780L);
     assertThat(row.get("EmpName").getStringValue()).isEqualTo("Mark");
   }
 
   @Test
-  void testFileUpload() throws InterruptedException, IOException {
+  void testFileUpload() throws InterruptedException {
     LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
     map.add("file", csvFile);
     map.add("tableName", TABLE_NAME);

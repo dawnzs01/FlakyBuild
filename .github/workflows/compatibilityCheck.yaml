@@ -1,19 +1,21 @@
 name: Compatibility Check
 
 on:
-  workflow_dispatch:
-    inputs:
-      mavenRepository:
-        description: 'URL of a Maven repository that holds dependencies to confirm'
-        required: true
-        type: string
-      mavenDependencies:
-        description: 'Key-value pairs of dependencies for Java'
-        required: true
-        type: string
-        
-  schedule:
-    - cron: '05 8 * * *' # 08:00 UTC every day
+  push:
+    branches: [ spring-cloud-gcp ]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 jobs:
   integrationTests:
@@ -47,7 +49,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d' --utc)"
+        run: echo "date=$(date +'%Y-%m-%d' --utc)" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v2
       - name: Read inputs
         run: |

@@ -1,14 +1,14 @@
 ## Cloud SQL
 
-Spring Cloud GCP adds integrations with [Spring
+Spring Framework on Google Cloud adds integrations with [Spring
 JDBC](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html)
 and [Spring
 R2DBC](https://docs.spring.io/spring-data/r2dbc/docs/current/reference/html/#r2dbc.core)
 so you can run your MySQL or PostgreSQL databases in [Google Cloud
 SQL](https://cloud.google.com/sql) using Spring JDBC and other libraries
-that depend on it like Spring Data JPA or Spring Data R2DBC.
+that depend on it like Spring Data JPA or Spring Data R2DBC (only R2DBC PostgreSQL is supported).
 
-The Cloud SQL support is provided by Spring Cloud GCP in the form of two
+The Cloud SQL support is provided by Spring Framework on Google Cloud in the form of two
 Spring Boot starters, one for MySQL and another one for PostgreSQL. The
 role of the starters is to read configuration from properties and assume
 default settings so that user experience connecting to MySQL and
@@ -16,8 +16,8 @@ PostgreSQL is as simple as possible.
 
 ### JDBC Support
 
-Maven and Gradle coordinates, using [Spring Cloud GCP
-BOM](getting-started.xml#bill-of-materials):
+Maven and Gradle coordinates,
+using [Spring Framework on Google Cloud BOM](getting-started.xml#bill-of-materials):
 
 To use MySQL:
 
@@ -48,7 +48,7 @@ To use PostgreSQL:
 #### Prerequisites
 
 In order to use the Spring Boot Starters for Google Cloud SQL, the
-Google Cloud SQL API must be enabled in your GCP project.
+Google Cloud SQL API must be enabled in your Google Cloud project.
 
 To do that, go to the [API library
 page](https://console.cloud.google.com/apis/library) of the Google Cloud
@@ -57,7 +57,7 @@ Console, search for "Cloud SQL API" and enable the option that is called
 
 #### Spring Boot Starter for Google Cloud SQL
 
-The Spring Boot Starters for Google Cloud SQL provide an auto-configured
+The Spring Boot Starters for Google Cloud SQL provide an autoconfigured
 [`DataSource`](https://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html)
 object. Coupled with Spring JDBC, it provides a
 [`JdbcTemplate`](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html#jdbc-JdbcTemplate)
@@ -71,7 +71,7 @@ public List<Map<String, Object>> listUsers() {
 ```
 
 You can rely on [Spring Boot data source
-auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-connect-to-production-database)
+autoconfiguration](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-connect-to-production-database)
 to configure a `DataSource` bean. In other words, properties like the
 SQL username, `spring.datasource.username`, and password,
 `spring.datasource.password` can be used. There is also some
@@ -88,7 +88,7 @@ Properties" section below).
 <div class="note">
 
 If you provide your own `spring.datasource.url`, it will be ignored,
-unless you disable Cloud SQL auto configuration with
+unless you disable Cloud SQL autoconfiguration with
 `spring.cloud.gcp.sql.enabled=false` or
 `spring.cloud.gcp.sql.jdbc.enabled=false`.
 
@@ -118,60 +118,22 @@ database with as little as a database and instance names.
 
 ### R2DBC Support
 
-Maven and Gradle coordinates, using [Spring Cloud GCP
+Maven and Gradle coordinates, using [Spring Framework on Google Cloud
 BOM](getting-started.xml#bill-of-materials):
 
-To use MySQL:
+To use PostgreSQL:
 
 ``` xml
 <dependency>
-    <groupId>com.google.cloud</groupId>
-    <artifactId>spring-cloud-gcp-starter-sql-mysql-r2dbc</artifactId>
-</dependency>
-```
-
-    dependencies {
-        implementation("com.google.cloud:spring-cloud-gcp-starter-sql-mysql-r2dbc")
-    }
-
-To use PostgreSQL with Spring Boot 2.6:
-
-``` xml
-<dependency>
-    <groupId>com.google.cloud</groupId>
-    <artifactId>spring-cloud-gcp-starter-sql-postgres-r2dbc</artifactId>
-</dependency>
-```
-
-    dependencies {
-        implementation("com.google.cloud:spring-cloud-gcp-starter-sql-postgres-r2dbc")
-    }
-
-To use PostgreSQL with Spring Boot 2.7 (the latest version of the Postgres R2DBC driver changed its Maven coordinates):
-
-``` xml
-<dependency>
-    <groupId>com.google.cloud</groupId>
-    <artifactId>spring-cloud-gcp-starter-sql-postgres-r2dbc</artifactId>
-    <exclusions>
-        <exclusion>
-            <groupId>io.r2dbc</groupId>
-            <artifactId>r2dbc-postgresql</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-
-<dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>r2dbc-postgresql</artifactId>
-    <version>0.9.1.RELEASE</version>
+  <groupId>com.google.cloud</groupId>
+  <artifactId>spring-cloud-gcp-starter-sql-postgres-r2dbc</artifactId>
 </dependency>
 ```
 
 #### Prerequisites
 
 In order to use the Spring Boot Starters for Google Cloud SQL, the
-Google Cloud SQL API must be enabled in your GCP project.
+Google Cloud SQL API must be enabled in your Google Cloud project.
 
 To do that, go to the [API library
 page](https://console.cloud.google.com/apis/library) of the Google Cloud
@@ -205,16 +167,16 @@ Standard R2DBC properties like the SQL username,
 used. There is also some configuration specific to Google Cloud SQL (see
 "Cloud SQL Configuration Properties" section below).
 
-|                         |                   |          |                                       |
-| ----------------------- | ----------------- | -------- | ------------------------------------- |
-| Property name           | Description       | Required | Default value                         |
-| `spring.r2dbc.username` | Database username | No       | MySQL: `root`; PostgreSQL: `postgres` |
-| `spring.r2dbc.password` | Database password | No       | `null`                                |
+|                         |                   |          |                                      |
+| ----------------------- | ----------------- | -------- | ------------------------------------ |
+| Property name           | Description       | Required | Default value                        |
+| `spring.r2dbc.username` | Database username | No       | `postgres` |
+| `spring.r2dbc.password` | Database password | No       | `null`                               |
 
 <div class="note">
 
 If you provide your own `spring.r2dbc.url`, it will be ignored, unless
-you disable Cloud SQL auto-configuration for R2DBC with
+you disable Cloud SQL autoconfiguration for R2DBC with
 `spring.cloud.gcp.sql.enabled=false` or
 `spring.cloud.gcp.sql.r2dbc.enabled=false` .
 
@@ -222,7 +184,7 @@ you disable Cloud SQL auto-configuration for R2DBC with
 
 ##### `ConnectionFactory` creation flow
 
-Spring Cloud GCP starter for Google Cloud SQL registers a
+Spring Framework on Google Cloud starter for Google Cloud SQL registers a
 `R2dbcCloudSqlEnvironmentPostProcessor` that provides a correctly
 formatted `spring.r2dbc.url` property to the environment based on the
 properties mentioned above. It also provides a default value for
@@ -271,8 +233,8 @@ the following to enable it:
 | `spring.cloud.gcp.sql.database-name`            | Name of the database to connect to.                                                                                                                                                                                                                                                                                                       | Yes      |                                                             |
 | `spring.cloud.gcp.sql.instance-connection-name` | A string containing a Google Cloud SQL instance’s project ID, region and name, each separated by a colon.                                                                                                                                                                                                                                 | Yes      | For example, `my-project-id:my-region:my-instance-name`.    |
 | `spring.cloud.gcp.sql.ip-types`                 | Allows you to specify a comma delimited list of preferred IP types for connecting to a Cloud SQL instance. Left unconfigured Cloud SQL Socket Factory will default it to `PUBLIC,PRIVATE`. See [Cloud SQL Socket Factory - Specifying IP Types](https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory#specifying-ip-types) | No       | `PUBLIC,PRIVATE`                                            |
-| `spring.cloud.gcp.sql.credentials.location`     | File system path to the Google OAuth2 credentials private key file. Used to authenticate and authorize new connections to a Google Cloud SQL instance.                                                                                                                                                                                    | No       | Default credentials provided by the Spring GCP Boot starter |
-| `spring.cloud.gcp.sql.credentials.encoded-key`  | Base64-encoded contents of OAuth2 account private key in JSON format. Used to authenticate and authorize new connections to a Google Cloud SQL instance.                                                                                                                                                                                  | No       | Default credentials provided by the Spring GCP Boot starter |
+| `spring.cloud.gcp.sql.credentials.location`     | File system path to the Google OAuth2 credentials private key file. Used to authenticate and authorize new connections to a Google Cloud SQL instance.                                                                                                                                                                                    | No       | Default credentials provided by the Spring Framework on Google Cloud Core Starter |
+| `spring.cloud.gcp.sql.credentials.encoded-key`  | Base64-encoded contents of OAuth2 account private key in JSON format. Used to authenticate and authorize new connections to a Google Cloud SQL instance.                                                                                                                                                                                  | No       | Default credentials provided by the Spring Framework on Google Cloud Core Starter |
 | `spring.cloud.gcp.sql.enableIamAuth`            | Specifies whether to enable IAM database authentication (PostgreSQL only).                                                                                                                                                                                                                                                                | No       | `False`                                                     |
 
 ### Troubleshooting tips
@@ -330,20 +292,17 @@ example, in Maven:
 
 Available sample applications and codelabs:
 
-  - [Spring Cloud GCP
+  - [Spring Framework on Google Cloud
     MySQL](https://github.com/GoogleCloudPlatform/spring-cloud-gcp/tree/main/spring-cloud-gcp-samples/spring-cloud-gcp-sql-mysql-sample)
 
-  - [Spring Cloud GCP
+  - [Spring Framework on Google Cloud
     PostgreSQL](https://github.com/GoogleCloudPlatform/spring-cloud-gcp/tree/main/spring-cloud-gcp-samples/spring-cloud-gcp-sql-postgres-sample)
 
-  - [Spring Data JPA with Spring Cloud GCP
+  - [Spring Data JPA with Spring Framework on Google Cloud
     SQL](https://github.com/GoogleCloudPlatform/spring-cloud-gcp/tree/main/spring-cloud-gcp-samples/spring-cloud-gcp-data-jpa-sample)
 
   - Codelab: [Spring Pet Clinic using Cloud
     SQL](https://codelabs.developers.google.com/codelabs/cloud-spring-petclinic-cloudsql/index.html)
 
-  - [R2DBC: Spring Cloud GCP
-    MySQL](https://github.com/GoogleCloudPlatform/spring-cloud-gcp/tree/main/spring-cloud-gcp-samples/spring-cloud-gcp-sql-mysql-r2dbc-sample)
-
-  - [R2DBC: Spring Cloud GCP
+  - [R2DBC: Spring Framework on Google Cloud
     PostgreSQL](https://github.com/GoogleCloudPlatform/spring-cloud-gcp/tree/main/spring-cloud-gcp-samples/spring-cloud-gcp-sql-postgres-r2dbc-sample)

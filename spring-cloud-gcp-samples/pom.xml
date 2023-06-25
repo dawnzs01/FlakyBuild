@@ -6,35 +6,29 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.4</version>
+		<version>3.0.6</version>
 		<relativePath/>
 	</parent>
 
-	<name>Spring Cloud GCP Code Samples</name>
+	<name>Spring Framework on Google Cloud Code Samples</name>
 	<artifactId>spring-cloud-gcp-samples</artifactId>
 	<groupId>com.google.cloud</groupId>
-	<version>3.5.0-SNAPSHOT</version>
-
+	<version>4.5.1-SNAPSHOT</version><!-- {x-version-update:spring-cloud-gcp:current} -->
 	<packaging>pom</packaging>
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
 		<main.basedir>${basedir}/..</main.basedir>
 
-		<!-- Dependency versions -->
-		<spring-native.version>0.12.1</spring-native.version>
-		<google-cloud-graalvm-support.version>0.7.0</google-cloud-graalvm-support.version>
-		<testcontainers.version>1.17.5</testcontainers.version>
-
 		<!-- Checkstyle versions. Keep in sync with ../pom.xml -->
-		<maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
+		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
 		<checkstyle-rules.version>9.3</checkstyle-rules.version>
 
 		<!-- App engine plugin version, used to deploy sample apps -->
 		<app-engine-maven-plugin.version>2.4.4</app-engine-maven-plugin.version>
 
 		<!-- Deploy plugin is skipped for all samples but exists -->
-		<maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
+		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
 
 		<integration-test.pattern>**/*IntegrationTest*</integration-test.pattern>
 		<integration-test.tags.include/>
@@ -66,13 +60,10 @@
 		<module>spring-cloud-gcp-pubsub-bus-config-sample</module>
 		<module>spring-cloud-gcp-pubsub-stream-dead-letter-sample</module>
 		<module>spring-cloud-gcp-pubsub-stream-functional-sample</module>
-		<module>spring-cloud-gcp-pubsub-stream-polling-sample</module>
-		<module>spring-cloud-gcp-pubsub-stream-sample</module>
 		<module>spring-cloud-gcp-pubsub-reactive-sample</module>
 		<module>spring-cloud-gcp-integration-pubsub-json-sample</module>
 		<module>spring-cloud-gcp-security-iap-sample</module>
 		<module>spring-cloud-gcp-sql-postgres-sample</module>
-		<module>spring-cloud-gcp-sql-mysql-r2dbc-sample</module>
 		<module>spring-cloud-gcp-sql-postgres-r2dbc-sample</module>
 		<module>spring-cloud-gcp-vision-ocr-demo</module>
 		<module>spring-cloud-gcp-firestore-sample</module>
@@ -87,6 +78,55 @@
 	</modules>
 
 	<profiles>
+		<profile>
+			<id>native-sample-config</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<buildArgs>
+								<buildArg>--trace-class-initialization=org.apache.commons.logging.LogFactoryService</buildArg>
+								<buildArg>--initialize-at-build-time=org.apache.commons.logging.LogFactory</buildArg>
+							</buildArgs>
+						</configuration>
+						<executions>
+							<execution>
+								<id>build-native</id>
+								<goals>
+									<goal>compile-no-fork</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>nativeTest</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/#integration-tests.no-starter-parent -->
+							<classesDirectory>${project.build.outputDirectory}</classesDirectory>
+							<excludes combine.self="override" />
+							<includes>
+								<!--including all integration tests for testing purposes.-->
+								<include>${integration-test.pattern}</include>
+							</includes>
+							<systemPropertyVariables>
+								<it.logging>true</it.logging>
+							</systemPropertyVariables>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>spring-cloud-gcp-ci-it</id>
 			<build>
@@ -112,17 +152,6 @@
 		</profile>
 	</profiles>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.testcontainers</groupId>
-				<artifactId>testcontainers-bom</artifactId>
-				<version>${testcontainers.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	<dependencies>
 		<!-- Needed for running JUnit 4 tests when depending on Spring Boot Ilford. -->
 		<dependency>
@@ -136,6 +165,12 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.graalvm.buildtools</groupId>
+					<artifactId>native-maven-plugin</artifactId>
+					<version>0.9.22</version>
+					<extensions>true</extensions>
+				</plugin>
 				<plugin>
 					<groupId>com.google.cloud.tools</groupId>
 					<artifactId>appengine-maven-plugin</artifactId>

@@ -20,6 +20,7 @@ import com.google.cloud.spanner.DatabaseClient;
 import com.google.cloud.spring.data.spanner.core.SpannerTransactionManager;
 import java.util.function.Supplier;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,22 +28,24 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;
 import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * Auto-configuration for {@link SpannerTransactionManager}.
  *
  * @since 1.1
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @ConditionalOnClass(SpannerTransactionManager.class)
 @ConditionalOnProperty(value = "spring.cloud.gcp.spanner.enabled", matchIfMissing = true)
 @AutoConfigureBefore(TransactionAutoConfiguration.class)
 public class SpannerTransactionManagerAutoConfiguration {
 
+  private SpannerTransactionManagerAutoConfiguration() {
+
+  }
+
   /** Config settings. */
-  @Configuration(proxyBeanMethods = false)
+  @AutoConfiguration
   static class DatabaseClientTransactionManagerConfiguration {
 
     private final Supplier<DatabaseClient> databaseClientProvider;
@@ -57,7 +60,7 @@ public class SpannerTransactionManagerAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(PlatformTransactionManager.class)
+    @ConditionalOnMissingBean
     public SpannerTransactionManager spannerTransactionManager() {
       SpannerTransactionManager transactionManager =
           new SpannerTransactionManager(this.databaseClientProvider);

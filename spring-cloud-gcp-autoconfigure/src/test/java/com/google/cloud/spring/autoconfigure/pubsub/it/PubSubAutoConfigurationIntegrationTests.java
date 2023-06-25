@@ -50,10 +50,10 @@ class PubSubAutoConfigurationIntegrationTests {
 
   private static GcpProjectIdProvider projectIdProvider;
 
-  private String fullSubscriptionNameSub1 = "projects/" + projectIdProvider.getProjectId() + "/subscriptions/test-sub-1";
-  private String fullSubscriptionNameSub2 = "projects/" + projectIdProvider.getProjectId() + "/subscriptions/test-sub-2";
+  private final String fullSubscriptionNameSub1 = "projects/" + projectIdProvider.getProjectId() + "/subscriptions/test-sub-1";
+  private final String fullSubscriptionNameSub2 = "projects/" + projectIdProvider.getProjectId() + "/subscriptions/test-sub-2";
 
-  private ApplicationContextRunner contextRunner =
+  private final ApplicationContextRunner contextRunner =
       new ApplicationContextRunner()
           .withPropertyValues(
               "spring.cloud.gcp.pubsub.subscriber.retryableCodes=INTERNAL",
@@ -67,6 +67,7 @@ class PubSubAutoConfigurationIntegrationTests {
               "spring.cloud.gcp.pubsub.subscription.fully-qualified-test-sub-1-with-project-abc.retry.initial-rpc-timeout-seconds=600",
               "spring.cloud.gcp.pubsub.subscription.fully-qualified-test-sub-1-with-project-abc.retry.rpc-timeout-multiplier=1",
               "spring.cloud.gcp.pubsub.subscription.fully-qualified-test-sub-1-with-project-abc.retry.max-rpc-timeout-seconds=600",
+              "spring.cloud.gcp.pubsub.subscription.fully-qualified-test-sub-1-with-project-abc.pull-endpoint=northamerica-northeast2-pubsub.googleapis.com:443",
               "spring.cloud.gcp.pubsub.subscription.test-sub-2.executor-threads=1",
               "spring.cloud.gcp.pubsub.subscription.test-sub-2.max-ack-extension-period=0",
               "spring.cloud.gcp.pubsub.subscription.test-sub-2.min-duration-per-ack-extension=1",
@@ -74,7 +75,8 @@ class PubSubAutoConfigurationIntegrationTests {
               "spring.cloud.gcp.pubsub.subscription.test-sub-2.parallel-pull-count=1",
               "spring.cloud.gcp.pubsub.subscription.test-sub-2.flow-control.max-outstanding-element-Count=1",
               "spring.cloud.gcp.pubsub.subscription.test-sub-2.flow-control.max-outstanding-request-Bytes=1",
-              "spring.cloud.gcp.pubsub.subscription.test-sub-2.flow-control.limit-exceeded-behavior=Ignore")
+              "spring.cloud.gcp.pubsub.subscription.test-sub-2.flow-control.limit-exceeded-behavior=Ignore",
+              "spring.cloud.gcp.pubsub.subscription.test-sub-2.pull-endpoint=bad.endpoint")
           .withConfiguration(
               AutoConfigurations.of(
                   GcpContextAutoConfiguration.class, GcpPubSubAutoConfiguration.class));
@@ -125,7 +127,7 @@ class PubSubAutoConfigurationIntegrationTests {
                   .build();
           PubSubConfiguration.Retry retry =
               gcpPubSubProperties.computeSubscriberRetrySettings(
-                  subscriptionName, projectId);
+                  ProjectSubscriptionName.of(projectId, subscriptionName));
           assertThat(retry.getTotalTimeoutSeconds()).isEqualTo(600L);
           assertThat(retry.getInitialRetryDelaySeconds()).isEqualTo(100L);
           assertThat(retry.getRetryDelayMultiplier()).isEqualTo(1.3);
@@ -147,10 +149,12 @@ class PubSubAutoConfigurationIntegrationTests {
               .isNotNull();
           assertThat((ExecutorProvider) context.getBean("globalSubscriberExecutorProvider"))
               .isNotNull();
-          assertThat(
-                  gcpPubSubProperties.computeRetryableCodes(
-                      "test-sub-1", projectId))
+          assertThat(gcpPubSubProperties.computeRetryableCodes(subscriptionName, projectId))
               .isEqualTo(new Code[] {Code.INTERNAL});
+          assertThat(gcpPubSubProperties.computePullEndpoint(fullSubscriptionNameSub1, projectId))
+              .isEqualTo("northamerica-northeast2-pubsub.googleapis.com:443");
+          assertThat(gcpPubSubProperties.computePullEndpoint("test-sub-2", projectId))
+              .isEqualTo("bad.endpoint");
           assertThat((RetrySettings) context.getBean("subscriberRetrySettings-" + fullSubscriptionNameSub1))
               .isEqualTo(expectedRetrySettings);
 

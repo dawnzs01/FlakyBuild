@@ -1,13 +1,13 @@
-# Spring Cloud GCP
+# Spring Framework on Google Cloud
 
 **{project-version}**
 
 ## Introduction
 
-The Spring Cloud GCP project makes the Spring Framework a first-class
-citizen of Google Cloud Platform (GCP).
+The Spring Framework on Google Cloud project makes the Spring Framework a first-class
+citizen of Google Cloud .
 
-Spring Cloud GCP lets you leverage the power and simplicity of the
+Spring Framework on Google Cloud lets you leverage the power and simplicity of the
 Spring Framework to:
 
   - Publish and subscribe to Google Cloud Pub/Sub topics
@@ -24,7 +24,7 @@ Spring Framework to:
   - Exchange messages with Spring Integration using Google Cloud Pub/Sub
     on the background
 
-  - Trace the execution of your app with Spring Cloud Sleuth and Google
+  - Trace the execution of your app with Micrometer and Google
     Cloud Trace
 
   - Configure your app with Spring Cloud Config, backed up by the Google

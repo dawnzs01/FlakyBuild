@@ -133,19 +133,6 @@ public class PubSubConfiguration {
   }
 
   /**
-   * Returns properties for the specified subscription name and project ID.
-   *
-   * @param name short subscription name
-   * @param projectId subscription project name
-   * @return user-provided subscription properties
-   * @deprecated use {@link #getSubscriptionProperties(ProjectSubscriptionName)} instead.
-   */
-  @Deprecated
-  public Subscriber getSubscriber(String name, String projectId) {
-    return getSubscriptionProperties(PubSubSubscriptionUtils.toProjectSubscriptionName(name, projectId));
-  }
-
-  /**
    * Returns properties for the specified fully-qualified {@link ProjectSubscriptionName}.
    *
    * @param projectSubscriptionName fully-qualified {@link ProjectSubscriptionName}
@@ -159,22 +146,6 @@ public class PubSubConfiguration {
     }
 
     return globalSubscriber;
-  }
-
-  /**
-   * Computes flow control settings to use. The subscription-specific property takes precedence if
-   * both global and subscription-specific properties are set. If subscription-specific settings are
-   * not set then global settings are picked.
-   *
-   * @param subscriptionName subscription name
-   * @param projectId project id
-   * @return flow control settings
-   * @deprecated use {@link #computeSubscriberFlowControlSettings(ProjectSubscriptionName)}
-   */
-  @Deprecated
-  public FlowControl computeSubscriberFlowControlSettings(
-      String subscriptionName, String projectId) {
-    return computeSubscriberFlowControlSettings(ProjectSubscriptionName.of(projectId, subscriptionName));
   }
 
   /**
@@ -213,7 +184,7 @@ public class PubSubConfiguration {
    */
   public Integer computeParallelPullCount(String subscriptionName, String projectId) {
     Integer parallelPullCount =
-        getSubscriptionProperties(ProjectSubscriptionName.of(projectId, subscriptionName))
+        getSubscriptionProperties(PubSubSubscriptionUtils.toProjectSubscriptionName(subscriptionName, projectId))
             .getParallelPullCount();
 
     return parallelPullCount != null
@@ -232,7 +203,7 @@ public class PubSubConfiguration {
    */
   public Code[] computeRetryableCodes(String subscriptionName, String projectId) {
     Code[] retryableCodes =
-        getSubscriptionProperties(ProjectSubscriptionName.of(projectId, subscriptionName))
+        getSubscriptionProperties(PubSubSubscriptionUtils.toProjectSubscriptionName(subscriptionName, projectId))
             .getRetryableCodes();
     return retryableCodes != null ? retryableCodes : this.globalSubscriber.getRetryableCodes();
   }
@@ -248,7 +219,7 @@ public class PubSubConfiguration {
    */
   public Long computeMaxAckExtensionPeriod(String subscriptionName, String projectId) {
     Long maxAckExtensionPeriod =
-        getSubscriptionProperties(ProjectSubscriptionName.of(projectId, subscriptionName))
+        getSubscriptionProperties(PubSubSubscriptionUtils.toProjectSubscriptionName(subscriptionName, projectId))
         .getMaxAckExtensionPeriod();
 
     if (maxAckExtensionPeriod != null) {
@@ -272,7 +243,7 @@ public class PubSubConfiguration {
   @Nullable
   public Long computeMinDurationPerAckExtension(String subscriptionName, String projectId) {
     Long minDurationPerAckExtension =
-        getSubscriptionProperties(ProjectSubscriptionName.of(projectId, subscriptionName))
+        getSubscriptionProperties(PubSubSubscriptionUtils.toProjectSubscriptionName(subscriptionName, projectId))
             .getMinDurationPerAckExtension();
 
     if (minDurationPerAckExtension != null) {
@@ -294,7 +265,7 @@ public class PubSubConfiguration {
   @Nullable
   public Long computeMaxDurationPerAckExtension(String subscriptionName, String projectId) {
     Long maxDurationPerAckExtension =
-        getSubscriptionProperties(ProjectSubscriptionName.of(projectId, subscriptionName))
+        getSubscriptionProperties(PubSubSubscriptionUtils.toProjectSubscriptionName(subscriptionName, projectId))
             .getMaxDurationPerAckExtension();
 
     if (maxDurationPerAckExtension != null) {
@@ -315,24 +286,9 @@ public class PubSubConfiguration {
    */
   public String computePullEndpoint(String subscriptionName, String projectId) {
     String pullEndpoint =
-        getSubscriptionProperties(ProjectSubscriptionName.of(projectId, subscriptionName))
+        getSubscriptionProperties(PubSubSubscriptionUtils.toProjectSubscriptionName(subscriptionName, projectId))
         .getPullEndpoint();
     return pullEndpoint != null ? pullEndpoint : this.globalSubscriber.getPullEndpoint();
-  }
-
-  /**
-   * Computes the retry settings. The subscription-specific property takes precedence if both global
-   * and subscription-specific properties are set. If subscription-specific settings are not set
-   * then the global settings are picked.
-   *
-   * @param subscriptionName subscription name
-   * @param projectId project id
-   * @return retry settings
-   * @deprecated Use {{@link #computeSubscriberRetrySettings(ProjectSubscriptionName)}}
-   */
-  @Deprecated
-  public Retry computeSubscriberRetrySettings(String subscriptionName, String projectId) {
-    return computeSubscriberRetrySettings(ProjectSubscriptionName.of(projectId, subscriptionName));
   }
 
   /**
