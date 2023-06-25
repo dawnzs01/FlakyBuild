@@ -1,0 +1,73 @@
+= Spring Cloud GCP IAP Authentication Example
+
+This sample application demonstrates using link:../../spring-cloud-gcp-starters/spring-cloud-gcp-starter-security-iap[Spring Cloud GCP IAP Authentication Starter] to extract user identity from a pre-authenticated header injected by https://cloud.google.com/iap/[Cloud Identity-Aware Proxy (IAP)].
+
+If you run the sample locally or on Cloud Shell, the following pages will be available:
+
+|===
+|URL |Description
+
+|`http://localhost:8080/`
+|Unsecured  page.
+
+|`http://localhost:8080/topsecret`
+|Secured page requiring non-anonymous authentication.
+Prints IAP identity details if authentication passes.
+
+|`http://localhost:8080/headers`
+|Unsecured page that can be used for troubleshooting or capturing IAP tokens from a deployed application for local testing (please don't give anyone else access to your IAP token or add this functionality to a real production application).
+|===
+
+
+== Setup & Configuration
+
+image:http://gstatic.com/cloudssh/images/open-btn.svg[link=https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FGoogleCloudPlatform%2Fspring-cloud-gcp&cloudshell_open_in_editor=spring-cloud-gcp-samples/spring-cloud-gcp-security-iap-sample/README.adoc]
+
+1. Create a Google Cloud Platform Project.
+2. Have the https://cloud.google.com/sdk/[Google Cloud SDK] installed, initialized and logged in with https://developers.google.com/identity/protocols/application-default-credentials[application default credentials] (you can run the sample locally without logging in, but you'll need the credentials to deploy).
+3. Run `$ mvn clean install` from the root directory of the project.
+
+
+== Deploying the Sample to AppEngine Standard
+
+The following Maven target will deploy this application to the root of your AppEngine Standard instance:
+----
+$ mvn clean package appengine:deploy -Dapp.deploy.projectId=$PROJECT_ID -Dapp.deploy.version=$VERSION
+----
+After deployed, follow steps link:https://cloud.google.com/iap/docs/app-engine-quickstart#enabling_iap[here] to enable IAP for this AppEngine application. You will also need to link:https://cloud.google.com/iap/docs/managing-access/#add_access[add "IAP-Secured Web App User" role] for user to gain access.
+
+== Running the Sample Locally
+
+In the link:src/main/resources/applications.properties[application.properties] file, you need to specify the value of `spring.cloud.gcp.security.iap.audience` to:
+
+- A dummy value to just test run locally
+- Or, a real audience string in AppEngine format (`/projects/PROJECT_NUMBER/apps/PROJECT_ID`) to test with JWT token grabbed from application deployed in the previous step. link:https://cloud.google.com/iap/docs/signed-headers-howto#verifying_the_jwt_payload[This guide] explains the token/audience formats.
+
+Run with Maven from the root of this code sample (spring-cloud-gcp-samples/spring-cloud-gcp-security-iap-sample):
+
+----
+$ mvn clean spring-boot:run
+----
+
+You can then try using `curl` against the paths made available in the sample.
+
+This will work, and pring "No secrets here":
+
+----
+$ curl localhost:8080/
+----
+
+This will not work, returning Access Denied:
+
+----
+$ curl localhost:8080/topsecret
+----
+
+It is possible, in principle, to grab a recent JWK token from a deployed application's `/headers` path, and to test locally.
+Please take care with your token if you do this.
+
+----
+$ curl -H "x-goog-iap-jwt-assertion: [JWK TOKEN]" localhost:8080/topsecret
+----
+
+
