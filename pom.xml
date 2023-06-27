@@ -1,230 +1,134 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--
+Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 
-	<modelVersion>4.0.0</modelVersion>
+This code is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License version 2 only, as
+published by the Free Software Foundation.  Oracle designates this
+particular file as subject to the "Classpath" exception as provided
+by Oracle in the LICENSE file that accompanied this code.
 
-	<groupId>org.jmolecules</groupId>
-	<artifactId>jmolecules</artifactId>
-	<version>1.8.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+This code is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+version 2 for more details (a copy is included in the LICENSE file that
+accompanied this code).
 
-	<name>jMolecules</name>
-	<description>Architectural concepts in Java</description>
-	<url>https://github.com/xmolecules/jmolecules</url>
+You should have received a copy of the GNU General Public License version
+2 along with this work; if not, write to the Free Software Foundation,
+Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
 
-	<modules>
-		<module>jmolecules-ddd</module>
-		<module>jmolecules-events</module>
-		<module>jmolecules-architecture</module>
-		<module>kmolecules-ddd</module>
-	</modules>
+Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+or visit www.oracle.com if you need additional information or have any
+questions.
+-->
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<assertj.version>3.20.2</assertj.version>
-		<junit.version>5.7.2</junit.version>
-		<kotlin.version>1.6.21</kotlin.version>
-	</properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
+    <groupId>org.openjdk.jol</groupId>
+    <artifactId>jol-parent</artifactId>
+    <version>0.18-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<developers>
-		<developer>
-			<id>odrotbohm</id>
-			<name>Oliver Drotbohm</name>
-			<email>odrotbohm@vmware.com</email>
-			<organization>VMware Inc.</organization>
-			<organizationUrl>https://vmware.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>hschwentner</id>
-			<name>Henning Schwentner</name>
-			<email>hs@wps.de</email>
-			<organization>WPS – Workplace Solutions GmbH</organization>
-			<organizationUrl>https://www.wps.de</organizationUrl>
-		</developer>
-		<developer>
-			<id>spirnbaum</id>
-			<name>Stephan Pirnbaum</name>
-			<email>stephan.pirnbaum@buschmais.com</email>
-			<organization>buschmais GbR</organization>
-			<organizationUrl>https://www.buschmais.de</organizationUrl>
-		</developer>
-	</developers>
+    <name>Java Object Layout: Parent</name>
 
-	<contributors>
-		<contributor>
-			<name>Sascha Kohlmann</name>
-			<email>sascha.kohlmann@gmail.com</email>
-		</contributor>
-	</contributors>
+    <description>
+        JOL is the set of tools for examining field and object layouts in JVM.
+    </description>
 
-	<profiles>
-		<profile>
-			<id>sonatype</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<additionalOptions>
-								<additionalOption>-Xdoclint:none</additionalOption>
-							</additionalOptions>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-			<distributionManagement>
-				<repository>
-					<id>sonatype-new</id>
-					<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
-				</repository>
-			</distributionManagement>
-		</profile>
-	</profiles>
+    <url>
+        https://github.com/openjdk/jol/
+    </url>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>${assertj.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <scm>
+        <url>https://github.com/openjdk/jol/</url>
+        <connection>scm:git:https://github.com/openjdk/jol.git</connection>
+    </scm>
 
-	<build>
+    <licenses>
+        <license>
+            <name>GNU General Public License (GPL), version 2, with the Classpath exception</name>
+            <url>http://openjdk.java.net/legal/gplv2+ce.html</url>
+        </license>
+    </licenses>
 
-		<defaultGoal>verify</defaultGoal>
+    <developers>
+        <developer>
+            <id>shade</id>
+            <name>Aleksey Shipilev</name>
+            <organization>Red Hat</organization>
+            <email>shade@redhat.com</email>
+        </developer>
+    </developers>
 
-		<plugins>
+    <modules>
+        <module>jol-core</module>
+        <module>jol-cli</module>
+        <module>jol-samples</module>
+        <module>jol-benchmarks</module>
+    </modules>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
+    <prerequisites>
+        <maven>3.2</maven>
+    </prerequisites>
 
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Automatic-Module-Name>${module.name}</Automatic-Module-Name>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>5.0.3</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
-			</plugin>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.mycila.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>1.10.b1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.2.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<version>1.2.7</version>
-				<executions>
-					<execution>
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-						<configuration>
-							<updatePomFile>true</updatePomFile>
-							<flattenMode>oss</flattenMode>
-							<pomElements>
-								<distributionManagement>remove</distributionManagement>
-								<properties>remove</properties>
-								<repositories>remove</repositories>
-								<profiles>remove</profiles>
-							</pomElements>
-						</configuration>
-					</execution>
-					<execution>
-						<id>flatten-clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>3.0.0-M4</version>
-				<configuration>
-					<releaseProfiles>sonatype</releaseProfiles>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<pushChanges>false</pushChanges>
-					<tagNameFormat>@{project.version}</tagNameFormat>
-					<localCheckout>true</localCheckout>
-				</configuration>
-			</plugin>
-
-		</plugins>
-
-	</build>
-
-	<scm>
-		<url>https://github.com/xmolecules/jmolecules</url>
-		<connection>scm:git:https://github.com/xmolecules/jmolecules</connection>
-		<developerConnection>scm:git:ssh://git@github.com/xmolecules/jmolecules.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jol.target>1.8</jol.target>
+    </properties>
 
 </project>
