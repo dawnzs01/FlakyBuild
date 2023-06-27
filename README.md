@@ -1,37 +1,47 @@
-# packetevents
+<img src="vassal-app/src/main/resources/icons/scalable/VASSAL.svg" width="100px" align="right" />
 
-[![](https://jitpack.io/v/retrooper/packetevents.svg)](https://jitpack.io/#retrooper/packetevents)
+# VASSAL
+> The open-source boardgame engine
 
-PacketEvents is a powerful packet library. Our packet wrappers are efficient and easy to use. With our API, you can write code that runs on many platforms including Spigot, BungeeCord, Velocity, and even client-sided Fabric! Switch to PacketEvents today by joining \
-our [Discord Server](https://discord.me/packetevents) for help.
+[![Build Status](https://github.com/vassalengine/vassal/actions/workflows/package.yml/badge.svg)](https://github.com/vassalengine/vassal/actions)
+[![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.0)
 
-### Links
-* [Find release builds on SpigotMC](https://www.spigotmc.org/resources/packetevents-api.80279/)
-* [View documentation on our JavaDocs Page](https://packetevents.github.io/javadocs)
-### Setup
-[Learn more](https://github.com/retrooper/packetevents/wiki/Setup-2.0)
+VASSAL is a game engine for building and playing online adaptations of board games and card games. Play live on the Internet or by email. VASSAL runs on all platforms, and is free, open-source software.
 
-### Sponsorships
-[![](https://www.ej-technologies.com/images/product_banners/jprofiler_small.png)](https://www.ej-technologies.com/products/jprofiler/overview.html)
+## Getting started
 
-### Statistics
-PacketEvents optionally collects statistics using [bStats](https://bstats.org/)\
-Check out our [bStats page](https://bstats.org/plugin/bukkit/packetevents/11327)
+### Minimum Requirements
 
-This library is licensed under the GPLv3 (General Public License version 3). Here are a few sources to learn more about the license.\
-[![](https://www.gnu.org/graphics/gplv3-with-text-136x68.png)](https://github.com/retrooper/packetevents/blob/2.0/LICENSE)
-### GPL Resources
-* https://www.gnu.org/philosophy/free-sw.html
-* https://www.gnu.org/philosophy/free-sw.html#clarifying
-* https://www.gnu.org/licenses/copyleft.en.html
-* https://www.gnu.org/licenses/quick-guide-gplv3.html
-* https://gpl-violations.org/faq/sourcecode-faq/
+VASSAL 3.6 requires Java 11 or later.
 
-### Credit to these projects
-[wiki.vg/Protocol](https://wiki.vg/Protocol)\
-[netty](https://github.com/netty/netty)\
-[gson](https://github.com/google/gson)\
-[adventure](https://github.com/KyoriPowered/adventure)\
-[ViaVersion](https://github.com/ViaVersion/ViaVersion)\
-[ProtocolSupport](https://github.com/ProtocolSupport/ProtocolSupport)\
-[MCProtocolLib](https://github.com/GeyserMC/MCProtocolLib/)  
+The Windows and Mac packages have an appropriate version of Java bundled with
+them, so there is no need to install Java separately on those operating
+systems. On Linux, use your package manager to install Java 11 or later.
+
+### Releases
+
+Get the [current release](https://github.com/vassalengine/vassal/releases/latest). Read the [release notes](https://vassalengine.org/wiki/Release_Notes) to see what's new.
+
+## Contributing
+
+#### Bug reports
+
+Please report bugs in the [Technical Support & Bugs](https://forum.vassalengine.org/c/technical-support-bugs/6) section of our forum.
+
+#### Developer's guide
+
+Read the [Developer's guide](developers-guide/developers-guide.adoc)
+
+## License
+
+This project is licensed under the terms of the [LGPLv2 license](LICENSE).
+
+## Acknowledgments
+YourKit supports open source projects with innovative and intelligent tools
+for monitoring and profiling Java and .NET applications.
+YourKit is the creator of
+[YourKit Java Profiler](https://www.yourkit.com/java/profiler/),
+[YourKit .NET Profiler](https://www.yourkit.com/.net/profiler/),
+and [YourKit YouMonitor](https://www.yourkit.com/youmonitor/).
+
+![YourKit-Logo](https://www.yourkit.com/images/yklogo.png)
