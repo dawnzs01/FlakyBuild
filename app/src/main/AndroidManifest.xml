@@ -1,685 +1,431 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.autojs.autoxjs">
+    android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 非auto_js运行必需，不会主动申请，某些脚本可以自行申请 -->
-    <uses-permission android:name="android.permission.ACCEPT_HANDOVER" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission
-        android:name="android.permission.ACCESS_BLOBS_ACROSS_USERS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    <uses-permission
-        android:name="android.permission.ACCOUNT_MANAGER"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-    <uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL" />
-    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
-    <uses-permission
-        android:name="android.permission.BATTERY_STATS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_APPWIDGET"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_AUTOFILL_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_CALL_REDIRECTION_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_CARRIER_MESSAGING_CLIENT_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_CARRIER_MESSAGING_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_CARRIER_SERVICES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_CHOOSER_TARGET_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_COMPANION_DEVICE_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_CONDITION_PROVIDER_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_CONTROLS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_DEVICE_ADMIN"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_DREAM_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_INCALL_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_INPUT_METHOD"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_MIDI_DEVICE_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_NFC_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_PRINT_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_QUICK_ACCESS_WALLET_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_QUICK_SETTINGS_TILE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_REMOTEVIEWS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_SCREENING_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_TELECOM_CONNECTION_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_TEXT_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_TV_INPUT"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_VISUAL_VOICEMAIL_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_VOICE_INTERACTION"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_VPN_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_VR_LISTENER_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BIND_WALLPAPER"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission
-        android:name="android.permission.BLUETOOTH_PRIVILEGED"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BODY_SENSORS" />
-    <uses-permission
-        android:name="android.permission.BROADCAST_PACKAGE_REMOVED"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.BROADCAST_SMS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission
-        android:name="android.permission.BROADCAST_WAP_PUSH"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CALL_COMPANION_APP" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission
-        android:name="android.permission.CALL_PRIVILEGED"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission
-        android:name="android.permission.CAPTURE_AUDIO_OUTPUT"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.CHANGE_CONFIGURATION"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission
-        android:name="android.permission.CLEAR_APP_CACHE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.CONTROL_LOCATION_UPDATES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.DELETE_CACHE_FILES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.DELETE_PACKAGES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.DIAGNOSTIC"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission
-        android:name="android.permission.DUMP"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
-    <uses-permission
-        android:name="android.permission.FACTORY_TEST"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission
-        android:name="android.permission.GET_ACCOUNTS_PRIVILEGED"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission
-        android:name="android.permission.GLOBAL_SEARCH"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.HIDE_OVERLAY_WINDOWS" />
-    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
-    <uses-permission
-        android:name="android.permission.INSTALL_LOCATION_PROVIDER"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.INSTALL_PACKAGES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.INSTANT_APP_FOREGROUND_SERVICE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.INTERACT_ACROSS_PROFILES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-    <uses-permission android:name="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK" />
-    <uses-permission
-        android:name="android.permission.LOADER_USAGE_STATS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.LOCATION_HARDWARE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MANAGE_DOCUMENTS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MANAGE_MEDIA"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MANAGE_ONGOING_CALLS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
-    <uses-permission
-        android:name="android.permission.MASTER_CLEAR"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MEDIA_CONTENT_CONTROL"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission
-        android:name="android.permission.MODIFY_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.NFC_PREFERRED_PAYMENT_INFO" />
-    <uses-permission android:name="android.permission.NFC_TRANSACTION_EVENT" />
-    <uses-permission
-        android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission
-        android:name="android.permission.READ_INPUT_STATE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission
-        android:name="android.permission.READ_PRECISE_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
-    <uses-permission
-        android:name="com.android.voicemail.permission.READ_VOICEMAIL"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.REBOOT"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.RECEIVE_MMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.REORDER_TASKS" />
-    <uses-permission android:name="android.permission.REQUEST_COMPANION_PROFILE_WATCH" />
-    <uses-permission android:name="android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND" />
-    <uses-permission android:name="android.permission.REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND" />
-    <uses-permission android:name="android.permission.REQUEST_COMPANION_USE_DATA_IN_BACKGROUND" />
-    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE" />
-    <uses-permission android:name="android.permission.REQUEST_PASSWORD_COMPLEXITY" />
-    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission
-        android:name="android.permission.SEND_RESPOND_VIA_MESSAGE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission
-        android:name="android.permission.SET_ALWAYS_FINISH"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.SET_ANIMATION_SCALE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.SET_DEBUG_APP"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.SET_PREFERRED_APPLICATIONS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.SET_PROCESS_LIMIT"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.SET_TIME"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.SET_TIME_ZONE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
-    <uses-permission
-        android:name="android.permission.SIGNAL_PERSISTENT_PROCESSES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.SMS_FINANCIAL_TRANSACTIONS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.START_VIEW_PERMISSION_USAGE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.STATUS_BAR"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.TRANSMIT_IR" />
-    <uses-permission
-        android:name="android.permission.UPDATE_DEVICE_STATS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.UPDATE_PACKAGES_WITHOUT_USER_ACTION" />
-    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-    <uses-permission
-        android:name="android.permission.USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.USE_SIP" />
-    <uses-permission android:name="android.permission.UWB_RANGING" />
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission
-        android:name="android.permission.WRITE_APN_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission
-        android:name="android.permission.WRITE_GSERVICES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.WRITE_SECURE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-    <uses-permission
-        android:name="com.android.voicemail.permission.WRITE_VOICEMAIL"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- We need to be able to open links in the browser on API 30+ -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+    </queries>
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
 
     <application
-        android:name="org.autojs.autojs.App"
+        android:name=".App"
         android:allowBackup="true"
-        android:extractNativeLibs="true"
-        android:hardwareAccelerated="true"
+        android:banner="@mipmap/newpipe_tv_banner"
         android:icon="@mipmap/ic_launcher"
-        android:label="${appName}"
-        android:largeHeap="true"
-        android:requestLegacyExternalStorage="true"
-        android:roundIcon="@drawable/autojs_logo"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        tools:replace="android:label, android:allowBackup"
-        tools:targetApi="m">
-
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.1" />
-
+        android:label="@string/app_name"
+        android:logo="@mipmap/ic_launcher"
+        android:resizeableActivity="true"
+        android:theme="@style/OpeningTheme"
+        tools:ignore="AllowBackup">
         <activity
-            android:name="org.autojs.autojs.ui.splash.SplashActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:hardwareAccelerated="true"
-            android:theme="@style/AppTheme.Splash">
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="org.autojs.autojs.ui.main.MainActivity"
+
+        <receiver
+            android:name="androidx.media.session.MediaButtonReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".player.PlayerService"
             android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".player.PlayQueueActivity"
+            android:exported="false"
+            android:label="@string/title_activity_play_queue"
             android:launchMode="singleTask" />
         <activity
-            android:name="org.autojs.autojs.external.shortcut.ShortcutActivity"
+            android:name=".settings.SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings" />
+        <activity
+            android:name=".about.AboutActivity"
+            android:exported="false"
+            android:label="@string/title_activity_about" />
+
+        <service android:name=".local.subscription.services.SubscriptionsImportService" />
+        <service android:name=".local.subscription.services.SubscriptionsExportService" />
+        <service android:name=".local.feed.service.FeedLoadService" />
+
+        <activity
+            android:name=".PanicResponderActivity"
             android:exported="true"
-            android:taskAffinity="org.autojs.autojs.external.shortcut.ShortcutActivity"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="info.guardianproject.panic.action.TRIGGER" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ExitActivity"
+            android:exported="false"
+            android:label="@string/general_error"
+            android:theme="@android:style/Theme.NoDisplay" />
+
+        <activity
+            android:name=".error.ErrorActivity"
+            android:exported="false" />
+
+        <!-- giga get related -->
+        <activity
+            android:name=".download.DownloadActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" />
+
+        <service android:name="us.shandian.giga.service.DownloadManagerService" />
+
+        <activity
+            android:name=".util.FilePickerActivityHelper"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/FilePickerThemeDark">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".error.ReCaptchaActivity"
+            android:exported="false"
+            android:label="@string/recaptcha" />
 
         <provider
-            android:name="org.autojs.autojs.external.fileprovider.AppFileProvider"
-            android:authorities="${applicationId}.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                android:resource="@xml/nnf_provider_paths" />
         </provider>
 
         <activity
-            android:name="org.autojs.autojs.ui.edit.EditActivity_"
-            android:configChanges="orientation|screenSize|uiMode"
-            android:launchMode="standard"
-            android:multiprocess="true"
-            android:taskAffinity="org.autojs.autojs.edit"
-            android:theme="@style/EditorTheme" />
-        <activity android:name="org.autojs.autojs.ui.settings.AboutActivity_" />
-        <activity
-            android:name="org.autojs.autojs.ui.settings.SettingsActivity_"
-            android:theme="@style/AppTheme.Settings" />
-        <activity android:name="org.autojs.autojs.ui.error.ErrorReportActivity" />
-        <activity
-            android:name="org.autojs.autojs.external.tasker.TaskerScriptEditActivity_"
-            android:configChanges="orientation|screenSize" />
-        <activity android:name="org.autojs.autojs.ui.edit.ViewSampleActivity" />
-        <activity
-            android:name="org.autojs.autojs.ui.user.LoginActivity_"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="org.autojs.autojs.ui.user.RegisterActivity_"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name="org.autojs.autojs.ui.user.WebActivity_" />
-        <activity
-            android:name="org.autojs.autojs.ui.build.BuildActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity android:name="org.autojs.autojs.ui.build.SignManageActivityKt" />
-        <activity android:name="org.autojs.autojs.ui.build.ProjectConfigActivity_" />
-        <activity android:name="org.autojs.autojs.ui.log.LogActivityKt" />
-        <activity android:name="org.autojs.autojs.ui.shortcut.ShortcutIconSelectActivity_" />
-        <activity android:name="org.autojs.autojs.ui.timing.TimedTaskSettingActivity_" />
-        <activity
-            android:name="org.autojs.autojs.ui.shortcut.ShortcutCreateActivity"
-            android:theme="@style/AppTheme.Transparent" />
-        <activity
-            android:name="org.autojs.autojs.external.widget.ScriptWidgetSettingsActivity_"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="org.autojs.autojs.ui.error.IssueReporterActivity"
-            android:theme="@style/IssueReporterTheme" />
-
-        <service android:name="org.autojs.autojs.external.foreground.ForegroundService" />
-        <service android:name="org.autojs.autojs.external.ScriptExecutionIntentService" />
-
-        <activity android:name="org.autojs.autojs.external.tasker.TaskPrefEditActivity_" />
-        <activity android:name="org.autojs.autojs.ui.log.LogActivity_"/>
-        <activity-alias
-            android:name=".external.tasker.PluginActivity"
+            android:name=".RouterActivity"
+            android:excludeFromRecents="true"
             android:exported="true"
-            android:icon="@drawable/ic_android_eat_js"
-            android:label="${appName}"
-            android:targetActivity="org.autojs.autojs.external.tasker.TaskPrefEditActivity_"
-            tools:ignore="ExportedActivity">
-            <intent-filter>
-                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
-            </intent-filter>
-        </activity-alias>
+            android:label="@string/preferred_open_action_share_menu_title"
+            android:taskAffinity=""
+            android:theme="@style/RouterActivityThemeDark">
 
-        <service
-            android:name="org.autojs.autojs.external.tile.LayoutBoundsTile"
-            android:exported="true"
-            android:icon="@drawable/ic_circular_menu_bounds"
-            android:label="@string/text_inspect_layout_bounds"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <meta-data
-                android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="false" />
-
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="org.autojs.autojs.external.tile.LayoutHierarchyTile"
-            android:exported="true"
-            android:icon="@drawable/ic_circular_menu_hierarchy"
-            android:label="@string/text_inspect_layout_hierarchy"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <meta-data
-                android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="false" />
-
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-
-        <receiver
-            android:name="org.autojs.autojs.external.receiver.StaticBroadcastReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="android.intent.action.TIME_SET" />
-                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
-                <action android:name="android.intent.action.UID_REMOVED" />
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-                <action android:name="android.intent.action.DATE_CHANGED" />
-                <action android:name="android.intent.action.DREAMING_STARTED" />
-                <action android:name="android.intent.action.DREAMING_STOPPED" />
-                <action android:name="android.intent.action.HEADSET_PLUG" />
-                <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
-                <action android:name="android.intent.action.LOCALE_CHANGED" />
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-                <action android:name="android.intent.action.MEDIA_CHECKING" />
-                <action android:name="android.intent.action.MEDIA_MOUNTED" />
-                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
-                <action android:name="android.intent.action.PROVIDER_CHANGED" />
-                <action android:name="android.intent.action.WALLPAPER_CHANGED" />
-                <action android:name="android.intent.action.USER_UNLOCKED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_CHANGED" />
-                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <action android:name="android.intent.action.PACKAGE_RESTARTED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="org.autojs.autojs.external.tasker.FireSettingReceiver"
-            android:exported="true"
-            android:process=":background"
-            tools:ignore="ExportedReceiver">
-
-            <!-- this Intent filter allows the plug-in to discovered by the host. -->
-            <intent-filter>
-                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
-            </intent-filter>
-        </receiver>
-
-        <activity
-            android:name="org.autojs.autojs.external.open.EditIntentActivity"
-            android:exported="true"
-            android:icon="@drawable/autojs_logo"
-            android:label="@string/text_edit_script">
+            <!-- Youtube filter -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.EDIT" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="file" />
-                <data android:scheme="content" />
-                <data android:mimeType="application/x-javascript" />
-                <data android:mimeType="text/plain" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="youtube.com" />
+                <data android:host="m.youtube.com" />
+                <data android:host="www.youtube.com" />
+                <data android:host="music.youtube.com" />
+                <!-- video prefix -->
+                <data android:pathPrefix="/v/" />
+                <data android:pathPrefix="/embed/" />
+                <data android:pathPrefix="/watch" />
+                <data android:pathPrefix="/attribution_link" />
+                <data android:pathPrefix="/shorts/" />
+                <data android:pathPrefix="/live/" />
+                <!-- channel prefix -->
+                <data android:pathPrefix="/channel/" />
+                <data android:pathPrefix="/user/" />
+                <data android:pathPrefix="/c/" />
+                <data android:pathPrefix="/@" />
+                <!-- playlist prefix -->
+                <data android:pathPrefix="/playlist" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="org.autojs.autojs.external.open.RunIntentActivity"
-            android:exported="true"
-            android:icon="@drawable/autojs_logo"
-            android:label="@string/text_run_script"
-            android:taskAffinity=".external.open.RunIntentActivity"
-            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.EDIT" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="file" />
-                <data android:scheme="content" />
-                <data android:mimeType="application/x-javascript" />
-                <data android:mimeType="text/plain" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="youtu.be" />
+                <data android:pathPrefix="/" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="org.autojs.autojs.external.open.ImportIntentActivity"
-            android:exported="true"
-            android:icon="@drawable/autojs_logo"
-            android:label="@string/text_import_script"
-            android:theme="@style/AppTheme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.EDIT" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="file" />
-                <data android:scheme="content" />
-                <data android:mimeType="application/x-javascript" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="www.youtube-nocookie.com" />
+                <data android:pathPrefix="/embed/" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="vnd.youtube" />
+                <data android:scheme="vnd.youtube.launch" />
+            </intent-filter>
+
+            <!-- Hooktube filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="hooktube.com" />
+                <data android:host="*.hooktube.com" />
+                <!-- video prefix -->
+                <data android:pathPrefix="/v/" />
+                <data android:pathPrefix="/embed/" />
+                <data android:pathPrefix="/watch" />
+                <!-- channel prefix -->
+                <data android:pathPrefix="/channel/" />
+                <data android:pathPrefix="/user/" />
+            </intent-filter>
+
+            <!-- Invidious filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="tubus.eduvid.org" />
+                <data android:host="invidio.us" />
+                <data android:host="dev.invidio.us" />
+                <data android:host="www.invidio.us" />
+                <data android:host="redirect.invidious.io" />
+                <data android:host="invidious.snopyta.org" />
+                <data android:host="yewtu.be" />
+                <data android:host="tube.connect.cafe" />
+                <data android:host="invidious.kavin.rocks" />
+                <data android:host="invidious-us.kavin.rocks" />
+                <data android:host="piped.kavin.rocks" />
+                <data android:host="invidious.site" />
+                <data android:host="vid.mint.lgbt" />
+                <data android:host="invidiou.site" />
+                <data android:host="invidious.fdn.fr" />
+                <data android:host="invidious.048596.xyz" />
+                <data android:host="invidious.zee.li" />
+                <data android:host="vid.puffyan.us" />
+                <data android:host="ytprivate.com" />
+                <data android:host="invidious.namazso.eu" />
+                <data android:host="invidious.silkky.cloud" />
+                <data android:host="invidious.exonip.de" />
+                <data android:host="inv.riverside.rocks" />
+                <data android:host="invidious.blamefran.net" />
+                <data android:host="invidious.moomoo.me" />
+                <data android:host="ytb.trom.tf" />
+                <data android:host="yt.cyberhost.uk" />
+                <data android:host="y.com.cm" />
+                <data android:pathPrefix="/" />
+            </intent-filter>
+
+            <!-- y2u.be filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="y2u.be" />
+                <data android:pathPrefix="/" />
+            </intent-filter>
+
+            <!-- Soundcloud filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="soundcloud.com" />
+                <data android:host="m.soundcloud.com" />
+                <data android:host="www.soundcloud.com" />
+                <data android:pathPrefix="/" />
+            </intent-filter>
+
+            <!-- Share filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
+
+            <!-- media.ccc.de filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="media.ccc.de" />
+                <!-- video prefix -->
+                <data android:pathPrefix="/v/" />
+                <!-- channel prefix-->
+                <data android:pathPrefix="/c/" />
+                <data android:pathPrefix="/b/" />
+            </intent-filter>
+
+            <!-- PeerTube filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+                <data android:host="eduvid.org" />
+                <data android:host="framatube.org" />
+                <data android:host="media.assassinate-you.net" />
+                <data android:host="peertube.co.uk" />
+                <data android:host="peertube.cpy.re" />
+                <data android:host="peertube.mastodon.host" />
+                <data android:host="peertube.fr" />
+                <data android:host="tilvids.com" />
+                <data android:host="video.ploud.fr" />
+                <data android:host="video.lqdn.fr" />
+                <data android:host="skeptikon.fr" />
+                <data android:host="media.fsfe.org" />
+
+                <data android:pathPrefix="/videos/" /> <!-- it contains playlists -->
+                <data android:pathPrefix="/w/" /> <!-- short video URLs -->
+                <data android:pathPrefix="/w/p/" /> <!-- short playlist URLs -->
+                <data android:pathPrefix="/accounts/" />
+                <data android:pathPrefix="/a/" /> <!-- short account URLs -->
+                <data android:pathPrefix="/video-channels/" />
+                <data android:pathPrefix="/c/" /> <!-- short video-channels URLs -->
+            </intent-filter>
+
+            <!-- Bandcamp filter for tracks, albums and playlists -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="*.bandcamp.com" />
+            </intent-filter>
+
+            <!-- Bandcamp filter for radio -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:sspPattern="bandcamp.com/?show=*" />
+            </intent-filter>
+
         </activity>
+
+        <activity
+            android:name=".LocalPlayerActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:foregroundServiceType="mediaPlayback"
+            android:configChanges="orientation|screenSize|layoutDirection" />
 
         <service
-            android:name="com.stardust.notification.NotificationListenerService"
-            android:exported="false"
-            android:label="${appName}"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-            <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService" />
-            </intent-filter>
-        </service>
+            android:name=".RouterActivity$FetcherService"
+            android:exported="false" />
 
-        <receiver
-            android:name="org.autojs.autojs.external.widget.ScriptWidget"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/script_widget_config" />
-        </receiver>
-        <receiver
-            android:name="org.autojs.autojs.timing.TaskReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.stardust.autojs.action.task" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="org.autojs.autojs.ui.widget.DownloadReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="org.autojs.autojs.timing.work.AlarmManagerProvider$AlarmManagerBroadcastReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.stardust.autojs.action.check_task" />
-                <action android:name="com.android.deskclock.ALARM_ALERT" />
-            </intent-filter>
-        </receiver>
+        <!-- opting out of sending metrics to Google in Android System WebView -->
+        <meta-data
+            android:name="android.webkit.WebView.MetricsOptOut"
+            android:value="true" />
+        <!-- see https://github.com/TeamNewPipe/NewPipe/issues/3947 -->
+        <!-- Version < 3.0. DeX Mode and Screen Mirroring support -->
+        <meta-data
+            android:name="com.samsung.android.keepalive.density"
+            android:value="true" />
+        <!-- Version >= 3.0. DeX Dual Mode support -->
+        <meta-data
+            android:name="com.samsung.android.multidisplay.keep_process_alive"
+            android:value="true" />
     </application>
-
 </manifest>
