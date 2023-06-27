@@ -1,197 +1,151 @@
----
+<img align="left" alt="jte" src="jte.svg" width="128">jte is a secure and lightweight template engine for Java and Kotlin. jte is designed to introduce as few new keywords as possible and builds upon existing Java features, so that it is very easy to reason about what a template does. The <a href="https://plugins.jetbrains.com/plugin/14521-jte">IntelliJ plugin</a> offers full completion and refactoring support for Java parts as well as for jte keywords. Supports Java 8 or higher.
+<br clear="left">
 
----
+[![Build Status](https://github.com/casid/jte/workflows/Test%20all%20JDKs%20on%20all%20OSes/badge.svg)](https://github.com/casid/jte/actions)
+[![Coverage Status](https://codecov.io/gh/casid/jte/branch/main/graph/badge.svg)](https://codecov.io/gh/casid/jte)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/casid/jte/master/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/gg.jte/jte.svg)](http://mvnrepository.com/artifact/gg.jte/jte)
 
-# Jvppeteer
-<p align = "left">
-<a rel="nofollow" href="https://download-chromium.appspot.com/"><img src ="https://img.shields.io/badge/chromium%20download-latest-blue"  alt="下载最新版本的chromuim" style="max-width:100%;"></a> <a><img alt="Maven Central" src="https://img.shields.io/maven-central/v/io.github.fanyong920/jvppeteer"></a> <a href="https://github.com/fanyong920/jvppeteer/issues"><img alt="Issue resolution status" src="https://img.shields.io/github/issues/fanyong920/jvppeteer" style="max-width:100%;"></a>
-    <a href="https://sonarcloud.io/dashboard?id=fanyong920_jvppeteer"><img alt="Quality Gate Status" src="https://sonarcloud.io/api/project_badges/measure?project=fanyong920_jvppeteer&metric=alert_status" style="max-width:100%;"></a>
-</p>
+## Features
+- Intuitive and easy syntax, you'll rarely need to check the [documentation](DOCUMENTATION.md)
+- Write plain Java or Kotlin for expressions
+- Context-sensitive [HTML escaping](https://github.com/casid/jte/blob/master/DOCUMENTATION.md#html-escaping) at compile time
+- <a href="https://plugins.jetbrains.com/plugin/14521-jte">IntelliJ plugin</a> with completion and refactoring support
+- Hot reloading of templates during development
+- Blazing fast execution ([see benchmarks](#performance))
 
+## TLDR
 
+jte gives you the same productive, type safe experience you're used to from writing Java or Kotlin. This is IntelliJ with the <a href="https://plugins.jetbrains.com/plugin/14521-jte">jte plugin</a> installed:
 
+<img alt="jte in IntelliJ" src="jte-intellij.gif" />
 
+## 5 minutes example
 
-**本库的灵感来自 [Puppeteer(Node.js)](https://github.com/puppeteer/puppeteer), API 也与其基本上保持一致，做这个库是为了方便使用 Java 操控 Chrome 或 Chromium**
+Here is a small jte template `example.jte`:
+```htm
+@import org.example.Page
 
+@param Page page
 
+<head>
+    @if(page.getDescription() != null)
+        <meta name="description" content="${page.getDescription()}">
+    @endif
+    <title>${page.getTitle()}</title>
+</head>
+<body>
+    <h1>${page.getTitle()}</h1>
+    <p>Welcome to my example page!</p>
+</body>
+```
 
+So what is going on here?
+- `@import` directly translates to Java imports, in this case so that `org.example.Page` is known to the template.
+- `@param Page page` is the parameter that needs to be passed to this template.
+- `@if`/`@endif` is an if-block. The stuff inside the parentheses (`page.getDescription() != null`) is plain Java code.
+- `${}` writes to the underlying template output, as known from various other template engines.
 
-   >Jvppeteer 通过 [DevTools](https://chromedevtools.github.io/devtools-protocol/) 控制 Chromium 或 Chrome。
-   >默认情况下，以 headless 模式运行，也可以通过配置运行'有头'模式。
+To render this template, an instance of `TemplateEngine` is required. Typically you create it once per application (it is safe to share the engine between threads):
+```java
+CodeResolver codeResolver = new DirectoryCodeResolver(Path.of("jte")); // This is the directory where your .jte files are located.
+TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html); // Two choices: Plain or Html
+```
 
+The content type passed to the engine determines how user output will be escaped. If you render HTML files, `Html` is highly recommended. This enables the engine to analyze HTML templates at compile time and perform context sensitive output escaping of user data, to prevent you from XSS attacks.
 
-你可以在浏览器中手动执行的绝大多数操作都可以使用 Jvppeteer 来完成！ 下面是一些示例：
+With the `TemplateEngine` ready, templates are rendered like this:
+```java
+TemplateOutput output = new StringOutput();
+templateEngine.render("example.jte", page, output);
+System.out.println(output);
+```
 
-- 生成页面 PDF。
-- 抓取 SPA（单页应用）并生成预渲染内容（即“SSR”（服务器端渲染））。
-- 自动提交表单，进行 UI 测试，键盘输入等。
-- 创建一个时时更新的自动化测试环境。 使用最新的 JavaScript 和浏览器功能直接在最新版本的 Chrome 中执行测试。
-- 捕获网站的 [timeline trace](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)，用来帮助分析性能问题。
-- 测试浏览器扩展。
+> Besides `StringOutput`, there are several other `TemplateOutput` implementations you can use, or create your own if required.
 
-## 开始使用
+If you had more than one page like `example.jte`, you would have to duplicate a lot of shared template code. Let's extract the shared code into another template, so that it can be reused.
 
+Let's move stuff from our example page to `layout.jte`:
 
+```htm
+@import org.example.Page
+@import gg.jte.Content
 
-**注意：Mac必须withExcutablePath是用來指定启动Chrome.exe的路径。在Mac下BrowserFetcher.downloadIfNotExist(null)有问题。**
+@param Page page
+@param Content content
 
+<head>
+    @if(page.getDescription() != null)
+        <meta name="description" content="${page.getDescription()}">
+    @endif
+    <title>${page.getTitle()}</title>
+</head>
+<body>
+    <h1>${page.getTitle()}</h1>
+    ${content}
+</body>
+```
 
+The `@param Content content` is a content block that can be provided by callers of the template. `${content}` renders this content block. Let's refactor `example.jte` to use the new template:
 
-### 以下是使用依赖管理工具（如 maven 或 gradle）的简要指南。
+```htm
+@import org.example.Page
 
-#### Maven
-要使用 maven,请将此依赖添加到pom.xml文件中：
+@param Page page
 
+@template.layout(page = page, content = @`
+    <p>Welcome to my example page!</p>
+`)
+```
+
+The shorthand to create content blocks within jte templates is an `@` followed by two backticks. For advanced stuff, you can even create Java methods that return custom `Content` implementation and call it from your template code!
+
+Check out the [syntax documentation](DOCUMENTATION.md), for a more comprehensive introduction.
+
+## Performance
+By design, jte provides very fast output. This is a <a href="https://github.com/casid/template-benchmark/">fork of mbosecke/template-benchmark</a> with jte included, running on AMD Ryzen 5950x (single thread):
+
+![alt Template Benchmark](https://raw.githubusercontent.com/casid/template-benchmark/master/results.png)
+
+### High concurrency
+This is the same benchmark as above, but the amount of threads was set to `@Threads(16)`, to fully utilize all cores. jte has pretty much zero serialization bottlenecks and runs  very concurrent on servers with a lot of CPU cores:
+![alt Template Benchmark](https://raw.githubusercontent.com/casid/template-benchmark/ryzen-5950x/results.png)
+
+## Getting started
+
+jte is available on <a href="http://mvnrepository.com/artifact/gg.jte/jte">Maven Central</a>:
+
+### Maven
 ```xml
 <dependency>
-  <groupId>io.github.fanyong920</groupId>
-  <artifactId>jvppeteer</artifactId>
-  <version>1.1.5</version>
+    <groupId>gg.jte</groupId>
+    <artifactId>jte</artifactId>
+    <version>2.3.2</version>
 </dependency>
 ```
 
-#### Gradle
-
-要使用 Gradle，请将 Maven 中央存储库添加到您的存储库列表中:
-
-```
-mavenCentral（）
+### Gradle
+```groovy
+implementation group: 'gg.jte', name: 'jte', version: '2.3.2'
 ```
 
-然后，您可以将最新版本添加到您的构建中。
+No further dependencies required! Check out the [syntax documentation](DOCUMENTATION.md) and have fun with jte.
 
-```xml
-compile "io.github.fanyong920:jvppeteer:1.1.5"
-```
+## Framework integration
 
-#### Logging
+- [Javalin](https://javalin.io/tutorials/jte)
+- [Eclipse Vert.x](https://github.com/vert-x3/vertx-web/tree/master/vertx-template-engines/vertx-web-templ-jte)
+- [Spring Boot](https://github.com/casid/jte-spring-boot-demo)
+- [Spring Web MVC](https://github.com/izogfif/demo-spring-jte)
+- [Ktor](https://ktor.io/docs/jte.html)
+- [Micronaut](https://micronaut-projects.github.io/micronaut-views/latest/guide/#jte)
+- [Quarkus](https://github.com/renannprado/quarkus-jte-extension/)
+- [Severell](https://github.com/severell/severell-jte-plugin)
 
-该库使用 [SLF4J](https://www.slf4j.org/) 进行日志记录，并且不附带任何默认日志记录实现。
+## Websites rendered with jte
 
-调试程序将日志级别设置为 TRACE。
-
-#### 独立 jar
-
-如果您不使用任何依赖项管理工具，则可以在[此处](https://github.com/fanyong920/jvppeteer/releases/latest)找到最新的独立 jar 。
-
-### 快速开始
-
-#### 1、启动浏览器
-
-```java
-	//设置基本的启动配置,这里选择了‘有头’模式启动
-	ArrayList<String> argList = new ArrayList<>();
-    //自动下载，第一次下载后不会再下载
-    BrowserFetcher.downloadIfNotExist(null);
-    LaunchOptions options = new LaunchOptionsBuilder().withArgs(argList).withHeadless(false).build();
-    argList.add("--no-sandbox");
-    argList.add("--disable-setuid-sandbox");
-    Puppeteer.launch(options);
-```
-
-在这个例子中，我们明确指明了启动路径，程序就会根据指明的路径启动对应的浏览器，如果没有明确指明路径，那么程序会尝试启动默认安装路径下的 Chrome 浏览器
-
-#### 2、导航至某个页面
-
-```java
-	//自动下载，第一次下载后不会再下载
-    BrowserFetcher.downloadIfNotExist(null);
-    ArrayList<String> argList = new ArrayList<>();
-    LaunchOptions options = new LaunchOptionsBuilder().withArgs(argList).withHeadless(false).build();
-    argList.add("--no-sandbox");
-    argList.add("--disable-setuid-sandbox");
-    Browser browser = Puppeteer.launch(options);
-    Browser browser2 = Puppeteer.launch(options);
-    Page page = browser.newPage();
-    page.goTo("https://www.taobao.com/about/");
-    browser.close();
-
-    Page page1 = browser2.newPage();
-    page1.goTo("https://www.taobao.com/about/");
-```
-
-这个例子中，浏览器导航到具体某个页面后关闭。在这里并没有指明启动路径。argList是放一些额外的命令行启动参数的，在下面资源章节中我会给出相关资料。
-
-#### 3、生成页面的 PDF
-
-```java
-	//自动下载，第一次下载后不会再下载
-    BrowserFetcher.downloadIfNotExist(null);
-    ArrayList<String> arrayList = new ArrayList<>();
-    //生成pdf必须在无厘头模式下才能生效
-    LaunchOptions options = new LaunchOptionsBuilder().withArgs(arrayList).withHeadless(true).build();
-    arrayList.add("--no-sandbox");
-    arrayList.add("--disable-setuid-sandbox");
-    Browser browser = Puppeteer.launch(options);
-    Page page = browser.newPage();
-    page.goTo("https://www.baidu.com/?tn=98012088_10_dg&ch=3");
-    PDFOptions pdfOptions = new PDFOptions();
-    pdfOptions.setPath("test.pdf");
-    page.pdf(pdfOptions);
-    page.close();
-    browser.close();
-```
-
-在这个例子中，导航到某个页面后，将整个页面截图，并写成PDF文件。注意，生成PDF必须在headless模式下才能生效
-
-#### 4、TRACING 性能分析
-
-```java
-	//自动下载，第一次下载后不会再下载
-    BrowserFetcher.downloadIfNotExist(null);
-    ArrayList<String> argList = new ArrayList<>();
-    LaunchOptions options = new LaunchOptionsBuilder().withArgs(argList).withHeadless(true).build();
-    argList.add("--no-sandbox");
-    argList.add("--disable-setuid-sandbox");
-    Browser browser = Puppeteer.launch(options);
-    Page page = browser.newPage();
-    //开启追踪
-    page.tracing().start("C:\\Users\\howay\\Desktop\\trace.json");
-    page.goTo("https://www.baidu.com/?tn=98012088_10_dg&ch=3");
-    page.tracing().stop();
-```
-
-在这个例子中，将在页面导航完成后，生成一个 json 格式的文件，里面包含页面性能的具体数据，可以用 Chrome 浏览器开发者工具打开该 json 文件，并分析性能。
-
-#### 5、页面截图
-
-```java
-    BrowserFetcher.downloadIfNotExist(null);       
-    ArrayList<String> arrayList = new ArrayList<>();
-    LaunchOptions options = new LaunchOptionsBuilder().withArgs(arrayList).withHeadless(true).build();
-    arrayList.add("--no-sandbox");
-    arrayList.add("--disable-setuid-sandbox");
-    Browser browser = Puppeteer.launch(options);
-    Page page = browser.newPage();
-    page.goTo("https://www.baidu.com/?tn=98012088_10_dg&ch=3");
-    ScreenshotOptions screenshotOptions = new ScreenshotOptions();
-    //设置截图范围
-    Clip clip = new Clip(1.0,1.56,400,400);
-    screenshotOptions.setClip(clip);
-    //设置存放的路径
-    screenshotOptions.setPath("test.png");
-    page.screenshot(screenshotOptions);
-```
-
-页面导航完成后，设置截图范围以及图片保存路径，即可开始截图。
-
-**更多的例子请看**[这里](https://github.com/fanyong920/jvppeteer/tree/master/example/src/main/java/com/ruiyun/example)
-
-### 资源
-
-1. [Puppeteer中文文档](https://zhaoqize.github.io/puppeteer-api-zh_CN/#/)
-2. [DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
-3. [Chrome命令行启动参数](https://peter.sh/experiments/chromium-command-line-switches/)
-
-### 推荐
-
-推荐一下最近发现的一个很好用的全球代理：SmartProxy属于代理IP池项目，主打1亿真实住宅IP资源，作为专业海外http代理商，拥有千万级优质资源，覆盖全球城市。高匿稳定提供100%原生住宅IP，支持社交账户、电商平台、网络数据收集等服务。提供API和账密提取使用方式，动态和静态住宅代理均有，大部分是真人住宅IP，成功率不用说，超棒！付费套餐选择多样，现在春季价格很优惠，动态住宅代理只要65折！
-
-![Ip代理](https://user-images.githubusercontent.com/29977021/228770306-6c5d0b8a-c381-4be3-b500-e43fc47298b3.png)
-
-注册链接：https://www.smartproxy.cn/regist?invite=X7TRG0
-
-### 执照
-
-此仓库中找到的所有内容均已获得 Apache 许可。有关详细信息，请参见`LICENSE`文件
+- <a href="https://jte.gg">The jte website</a> (<a href="https://github.com/casid/jte-website">Source</a>)
+- <a href="https://mazebert.com">Mazebert TD (game website)</a>
+- <a href="https://github.com/casid/jte-javalin-tutorial">Javalin website example with login and multiple languages</a>
+- <a href="https://www.mitchdennett.com/">Mitch Dennett's Blog</a>
+- <a href="https://flowcrypt.com/docs/business/enterprise-admin-panel.html">FlowCrypt Admin Panel</a>
