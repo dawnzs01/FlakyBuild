@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="what_do_you_want_to_share">Vad vill du dela?</string>
+    <string name="currently_listening_to_x_by_x">Nu spelas %1$s av %2$s</string>
+    <string name="the_audio_file">Ljudfilen</string>
+    <string name="action_share">Dela</string>
+    <string name="action_settings">"Inställningar"</string>
+    <string name="action_grant">Tillåt</string>
+    <string name="action_about">Om</string>
+    <string name="action_add_to_favorites">"Lägg till i favoriter "</string>
+    <string name="action_remove_from_favorites">"Ta bort från favoriter "</string>
+    <string name="action_search">Sök</string>
+    <string name="action_play_next">Spela nästa</string>
+    <string name="action_play">Spela</string>
+    <string name="action_details">Detaljer</string>
+    <string name="action_rename">Byt namn</string>
+    <string name="action_delete">Radera</string>
+    <string name="albums">Album</string>
+    <string name="artists">Artister</string>
+    <string name="songs">Låtar</string>
+    <string name="playlists">Spellistor</string>
+    <string name="unplayable_file">Ett problem uppstod vid spelningen av denna l\u00e5t.</string>
+    <string name="album">Album</string>
+    <string name="label_details">Detaljer</string>
+    <string name="label_file_name">Filnamn</string>
+    <string name="label_file_path">Sökväg</string>
+    <string name="label_file_size">Storlek</string>
+    <string name="label_file_format">Format</string>
+    <string name="label_track_length">Längd</string>
+    <string name="label_bit_rate">Bithastighet</string>
+    <string name="label_sample_rate">Samplingsfrekvens</string>
+    <string name="action_go_to_artist">Gå till artist</string>
+    <string name="action_go_to_album">Gå till album</string>
+    <string name="no_results">Inga resultat</string>
+    <string name="delete_playlist_x"><![CDATA[
+Vill du radera spellistan <b>%1$s</b>?
+    ]]></string>
+    <string name="rename_playlist_title">Döp om spellista</string>
+    <string name="delete_playlist_title">Radera spellista</string>
+    <string name="light_theme_name">Ljus</string>
+    <string name="dark_theme_name">Mörk</string>
+    <string name="pref_title_theme">Allmänt tema</string>
+    <string name="pref_header_audio">Ljud</string>
+    <string name="delete_action">Radera</string>
+    <string name="rename_action">Döp om</string>
+    <string name="pref_title_primary_color">Grundfärg</string>
+    <string name="no_playlists">Inga spellistor</string>
+    <string name="song">Låt</string>
+</resources>

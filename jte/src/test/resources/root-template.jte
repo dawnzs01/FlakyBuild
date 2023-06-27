@@ -1,1 +1,0 @@
-This template is located in resources with no subpackage.

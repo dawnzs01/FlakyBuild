@@ -1,0 +1,40 @@
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.dkanada.gramophone.views.settings.JellyPreferenceCategory android:title="@string/pref_header_colors">
+
+        <ListPreference
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true"
+            android:defaultValue="dark"
+            android:entries="@array/pref_theme_titles"
+            android:entryValues="@array/pref_theme_values"
+            android:key="general_theme"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/pref_title_theme" />
+
+        <com.dkanada.gramophone.views.settings.ColorPreference
+            app:iconSpaceReserved="false"
+            android:defaultValue="@color/color_primary"
+            android:key="primary_color"
+            android:summary="@string/pref_summary_primary_color"
+            android:title="@string/pref_title_primary_color" />
+
+        <com.dkanada.gramophone.views.settings.ColorPreference
+            app:iconSpaceReserved="false"
+            android:defaultValue="@color/color_accent"
+            android:key="accent_color"
+            android:summary="@string/pref_summary_accent_color"
+            android:title="@string/pref_title_accent_color" />
+
+        <SwitchPreference
+            app:iconSpaceReserved="false"
+            android:defaultValue="true"
+            android:key="colored_shortcuts"
+            android:summary="@string/pref_summary_colored_shortcuts"
+            android:title="@string/pref_title_colored_shortcuts" />
+
+    </com.dkanada.gramophone.views.settings.JellyPreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

@@ -1,5 +1,0 @@
-@import test.Model
-
-@param model:Model
-
-${model.thatThrows}

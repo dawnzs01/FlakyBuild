@@ -1,0 +1,71 @@
+<resources>
+
+    <string-array name="pref_theme_titles">
+        <item>@string/light_theme_name</item>
+        <item>@string/dark_theme_name</item>
+        <item>@string/black_theme_name</item>
+    </string-array>
+
+    <string-array name="pref_theme_values">
+        <item>LIGHT</item>
+        <item>DARK</item>
+        <item>BLACK</item>
+    </string-array>
+
+    <string-array name="pref_transcode_codec_titles">
+        <item>@string/codec_aac</item>
+        <item>@string/codec_mp3</item>
+    </string-array>
+
+    <string-array name="pref_transcode_codec_values">
+        <item>aac</item>
+        <item>mp3</item>
+    </string-array>
+
+    <string-array name="pref_maximum_bitrate_titles">
+        <item>@string/unlimited</item>
+        <item>@string/bitrate_320kbps</item>
+        <item>@string/bitrate_256kbps</item>
+        <item>@string/bitrate_128kbps</item>
+    </string-array>
+
+    <string-array name="pref_maximum_bitrate_values">
+        <item>10000000</item>
+        <item>320000</item>
+        <item>256000</item>
+        <item>128000</item>
+    </string-array>
+
+    <string-array name="pref_page_size_titles">
+        <item>@string/unlimited</item>
+        <item>400</item>
+        <item>100</item>
+        <item>60</item>
+        <item>40</item>
+    </string-array>
+
+    <string-array name="pref_page_size_values">
+        <item>100000</item>
+        <item>400</item>
+        <item>100</item>
+        <item>60</item>
+        <item>40</item>
+    </string-array>
+
+    <string-array name="pref_cache_size_titles">
+        <item>@string/unlimited</item>
+        <item>2GB</item>
+        <item>1GB</item>
+        <item>400MB</item>
+        <item>200MB</item>
+    </string-array>
+
+    <string-array name="pref_cache_size_values">
+        <item>10000</item>
+        <item>2000</item>
+        <item>1000</item>
+        <item>400</item>
+        <item>200</item>
+    </string-array>
+
+</resources>
