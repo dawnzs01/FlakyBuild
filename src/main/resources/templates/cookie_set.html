@@ -1,0 +1,96 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="never">
+    <meta name="renderer" content="webkit">
+    <meta
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+            name="viewport">
+    <title>弹幕姬-自定义cookie</title>
+    <link rel="apple-touch-icon-precomposed"
+          href="../../img/headlogo.png" th:href="@{/img/favicon.png}">
+    <link rel="shortcut icon" href="../../img/headlogo.png"
+          th:href="@{/img/favicon.png}">
+    <link rel="stylesheet" href="../../css/style.css" th:href="@{/css/style.css}" type="text/css" media="all">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" type="text/css"
+          media="all">
+    <script type="text/javascript" src="../../js/jquery-3.6.4.min.js" th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <script type="text/javascript" src="../../js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script type="text/javascript" src="../../js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<div class="app">
+    <div
+            class="row align-items-center justify-content-center center-wrapper">
+        <div class="col-md-6 m-3">
+            <div class="card border-second">
+                <div class="card-header">
+                    <h2>
+                        <span>自定义cookie</span>
+                        <iframe
+                                src="https://ghbtns.com/github-btn.html?user=BanqiJane&amp;repo=Bilibili_Danmuji&amp;type=star&amp;count=true&amp;size=large"
+                                frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text">cookie:</span>
+                        </div>
+                        <input type="text" id="cookie_data" class="form-control"
+                               placeholder="你的cookie" data-bs-toggle="tooltip"
+                               data-bs-placement="top" data-bs-html="true"
+                               title="破站的cookie,通常在浏览器按f12找某个接口复制<br>必要:<span class='red-font'>bili_jct,SESSDATA</span>"
+                        >
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-success" id="cookie_set_send">设定</button>
+                    <a th:href="@{/}" class="btn btn-link" style="float: right;">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function cookie_set(key) {
+        $.ajax({
+            url: '../customCookie',
+            async: false,
+            cache: false,
+            type: 'POST',
+            data: {
+                cookie: key
+            },
+            dataType: 'json',
+            success: function (data) {
+                const flag = data.result;
+                if (flag == true) {
+                    alert("设定成功");
+                    window.location.replace("/");
+                } else {
+                    alert("cookie错误")
+                }
+            }
+        })
+    }
+
+    $(document).on('click', '#cookie_set_send', function () {
+        const cookie_data = $("#cookie_data").val();
+        cookie_set(cookie_data);
+    });
+    $(function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            // this.addEventListener('hide.bs.tooltip', function () {
+            //     new bootstrap.Tooltip(tooltipTriggerEl)
+            // })
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    })
+</script>
+</body>
+</html>

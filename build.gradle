@@ -1,183 +1,63 @@
-buildscript {
-    ext {
-        kotlin_version = '1.5.21'
-    }
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.2'
-        classpath 'com.google.gms:google-services:4.3.10'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+plugins {
+	id 'org.springframework.boot' version '2.6.8'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
 }
+group = 'xyz.acproject.danmuji'
+version = '2.6.4beta'
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-        google()
-        mavenCentral()
-    }
-}
-
-def getReleaseVersionCode() {
-    def versionCode = (int) (new Date().getTime() / 1000)
-    println('versionCode: ' + versionCode)
-    return versionCode
-}
-
-def getReleaseVersionName() {
-    def baseline = '1.6.8'
-    def versionName = baseline + new Date().format('(yyMMdd)')
-    println('versionName: ' + versionName)
-    return versionName
-}
-
-def localProperties = new Properties()
-def localPropertiesFile = new File(rootDir.getAbsolutePath(), 'local.properties')
-if (localPropertiesFile.exists()) {
-    localProperties.load(localPropertiesFile.newDataInputStream())
-}
-
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-
-android {
-    compileSdkVersion 30
-    ndkVersion '22.1.7171670'
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode getReleaseVersionCode()
-        versionName getReleaseVersionName()
-        ndk {
-            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
-        }
-    }
-
-    packagingOptions {
-        exclude 'META-INF/proguard/coroutines.pro'
-    }
-
-    signingConfigs {
-        debug {
-            storeFile file('debug.jks')
-            storePassword "debug.dgsrz.com"
-            keyAlias 'debug.github.dgsrz.com'
-            keyPassword 'debug.github.dgsrz.com'
-        }
-
-        release {
-            try {
-                storeFile file(localProperties.get("RELEASE_KEYSTORE", "debug.jks"))
-                storePassword localProperties.get('RELEASE_KEYSTORE_PASSWORD', "debug.dgsrz.com")
-                keyAlias localProperties.get('RELEASE_KEY_ALIAS', "debug.github.dgsrz.com")
-                keyPassword localProperties.get('RELEASE_KEY_PASSWORD', "debug.github.dgsrz.com")
-            } catch (ignored) {
-                throw new InvalidUserDataException('You should define RELEASE_KEYSTORE_PASSWORD and RELEASE_KEY_PASSWORD in local.properties.', ignored)
-            }
-        }
-    }
-
-    buildTypes {
-        debug {
-            resValue "string", "app_name", "osu!droid-debug"
-            applicationIdSuffix '.debug'
-            firebaseCrashlytics {
-                mappingFileUploadEnabled false
-            }
-        }
-
-        release {
-            resValue "string", "app_name", "osu!droid"
-            zipAlignEnabled true
-//            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.cfg', 'proguard-kotlin.pro'
-            signingConfig signingConfigs.release
-            firebaseCrashlytics {
-                mappingFileUploadEnabled false
-            }
-        }
-
-        pre_release {
-            matchingFallbacks = ['release']
-            resValue "string", "app_name", "osu!droid"
-            zipAlignEnabled true
-//            minifyEnabled true
-//            debuggable true
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.cfg', 'proguard-kotlin.pro'
-            signingConfig signingConfigs.release
-            firebaseCrashlytics {
-                mappingFileUploadEnabled false
-            }
-        }
-    }
-
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
-            jniLibs.srcDirs = ['libs']
-        }
-        androidTest.setRoot('tests')
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-
-    useLibrary 'org.apache.http.legacy'
-
-    lintOptions {
-        abortOnError true
-        ignoreWarnings true
-        disable 'MissingTranslation', 'ExpiredTargetSdkVersion', 'ProtectedPermissions', 'AppLinkUrlError'
-    }
-
-    android.applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            def releaseTime = new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
-            def fileName = "osu!droid-${defaultConfig.versionName}-${variant.buildType.name}-${releaseTime}.apk"
-            outputFileName = fileName
-        }
-    }
+repositories {
+	maven{
+	      name 'aliyunmaven'
+	      url 'https://maven.aliyun.com/nexus/content/groups/public/'
+	}
+	mavenCentral()
 }
 
 dependencies {
-    implementation project(':AndEngine')
-    implementation project(':andnext_markdown')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.preference:preference:1.1.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
-    implementation 'com.google.firebase:firebase-analytics:19.0.1'
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-undertow'
+	implementation ('org.springframework.boot:spring-boot-starter-web'){
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	implementation ('org.springframework.boot:spring-boot-starter-websocket'){
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
+	}
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+    // https://mvnrepository.com/artifact/org.java-websocket/Java-WebSocket
+	implementation group: 'org.java-websocket', name: 'Java-WebSocket', version: '1.5.3'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.6.8'
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+	implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.83'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+	implementation group: 'joda-time', name: 'joda-time', version: '2.10.5'
+    // https://mvnrepository.com/artifact/com.google.zxing/core
+	implementation group: 'com.google.zxing', name: 'core', version: '3.4.0'
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.9'
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+	implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
 
-    // implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    // implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    // implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
-    implementation 'com.google.code.gson:gson:2.8.8'
-    //implementation 'com.github.tbruyelle:rxpermissions:0.12'
-    implementation 'pub.devrel:easypermissions:3.0.0'
-    implementation 'net.lingala.zip4j:zip4j:2.9.0'
-
-    implementation 'com.github.EdrowsLuo:osudroidstrings:bd9507b289'
-    implementation 'com.github.EdrowsLuo.EdlGameFramework:EdlJavaExt:d91c53fcff'
-    implementation 'com.github.EdrowsLuo.EdlGameFramework:EdlOsbSupport:d91c53fcff'
-    implementation project(path: ':LibBASS')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation 'commons-io:commons-io:2.11.0'
-    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
+	implementation fileTree(dir: 'lib', includes: ['*.jar'])
+}
+configurations {
+	//remove default logger
+	all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	
+}
+//test {
+//	enable = false
+////	useJUnitPlatform()
+//}
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
 }
