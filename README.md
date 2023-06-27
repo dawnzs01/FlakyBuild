@@ -1,29 +1,26 @@
-![Structurizr](docs/images/structurizr-banner.png)
+# Chunky
 
-# Structurizr command line interface (CLI)
+![chunkylogo](https://user-images.githubusercontent.com/17698576/171119146-122497e4-7527-438b-8f8e-c1c04c2841b9.jpg)
 
-This GitHub repository contains the Structurizr CLI - a command line utility for Structurizr, designed to be used in conjunction with the [Structurizr DSL](https://github.com/structurizr/dsl), and supports the following commands/functionality:
+Minecraft chunk pre-generator, supporting a wide variety of server implementations including Spigot, Paper, Fabric, Forge, and Sponge.
 
-- [__push__](docs/push.md) content to the Structurizr cloud service/on-premises installation
-- [__pull__](docs/pull.md) workspace content as JSON
-- [__lock__](docs/lock.md) a workspace
-- [__unlock__](docs/unlock.md) a workspace
-- [__export__](docs/export.md) diagrams to PlantUML, Mermaid, WebSequenceDiagrams, DOT, and Ilograph; or a DSL workspace to JSON
-- [__list__](docs/list.md) elements within a workspace
-- [__validate__](docs/validate.md) a JSON/DSL workspace definition
+Pre-generate chunks, quickly, efficiently, and safely!
 
-## Installing the CLI
+## Getting Started
 
-- [Local installation](docs/local-installation.md)
-- [Pre-built containers](docs/containers.md) (Docker, dev containers, etc)
-- [Package managers](docs/package-managers.md)
-- [GitLab](docs/gitlab.md) (e.g. GitLab CI/CD)
+- [Installing](https://github.com/pop4959/Chunky/wiki/Installing)
+- [Pre-generating Chunks](https://github.com/pop4959/Chunky/wiki/Pregeneration)
+- [Command Reference](https://github.com/pop4959/Chunky/wiki/Commands)
 
-## Getting started
+## Support
 
-See the [getting started](docs/getting-started.md) guide for details of how to use the Structurizr CLI.
+For questions about Chunky, first try the [Wiki](https://github.com/pop4959/Chunky/wiki) to see if your question is already answered there.
 
-## Links
+If you can't find what you're looking for, visit us in the #chunky channel on our [Discord server](https://discord.gg/ZwVJukcNQG).
 
-- [Docker Hub](https://hub.docker.com/r/structurizr/cli)
-- [Changelog](docs/changelog.md)
+## Special Thanks
+
+[![yklogo](https://www.yourkit.com/images/yklogo.png)](https://www.yourkit.com/)
+
+YourKit supports open source projects with innovative and intelligent tools for monitoring and profiling Java and .NET applications. YourKit is the creator of [YourKit Java Profiler](https://www.yourkit.com/java/profiler/), [YourKit .NET Profiler](https://www.yourkit.com/.net/profiler/),
+and [YourKit YouMonitor](https://www.yourkit.com/youmonitor/). We thank them for granting us open source project licenses so that we can continue to deliver the best performance possible.
