@@ -1,26 +1,30 @@
-# Build
-*.apk
+# gradle
 
-# Cache
-bin
-gen
-out
+.gradle/
+build/
+out/
+classes/
 
-# NDK
-*.so
-*.hpp
-*.h
+# eclipse
 
-# Gradle
-*.gradle
-*.jar
-gradlew
-gradlew.bat
-build
+*.launch
 
-# Configuration
-local.properties
+# idea
 
-# Other
-.idea
-.vs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# fabric
+
+run/
+logs/latest.log
