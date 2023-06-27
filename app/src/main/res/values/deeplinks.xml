@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ This file is part of Grocy Android.
+  ~
+  ~ Grocy Android is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Grocy Android is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Grocy Android. If not, see http://www.gnu.org/licenses/.
+  ~
+  ~ Copyright (c) 2020-2023 by Patrick Zedler and Dominic Zedler
+  -->
+
+<resources>
+
+  <string name="deep_link_stockOverviewFragment" translatable="false">grocy://stockOverviewFragment?statusFilterId={statusFilterId}</string>
+  <string name="deep_link_shoppingListFragment" translatable="false">grocy://shoppingListFragment</string>
+  <string name="deep_link_shoppingListItemEditFragment" translatable="false">grocy://shoppingListItemEditFragment?action={action}&amp;productId={productId}</string>
+  <string name="deep_link_shoppingListItemEditFragmentCreate" translatable="false">grocy://shoppingListItemEditFragment?action=create</string>
+  <string name="deep_link_shoppingModeFragment" translatable="false">grocy://shoppingModeFragment</string>
+  <string name="deep_link_purchaseFragment" translatable="false">grocy://purchaseFragment</string>
+  <string name="deep_link_consumeFragment" translatable="false">grocy://consumeFragment</string>
+  <string name="deep_link_transferFragment" translatable="false">grocy://transferFragment</string>
+  <string name="deep_link_inventoryFragment" translatable="false">grocy://inventoryFragment</string>
+  <string name="deep_link_settingsFragment" translatable="false">grocy://settingsFragment?showCategory={showCategory}</string>
+  <string name="deep_link_settingsCatServerFragment" translatable="false">grocy://settingsCatServerFragment</string>
+  <string name="deep_link_settingsCatBehaviorFragment" translatable="false">grocy://settingsCatBehaviorFragment</string>
+  <string name="deep_link_settingsCatScannerFragment" translatable="false">grocy://settingsCatScannerFragment</string>
+  <string name="deep_link_tasksFragment" translatable="false">grocy://tasksFragment</string>
+  <string name="deep_link_taskEntryEditFragment" translatable="false">grocy://taskEntryEditFragment?action={action}</string>
+  <string name="deep_link_taskEntryEditFragmentCreate" translatable="false">grocy://taskEntryEditFragment?action=create</string>
+  <string name="deep_link_choresFragment" translatable="false">grocy://choresFragment</string>
+  <string name="deep_link_recipesFragment" translatable="false">grocy://recipesFragment</string>
+  <string name="deep_link_aboutFragment" translatable="false">grocy://aboutFragment</string>
+  <string name="deep_link_masterProductFragment" translatable="false">grocy://masterProductFragment?action={action}&amp;productName={productName}&amp;productId={productId}&amp;pendingProductId={pendingProductId}&amp;pendingProductBarcodes={pendingProductBarcodes}</string>
+  <string name="deep_link_masterDataOverviewFragment" translatable="false">grocy://masterDataOverviewFragment</string>
+  <string name="deep_link_storedPurchasesFragment" translatable="false">grocy://storedPurchasesFragment</string>
+  <string name="deep_link_stockEntriesFragment" translatable="false">grocy://stockEntriesFragment?productId={productId}</string>
+  <string name="deep_link_recipeEditIngredientEditFragment">grocy://recipeEditIngredientEditFragment</string>
+  <string name="deep_link_recipeEditIngredientListFragment">grocy://masterRecipeEditIngredientListFragment?recipeId={recipeId}</string>
+  <string name="deep_link_recipeEditFragment">grocy://recipeEditFragment?action={action}</string>
+  <string name="deep_link_chooseProductFragment">grocy://chooseProductFragment?barcode={barcode}&amp;forbidCreateProduct={forbidCreateProduct}&amp;pendingProductsActive={pendingProductsActive}</string>
+</resources>

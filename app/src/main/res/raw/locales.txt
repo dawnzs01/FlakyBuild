@@ -1,0 +1,87 @@
+ca
+ca.demo.grocy.info
+blauigris, tmllull, flygorn
+
+cs
+cs.demo.grocy.info
+Radimek, InToSSH, PavelP, cniry
+
+de
+de.demo.grocy.info
+Dominic Zedler, Patrick Zedler
+
+en
+en.demo.grocy.info
+Dominic Zedler, Patrick Zedler
+
+es
+es.demo.grocy.info
+martinvolantin, recognitium, ami232, adrigrillo, rubensancor, tmllull, netsyder, xuko, SackCastellon, amilustre, flygorn, Londoneye02, BarbarianTarkus
+
+et
+en.demo.grocy.info
+dogyx
+
+fr
+fr.demo.grocy.info
+prohand, Clem844, tesseract241, erobertc, voslin, Zorvalt, lapourgagner, Keiishu, MrAlucardDante, Mquiles, aleskx, choukajohn, Stack_it_up, pellegrin.guillaume, a_nayrat, Keeh
+
+hu
+hu.demo.grocy.info
+vrnagy, cr0ssmind, jandras, infeeeee, Tallyrald
+
+it
+it.demo.grocy.info
+Matte23, racerider, nuraiman, alex.bernocchi.ab, tesseract241, mellotanica, sandman91, bonerserk, silkevicious, wisewtf, lucanomax, loviuz, iglox, AlessandroSechi, igi, ant.mar94
+
+iw
+en.demo.grocy.info
+sefi.ninio, Yaron
+
+ja
+ja.demo.grocy.info
+daigoume
+
+nb
+no.demo.grocy.info
+teitrand, Ziggiz, RonnyRusten
+
+nl
+nl.demo.grocy.info
+MaartenSiersema, Wazzaaam, knnnrd, 4lloyd, Llewy, emielverstegen, decramy, mcbloch, maarten.paul, gerba102, AlexInvar
+
+pl
+pl.demo.grocy.info
+smiglo, micwoj92, smigima, hazelnutfox, Moarc
+
+pt-BR
+pt-br.demo.grocy.info
+alemoh1234, recognitium, jeffersantoss, JST, edbizarro, fabiosv, ferlbo, albarreto
+
+pt-PT
+pt-pt.demo.grocy.info
+zedascouves, JST
+
+ru
+ru.demo.grocy.info
+Dside, unwarkz, rrader, SergeyKodolov, iluhis, Moarc
+
+sk
+sk.demo.grocy.info
+LiJu09, aasami, PatrikKT
+
+sv
+sv.demo.grocy.info
+duxleon, Busan15, googleoo, Bllstc, bexov, Joakim_S, lrnflk
+
+uk
+en.demo.grocy.info
+NazimUa, rrader, hafanovychvladyslav
+
+zh-CN
+zh-cn.demo.grocy.info
+LuLuX, alei643, aleixcox, LilligantMatsuri, Yiming.L, copy00
+
+zh-TW
+zh-tw.demo.grocy.info
+Stillu, LuLuX, zobuwei, knfu, alexli1205

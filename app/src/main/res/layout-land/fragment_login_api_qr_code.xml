@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ This file is part of Grocy Android.
+  ~
+  ~ Grocy Android is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Grocy Android is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Grocy Android. If not, see http://www.gnu.org/licenses/.
+  ~
+  ~ Copyright (c) 2020-2023 by Patrick Zedler and Dominic Zedler
+  -->
+
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+    <variable
+      name="fragment"
+      type="xyz.zedler.patrick.grocy.fragment.LoginApiQrCodeFragment" />
+    <variable
+      name="clickUtil"
+      type="xyz.zedler.patrick.grocy.util.ClickUtil" />
+    <variable
+      name="activity"
+      type="xyz.zedler.patrick.grocy.activity.MainActivity" />
+  </data>
+
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/app_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.Grocy.Toolbar.Back"
+        app:title="@string/action_login"
+        app:menu="@menu/menu_login" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/scroll"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true"
+      android:overScrollMode="never"
+      android:layout_marginTop="?attr/actionBarSize">
+
+      <LinearLayout
+        android:id="@+id/linear_container_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:baselineAligned="false">
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1"
+          android:paddingStart="16dp"
+          android:paddingEnd="8dp"
+          android:paddingTop="16dp"
+          android:paddingBottom="16dp">
+
+          <com.google.android.material.card.MaterialCardView
+            android:id="@+id/hint_card"
+            style="@style/Widget.Grocy.Card.Text"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+              style="@style/Widget.Grocy.TextView.Paragraph.Card"
+              android:text="@{fragment.isPageForGrocyKey() ? @string/msg_qr_code_scan : @string/msg_qr_code_scan_token}" />
+
+          </com.google.android.material.card.MaterialCardView>
+
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/enter_manually"
+            style="@style/Widget.Grocy.Button.OutlinedButton"
+            android:text="@string/action_enter_data_manually"
+            android:layout_gravity="center_horizontal"
+            android:onClick="@{() -> fragment.enterDataManually()}"
+            app:clickUtil="@{clickUtil}" />
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:paddingStart="8dp"
+          android:paddingEnd="16dp"
+          android:paddingTop="16dp"
+          android:paddingBottom="16dp">
+
+          <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/container_scanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> fragment.toggleTorch()}"/>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

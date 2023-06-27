@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ This file is part of Grocy Android.
+  ~
+  ~ Grocy Android is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Grocy Android is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Grocy Android. If not, see http://www.gnu.org/licenses/.
+  ~
+  ~ Copyright (c) 2020-2023 by Patrick Zedler and Dominic Zedler
+  -->
+
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+    <import type="android.view.View" />
+    <import type="xyz.zedler.patrick.grocy.R" />
+    <import type="xyz.zedler.patrick.grocy.Constants" />
+    <variable
+      name="formData"
+      type="xyz.zedler.patrick.grocy.form.FormDataMasterProductCatConversionsEdit" />
+    <variable
+      name="viewModel"
+      type="xyz.zedler.patrick.grocy.viewmodel.MasterProductCatConversionsEditViewModel" />
+    <variable
+      name="activity"
+      type="xyz.zedler.patrick.grocy.activity.MainActivity" />
+    <variable
+      name="fragment"
+      type="xyz.zedler.patrick.grocy.fragment.MasterProductCatConversionsEditFragment" />
+  </data>
+
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/app_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.Grocy.Toolbar.Back"
+        app:title="@{viewModel.isActionEdit ? @string/title_edit_qu_conversion : @string/title_create_qu_conversion}" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <xyz.zedler.patrick.grocy.view.swiperefreshlayout.CustomSwipeRefreshLayout
+      android:id="@+id/swipe"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="?attr/actionBarSize"
+      android:overScrollMode="never"
+      app:setRefreshing="@{viewModel.isLoadingLive}"
+      app:onRefreshListener="@{() -> viewModel.downloadDataForceUpdate()}">
+
+      <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+          android:id="@+id/scroll"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:overScrollMode="never"
+          android:fillViewport="true">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/global_scroll_bottom_padding">
+
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:animateLayoutChanges="true"
+              app:transitionTypeChanging="@{true}"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintWidth_max="@dimen/max_content_width"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent">
+
+              <View
+                android:id="@+id/dummy_focus_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+
+              <LinearLayout
+                android:id="@+id/qu_from_container"
+                style="@style/Widget.Grocy.LinearLayout.ListItem.TwoLine.Clickable"
+                android:onClick="@{() -> viewModel.showQuantityUnitsBottomSheet(true)}">
+
+                <ImageView
+                  style="@style/Widget.Grocy.ImageView.ListItem.Icon"
+                  android:src="@drawable/ic_round_weights"
+                  tools:ignore="ContentDescription" />
+
+                <LinearLayout style="@style/Widget.Grocy.LinearLayout.ListItem.TextBox">
+
+                  <TextView
+                    android:id="@+id/text_quantity_unit_from"
+                    style="@style/Widget.Grocy.TextView.ListItem.OverLine"
+                    android:text="@string/property_quantity_unit_from" />
+
+                  <TextView
+                    style="@style/Widget.Grocy.TextView.ListItem.Title"
+                    android:text="@{formData.quantityUnitFromNameLive ?? @string/subtitle_none_selected}" />
+
+                </LinearLayout>
+
+              </LinearLayout>
+
+              <LinearLayout
+                android:id="@+id/qu_to_container"
+                style="@style/Widget.Grocy.LinearLayout.ListItem.TwoLine.Clickable"
+                android:onClick="@{() -> viewModel.showQuantityUnitsBottomSheet(false)}">
+
+                <ImageView
+                  style="@style/Widget.Grocy.ImageView.ListItem.Icon"
+                  android:src="@drawable/ic_round_weights"
+                  tools:ignore="ContentDescription" />
+
+                <LinearLayout style="@style/Widget.Grocy.LinearLayout.ListItem.TextBox">
+
+                  <TextView
+                    android:id="@+id/text_quantity_unit_to"
+                    style="@style/Widget.Grocy.TextView.ListItem.OverLine"
+                    android:text="@string/property_quantity_unit_to" />
+
+                  <TextView
+                    style="@style/Widget.Grocy.TextView.ListItem.Title"
+                    android:text="@{formData.quantityUnitToNameLive ?? @string/subtitle_none_selected}" />
+
+                </LinearLayout>
+
+              </LinearLayout>
+
+              <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                  style="@style/Widget.Grocy.LinearLayout.ListItem.TwoLine"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:paddingTop="8dp"
+                  android:paddingBottom="0dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="8dp">
+
+                  <ImageView
+                    android:id="@+id/image_factor"
+                    style="@style/Widget.Grocy.ImageView.ListItem.Icon"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/ic_round_scatter_plot_anim"
+                    tools:ignore="ContentDescription" />
+
+                  <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_factor"
+                    style="@style/Widget.Grocy.TextInputLayout.FilledBox"
+                    android:hint="@string/property_factor"
+                    app:helperTextEnabled="true"
+                    app:helperText="@{formData.factorHelperLive ?? ` `}"
+                    app:errorText="@{formData.factorErrorLive}"
+                    app:endIconMode="clear_text"
+                    app:endIconOnClickListener="@{v -> fragment.clearAmountFieldAndFocusIt()}">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/edit_text_factor"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:afterTextChanged="@{() -> formData.isFactorValid()}"
+                      android:imeOptions="actionDone"
+                      android:inputType="number|numberDecimal"
+                      android:maxLength="10"
+                      android:selectAllOnFocus="true"
+                      android:text="@={formData.factorLive}"
+                      app:onDoneClickInSoftKeyboard="@{() -> fragment.clearInputFocus()}"
+                      app:onFocusChangeListener="@{(v, focus) -> activity.startIconAnimation(imageFactor, focus)}" />
+
+                  </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                  android:id="@+id/amount_more"
+                  style="@style/Widget.Grocy.Button.IconButton"
+                  android:layout_marginStart="8dp"
+                  android:layout_marginBottom="4dp"
+                  android:onClick="@{() -> formData.moreFactor(imageFactor)}"
+                  app:icon="@drawable/ic_round_expand_less" />
+
+                <com.google.android.material.button.MaterialButton
+                  android:id="@+id/amount_less"
+                  style="@style/Widget.Grocy.Button.IconButton"
+                  android:layout_marginEnd="8dp"
+                  android:layout_marginBottom="4dp"
+                  android:onClick="@{() -> formData.lessFactor(imageFactor)}"
+                  app:icon="@drawable/ic_round_expand_more" />
+
+              </LinearLayout>
+
+            </LinearLayout>
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+      </FrameLayout>
+
+    </xyz.zedler.patrick.grocy.view.swiperefreshlayout.CustomSwipeRefreshLayout>
+
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
