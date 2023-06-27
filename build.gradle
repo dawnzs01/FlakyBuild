@@ -1,209 +1,183 @@
-plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
-	id 'maven-publish'
-	id 'io.github.juuxel.loom-quiltflower' version '1.8.+'
-	id 'org.ajoberstar.grgit' version '4.1.0'
+buildscript {
+    ext {
+        kotlin_version = '1.5.21'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.2'
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+        google()
+        mavenCentral()
+    }
+}
 
-archivesBaseName = project.archives_base_name
-version = "${project.mod_version}${getVersionMetadata()}+${project.minecraft_version}"
-group = project.maven_group
+def getReleaseVersionCode() {
+    def versionCode = (int) (new Date().getTime() / 1000)
+    println('versionCode: ' + versionCode)
+    return versionCode
+}
 
-repositories {
-	maven {
-		url "https://jitpack.io"
-	}
-	maven {
-		url "https://maven.theepicblock.nl"
-		content {
-			includeGroup("nl.theepicblock")
-		}
-	}
-	maven {
-		url "https://maven.nucleoid.xyz"
-		content {
-			includeGroup("xyz.nucleoid")
-		}
-	}
-	maven {
-		name 'Quilt'
-		url 'https://maven.quiltmc.org/repository/release'
-		content {
-			includeGroupByRegex("org\\.quiltmc.*")
-		}
-	}
+def getReleaseVersionName() {
+    def baseline = '1.6.8'
+    def versionName = baseline + new Date().format('(yyMMdd)')
+    println('versionName: ' + versionName)
+    return versionName
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = new File(rootDir.getAbsolutePath(), 'local.properties')
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.newDataInputStream())
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 30
+    ndkVersion '22.1.7171670'
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode getReleaseVersionCode()
+        versionName getReleaseVersionName()
+        ndk {
+            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/proguard/coroutines.pro'
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.jks')
+            storePassword "debug.dgsrz.com"
+            keyAlias 'debug.github.dgsrz.com'
+            keyPassword 'debug.github.dgsrz.com'
+        }
+
+        release {
+            try {
+                storeFile file(localProperties.get("RELEASE_KEYSTORE", "debug.jks"))
+                storePassword localProperties.get('RELEASE_KEYSTORE_PASSWORD', "debug.dgsrz.com")
+                keyAlias localProperties.get('RELEASE_KEY_ALIAS', "debug.github.dgsrz.com")
+                keyPassword localProperties.get('RELEASE_KEY_PASSWORD', "debug.github.dgsrz.com")
+            } catch (ignored) {
+                throw new InvalidUserDataException('You should define RELEASE_KEYSTORE_PASSWORD and RELEASE_KEY_PASSWORD in local.properties.', ignored)
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            resValue "string", "app_name", "osu!droid-debug"
+            applicationIdSuffix '.debug'
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
+        }
+
+        release {
+            resValue "string", "app_name", "osu!droid"
+            zipAlignEnabled true
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.cfg', 'proguard-kotlin.pro'
+            signingConfig signingConfigs.release
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
+        }
+
+        pre_release {
+            matchingFallbacks = ['release']
+            resValue "string", "app_name", "osu!droid"
+            zipAlignEnabled true
+//            minifyEnabled true
+//            debuggable true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.cfg', 'proguard-kotlin.pro'
+            signingConfig signingConfigs.release
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+        androidTest.setRoot('tests')
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    useLibrary 'org.apache.http.legacy'
+
+    lintOptions {
+        abortOnError true
+        ignoreWarnings true
+        disable 'MissingTranslation', 'ExpiredTargetSdkVersion', 'ProtectedPermissions', 'AppLinkUrlError'
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def releaseTime = new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+            def fileName = "osu!droid-${defaultConfig.versionName}-${variant.buildType.name}-${releaseTime}.apk"
+            outputFileName = fileName
+        }
+    }
 }
 
 dependencies {
-	//to change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation project(':AndEngine')
+    implementation project(':andnext_markdown')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
+    implementation 'com.google.firebase:firebase-analytics:19.0.1'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
 
-	modCompileOnly("org.quiltmc.qsl.core:registry:${project.qsl_version}") {
-		transitive(false)
-	}
+    // implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    // implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    // implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    //implementation 'com.github.tbruyelle:rxpermissions:0.12'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'net.lingala.zip4j:zip4j:2.9.0'
 
-	modImplementation include("nl.theepicblock:resource-locator-api:${project.resource_locator_api_version}")
-	modImplementation include("xyz.nucleoid:packet-tweaker:${project.packet_tweaker_version}")
+    implementation 'com.github.EdrowsLuo:osudroidstrings:bd9507b289'
+    implementation 'com.github.EdrowsLuo.EdlGameFramework:EdlJavaExt:d91c53fcff'
+    implementation 'com.github.EdrowsLuo.EdlGameFramework:EdlOsbSupport:d91c53fcff'
+    implementation project(path: ':LibBASS')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-	// Compat
-	modCompileOnly("com.github.CaffeineMC.lithium-fabric:lithium:${project.lithium_version}") {
-		transitive(false)
-	}
-	modCompileOnly("com.github.iPortalTeam.ImmersivePortalsMod:imm_ptl_core:${project.immersive_portals_version}") {
-		transitive(false)
-	}
-	modCompileOnly("com.github.iPortalTeam.ImmersivePortalsMod:q_misc_util:${project.immersive_portals_version}") {
-		transitive(false)
-	}
-}
-
-sourceSets {
-	testmod {
-		runtimeClasspath += main.runtimeClasspath + main.output
-		compileClasspath += main.compileClasspath + main.output
-	}
-	datagen {
-		runtimeClasspath += main.runtimeClasspath
-		compileClasspath += main.compileClasspath
-	}
-}
-
-loom {
-	runs {
-		testmodClient {
-			client()
-			ideConfigGenerated project.rootProject == project
-			name = "Test Mod Client"
-			source sourceSets.testmod
-		}
-		testmodServer {
-			server()
-			ideConfigGenerated project.rootProject == project
-			name = "Test Mod Server"
-			source sourceSets.testmod
-		}
-		gametest {
-			server()
-			name "Game Test"
-			vmArg "-Dfabric-api.gametest"
-			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
-			runDir "build/gametest"
-			source sourceSets.testmod
-		}
-		datagen {
-			server()
-			ideConfigGenerated false
-			source sourceSets.datagen
-		}
-	}
-
-	accessWidenerPath = file("src/main/resources/polymc.accesswidener")
-}
-
-task testmodJar(type: Jar) {
-	archiveClassifier = "testmod-dev"
-	from sourceSets.testmod.output
-}
-
-task remapTestmodJar(type: net.fabricmc.loom.task.RemapJarTask, dependsOn: testmodJar) {
-	archiveClassifier = "testmod"
-	input = testmodJar.archiveFile.get().asFile
-	addNestedDependencies = false
-}
-
-processResources {
-	inputs.property "version", project.version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
-}
-
-// This includes the resources in build/polymc-datagen/<version>/ into the jar
-def datagenDir = "$rootProject.buildDir/polymc-datagen/$project.minecraft_version"
-sourceSets.main.resources.srcDirs += datagenDir
-
-runDatagen {
-	environment("output-dir", datagenDir)
-}
-
-build.doLast {
-	if (!file(datagenDir).exists()) {
-		logger.error("!! Datagen hasn't been run. Vanilla ids aren't included in the build")
-	}
-}
-
-task getClientSha1 {
-	doLast {
-		def loomExt = net.fabricmc.loom.LoomGradleExtension.get(project)
-		def mcProvider = loomExt.getMinecraftProvider()
-		println(mcProvider.getVersionInfo().download("client").sha1())
-	}
-}
-
-def getVersionMetadata() {
-	if (grgit != null) {
-		def head = grgit.head()
-		def headTag = grgit.tag.list().find {
-			it.commit == head
-		}
-
-		if (headTag) {
-			return "" // This is a release
-		}
-
-		def id = head.abbreviatedId
-
-		// Flag the build if the build tree is not clean
-		if (!grgit.status().clean) {
-			id += "-dirty"
-		}
-
-		return "-rev.${id}"
-	}
-	return "";
-}
-
-// Ensure that the encoding is set to UTF-8, no matter what the system default is
-// This fixes some edge cases with special characters not displaying correctly
-// See http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-
-	it.options.release = 16
-}
-
-java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
-}
-
-jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
-}
-
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
-
-	repositories {
-		maven {
-			name = "teb"
-			credentials(PasswordCredentials)
-			url = "https://maven.theepicblock.nl"
-		}
-	}
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
 }
