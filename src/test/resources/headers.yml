@@ -1,5 +1,0 @@
-all:
-  header: value
-  catsFuzzedHeader: cats
-auth-header:
-  jwt: value
