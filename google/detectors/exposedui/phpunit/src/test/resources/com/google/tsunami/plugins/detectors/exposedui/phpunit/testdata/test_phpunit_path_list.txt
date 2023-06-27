@@ -1,3 +1,0 @@
-foo/eval-stdin.php
-bar/eval-stdin.php
-foo/bar/eval-stdin.php
