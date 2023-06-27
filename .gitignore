@@ -1,90 +1,18 @@
-#
-# LambdAurora's ignore file
-#
-# v0.21
+/target
+/local
 
-# JetBrains
-.idea/
-*.iml
-*.ipr
-*.iws
-## Intellij IDEA
-out/
-## CLion
-cmake-build-debug*/
-cmake-build-release*/
-## Eclipse
-eclipse
-*.launch
-.settings
-.metadata
-.classpath
+# Eclipse, Netbeans and IntelliJ files
+/.*
+!/.github
+!/.ci
+!.gitignore
+!.gitattributes
+!/.mvn
+/nbproject
+/*.ipr
+/*.iws
+/*.iml
 .project
-## Visual Studio
-.vs/
-CMakeSettings.json
 
-# Build system
-## Cargo
-Cargo.lock
-## CMake
-CMakeCache.txt
-CMakeLists.txt.user
-CMakeFiles/
-## QMake
-.qmake.stash
-## Gradle
-.gradle/
-## Node.JS
-node_modules/
-## PHP composer
-vendor/
-
-# Editors
-## VSCode
-.vscode/
-
-# Logging
-logs/
-
-# Languages
-## Java
-classes/
-## Python
-__pycache__/
-venv/
-## Rust
-**/*.rs.bk
-
-# OS
-## Windows
-desktop.ini
-# MacOS
+# Repository wide ignore mac DS_Store files
 .DS_Store
-
-# File types
-*.dll
-*.db
-*.tar.?z
-
-# Asset files automatic backup
-.*.png-autosave.kra
-*.png~
-
-# Compilation artifacts/Binaries
-*.o
-*.so
-*.dylib
-*.lib
-lib*.a
-
-# Common
-bin/
-build/
-dist/
-lib/
-!src/lib/
-!src/**/lib/
-obj/
-run/
-target/
