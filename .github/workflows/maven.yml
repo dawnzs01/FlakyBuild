@@ -1,14 +1,11 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: CI
+name: Java CI with Maven
 
 on:
   push:
-    branches: [ cp-ddd-framework ]
-
-
-
+    branches: [ ysomap ]
 
 
 
@@ -26,8 +23,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: 'Generate coverage report'
-      run: mvn clean verify -Ptest
-    - name: 'Upload coverage to Codecov'
-      uses: codecov/codecov-action@v1
+      run: mvn -B package -DskipTests --file pom.xml

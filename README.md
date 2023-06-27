@@ -1,199 +1,107 @@
-<img src="doc/assets/img/logo-small.png">
 
-#### **[Quickstart](#quickstart)** • **[Examples](#the-demo)** • **[Landscape](#landscape-of-central-platform)** • **[Chat with us](https://gitter.im/cp-ddd-framework/community)**
+# YSOMAP 
+![Platforms](https://img.shields.io/badge/Platforms-OSX-green.svg)
+![Java version](https://img.shields.io/badge/Java-8-blue.svg)
+![License](https://img.shields.io/badge/License-apache%202-green.svg)
 
-[![Mavenn Central](https://img.shields.io/maven-central/v/io.github.dddplus/dddplus.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:io.github.dddplus)
-![Requirement](https://img.shields.io/badge/JDK-8+-blue.svg)
-[![CI](https://github.com/funkygao/cp-ddd-framework/workflows/CI/badge.svg?branch=master)](https://github.com/funkygao/cp-ddd-framework/actions?query=branch%3Amaster+workflow%3ACI)
-[![Code Quality: Java](https://img.shields.io/lgtm/grade/java/g/funkygao/cp-ddd-framework.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/funkygao/cp-ddd-framework/context:java)
-[![Maintainability](https://api.codeclimate.com/v1/badges/84b05607593179e62374/maintainability)](https://codeclimate.com/github/funkygao/cp-ddd-framework/maintainability)
-[![Coverage Status](https://img.shields.io/codecov/c/github/funkygao/cp-ddd-framework.svg)](https://codecov.io/gh/funkygao/cp-ddd-framework)
+Ysomap is A helpful Java Deserialization exploit framework.
 
-[![Mentioned in Awesome DDD](https://awesome.re/mentioned-badge.svg)](https://github.com/heynickc/awesome-ddd#jvm)
-[![Javadoc](https://img.shields.io/badge/javadoc-Reference-blue.svg)](https://funkygao.github.io/cp-ddd-framework/doc/apidocs/)
-[![TODO](https://badgen.net/https/api.tickgit.com/badgen/github.com/funkygao/cp-ddd-framework?label=todos)](https://www.tickgit.com/browse?repo=github.com/funkygao/cp-ddd-framework)
-[![Gitter chat](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/cp-ddd-framework/community)
+Ysomap是一款适配于各类实际复杂环境的Java反序列化利用框架，可动态配置具备不同执行效果的Java反序列化利用链payload。
 
-<details>
-<summary><b>Table of content</b></summary>
+随着利用链的补充，ysomap同样可作为一款Java反序列化利用链教学库。目前，ysomap支持Java原生反序列化利用链、fastjson利用链、hessian利用链、xmldecoder、xstream等等。
 
-## Table of content
-   * [What is DDDplus](#what-is-dddplus)
-      * [Current status](#current-status)
-      * [Quickstart](#quickstart)
-      * [Features](#features)
-      * [Modules](#modules)
-      * [Key abstractions](#key-abstractions)
-   * [Using DDDplus](#using-dddplus)
-      * [Maven](#maven)
-      * [Gradle](#gradle)
-      * [Building from Source](#building-from-source)
-      * [With dddplus-archetype](#with-dddplus-archetype)
-   * [Demos](#demos)
-   * [DDDplus Ecosystem](#dddplus-ecosystem)
-   * [FAQ](#faq)
-   * [Landscape of Central Platform](#landscape-of-central-platform)
-   * [Contribution](#contribution)
-   * [Release Planning](#release-planning)
-   * [Licensing](#licensing)
+另外，ysomap具备exploit模块，用于充分调动反序列化利用链。目前，ysomap已支持RMI、JNDI、JMX、shiro、xmlrpc等exploits。
 
-</details>
+## #1 如何使用
 
-----
+在谈如何使用ysomap之前，假设使用者有一定的Java反序列化利用的前置知识，以及一些常见利用的原理，如rmi、ldap等。
 
-## What is DDDplus?
+### Jar编译
 
-DDDplus, originally cp-ddd-framework(cp means Central Platform：中台), is a lightweight flexible development framework for complex business architecture.
+由于XStream的几个payload依赖JDK8的环境，所以后续的使用均在JDK8的环境下编译并运行
 
-Originated from business，serve business！
-
-一套轻量级业务中台开发框架，以[DDD](https://github.com/funkygao/cp-ddd-framework/wiki/DDD)思想为本，致力于业务资产的可沉淀可传承，全方位解决复杂业务场景的扩展问题，实现[中台核心要素](https://github.com/funkygao/cp-ddd-framework/wiki/%E4%B8%9A%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%A0%B8%E5%BF%83%E8%A6%81%E7%B4%A0)，赋能中台建设。
-
-融合了前中台复杂生态协作方法论，充分考虑组织架构、技术债、学习门槛、可演进性、运维成本和风险而开发的，解决[业务开发痛点](https://github.com/funkygao/cp-ddd-framework/wiki/Why-we-need-this-framework)，是中台架构的顶层设计和完整解决方案。
-
-从业务中来，到业务中去！
-
-### Current status
-
-Used for several complex critical central platform projects in production environment.
-
-多个复杂的中台核心项目生产环境下使用。
-
-### Quickstart
-
-Please visit [Quickstart](https://github.com/funkygao/cp-ddd-framework/wiki).
-
-### Features
-
-- Based on DDD, but beyond DDD
-- 14 key business abstractions cover most complex business scenarios
-- Full layered extensibility
-- Empowers InnerSource
-- Provide maven archetype that generates a DDDplus integrated project
-- Total solutions oriented
-- Above all, DDDplus is simple enough
-
-核心特性：
-- 以DDD架构思想为本，面向复杂业务场景架构设计
-   - 通过代码框架提供足够的约束和指导，让DDD不再仅停留在思想层面
-   - 只引入弱依赖的 [IDomainModel](dddplus-spec/src/main/java/io/github/dddplus/model/IDomainModel.java)，弱化其他概念，降低DDD上手门槛
-   - 提供 [dddplus-archetype](https://github.com/dddplus/dddplus-archetype)，直接生成最佳实践的脚手架代码
-   - DDD分层架构上增加一层`spec layer`，解决前中台协同问题
-- 14个核心业务抽象(常用9个)，勾勒出业务中台骨架
-   - 中台架构的顶层设计
-   - less is more，以不变应万变
-   - 研发专注于填空式开发，只需解决局部问题
-- 全方位解决业务的不确定性
-   - 业务逻辑、流程、逻辑模型、数据模型的扩展、多态体系
-   - 框架本身支持再次扩展，便于被集成
-   - 抽象出独立的业务扩展包，框架底层通过`ClassLoader`机制进行业务隔离，支持热更新
-   - 平台容器包、平台业务包与业务扩展包：分离
-- 支撑中台战略的复杂生态协作
-   - 前台、中台解耦
-   - 业务隔离，不同前台间业务隔离，前台和中台隔离
-   - 支持稳态、敏态双速应用
-   - InnerSource，生态合作协同机制
-- 完整的解决方案
-   - 业务能力演化，业务测试，最佳实践，架构持续防腐，重构的导流验证，绞杀者落地方案等
-   - 提供 [一套完整的Demo工程](https://github.com/dddplus/dddplus-demo)
-   - 演示 [5分钟搭建一个仓储中台WMS](https://github.com/dddplus/dddplus-archetype-demo)，手把手真实场景教学
-- DDDplus框架，始终保持简单性
-
-### Modules
-
-```
-dddplus
-   ├── dddplus-spec    - Specification of DDDplus
-   ├── dddplus-runtime - Runtime implementation
-   ├── dddplus-plugin  - Plugin jar hot reloading mechanism
-   ├── dddplus-unit    - Extra unit test facilities
-   ├── dddplus-enforce - Enforce expected evolvement of the business architecture
-   └── dddplus-test    - Fully covered unit test cases
+```bash
+mvn clean package -DskipTests
 ```
 
-### Key abstractions
+正常编译不出错，可在`cli/target`目录找到ysomap.jar
 
-![](http://www.plantuml.com/plantuml/svg/XLHDRnCn4BtxLunwQW-fn3LQLIq4f1v0LSiTJUn9rehNZkpPfAZqlpDE7DWF8tAAvxrvyxttYJ5otpcLTjRlCM87BNfpZ9QPF6pG9HfWgKKJZjPlc-PekVrnVj_T0SUUbACD0mU8Tjio61j9imrUgJtg7Mu9dbo_jHwQvek8aRYzAP2VzKnnWvhWyT6GPyi_doa5Tw0unLUXG-i_lpBv9D9JE0V0jQEf_Mimv1wOKRSTUHR_cJ1fQ-Y5QPykg7QO4ZmX2ycFB94zHVMkb0zCSDK6XaWkeCcnhm0JVFkWIh6tj_cXPZMyK3nOJHL0Sb23_x04UYNTCrtV3DdFT0Yx773eLZ6AVmpEhMK68l2dHT3yMYnc3PtXiu5KUddASEz4HmBKyKZUK1GOruaZQeRIQjBVgHDVfh_GHqmb_uUrTH9SpImYkIM-f2rngvIDZUc_94CRxDs8DijjD8FLQYNljyJ8LhzB46-AMXqygGaqsR4SkXWAFksrC3fatLwNAPqwUwFKU8FAeEhBKy3ghinLAfrNqmqfYkDQwgpgtStBF7FBdVqJBaTN6M4ZiBHzN7QnLHAhbRa45pGoLVYBnTqbjoMiPPnrIiclKDIdu5au525BeybNbSzZY6ItixsGb2egyjR1a2fnotCUkDWh-vgr1_rOGeYwfSHHG7LFtkHl_cy0)
+当然，你也可以直接下载[release](https://github.com/wh1t3p1g/ysomap/releases)，但还是推荐自行clone后编译，因为大版本的更新将积攒一批利用链后才会发布release。
 
-## Using DDDplus
+### Jar运行
 
-已推送至[Maven中央库](https://search.maven.org/search?q=g:io.github.dddplus)，可直接引入。
+经过几次迭代，目前ysomap支持两种运行模式：终端cli模式和脚本模式
 
-### Maven
-
-```xml
-<dependency>
-    <groupId>io.github.dddplus</groupId>
-    <artifactId>dddplus-runtime</artifactId>
-    <version>1.1.2</version>
-</dependency>
+终端模式
+```bash
+java -jar ysomap.jar cli
 ```
-
-### Gradle
-
-```groovy
-dependencies {
-    ...
-    compile 'io.github.dddplus:dddplus-runtime:1.1.2'
-}
+脚本模式
+```bash
+java -jar ysomap.jar script path/to/script.yso
 ```
+终端模式更易于选择和配置exploit、payload、bullet，但对于重复性的配置，终端模式显的格外繁琐。所以后续又增加了脚本模式。通过编写特定配置的yso脚本，使用ysomap进行载入调用。脚本模式在正确配置的前提下将极大的节省使用者输入重复配置的工作量，提高使用效率。同时，yso脚本也可以被分享给其他使用者进行快捷使用。
 
-### Building from Source
+### 基础使用方法
 
-``` bash
-git clone https://github.com/funkygao/cp-ddd-framework.git
-cd cp-ddd-framework/
-mvn install
-```
+参见[YSOMAP食用指北](https://github.com/wh1t3p1g/ysomap/wiki/YSOMAP%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8C%97)
 
-### With dddplus-archetype
+## #2 当前进度
 
-``` bash
-mvn archetype:generate                          \
-    -DarchetypeGroupId=io.github.dddplus        \
-    -DarchetypeArtifactId=dddplus-archetype     \
-    -DarchetypeVersion=1.1.1                    \
-    -DgroupId=com.foo -DartifactId=demo         \
-    -Dpackage=com.foo -Dversion=1.0.0-SNAPSHOT  \
-    -B
-```
+### DONE
 
-For more, please visit [dddplus-archetype project](https://github.com/dddplus/dddplus-archetype).
+- [x] 支持CommonsCollections系列payload
+- [x] 支持执行效果bullet：远程jar载入、命令执行、代码执行、发起jndi效果、tomcat内存马、延时判断、文件写入、socket shell。
+- [x] 支持现有RMI系列攻击包 [原理1](http://blog.0kami.cn/2020/02/06/rmi-registry-security-problem/) [原理2](http://blog.0kami.cn/2020/02/09/jndi-with-rmi/) [原理3](https://mogwailabs.de/blog/2020/02/an-trinhs-rmi-registry-bypass/)
+- [x] 支持现有LDAP系列攻击包 [原理](http://blog.0kami.cn/2020/03/01/jndi-with-ldap/)
+- [x] 支持HTTP服务动态挂载恶意的class文件或jar文件
+- [x] 支持URLDNS
+- [x] 支持现有JMX系列攻击包 [原理](http://blog.0kami.cn/2020/03/10/java-jmx-rmi/)
+- [x] 支持fastjson JdbcRowSetImpl、TemplatesImpl gadget [原理](http://blog.0kami.cn/2020/04/13/talk-about-fastjson-deserialization/)
+- [x] 支持现有XStream系列payload包 [原理](http://blog.0kami.cn/2020/04/18/talk-about-xstream-deserialization/)
+- [x] 支持weblogic XMLDecoder payloads
 
-## Demos
+### TODO
 
-- [使用DDDplus搭建`订单履约中台`的例子](https://github.com/dddplus/dddplus-demo)
-- [使用DDDplus，5分钟搭建一个仓储中台WMS](https://github.com/dddplus/dddplus-archetype-demo)
+- [ ] 支持weblogic系列攻击包
+- [ ] 支持websphere系列攻击包
 
-## DDDplus Ecosystem
+## #3 由来
 
-- [dddplus-archetype](https://github.com/dddplus/dddplus-archetype)
-   - a maven archetype that generates a complete DDDplus driven project skeleton
-- [dddplus-visualizer](https://github.com/dddplus/vis)
-   - a CLI parsing DDDplus driven project Java AST with ANTLR and visualize your business artifacts
+在实际分析ysoserial的利用链时，有时候会觉得框架写的太死，有以下几个缺点：
 
-## FAQ
+1. 同一个利用链如果想改变一下最后的利用效果，如命令执行改成代码执行，我们需要改写这个利用链或者是重新增加一个利用链。这时，我们其实可以看到利用链的前半部分是不变的，变的只是后续的利用效果。
+2. ysoserial仅实现了常规的序列化利用链，对于类似JSON格式的序列化利用链，以当前的这个框架扩展起来会比较麻烦
 
-Please visit [FAQ](https://github.com/funkygao/cp-ddd-framework/wiki/FAQ).
+所以萌生了开发一个更加灵活的框架来扩展反序列化利用链，也就是当前这个试验品ysomap。
 
-## Landscape of Central Platform
+PS：YSOMAP项目为另一个项目的子项目，后续将开源该项目，敬请期待......
 
-业务中台建设全景图。
+## #4 原理
 
-![](doc/assets/img/landscape.png)
+我将利用链切分成了两个部分**payload**和**bullet**：
 
-## Contribution
+1. payload：指代利用链的前序部分
+2. bullet：指代最终利用链可达成的效果
 
-You are welcome to contribute to the project with pull requests on GitHub.
+#### 实际案例分析
 
-If you find a bug or want to request a feature, please use the [Issue Tracker](https://github.com/funkygao/cp-ddd-framework/issues).
+CommonsCollection1和3，在分析时我们可以看到实际1和3的区别在于1使用的是`InvokerTransformer`，而3使用的是`templatesImpl`的方式。那么提取相同的前序payload部分，我们只需写两个不同的bullet即可。而且这两个bullet也同样能被用在其他的payload上。
 
-For any question, you can use [Gitter Chat](https://gitter.im/cp-ddd-framework/community) to ask.
+实际还有就是我在写RMIRegistryExploit时，也有这种可将不变部分重用的地方，而无需2,3之类的出现。
 
-## Release Planning
 
-Interested on when the next release is coming? Check our [release planning](https://github.com/funkygao/cp-ddd-framework/wiki/Release-Planning) document for details.
+## #5 免责申明
 
-## Licensing
+未经授权许可使用YSOMAP攻击目标是非法的。 本程序应仅用于授权的安全测试与研究目的。
 
-DDDplus is licensed under the Apache License, Version 2.0 (the "License"); you may not use this project except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
+## #6 致谢
+
+@ysoserial: https://github.com/frohoff/ysoserial
+@marshalsec: https://github.com/mbechler/marshalsec
+
+## #7 404星链计划
+
+<img src="https://github.com/knownsec/404StarLink-Project/raw/master/logo.png" width="30%">
+
+ysomap现已加入 [404星链计划](https://github.com/knownsec/404StarLink)

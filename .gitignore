@@ -1,20 +1,20 @@
+# java
 *.class
-target/
-*.swp
-*.iml
-*.ipr
-*.iws
-.DS_Store
-.idea/
+
+# mvn
+**/target/**
+**/secret/**
+**/taobao/**
+
+# eclipse
 .classpath
-.ekstazi
 .project
-.settings
-.checkstyle
-*.log
-id_file
-*.epoch
-.factorypath
-.pmd
-.sonar/
-.deploy
+.settings/
+
+# idea
+.idea/
+*.iml
+
+.DS_Store
+*.ser
+*Test.java
