@@ -1,19 +1,20 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: waiting-for-triage
+title: FEATURE REQUEST
+labels: enhancement
 assignees: ''
 
 ---
 
 **Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is and what version of Spring Cloud you are using. Ex. I'm always frustrated when [...]
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.
 
-**Describe alternatives you've considered**
+**Describe alternatives you've considered to solve your solution without
+us adding this as a feature?**
 A clear and concise description of any alternative solutions or features you've considered.
 
 **Additional context**
