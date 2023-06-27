@@ -1,46 +1,35 @@
-# custom sodium versions
-custom_sodium/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-# gradle
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-.gradle/
-build/
-out/
-classes/
-
-# brachyura
-.brachyura
-*.jfr
-
-# custom sodium
-/custom_sodium/
-
-# idea
-
-.idea/
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
 *.ipr
-*.iws
 
-# vscode
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+nbactions.txt
+nbactions.xml
 
-.settings/
+### VS Code ###
 .vscode/
-bin/
-.classpath
-.project
 
-# eclipse
-
-*.launch
-
-# fabric
-
-run/
-/logs/latest.log
-
-# macOS
-
-.DS_Store
-.AppleDouble
-.LSOverride
+/nb-configuration.xml
+/nbproject/

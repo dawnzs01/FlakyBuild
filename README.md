@@ -1,82 +1,137 @@
-![Iris: An open-source shaders mod compatible with OptiFine shaderpacks](docs/banner.png)
+<h1 align="center">
+    Corona-Warn-App Verification Server
+</h1>
 
-# Iris
+<p align="center">
+    <a href="https://github.com/corona-warn-app/cwa-verification-server/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/corona-warn-app/cwa-verification-server?style=flat"></a>
+    <a href="https://github.com/corona-warn-app/cwa-verification-server/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-verification-server?style=flat"></a>
+    <a href="https://github.com/corona-warn-app/cwa-verification-server/blob/master/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=flat"></a>
+</p>
 
-## Links
+<p align="center">
+  <a href="#development">Development</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#support-and-feedback">Support</a> •
+  <a href="#how-to-contribute">Contribute</a> •
+  <a href="#contributors">Contributors</a> •
+  <a href="#repositories">Repositories</a> •
+  <a href="#licensing">Licensing</a>
+</p>
 
-* **Visit [our website](https://irisshaders.dev) for downloads and pretty screenshots!**\
-  * **Visit [Modrinth](https://modrinth.com/shaders) to find shader packs!**
-* Visit [our Discord server](https://discord.gg/jQJnav2jPu) to chat about the mod and get support! It's also a great place to get development updates right as they're happening.
-* Visit [the developer documentation](https://github.com/IrisShaders/Iris/tree/trunk/docs/development) for information on developing, building, and contributing to Iris!
+The goal of this project is to develop the official Corona-Warn-App for Germany based on the exposure notification API from [Apple](https://www.apple.com/covid19/contacttracing/) and [Google](https://www.google.com/covid19/exposurenotifications/). The apps (for both iOS and Android) use Bluetooth technology to exchange anonymous encrypted data with other mobile phones (on which the app is also installed) in the vicinity of an app user's phone. The data is stored locally on each user's device, preventing authorities or other parties from accessing or controlling the data. This repository contains the **verification service** for the Corona-Warn-App.
 
-## FAQ
+## Status
+![ci](https://github.com/corona-warn-app/cwa-verification-server/workflows/ci/badge.svg)
+[![quality gate](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=alert_status)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
+[![coverage](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=coverage)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
+[![bugs](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=bugs)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
 
-- Find answers to frequently asked questions on our [FAQ page](docs/faq.md).
-- Iris supports almost all shaderpacks, but a list of unsupported shaderpacks is available [here](docs/unsupportedshaders.md).
-- A list of unfixable limitations in Iris is available [here](docs/usage/limitations.md).
+## About this component
 
-## Why did you make Iris?
+In the world of the Corona Warn App the Verification Server helps validating whether upload requests from the mobile App are valid or not. The parts of the verification component cooperate in the following manner:
 
-Iris was created to fill a void that I saw in the Minecraft customization and graphical enhancement community: the lack of an open-source shaders mod that would let me load my favorite shader packs on modern versions of the game, while retaining performance and compatibility with modpacks. OptiFine, the current dominant mod for loading shader packs, has restrictive licensing that firmly stands in the way of any sort of tinkering, and is fairly notorious for having compatibility issues with the mods that I like. It's also mutually incompatible with Sodium, the best rendering optimization mod in existence by a large margin. ShadersMod was never updated past 1.12, and it lacks support for many of the many modern popular shaderpacks. So I created Iris, to try and solve these issues, and also address many other longstanding issues with shader packs.
+- The Verification Server of the Corona Warn App (repository: cwa-verification-server) helps validating whether upload requests from the mobile App are valid or not.
+- The Verification Portal of the Corona Warn App (repository: cwa-verification-portal) allows hotline employees to generate teleTANs which are used by users of the mobile App to upload their diagnostic keys.
+- The Verification Identity and Access of the Corona Warn App (repository: cwa-verification-iam) ensures that only authorized health personnel get access to the Verification Portal.
+- The Test Result Server of the Corona Warn App (repository: cwa-testresult-server) receives the results from laboratories and delivers these results to the app via the verification-server.
 
-I first and foremost develop Iris to meet my own needs of a performance-oriented shaders mod with good compatibility and potential for tinkering. Iris when paired with Sodium delivers great performance on my machine, finally making it fully possible for me to actually play with shaders instead of just periodically switching them on to take pretty screenshots, then switching them off once I get tired of frame drops. Of course, as it turns out, I'm far from the only person who benefits from the development of Iris, which is why I've decided to release it to the public as an open-source mod.
+## Architecture overview
+You can find an architectural overview of the component in the [solution architecture document](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md).  
+This component of the Corona-Warn-App whereas named **verification process** provides indeed two functionalities:  
+1. prove that a pretended positive case is indeed positive  
+2. provide the result of a COVID-19 test  
 
-Canvas is another shaders mod that has already gained some traction. Its big downside for me, however, is the fact that it doesn't support the existing popular OptiFine shaderpacks that I want to use. This is because it uses a new format for shader packs that isn't compatible with the existing format, in order to achieve many of its goals for better mod integration with shaders. And while Canvas now has a few nice shaders like Lumi Lights, I still want to have the option of using existing shader packs that were designed for OptiFine. Shader packs just aren't interchangeable, just like how you cannot hand a copy of *The Last Supper* to someone who wants a copy of the *Mona Lisa*. They're both great pieces of art, but you absolutely cannot just swap one out for the other. That being said, if you're a fan of the shader packs available for Canvas, then great! Canvas and Iris are both perfectly fine ways to enjoy shaders with Minecraft.
+To achieve this, the verification service gets the result of COVID-19 tests from LIS (**L**abor **I**nformation **S**ystem) which delivers test results to it. The complete process is described in [cwa-documentation/Solution Architecture](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md) to which you may refer for detailed information about the workflow.
 
-## Goals
+The software stack of the verification server is based on [Spring Boot](https://spring.io/projects/spring-boot), currently with an in-memory H2 database. As the persistence relies on [Liquibase](https://www.liquibase.org).
 
-These are the goals of Iris. Iris hasn't fully achieved all these goals, however we are getting close.
+## Development
+This component can be locally build in order to test the functionality of the interfaces and verify the concepts it is built upon.  
 
-* **Performance.** Iris should fully utilize your graphics card when paired with optimization mods like Sodium.
-* **Correctness.** Iris should try to be as issueless as possible in its implementation.
-* **Mod compatibility.** Iris should make a best effort to be compatible with modded environments.
-* **Backwards compatibility.** All existing ShadersMod / OptiFine shader packs should just work on Iris, without any modifications required.
-* **Features for shader pack developers.** Once Iris has full support for existing features of the shader pipeline and is reasonably bug free, I wish to expand the horizons of what's possible to do with Minecraft shader packs through the addition of new features to the shader pipeline. Unlimited color buffers, direct voxel data access, and fancy debug HUDs are some examples of features that I'd like to add in the future.
-* **A well-organized codebase.** I'd like for working with Iris code to be a pleasant experience overall.
+There are two ways to build:
+ - [Maven](https:///maven.apache.org) build - to run this component as spring application on your local machine
+ - [Docker](https://www.docker.com) build - to run it as docker container build from the provided docker build [file](https://github.com/corona-warn-app/cwa-verification-server/blob/master/Dockerfile)
 
+### Prerequisites
+ - [Open JDK 11](https://openjdk.java.net)  
+ - [Maven](https://maven.apache.org)
+ - *(optional)*: [Docker](https://www.docker.com)  
 
-## What's the current state of development?
+### Build
+Whether you cloned or downloaded the 'zipped' sources you will either find the sources in the chosen checkout-directory or get a zip file with the source code, which you can expand to a folder of your choice.
 
-Iris has public releases for 1.18.2, 1.19.2, 1.19.3, and 1.19.4 that work with the official releases of Sodium. Iris is generally usable on most shader packs, and most shader packs are being designed with Iris support in mind.
+In either case open a terminal pointing to the directory you put the sources in. The local build process is described afterwards depending on the way you choose.
 
-However, Iris is still not complete software. Performance can be improved, and more features are being added for shader developers. There are also some minor missing features from OptiFine that make the implementation incomplete.
+#### Maven based build
+This is the recommended way for taking part in the development.  
+Please check, whether following prerequisites are installed on your machine:
+- [Open JDK 11](https://openjdk.java.net) or a similar JDK 11 compatible VM  
+- [Maven](https://maven.apache.org)
 
-## How can I help?
+You can then open a terminal pointing to the root directory of the verification server and do the following:
 
-* The Iris Discord server is looking for people willing to provide support and moderate the server! Go to #applications on our server if you'd like to apply.
-* Code review on open PRs is appreciated! This helps get important issues with PRs resolved before I give them a look.
-* Code contributions through PRs are also welcome! If you're working on a large / significant feature it's usually a good idea to talk about your plans beforehand, to make sure that work isn't wasted.
+    mvn package
+    java -jar target/cwa-verification-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=local                               
 
-## But where's the Forge version?
+The verification server will start up and run locally on your machine available on port 8080.
 
-Iris doesn't support Forge. This is for a few reasons:
+#### Docker based build  
+We recommend that you first check to ensure that [Docker](https://www.docker.com) is installed on your machine.
 
-* My time is limited, and properly supporting all the mods available for Forge (as well as Forge itself) is a huge amount of work. When people ask for Forge support, they aren't asking just for Iris to run on Forge, they are also asking for it to be compatible out of the box with their kitchen sink modpack that contains over 300 mods. As a result, properly supporting Forge would require me to divert large amounts of precious time into fixing tedious compatibility issues and bugs, time that could instead be spent making the Fabric version of Iris better.
-* The Forge toolchain isn't really designed to play nice with mods like Iris that need to make many patches to the game code. It's possible, but Fabric & Quilt are just *better* for mods like Iris. It's no coincidence that the emergence of Fabric and the initial emergence of OptiFine replacements happened at around the same time.
-* Sodium, which Iris depends on to achieve its great performance, has no official Forge version. It's a long story, but in short: the lead developers of Forge were incredibly hostile to JellySquid when she developed for Forge, and since then have made no credible attempts to repair relations or even admit wrongdoing.
+On the command line do the following:
+```bash
+docker build -f|--file <path to dockerfile>  -t <imagename>  <path-to-verificationserver-root>
+docker run -p 127.0.0.1:8080:8080/tcp -it <imagename>
+```
+or simply  
+```bash
+docker build --pull --rm -f "Dockerfile" -t cwa-verificationserver "."
+docker run -p 127.0.0.1:8080:8080/tcp -it cwa-verificationserver
+```
+if you are in the root of the checked out repository.  
+The docker image will then run on your local machine on port 8080 assuming you configured docker for shared network mode.
 
-Some users have already ported Iris to Forge, however these ports generally come with mod compatibility issues and outdated updates.
-The license of Iris does permit others to legally port Iris to Forge, and we are not strictly opposed to the existence of an Iris Forge port created by others. However, what we are opposed to is someone doing a bare-minimum port of Iris to Forge, releasing it to the public, and then abandoning it or poorly maintaining it while compatibility issues and bug reports accumulate. When that happens, not only does that hurt the reputation of Iris, but we also ultimately get flooded by users wanting support with a low-effort Forge port that we didn't even make.
+#### API documentation  
+Along with the application there comes a [swagger2](https://swagger.io) API documentation, which you can access in your web browser when the verification server applications runs:
 
-So, if you want to distribute a Forge port of Iris, we'd prefer if you let us know. Please don't just name your port "Iris Forge," "Iris for Forge," or "Iris Forge Port" either. Be original, and don't just hijack our name, unless we've given you permission to use one of those kinds of names. If a well-qualified group of people willing to maintain a Forge port of Iris does appear, then a name like "Iris Forge" might be appropriate - otherwise, it probably isn't appropriate.
+    <base-url>/api/swagger
 
-## Credits
+Which results in the following URL on your local machine:
+http://localhost:8080/api/swagger
 
-* **TheOnlyThing and Vaerian**, for creating the excellent logo
-* **Mumfrey**, for creating the Mixin bytecode patching system used by Iris and Sodium internally
-* **The Fabric and Quilt projects**, for enabling the existence of mods like Iris that make many patches to the game
-* **JellySquid**, for creating Sodium, the best rendering optimization mod for Minecraft that currently exists, and for making it open-source
-* **All past, present, and future contributors to Iris**, for helping the project move along
-* **Dr. Rubisco**, for maintaining the website
-* **The Iris support and moderation team**, for handling user support requests and allowing me to focus on developing Iris
-* **daxnitro, karyonix, and sp614x**, for creating and maintaining the current shaders mods
+#### Remarks
+This repository contains files which support our CI/CD pipeline and will be removed without further notice  
+ - DockerfileCi - used for the GitHub build chain
+ - Jenkinsfile - used for Telekom internal SBS (**S**oftware**B**uild**S**ervice)
 
-## License
+## Documentation  
+The full documentation for the Corona-Warn-App can be found in the [cwa-documentation](https://github.com/corona-warn-app/cwa-documentation) repository. The documentation repository contains technical documents, architecture information, and white papers related to this implementation.
 
-All code in this (Iris) repository is completely free and open source, and you are free to read, distribute, and modify the code as long as you abide by the (fairly reasonable) terms of the [GNU LGPLv3 license](https://github.com/IrisShaders/Iris/blob/master/LICENSE).
+## Support and feedback
+The following channels are available for discussions, feedback, and support requests:
 
-Dependencies may not be under an applicable license: See the [Incompatible Dependencies](https://github.com/IrisShaders/Iris/blob/master/LICENSE-DEPENDENCIES) page for more information.
+| Type                     | Channel                                                |
+| ------------------------ | ------------------------------------------------------ |
+| **General Discussion**   | <a href="https://github.com/corona-warn-app/cwa-documentation/issues/new/choose" title="General Discussion"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-documentation/question.svg?style=flat-square"></a> </a>   |
+| **Concept Feedback**    | <a href="https://github.com/corona-warn-app/cwa-documentation/issues/new/choose" title="Open Concept Feedback"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-documentation/architecture.svg?style=flat-square"></a>  |
+| **Verification server issues**    | <a href="https://github.com/corona-warn-app/cwa-verification-server/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-verification-server?style=flat"></a>  |
+| **Other requests**    | <a href="mailto:opensource@telekom.de" title="Email CWA Team"><img src="https://img.shields.io/badge/email-CWA%20team-green?logo=mail.ru&style=flat-square&logoColor=white"></a>   |
 
-You are not allowed to redistribute Iris commerically or behind a paywall, unless you get a commercial license for GLSL Transformer. See above for more information.
+## How to contribute  
+Contribution and feedback is encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](./CONTRIBUTING.md). By participating in this project, you agree to abide by its [Code of Conduct](./CODE_OF_CONDUCT.md) at all times.
 
-Though it's not legally required, I'd appreciate it if you could ask before hosting your own public downloads for compiled versions of Iris. Though if you want to add the mod to a site like MCBBS, that's fine, no need to ask me.
+## Contributors  
+The German government has asked SAP AG and Deutsche Telekom AG to develop the Corona-Warn-App for Germany as open source software. Deutsche Telekom is providing the network and mobile technology and will operate and run the backend for the app in a safe, scalable and stable manner. SAP is responsible for the app development, its framework and the underlying platform. Therefore, development teams of SAP and Deutsche Telekom are contributing to this project. At the same time our commitment to open source means that we are enabling -in fact encouraging- all interested parties to contribute and become part of its developer community.
+
+## Repositories
+
+A list of all public repositories from the Corona-Warn-App can be found [here](https://github.com/corona-warn-app/cwa-documentation/blob/master/README.md#repositories).
+
+## Licensing
+Copyright (c) 2020-2023 Deutsche Telekom AG.
+
+Licensed under the **Apache License, Version 2.0** (the "License"); you may not use this file except in compliance with the License.
+
+You may obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the [LICENSE](./LICENSE) for the specific language governing permissions and limitations under the License.
