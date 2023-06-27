@@ -1,0 +1,9 @@
+"User account."
+type Account {
+    "A unique identifier for this account."
+    accountId: String!
+    "A descriptive name for this account."
+    name: String
+    "The balances of each currency owned by this account."
+    balances: [Balance]
+}
