@@ -1,3 +1,0 @@
-[submodule "app/src/main/cpp/external/Dobby"]
-	path = app/src/main/cpp/external/Dobby
-	url = git@github.com:jmpews/Dobby.git
