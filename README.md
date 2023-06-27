@@ -1,211 +1,197 @@
-# Coral
+---
 
-<p align="center">
- <img src="docs/coral-logo.jpg" width="400" title="Coral Logo">
+---
+
+# Jvppeteer
+<p align = "left">
+<a rel="nofollow" href="https://download-chromium.appspot.com/"><img src ="https://img.shields.io/badge/chromium%20download-latest-blue"  alt="下载最新版本的chromuim" style="max-width:100%;"></a> <a><img alt="Maven Central" src="https://img.shields.io/maven-central/v/io.github.fanyong920/jvppeteer"></a> <a href="https://github.com/fanyong920/jvppeteer/issues"><img alt="Issue resolution status" src="https://img.shields.io/github/issues/fanyong920/jvppeteer" style="max-width:100%;"></a>
+    <a href="https://sonarcloud.io/dashboard?id=fanyong920_jvppeteer"><img alt="Quality Gate Status" src="https://sonarcloud.io/api/project_badges/measure?project=fanyong920_jvppeteer&metric=alert_status" style="max-width:100%;"></a>
 </p>
 
-**Coral** is a library for analyzing, processing, and rewriting views defined in the Hive Metastore, and sharing them
-across multiple execution engines. It performs SQL translations to enable views expressed in HiveQL (and potentially
-other languages) to be accessible in engines such as [Trino (formerly PrestoSQL)](https://trino.io/),
-[Apache Spark](https://spark.apache.org/), and [Apache Pig](https://pig.apache.org/).
-Coral not only translates view definitions between different SQL/non-SQL dialects, but also rewrites expressions to
-produce semantically equivalent ones, taking into account the semantics of the target language or engine.
-For example, it automatically composes new built-in expressions that are equivalent to each built-in expression in the
-source view definition. Additionally, it integrates with [Transport UDFs](https://github.com/linkedin/transport)
-to enable translating and executing user-defined functions (UDFs) across Hive, Trino, Spark, and Pig. Coral is under
-active development. Currently, we are looking into expanding the set of input view language APIs beyond HiveQL,
-and implementing query rewrite algorithms for data governance and query optimization.
-
-## <img src="https://user-images.githubusercontent.com/10084105/141652009-eeacfab4-0e7b-4320-9379-6c3f8641fcf1.png" width="30" title="Slack Logo"> Slack
-
-- Join the discussion with the community on Slack [here](https://join.slack.com/t/coral-sql/shared_invite/zt-s8te92up-qU5PSG~spK33ovPPL5v96A)!
-
-## Modules
-
-**Coral** consists of following modules:
-
-- Coral-Hive: Converts definitions of Hive views with UDFs to equivalent view logical plan.
-- Coral-Trino: Converts view logical plan to Trino (formerly PrestoSQL) SQL, and vice versa.
-- Coral-Spark: Converts view logical plan to Spark SQL.
-- Coral-Pig: Converts view logical plan to Pig-latin.
-- Coral-Dbt [WIP]: DBT package that houses materialization modes that exercise Coral logic.
-- Coral-Incremental [WIP]: Derives an incremental query from input SQL for incremental view maintenance.
-- Coral-Schema: Derives Avro schema of view using view logical plan and input Avro schemas of base tables.
-- Coral-Spark-Plan [WIP]: Converts Spark plan strings to equivalent logical plan.
-- Coral-Visualization [WIP]: Visualizes Coral SqlNode and RelNode trees and renders them to an output file.
-- Coral-Service: Service that exposes REST APIs that allow users to interact with Coral (see [Coral-as-a-Service](#Coral-as-a-Service) for more details).
-
-## Version Upgrades
-
-This project adheres to semantic versioning, where the format x.y.z represents major, minor, and patch version upgrades. Consideration should be given to potential changes required when integrating different versions of this project.
-
-**'y' Upgrade**
-
-An 'y' upgrade represents a version change that introduces backward incompatibility by removal or modification of methods.
-
-**'x' Upgrade**
-
-An 'x' upgrade signifies a version change that introduces backward incompatibility by affecting the availability of classes.
-
-Please carefully review the release notes and documentation accompanying each version upgrade to understand the specific changes and the recommended steps for migration.
 
 
-## How to Build
 
-Clone the repository:
 
-```bash
-git clone https://github.com/linkedin/coral.git
+**本库的灵感来自 [Puppeteer(Node.js)](https://github.com/puppeteer/puppeteer), API 也与其基本上保持一致，做这个库是为了方便使用 Java 操控 Chrome 或 Chromium**
+
+
+
+
+   >Jvppeteer 通过 [DevTools](https://chromedevtools.github.io/devtools-protocol/) 控制 Chromium 或 Chrome。
+   >默认情况下，以 headless 模式运行，也可以通过配置运行'有头'模式。
+
+
+你可以在浏览器中手动执行的绝大多数操作都可以使用 Jvppeteer 来完成！ 下面是一些示例：
+
+- 生成页面 PDF。
+- 抓取 SPA（单页应用）并生成预渲染内容（即“SSR”（服务器端渲染））。
+- 自动提交表单，进行 UI 测试，键盘输入等。
+- 创建一个时时更新的自动化测试环境。 使用最新的 JavaScript 和浏览器功能直接在最新版本的 Chrome 中执行测试。
+- 捕获网站的 [timeline trace](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)，用来帮助分析性能问题。
+- 测试浏览器扩展。
+
+## 开始使用
+
+
+
+**注意：Mac必须withExcutablePath是用來指定启动Chrome.exe的路径。在Mac下BrowserFetcher.downloadIfNotExist(null)有问题。**
+
+
+
+### 以下是使用依赖管理工具（如 maven 或 gradle）的简要指南。
+
+#### Maven
+要使用 maven,请将此依赖添加到pom.xml文件中：
+
+```xml
+<dependency>
+  <groupId>io.github.fanyong920</groupId>
+  <artifactId>jvppeteer</artifactId>
+  <version>1.1.5</version>
+</dependency>
 ```
 
-Build:
+#### Gradle
 
-```bash
-./gradlew clean build
+要使用 Gradle，请将 Maven 中央存储库添加到您的存储库列表中:
+
+```
+mavenCentral（）
 ```
 
-Please note that this project requires Python 3 and Java 8 to run. Either set `JAVA_HOME` to the home of an appropriate version and then use `./gradlew clean build` as described above, or set the `org.gradle.java.home` gradle property to the Java home of an appropriate version as below:
+然后，您可以将最新版本添加到您的构建中。
 
-```bash
-./gradlew -Dorg.gradle.java.home=/path/to/java/home clean build
+```xml
+compile "io.github.fanyong920:jvppeteer:1.1.5"
 ```
 
-## Contributing
+#### Logging
 
-The project is under active development and we welcome contributions of different forms.
-Please see the [Contribution Agreement](CONTRIBUTING.md).
+该库使用 [SLF4J](https://www.slf4j.org/) 进行日志记录，并且不附带任何默认日志记录实现。
 
-## Resources
+调试程序将日志级别设置为 TRACE。
 
-- [Coral: A SQL translation, analysis, and rewrite engine for modern data lakehouses](https://engineering.linkedin.com/blog/2020/coral), LinkedIn Engineering Blog, 12/10/2020.
-- [Coral & Transport UDFs: Building Blocks of a Postmodern Data Warehouse](https://www.slideshare.net/walaa_eldin_moustafa/coral-transport-udfs-building-blocks-of-a-postmodern-data-warehouse-229545076), Tech-talk, Facebook HQ, 2/28/2020.
-- [Transport: Towards Logical Independence Using Translatable Portable UDFs](https://engineering.linkedin.com/blog/2018/11/using-translatable-portable-UDFs), LinkedIn Engineering Blog, 11/14/2018.
-- [Dali Views: Functions as a Service for Big Data](https://engineering.linkedin.com/blog/2017/11/dali-views--functions-as-a-service-for-big-data), LinkedIn Engineering Blog, 11/9/2017.
+#### 独立 jar
 
+如果您不使用任何依赖项管理工具，则可以在[此处](https://github.com/fanyong920/jvppeteer/releases/latest)找到最新的独立 jar 。
 
-## Coral-as-a-Service
+### 快速开始
 
-**Coral-as-a-Service** or simply, **Coral Service** is a service that exposes REST APIs that allow users to interact with Coral without necessarily coming from a compute engine. Currently, the service supports an API for query translation between different dialects and another for interacting with a local Hive Metastore to create example databases, tables, and views so they can be referenced in the translation API. The service can be used in two modes: remote Hive Metastore mode, and local Hive Metastore mode. The remote mode uses an existing (already deployed) Hive Metastore to resolve tables and views, while the local one creates an empty embedded Hive Metastore so users can add their own table and view definitions.
+#### 1、启动浏览器
 
-### API Reference
-
-#### /api/translations/translate
-A **POST** API which takes JSON request body containing following parameters and returns the translated query:
-- `fromLanguage`: Input dialect (e.g., spark, trino, hive -- see below for supported inputs)
-- `toLanguage`: Output dialect (e.g., spark, trino, hive -- see below for supported outputs)
-- `query`: SQL query to translate between two dialects
-
-#### /api/catalog-ops/execute
-A **POST** API which takes a SQL statement to create a database/table/view in the local metastore
-(note: this endpoint is only available with Coral Service in local metastore mode).
-
-### Instructions to use with examples
-1. Clone [Coral repo](https://github.com/linkedin/coral)
-```bash  
-git clone https://github.com/linkedin/coral.git  
-```  
-2. From the root directory of Coral, access the coral-service module
-```bash  
-cd coral-service  
-```  
-3. Build
-```bash  
-../gradlew clean build  
-```  
-#### To run Coral Service using the **local metastore**:
-4. Run
-```bash  
-../gradlew bootRun --args='--spring.profiles.active=localMetastore'  
+```java
+	//设置基本的启动配置,这里选择了‘有头’模式启动
+	ArrayList<String> argList = new ArrayList<>();
+    //自动下载，第一次下载后不会再下载
+    BrowserFetcher.downloadIfNotExist(null);
+    LaunchOptions options = new LaunchOptionsBuilder().withArgs(argList).withHeadless(false).build();
+    argList.add("--no-sandbox");
+    argList.add("--disable-setuid-sandbox");
+    Puppeteer.launch(options);
 ```
 
-#### To run Coral Service using the **remote metastore**:
-4. Add your kerberos client keytab file to `coral-service/src/main/resources`
-5. Appropriately replace all instances of `SET_ME` in `coral-service/src/main/resources/hive.properties`
-6. Run
-```  
-../gradlew bootRun  
-```  
-You can also specify a custom location of `hive.properties` file through `--hivePropsLocation` as follows
-```
- ./gradlew bootRun --args='--hivePropsLocation=/tmp/hive.properties'
-```
-Then you can interact with the service using your [browser](#coral-service-ui) or the [CLI](#coral-service-cli).
+在这个例子中，我们明确指明了启动路径，程序就会根据指明的路径启动对应的浏览器，如果没有明确指明路径，那么程序会尝试启动默认安装路径下的 Chrome 浏览器
 
-### Coral Service UI
-After running `../gradlew bootRun --args='--spring.profiles.active=localMetastore'` (for local metastore mode) 
-or `../gradlew bootRun` (for remote metastore mode) from coral-service module, 
-the UI can be accessed from the browser. Use the URL http://localhost:8080 to run the UI on a local browser.
-<p align="center">
- <img src="docs/coral-service-ui/start.png" title="Coral Service UI">
-</p>
+#### 2、导航至某个页面
 
-The UI provides 2 features:
-#### Create a database/table/view in local metastore mode
-This feature is only available with Coral Service in local metastore mode, it calls `/api/catalog-ops/execute` API above.
+```java
+	//自动下载，第一次下载后不会再下载
+    BrowserFetcher.downloadIfNotExist(null);
+    ArrayList<String> argList = new ArrayList<>();
+    LaunchOptions options = new LaunchOptionsBuilder().withArgs(argList).withHeadless(false).build();
+    argList.add("--no-sandbox");
+    argList.add("--disable-setuid-sandbox");
+    Browser browser = Puppeteer.launch(options);
+    Browser browser2 = Puppeteer.launch(options);
+    Page page = browser.newPage();
+    page.goTo("https://www.taobao.com/about/");
+    browser.close();
 
-You can enter a SQL statement to create a database/table/view in the local metastore:
-<p align="center">
- <img src="docs/coral-service-ui/creation.png" title="Coral Service Creation Feature">
-</p>
-
-#### Translate SQL from source language to target language
-This feature is available with Coral Service in both local and remote metastore modes, it calls `/api/translations/translate` API above.
-
-You can enter a SQL query and specify the source and target language to use Coral translation service:
-<p align="center">
- <img src="docs/coral-service-ui/translation.png" title="Coral Service Translation Feature">
-</p>
-
-### Coral Service CLI
-Apart from the UI above, you can also interact with the service using the CLI.
-
-Example workflow for local metastore mode:
-
-1. Create a database called `db1` in local metastore using the `/api/catalog-ops/execute` endpoint
-
-```bash
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data "CREATE DATABASE IF NOT EXISTS db1" \
-  http://localhost:8080/api/catalog-ops/execute
-
-Creation successful
-```
-2. Create a table called `airport` within `db1` in local metastore using the `/api/catalog-ops/execute` endpoint
-
-```bash
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data "CREATE TABLE IF NOT EXISTS db1.airport(name string, country string, area_code int, code string, datepartition string)" \
-  http://localhost:8080/api/catalog-ops/execute
-
-Creation successful
+    Page page1 = browser2.newPage();
+    page1.goTo("https://www.taobao.com/about/");
 ```
 
-3. Translate a query on `db1.airport` in local metastore using the `/api/translations/translate` endpoint
+这个例子中，浏览器导航到具体某个页面后关闭。在这里并没有指明启动路径。argList是放一些额外的命令行启动参数的，在下面资源章节中我会给出相关资料。
 
-```bash
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{
-    "fromLanguage":"hive", 
-    "toLanguage":"trino", 
-    "query":"SELECT * FROM db1.airport"
-  }' \
-  http://localhost:8080/api/translations/translate
-```
-The translation result is:
-```
-Original query in Hive QL:
-SELECT * FROM db1.airport
-Translated to Trino SQL:
-SELECT "name", "country", "area_code", "code", "datepartition"
-FROM "db1"."airport"
+#### 3、生成页面的 PDF
+
+```java
+	//自动下载，第一次下载后不会再下载
+    BrowserFetcher.downloadIfNotExist(null);
+    ArrayList<String> arrayList = new ArrayList<>();
+    //生成pdf必须在无厘头模式下才能生效
+    LaunchOptions options = new LaunchOptionsBuilder().withArgs(arrayList).withHeadless(true).build();
+    arrayList.add("--no-sandbox");
+    arrayList.add("--disable-setuid-sandbox");
+    Browser browser = Puppeteer.launch(options);
+    Page page = browser.newPage();
+    page.goTo("https://www.baidu.com/?tn=98012088_10_dg&ch=3");
+    PDFOptions pdfOptions = new PDFOptions();
+    pdfOptions.setPath("test.pdf");
+    page.pdf(pdfOptions);
+    page.close();
+    browser.close();
 ```
 
+在这个例子中，导航到某个页面后，将整个页面截图，并写成PDF文件。注意，生成PDF必须在headless模式下才能生效
 
-### Currently Supported Translation Flows
-1. Hive to Trino
-2. Hive to Spark
-3. Trino to Spark  
-   Note: During Trino to Spark translations, views referenced in queries are considered to be defined in HiveQL and hence cannot be used when translating a view from Trino. Currently, only referencing base tables is supported in Trino queries. This translation path is currently a POC and may need further improvements.
+#### 4、TRACING 性能分析
+
+```java
+	//自动下载，第一次下载后不会再下载
+    BrowserFetcher.downloadIfNotExist(null);
+    ArrayList<String> argList = new ArrayList<>();
+    LaunchOptions options = new LaunchOptionsBuilder().withArgs(argList).withHeadless(true).build();
+    argList.add("--no-sandbox");
+    argList.add("--disable-setuid-sandbox");
+    Browser browser = Puppeteer.launch(options);
+    Page page = browser.newPage();
+    //开启追踪
+    page.tracing().start("C:\\Users\\howay\\Desktop\\trace.json");
+    page.goTo("https://www.baidu.com/?tn=98012088_10_dg&ch=3");
+    page.tracing().stop();
+```
+
+在这个例子中，将在页面导航完成后，生成一个 json 格式的文件，里面包含页面性能的具体数据，可以用 Chrome 浏览器开发者工具打开该 json 文件，并分析性能。
+
+#### 5、页面截图
+
+```java
+    BrowserFetcher.downloadIfNotExist(null);       
+    ArrayList<String> arrayList = new ArrayList<>();
+    LaunchOptions options = new LaunchOptionsBuilder().withArgs(arrayList).withHeadless(true).build();
+    arrayList.add("--no-sandbox");
+    arrayList.add("--disable-setuid-sandbox");
+    Browser browser = Puppeteer.launch(options);
+    Page page = browser.newPage();
+    page.goTo("https://www.baidu.com/?tn=98012088_10_dg&ch=3");
+    ScreenshotOptions screenshotOptions = new ScreenshotOptions();
+    //设置截图范围
+    Clip clip = new Clip(1.0,1.56,400,400);
+    screenshotOptions.setClip(clip);
+    //设置存放的路径
+    screenshotOptions.setPath("test.png");
+    page.screenshot(screenshotOptions);
+```
+
+页面导航完成后，设置截图范围以及图片保存路径，即可开始截图。
+
+**更多的例子请看**[这里](https://github.com/fanyong920/jvppeteer/tree/master/example/src/main/java/com/ruiyun/example)
+
+### 资源
+
+1. [Puppeteer中文文档](https://zhaoqize.github.io/puppeteer-api-zh_CN/#/)
+2. [DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
+3. [Chrome命令行启动参数](https://peter.sh/experiments/chromium-command-line-switches/)
+
+### 推荐
+
+推荐一下最近发现的一个很好用的全球代理：SmartProxy属于代理IP池项目，主打1亿真实住宅IP资源，作为专业海外http代理商，拥有千万级优质资源，覆盖全球城市。高匿稳定提供100%原生住宅IP，支持社交账户、电商平台、网络数据收集等服务。提供API和账密提取使用方式，动态和静态住宅代理均有，大部分是真人住宅IP，成功率不用说，超棒！付费套餐选择多样，现在春季价格很优惠，动态住宅代理只要65折！
+
+![Ip代理](https://user-images.githubusercontent.com/29977021/228770306-6c5d0b8a-c381-4be3-b500-e43fc47298b3.png)
+
+注册链接：https://www.smartproxy.cn/regist?invite=X7TRG0
+
+### 执照
+
+此仓库中找到的所有内容均已获得 Apache 许可。有关详细信息，请参见`LICENSE`文件
