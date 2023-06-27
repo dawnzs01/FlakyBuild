@@ -1,0 +1,6 @@
+dependencies {
+    api project(":processor")
+
+    api "org.apache.kafka:kafka-clients:$kafkaVersion"
+    api "org.springframework.boot:spring-boot-starter:2.7.11"
+}

@@ -1,18 +1,8 @@
-/target
-/local
+.idea/*
+!.idea/copyright
+.gradle
+build
+*.iml
 
-# Eclipse, Netbeans and IntelliJ files
-/.*
-!/.github
-!/.ci
-!.gitignore
-!.gitattributes
-!/.mvn
-/nbproject
-/*.ipr
-/*.iws
-/*.iml
-.project
-
-# Repository wide ignore mac DS_Store files
-.DS_Store
+# generated files by IDE
+out/

@@ -1,0 +1,9 @@
+ext {
+    relocatePb = false
+}
+
+dependencies {
+    api project(":common")
+
+    api "com.google.protobuf:protobuf-java:$protobufVersion"
+}
