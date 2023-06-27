@@ -1,27 +1,90 @@
-# Eclipse
-.metadata
-.recommenders
-.classpath
-.project
-.settings
-.factorypath
-.checkstyle
-.externalToolBuilders
+#
+# LambdAurora's ignore file
+#
+# v0.21
 
-# IntelliJ
+# JetBrains
+.idea/
 *.iml
 *.ipr
 *.iws
-.idea
+## Intellij IDEA
+out/
+## CLion
+cmake-build-debug*/
+cmake-build-release*/
+## Eclipse
+eclipse
+*.launch
+.settings
+.metadata
+.classpath
+.project
+## Visual Studio
+.vs/
+CMakeSettings.json
 
-# Netbeans
-nb-configuration.xml
+# Build system
+## Cargo
+Cargo.lock
+## CMake
+CMakeCache.txt
+CMakeLists.txt.user
+CMakeFiles/
+## QMake
+.qmake.stash
+## Gradle
+.gradle/
+## Node.JS
+node_modules/
+## PHP composer
+vendor/
 
-# Build
-/**/target/
-test-output
-
-# Misc.
-.DS_Store
-/**/dependency-reduced-pom.xml
+# Editors
+## VSCode
 .vscode/
+
+# Logging
+logs/
+
+# Languages
+## Java
+classes/
+## Python
+__pycache__/
+venv/
+## Rust
+**/*.rs.bk
+
+# OS
+## Windows
+desktop.ini
+# MacOS
+.DS_Store
+
+# File types
+*.dll
+*.db
+*.tar.?z
+
+# Asset files automatic backup
+.*.png-autosave.kra
+*.png~
+
+# Compilation artifacts/Binaries
+*.o
+*.so
+*.dylib
+*.lib
+lib*.a
+
+# Common
+bin/
+build/
+dist/
+lib/
+!src/lib/
+!src/**/lib/
+obj/
+run/
+target/
