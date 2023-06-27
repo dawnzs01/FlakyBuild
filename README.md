@@ -1,74 +1,68 @@
-![Structurizr](docs/images/structurizr-banner.png)
+# Arclight
 
-# Structurizr DSL
+A Bukkit server implementation utilizing Mixin.
 
-This GitHub repository contains an implementation of the Structurizr DSL - a way to create Structurizr software
-architecture models based upon the [C4 model](https://c4model.com) using a textual domain specific language (DSL).
-The Structurizr DSL has appeared on the
-[ThoughtWorks Tech Radar - Techniques - Diagrams as code](https://www.thoughtworks.com/radar/techniques/diagrams-as-code)
-and is text-based wrapper around the [Structurizr for Java library](https://github.com/structurizr/java).
+![Downloads](https://img.shields.io/github/downloads/IzzelAliz/Arclight/total?style=flat-square)  ![GitHub](https://img.shields.io/github/license/IzzelAliz/Arclight?style=flat-square)
 
-## A quick example
+|       Release        |  Forge  | Status |                                                                                                        Build                                                                                                         |
+|:--------------------:|:-------:|:------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Trials (1.20-1.20.1) | 47.0.3  | ACTIVE |   [![1.19.4 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=Trials&style=flat-square)](https://github.com/IzzelAliz/Arclight/actions?query=branch%3ATrials)   |
+| Executions (1.19.4)  | 45.1.0  |  LTS   | [![1.19.4 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=Executions&style=flat-square)](https://github.com/IzzelAliz/Arclight/actions?query=branch%3AExecutions) |
+|        1.18.x        | 40.1.80 |  LTS   |              [![1.18 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=1.18&style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-18)              |
+|        1.16.x        | 36.2.39 |  LTS   |              [![1.16 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=1.16&style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-16)              |
 
-As an example, the following text can be used to create a software architecture __model__ and
-an associated __view__ that describes a user using a software system.
+**Legacy versions**:
 
-```
-workspace {
+<details>
 
-    model {
-        user = person "User"
-        softwareSystem = softwareSystem "Software System"
+| Release |  Forge  |                                    Status                                    |                                                                         Build                                                                          |
+|:-------:|:-------:|:----------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Great Horn (1.19.3) | 44.1.22 | [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/GreatHorn/1.0.3) | [![1.19 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=GreatHorn&style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-19) |
+| Horn (1.19-1.19.2)  | 43.2.11 |   [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/horn/1.0.2)    | [![Horn Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight-19?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-19) |
+| 1.17.x  | 37.1.0  |   [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/1.17/1.0.2)    | [![1.17 Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight-17?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-17) |
+| 1.15.x  | 31.2.48 |   [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/1.15/1.0.19)   | [![1.15 Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight-15?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-15) |
+| 1.14.x  | 28.2.0  |      [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/1.0.6)      |    [![1.14 Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight)    |
 
-        user -> softwareSystem "Uses"
-    }
+* Legacy version still accepts pull requests.
 
-    views {
-        systemContext softwareSystem {
-            include *
-            autolayout lr
-        }
-    }
-    
-}
-```
+</details>
 
-![Example system context diagram](docs/images/quick-example.png)
+![](.github/arclightlogo.jpg)
 
-##  Getting started
+## Installing
 
-* [Structurizr DSL demo page](https://structurizr.com/dsl)
-* [Getting started with Structurizr Lite](https://dev.to/simonbrown/getting-started-with-structurizr-lite-27d0) (using the DSL)
-* [Diagrams as code 2.0](https://www.youtube.com/watch?v=Za1-v4Zkq5E) (video from GOTO Copenhagen 2021)
+* Download the jar from [release page](https://github.com/IzzelAliz/Arclight/releases) or build server. (see the table
+  above)
+* Launch with command `java -jar arclight-forge-<mc>-<version>.jar nogui`. The `nogui` argument will disable the server
+  control panel.
 
-##  Reference
+## Support
 
-* [DSL Language reference](docs/language-reference.md)
-* [DSL cookbook](docs/cookbook)
-* [Changelog](docs/changelog.md)
+Read [FAQ](https://github.com/IzzelAliz/Arclight/wiki/FAQ) before reporting issue.
 
-## Examples
+Discord server https://discord.gg/ZvTY5SC
 
-* [Getting started](https://structurizr.com/dsl?example=getting-started)
-* [Big Bank plc](https://structurizr.com/dsl?example=big-bank-plc)
-* [Amazon Web Services](https://structurizr.com/dsl?example=amazon-web-services)
+QQ Group chat 3556966
 
-## Rendering tools
+## Contributing
 
-The Structurizr DSL itself does not create diagrams, and is rendering tool independent,
-there being a number of tools that can be used to render diagrams.
-Please note that the feature set and look/feel of the resulting diagrams will vary between tools.
+Please read this [wiki section](https://github.com/IzzelAliz/Arclight/wiki/Contributing).
 
-* [Structurizr Lite/on-premises/cloud service](https://structurizr.com): A browser-based diagram and documentation rendering tool with interactive diagrams, "double-click to zoom", etc.
-* [c4viz](https://github.com/pmorch/c4viz): A browser-based diagram renderer, with diagram navigation and "click to zoom".
-* [Structurizr Site Generatr](https://github.com/avisi-cloud/structurizr-site-generatr): Generates a HTML microsite with diagrams, documentation, and a UI to explore the model. 
-* [Kroki](https://kroki.io): Kroki generates diagrams from a number of text-based formats, including the Structurizr DSL.
-* [Git for Confluence | Markdown, PlantUML, Graphviz, Mermaid](https://marketplace.atlassian.com/apps/1211675/git-for-confluence-markdown-plantuml-graphviz-mermaid): A Confluence plugin that will render a specific diagram from a Structurizr DSL file stored in your git repo.
-* [Structurizr Export](https://github.com/structurizr/export): A collection of Java classes to generate diagrams as PlantUML, Mermaid, D2, DOT, and WebSequenceDiagrams. An export to Ilograph is also available.
-* [Structurizr CLI](https://github.com/structurizr/cli): A command line tool that bundles the Structurizr Export utilities.
+## License
 
-## Other tooling support
+This project is licensed under [GPL v3](LICENSE).
 
-* [VS Code extension](https://marketplace.visualstudio.com/items?itemName=systemticks.c4-dsl-extension) (syntax highlighting and diagram previews)
-* [VS Code extension](https://marketplace.visualstudio.com/items?itemName=ciarant.vscode-structurizr) (syntax highlighting)
-* [C4 DSL Language Server](https://gitlab.com/systemticks/c4-dsl-language-server) (for integrating the Structurizr DSL into Language Server Protocol compatible tools)
+## Sponsor
+
+[![](https://www.yourkit.com/images/yklogo.png)](https://www.yourkit.com)
+
+YourKit supports open source projects with innovative and intelligent tools for monitoring and profiling Java and .NET
+applications. YourKit is the creator of <a href="https://www.yourkit.com/java/profiler/">YourKit Java Profiler</a>,
+<a href="https://www.yourkit.com/.net/profiler/">YourKit .NET Profiler</a>,
+and <a href="https://www.yourkit.com/youmonitor/">YourKit YouMonitor</a>.
+
+[![](.github/jetbrains.png)](https://www.jetbrains.com/?from=Arclight)
+
+[![](.github/nexusnode.gif)](https://nexusnode.com/minecraft.php)
+
+Get 10% off hosting server with promocode **ARCLIGHT** at [NEXUSNODE](https://nexusnode.com/minecraft.php)
