@@ -1,0 +1,94 @@
+package com.huaweicloud.sdk.lts.v2.model;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.huaweicloud.sdk.core.SdkResponse;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
+
+/**
+ * Response Object
+ */
+public class ListStructuredLogsWithTimeRangeResponse extends SdkResponse {
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty(value = "body")
+
+    private Map<String, List<Object>> body = null;
+
+    public ListStructuredLogsWithTimeRangeResponse withBody(Map<String, List<Object>> body) {
+        this.body = body;
+        return this;
+    }
+
+    public ListStructuredLogsWithTimeRangeResponse putBodyItem(String key, List<Object> bodyItem) {
+        if (this.body == null) {
+            this.body = new HashMap<>();
+        }
+        this.body.put(key, bodyItem);
+        return this;
+    }
+
+    public ListStructuredLogsWithTimeRangeResponse withBody(Consumer<Map<String, List<Object>>> bodySetter) {
+        if (this.body == null) {
+            this.body = new HashMap<>();
+        }
+        bodySetter.accept(this.body);
+        return this;
+    }
+
+    /**
+     * 此参数在请求实体中，采用json字符串格式。
+     * @return body
+     */
+    public Map<String, List<Object>> getBody() {
+        return body;
+    }
+
+    public void setBody(Map<String, List<Object>> body) {
+        this.body = body;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ListStructuredLogsWithTimeRangeResponse listStructuredLogsWithTimeRangeResponse =
+            (ListStructuredLogsWithTimeRangeResponse) o;
+        return Objects.equals(this.body, listStructuredLogsWithTimeRangeResponse.body);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(body);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class ListStructuredLogsWithTimeRangeResponse {\n");
+        sb.append("    body: ").append(toIndentedString(body)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+}
