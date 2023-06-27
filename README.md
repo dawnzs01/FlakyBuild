@@ -1,50 +1,24 @@
-<p align="center">
-    <a href="https://trading-bot.cassandre.tech/tutorial/create-your-project.html">Quick Start</a> | 
-    <a href="https://trading-bot.cassandre.tech">Documentation</a> | 
-    <a href="https://discord.gg/sv3VXuTgFS">Discord</a> | 
-    <a href="https://twitter.com/cassandretech">Twitter</a>
-</p>
+# PolyMc
+What if you could put mods on a server, without needing it on the client?  
+Well, that's impossible. But we can try! *Nothing is impossible!*
 
-<p align="center">
-    <a href="https://trading-bot.cassandre.tech">
-        <img    src="https://trading-bot.cassandre.tech/assets/images/logo/cassandre-trading-bot-full-medium.png"
-                alt="Cassandre trading bot logo"/>
-    </a>
-</p>
+**Note:** if you're a mod developer looking to make a mod that'll be solely used serverside, you might want to consider [Polymer](https://github.com/Patbox/polymer). It has some advantages and disadvantages over PolyMc.
 
-<hr>
+## How PolyMc works
+PolyMc is unique in that it operates on packet level. This means PolyMc doesn't touch the mechanics of the mod at all.
+The server is *genuinely modded*. This results in the server being quite stable, all the hacks PolyMc does to display things
+are separated from what's actually happening. 
 
-<h3 align="center">Create and run your java crypto trading bot in minutes</h2>
-<p align="center">Our Spring boot starter takes care of exchange connections, accounts, orders, trades, and positions so you can focus on building your strategies.</p>
+PolyMc uses a host of techniques to automatically try and display your modded things. PolyMc also features a large api
+to customize how items/blocks/entities/whatevers are transformed.
 
-<p align="center"><i>We are thrilled to share that our open source project is still actively maintained! While there won't be major upgrades in the near future, we remain dedicated to providing ongoing support and ensuring the project continues to thrive.</i></p>
+Do you want to get started? [Check out the wiki!](https://theepicblock.github.io/PolyMc/)
 
-<p align="center">
-    <a href="https://discord.gg/sv3VXuTgFS">
-        <img    src="https://img.shields.io/discord/796141274171310110.svg?logo=discord&label=Discord"
-                alt="Cassandre trading bot on discord" />
-    </a>
-    <a href="https://www.codacy.com/gh/cassandre-tech/cassandre-trading-bot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cassandre-tech/cassandre-trading-bot&amp;utm_campaign=Badge_Grade">
-        <img    src="https://api.codacy.com/project/badge/Grade/f26dc41008a64bb18dcd404b46b69fc8"
-                alt="Cassandre trading bot on codacy" />
-    </a>
-    <a href="https://www.codacy.com/gh/cassandre-tech/cassandre-trading-bot/dashboard?utm_source=github.com&utm_medium=referral&utm_content=cassandre-tech/cassandre-trading-bot&utm_campaign=Badge_Coverage">
-        <img    src="https://api.codacy.com/project/badge/Coverage/f26dc41008a64bb18dcd404b46b69fc8"
-                alt="Cassandre trading bot on codacy" />
-    </a>
-    <a href="https://github.com/cassandre-tech/cassandre-trading-bot/actions">
-        <img    src="https://github.com/cassandre-tech/cassandre-trading-bot/workflows/Continuous%20integration/badge.svg"
-                alt="Cassandre trading bot continuous integration" />
-    </a>
-    <a href="https://search.maven.org/search?q=g:tech.cassandre.trading.bot">
-        <img    src="https://img.shields.io/maven-central/v/tech.cassandre.trading.bot/cassandre-trading-bot-project.svg?label=Maven%20Central"
-                alt="Cassandre trading bot on Maven Central repository" />
-    </a>
-</p>
+## Building
+Run `./gradlew runDatagen` once. Then just run `./gradlew build`
 
-<p align="center">
-    <a href="https://trading-bot.cassandre.tech/tutorial/create-your-project.html">Quick Start</a> | 
-    <a href="https://trading-bot.cassandre.tech">Documentation</a> | 
-    <a href="https://discord.gg/sv3VXuTgFS">Discord</a> | 
-    <a href="https://twitter.com/cassandretech">Twitter</a>
-</p>
+<a href="https://discord.gg/hbp9Gv2">![discord](https://img.shields.io/badge/Fabric_server--side_development-PolyMc-7289DA?logo=discord&logoColor=white&style=flat-square)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/issues/">![issues](https://img.shields.io/github/issues-raw/TheEpicBlock/PolyMc?color=succes&logo=github&style=flat-square)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/releases/">![latest release](https://img.shields.io/github/v/release/TheEpicBlock/PolyMc?style=flat-square&label=latest%20release)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/commits/">![GitHub commits since latest release](https://img.shields.io/github/commits-since/TheEpicBlock/PolyMc/latest?style=flat-square)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/blob/master/LICENSE">![GitHub](https://img.shields.io/github/license/TheEpicBlock/PolyMc?style=flat-square)</a>
