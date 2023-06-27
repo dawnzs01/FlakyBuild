@@ -1,102 +1,139 @@
-# camellia（[ENGLISH](README-en.md)）
-Camellia是网易云信开发的服务器基础组件，所有模块均已应用于网易云信线上环境
+# Java Concurrency Stress (jcstress)
 
-<img src="/docs/img/logo.png" width = "500"/>
- 
-![GitHub](https://img.shields.io/badge/license-MIT-green.svg)
-![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.netease.nim/camellia/badge.svg)
+The Java Concurrency Stress (jcstress) is the experimental harness and
+a suite of tests to aid the research in the correctness of concurrency support
+in the JVM, class libraries, and hardware.
 
-## 介绍
-camellia主要包括以下功能模块：
+## Usage
 
-### camellia-redis-proxy
-基于netty4开发的一款高性能redis代理  
-* 支持redis-standalone/redis-sentinel/redis-cluster    
-* 支持普通的GET/SET/EVAL，也支持MGET/MSET，也支持阻塞型的BLPOP，也支持PUBSUB和TRANSACTION，也支持STREAMS/JSON/SEARCH，也支持TAIR_HASH/TAIR_ZSET/TAIR_STRING
-* 支持自定义分片、读写分离、双（多）写、双（多）读   
-* 支持多租户（可以同时代理多组路由，可以通过不同的登录密码来区分）     
-* 支持多租户动态路由，支持自定义的动态路由数据源
-* 支持读从节点（redis-sentinel、redis-cluster都支持）
-* 高可用，可以基于lb组成集群，也可以基于注册中心组成集群，也可以伪装成redis-cluster组成集群
-* 支持自定义插件，并且内置了很多插件，可以按需使用（包括：大key监控、热key监控、热key缓存、key命名空间、ip黑白名单、速率控制等等） 
-* 支持丰富的监控，如TPS、RT、热key、大key、慢查询、连接数等   
-* 支持整合hbase实现string/zset/hash等数据结构的冷热分离存储操作     
-[快速开始](/docs/redis-proxy/redis-proxy-zh.md)  
+### Samples
 
-### camellia-id-gen
-提供了多种id生成算法，开箱即用，包括：  
-* 雪花算法（支持设置单元标记）   
-* 严格递增的id生成算法（步长支持动态调整）  
-* 趋势递增的id生成算法（支持设置单元标记，支持多单元id同步）         
-[快速开始](/docs/id-gen/id-gen.md)
+In order to understand jcstress tests and maybe write your own, it might be useful
+to work through the [jcstress-samples](https://github.com/openjdk/jcstress/tree/master/jcstress-samples/src/main/java/org/openjdk/jcstress/samples). The samples come in three groups:
+ * **APISample** target to explain the jcstress API;
+ * **JMMSample** target to explain the basics of Java Memory Model;
+ * **ConcurrencySample** show the interesting concurrent behaviors of standard library.
 
-### camellia-delay-queue
-基于redis实现的延迟队列服务：
-* 独立部署delay-queue-server服务器，支持水平扩展，支持多topic，以http协议对外提供服务（短轮询or长轮询），支持多语言客户端
-* 提供了一个java-sdk，并且支持以spring-boot方式快速接入
-* 支持丰富的监控数据    
-[快速开始](/docs/delay-queue/delay-queue.md)
+See the test comments for run instructions. Most tests can be run like this:
 
-### camellia-hot-key  
-热key探测和缓存服务：  
-* 支持热key探测，也支持热key缓存，也支持topN统计  
-* 支持丰富的自定义扩展口（热key通知、topN通知、热key规则数据源、热key缓存命中统计）  
-* 支持自定义注册中心（内置zk、eureka）  
-* 支持丰富的监控数据     
-[快速开始](/docs/hot-key/hot-key.md)  
+     $ mvn clean verify -pl jcstress-samples -am
+     $ java -jar jcstress-samples/target/jcstress.jar -t <test-name>
 
-### camellia-redis(enhanced-redis-client)
-这是一个封装了jedis（2.9.3/3.6.3）的redis客户端，主要的类是CamelliaRedisTemplate  
-* 屏蔽了访问redis-standalone/redis-sentinel/redis-cluster的区别（jedis访问上述三种redis服务器的api是不一样的）
-* 支持pipeline、mget、mset等操作（jedis不支持使用pipeline访问redis-cluster，也不支持跨slot场景下使用mget、mset命令访问redis-cluster）
-* 支持透明的访问从节点（当前支持redis-sentinel）
-* 支持自定义分片、读写分离、双（多）写、双（多）读
-* 支持动态配置变更
-* 提供了一些常用的工具类，如分布式锁、计数器缓存、频控等  
-[快速开始](/docs/redis-client/redis-client.md)
+### Running The Existing Tests
 
-### camellia-hbase(enhanced-hbase-client)
-基于hbase-client封装的hbase客户端，主要的类是CamelliaHBaseTemplate    
-* 支持读写分离、双（多）写   
-* 支持动态配置变更  
-[快速开始](/docs/hbase-client/hbase-client.md)
+The quickest way to start running jcstress is to use a prebuilt JAR, for example from [here](https://builds.shipilev.net/jcstress/).
 
-### camellia-feign(enhanced-feign-client)  
-整合了camellia-core和open-feign，从而你的feign客户端可以：
-* 支持动态路由
-* 支持根据请求参数做自定义路由
-* 支持根据请求参数做自定义负载均衡
-* 支持双写、支持读写分离
-* 支持动态调整参数，如超时时间   
-[快速开始](/docs/feign/feign.md)
+     $ java -jar jcstress.jar
 
-### camellia-cache(enhanced-spring-cache)
-基于spring-cache二次开发：  
-* 支持redis，也支持本地缓存（Caffeine）
-* 支持基于注解执行mget，mevict等批量操作
-* 支持不同的过期时间、支持设置是否缓存null值
-* 支持自定义的序列化/反序列化，默认使用jackson，并且支持缓存值的压缩
-* 支持一键刷新缓存（动态调整缓存key的前缀）  
-[快速开始](/docs/cache/cache.md)
+Run the JAR with `-h` to see available options.
 
-### camellia-tools
-提供了一些简单实用的工具类，包括：  
-* 解压缩
-* 加解密
-* 线程池
-* 熔断
-* 分布式锁
-* ......  
-[快速开始](/docs/tools/tools.md)  
+Otherwise, you can build the entire test suite yourself:
 
-## 版本
-最新版本是1.2.10，已经发布到maven中央仓库（2023/06/07）  
-[更新日志](/update-zh.md)  
+     $ mvn clean verify
+     $ java -jar tests-all/target/jcstress.jar
 
-## 谁在使用Camellia
-如果觉得 Camellia 对你有用，欢迎Star/Fork  
-欢迎所有 Camellia 用户及贡献者在 [这里](https://github.com/netease-im/camellia/issues/10) 分享您在当前工作中开发/使用 Camellia 的故事  
+The project requires JDK 11+ to build. It can reference the APIs from
+the future releases, as the jcstress harness will fail gracefully on API
+mismatches, and the mismatched tests will be just skipped.
 
-## 联系方式
-微信: hdnxttl  
-email: zj_caojiajun@163.com  
+
+### Extending The Tests
+
+Please consider contributing the interesting tests back.
+
+If you want to develop a test, you are encouraged to get familiar with existing set of
+tests first. You will have to have a class annotated with jcstress annotations, see the
+harness API. Read up their Javadocs to understand the conditions that are guaranteed for
+those tests. If you need some other test interface/harness support, please don't hesitate
+to raise the issue and describe the scenario you want to test.
+
+You are encouraged to provide the thorough explanation why particular test outcome is
+acceptable/forbidden/special. Even though harness will print the debug output into the
+console if no description is given.
+
+You should have Git and Maven installed to check out and build the tests.
+You will need JDK 17+ to compile all the tests. Most tests are runnable on JDK 8+
+afterwards.
+
+The vast majority of jcstress tests are auto-generated. The custom/hand-written tests
+usually go to `tests-custom`. This also allows building the smaller subset of tests:
+
+    $ mvn clean verify -pl tests-custom -am
+    $ java -jar tests-custom/target/jcstress.jar
+
+### Using jcstress As Separate Dependency
+
+If you want to use jcstress as separate dependency in your project, then you are recommended
+to create the submodule with the jcstress tests, which would use jcstress libraries and build
+steps.
+
+[Maven Central](https://repo.maven.apache.org/maven2/org/openjdk/jcstress/jcstress-core/) contains
+the latest releases of jcstress libraries. Using jcstress as the library requires special build configuration.
+The easiest way to bootstrap the project with jcstress is to use the archetype:
+
+    $ mvn archetype:generate \
+     -DinteractiveMode=false \
+     -DarchetypeGroupId=org.openjdk.jcstress \
+     -DarchetypeArtifactId=jcstress-java-test-archetype \
+     -DgroupId=org.sample \
+     -DartifactId=test \
+     -Dversion=1.0
+
+Then you can build and use it:
+
+    $ cd test
+    $ mvn clean verify
+    $ java -jar target/jcstress.jar
+
+
+## Interpreting The Results
+
+The tests are arranged so that a few threads are executing the test concurrently, sometimes
+rendezvous'ing over the shared state. There are multiple state objects generated per each run.
+Threads then either mutate or observe that state object. Test harness is collecting statistics on
+the observed states. In many cases this is enough to catch the reorderings or contract violations
+for concurrent code.
+
+The console output can be used to track progress and debugging. Ordinary users should
+use generated HTML report, which has the full interpretation of the results.
+
+Most of the tests are probabilistic, and require substantial time to catch all the cases.
+It is highly recommended to run tests longer to get reliable results. Since the tests are
+time-bound, the faster CPUs the machine has the more samples jcstress collects. There is
+a tradeoff between the number of samples harness collects and the suite run time.
+There are a few preset modes that set sensible test durations, see `-m`. Many
+CIs run jcstress with `-m quick` for quicker turnaround.
+
+Test failure does not immediately mean the implementation bug. The usual
+suspects are the bugs in test infrastructure, test grading error, bugs in
+hardware, or something else. Share your results, discuss them, we will figure
+out what's wrong. Discuss the result on the relevant mailing lists first.
+
+Two usual options are:
+  * concurrency-interest@cs.oswego.edu: general discussion on concurrency
+  * jcstress-dev@openjdk.java.net: to discuss jcstress issues
+
+## Reporting Harness and Test Bugs
+
+If you have the access to [JDK Bug System](https://bugs.openjdk.org/), please submit the bug there:
+ * Project: CODETOOLS
+ * Component: tools
+ * Sub-component: jcstress
+
+## Development
+
+jcstress project accepts pull requests, like other OpenJDK projects.
+If you have never contributed to OpenJDK before, then bots would require you to [sign OCA first](https://openjdk.org/contribute/).
+Normally, you don't need to post patches anywhere else, or post to mailing lists, etc.
+If you do want to have a wider discussion about jcstress, please refer to [jcstress-dev](https://mail.openjdk.org/mailman/listinfo/jcstress-dev).
+
+Compile and run internal tests:
+
+    $ mvn clean install
+
+Run the quick tests:
+
+    $ java -jar tests-all/target/jcstress.jar -m quick
+
+GitHub workflow "JCStress Pre-Integration Tests" should pass on the changes. It would be triggered
+for PRs. You can also trigger it manually for your branch.
