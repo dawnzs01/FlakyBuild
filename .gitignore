@@ -1,10 +1,27 @@
-*.iml
-.gradle
-/local.properties
-/.idea/
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+
+target/
+.flattened-pom.xml
+*.jar
+!.mvn/wrapper/*.jar
+*.log
+
+# idea
+*/.idea
+.idea/*
+*.iml
+!.idea/codeStyles
+!.idea/vcs.xml
+!.idea/eclipseCodeFormatter.xml
+!.idea/jsonSchemas.xml
+
+# eclipse
+.classpath
+.project
+.settings
+bin/
+
+TODO
+
+data/
+*-unzipped/

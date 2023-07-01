@@ -1,8 +1,9 @@
 ---
+
 name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
+about: Create a report to help improve Planetiler
+title: "[BUG] "
+labels: ["bug"]
 assignees: ''
 
 ---
@@ -12,20 +13,25 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Open '...'
-2. Select '....'
+
+1. Download data from '...'
+2. Run command '....'
 3. See error
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+A clear and concise description of what you expected to happen. For map data issues, plase include OSM element IDs and
+the vector tile features you expect in the output to make help reproduce the issue in tests.
 
-**Device (please complete the following information):**
- - Model: [e.g. Samsung Galaxy S22]
- - OS: [e.g. Android 13]
- - Version [e.g. 0.134]
+**Screenshots**
+If applicable, add screenshots to help explain your problem (include tile IDs or latitude/longitude for visual issues
+with generated maps)
 
-**Media**
-If applicable, add a short media sample which triggers the problem.
+**Environment (please complete the following information):**
+
+- Hardware: [e.g. 2015 Macbook Pro]
+- OS: [e.g. MacOS 10.15.7]
+- Java version and distribution: [e.g. Eclipse Temurin 17.35]
+- Maven version: [e.g. 3.8.1]
 
 **Additional context**
 Add any other context about the problem here.

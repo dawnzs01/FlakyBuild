@@ -1,170 +1,356 @@
-# Just (Video) Player 
+# Planetiler
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/moneytoo/Player.svg?logo=github&label=GitHub&cacheSeconds=3600)](https://github.com/moneytoo/Player/releases/latest)
-[![Google Play](https://img.shields.io/endpoint?color=green&logo=google-play&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.brouken.player%26l%3DGoogle%2520Play%26m%3Dv%24version)](https://play.google.com/store/apps/details?id=com.brouken.player)
-[![F-Droid](https://img.shields.io/f-droid/v/com.brouken.player.svg?logo=f-droid&label=F-Droid&cacheSeconds=3600)](https://f-droid.org/packages/com.brouken.player/)
-[![GitHub all releases](https://img.shields.io/github/downloads/moneytoo/Player/total?logo=github&cacheSeconds=3600)](https://github.com/moneytoo/Player/releases/latest)
-[![Google Play](https://img.shields.io/endpoint?color=green&logo=google-play&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.brouken.player%26l%3Ddownloads%26m%3D%24totalinstalls)](https://play.google.com/store/apps/details?id=com.brouken.player)
-[![Google Play](https://img.shields.io/endpoint?color=green&logo=google-play&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.brouken.player%26l%3Drating%26m%3D%25E2%2598%2585%2520%24rating)](https://play.google.com/store/apps/details?id=com.brouken.player)
-[![Media3](https://img.shields.io/badge/Media3-1.1.0--rc01-007ec6?cacheSeconds=3600)](https://github.com/androidx/media/releases/tag/1.1.0-rc01)
-[![Weblate project translated](https://img.shields.io/weblate/progress/just-player?logo=weblate&logoColor=white&cacheSeconds=36000)](https://hosted.weblate.org/engage/just-player/)
-[![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/JustPlayer?label=r%2FJustPlayer&logo=reddit&logoColor=white&cacheSeconds=3600)](https://www.reddit.com/r/JustPlayer/)
+Planetiler (_**pla**&middot;nuh&middot;tai&middot;lr_, formerly named "Flatmap") is a tool that generates
+[Vector Tiles](https://github.com/mapbox/vector-tile-spec/tree/master/2.1)
+from geographic data sources like [OpenStreetMap](https://www.openstreetmap.org/). Planetiler aims to be fast and
+memory-efficient so that you can build a map of the world in a few hours on a single machine without any external tools
+or database.
 
-Android video player based on [Media3](https://github.com/androidx/media) (formerly [ExoPlayer](https://github.com/google/ExoPlayer)), compatible with Android 5+ and Android TV.
+Vector tiles contain raw point, line, and polygon geometries that clients like [MapLibre](https://github.com/maplibre)
+can use to render custom maps in the browser, native apps, or on a server. Planetiler packages tiles into
+an [MBTiles](https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md) (sqlite)
+or [PMTiles](https://github.com/protomaps/PMTiles) file that can be served using tools
+like [TileServer GL](https://github.com/maptiler/tileserver-gl) or [Martin](https://github.com/maplibre/martin) or
+even [queried directly from the browser](https://github.com/protomaps/PMTiles/tree/main/js).
+See [awesome-vector-tiles](https://github.com/mapbox/awesome-vector-tiles) for more projects that work with data in this
+format.
 
-It uses ExoPlayer's ``ffmpeg`` extension with [all its audio formats](https://exoplayer.dev/supported-formats.html#ffmpeg-extension) enabled (it can handle even special formats like AC3, EAC3, DTS, DTS HD, TrueHD etc.).
+Planetiler works by mapping input elements to vector tile features, flattening them into a big list, then sorting by
+tile ID to group into tiles. See [ARCHITECTURE.md](ARCHITECTURE.md) for more details or
+this [blog post](https://medium.com/@onthegomap/dc419f3af75d?source=friends_link&sk=fb71eaa0e2b26775a9d98c81750ec10b)
+for more of the backstory.
 
-It properly syncs audio with video track when using Bluetooth earphones/speaker. (I was not able to find any other nice ExoPlayer based video player so I created this one.)
+## Demo
 
-## Supported formats
+See the [live demo](https://onthegomap.github.io/planetiler-demo/) of vector tiles created by Planetiler and hosted by
+the [OpenStreetMap Americana Project](https://github.com/ZeLonewolf/openstreetmap-americana/).
 
- * **Audio**: Vorbis, Opus, FLAC, ALAC, PCM/WAVE (μ-law, A-law), MP1, MP2, MP3, AMR (NB, WB), AAC (LC, ELD, HE; xHE on Android 9+), AC-3, E-AC-3, DTS, DTS-HD, TrueHD
- * **Video**: H.263, H.264 AVC (Baseline Profile; Main Profile on Android 6+), H.265 HEVC, MPEG-4 SP, VP8, VP9, AV1
- * **Containers**: MP4, MOV, WebM, MKV, Ogg, MPEG-TS, MPEG-PS, FLV, AVI (🚧)
- * **Streaming**: DASH, HLS, SmoothStreaming, RTSP
- * **Subtitles**: SRT, SSA/ASS ([limited styling](https://github.com/google/ExoPlayer/issues/8435)), TTML, VTT, DVB
+[![Planetiler Demo Screenshot](./diagrams/demo.png)](https://onthegomap.github.io/planetiler-demo/)
+[© OpenMapTiles](https://www.openmaptiles.org/) [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright)
 
-HDR (HDR10+ and Dolby Vision) video playback on compatible/supported hardware.
+## Usage
 
-AC-4 audio is supported on devices providing such system decoder (e.g. Samsung Galaxy A, S and Z series running Android 11 or later).
+To generate a map of an area using the [OpenMapTiles profile](https://github.com/openmaptiles/planetiler-openmaptiles),
+you will need:
 
-## Screenshots
+- Java 17+ (see [CONTRIBUTING.md](CONTRIBUTING.md)) or [Docker](https://docs.docker.com/get-docker/)
+- at least 1GB of free disk space plus 5-10x the size of the `.osm.pbf` file
+- at least 0.5x as much free RAM as the input `.osm.pbf` file size
 
-<img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="806"> <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="400"> <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="400">
+#### To build the map:
+
+Using Java, download `planetiler.jar` from
+the [latest release](https://github.com/onthegomap/planetiler/releases/latest)
+and run it:
+
+```bash
+wget https://github.com/onthegomap/planetiler/releases/latest/download/planetiler.jar
+java -Xmx1g -jar planetiler.jar --download --area=monaco
+```
+
+Or using Docker:
+
+```bash
+docker run -e JAVA_TOOL_OPTIONS="-Xmx1g" -v "$(pwd)/data":/data ghcr.io/onthegomap/planetiler:latest --download --area=monaco
+```
+
+:warning: This starts off by downloading about 1GB of [data sources](NOTICE.md#data) required by the OpenMapTiles
+profile
+including ~750MB for [ocean polygons](https://osmdata.openstreetmap.de/data/water-polygons.html) and ~240MB
+for [Natural Earth Data](https://www.naturalearthdata.com/).
+
+<details>
+<summary>To download smaller extracts just for Monaco:</summary>
+
+Java:
+
+```bash
+java -Xmx1g -jar planetiler.jar --download --area=monaco \
+  --water-polygons-url=https://github.com/onthegomap/planetiler/raw/main/planetiler-core/src/test/resources/water-polygons-split-3857.zip \
+  --natural-earth-url=https://github.com/onthegomap/planetiler/raw/main/planetiler-core/src/test/resources/natural_earth_vector.sqlite.zip
+```
+
+Docker:
+
+```bash
+docker run -e JAVA_TOOL_OPTIONS="-Xmx1g" -v "$(pwd)/data":/data ghcr.io/onthegomap/planetiler:latest --download --area=monaco \
+  --water-polygons-url=https://github.com/onthegomap/planetiler/raw/main/planetiler-core/src/test/resources/water-polygons-split-3857.zip \
+  --natural-earth-url=https://github.com/onthegomap/planetiler/raw/main/planetiler-core/src/test/resources/natural_earth_vector.sqlite.zip
+```
+
+You will need the full data sources to run anywhere besides Monaco.
+
+</details>
+
+#### To view tiles locally:
+
+Using [Node.js](https://nodejs.org/en/download/):
+
+```bash
+npm install -g tileserver-gl-light
+tileserver-gl-light data/output.mbtiles
+```
+
+Or using [Docker](https://docs.docker.com/get-docker/):
+
+```bash
+docker run --rm -it -v "$(pwd)/data":/data -p 8080:8080 maptiler/tileserver-gl -p 8080
+```
+
+Then open http://localhost:8080 to view tiles.
+
+Some common arguments:
+
+- `--output` tells planetiler where to write output to, and what format to write it in. For
+  example `--output=australia.pmtiles` creates a pmtiles archive named `australia.pmtiles`.
+- `--download` downloads input sources automatically and `--only-download` exits after downloading
+- `--area=monaco` downloads a `.osm.pbf` extract from [Geofabrik](https://download.geofabrik.de/)
+- `--osm-path=path/to/file.osm.pbf` points Planetiler at an existing OSM extract on disk
+- `-Xmx1g` controls how much RAM to give the JVM (recommended: 0.5x the input .osm.pbf file size to leave room for
+  memory-mapped files)
+- `--force` overwrites the output file
+- `--help` shows all of the options and exits
+
+### Git submodules
+
+Planetiler has a submodule dependency
+on [planetiler-openmaptiles](https://github.com/openmaptiles/planetiler-openmaptiles). Add `--recurse-submodules`
+to `git clone`, `git pull`, or `git checkout` commands to also update submodule dependencies.
+
+To clone the repo with submodules:
+
+```bash
+git clone --recurse-submodules https://github.com/onthegomap/planetiler.git
+```
+
+If you already pulled the repo, you can initialize submodules with:
+
+```bash
+git submodule update --init
+```
+
+To force git to always update submodules (recommended), run this command in your local repo:
+
+```bash
+git config --local submodule.recurse true
+```
+
+Learn more about working with submodules [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+## Generating a Map of the World
+
+See [PLANET.md](PLANET.md).
+
+## Generating Custom Vector Tiles
+
+If you want to customize the OpenMapTiles schema or generate an mbtiles file with OpenMapTiles + extra layers, then
+fork https://github.com/openmaptiles/planetiler-openmaptiles make changes there, and run directly from that repo. It
+is a standalone Java project with a dependency on Planetiler.
+
+If you want to generate a separate mbtiles file with overlay layers or a full custom basemap, then:
+
+- For simple schemas, run a recent planetiler jar or docker image with a custom schema defined in a yaml
+  configuration file. See [planetiler-custommap](planetiler-custommap) for details.
+- For complex schemas (or if you prefer working in Java), create a new Java project
+  that [depends on Planetiler](#use-as-a-library). See the [planetiler-examples](planetiler-examples) project for a
+  working example.
+
+If you want to customize how planetiler works internally, then fork this project, build from source, and
+consider [contributing](#contributing) your change back for others to use!
+
+## Benchmarks
+
+Some example runtimes for the OpenMapTiles profile (excluding downloading resources):
+
+|                                                                   Input                                                                   | Version |             Machine             |              Time               | mbtiles size |                                                          Logs                                                          |
+|-------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------|---------------------------------|--------------|------------------------------------------------------------------------------------------------------------------------|
+| s3://osm-pds/2022/planet-220530.osm.pbf (69GB)                                                                                            | 0.5.0   | c2d-standard-112 (112cpu/448GB) | 37m cpu:48h5m gc:3m45s avg:76.9 | 79GB         | [logs](planet-logs/v0.5.0-planet-c2d-standard-112.txt)                                                                 |
+| s3://osm-pds/2022/planet-220530.osm.pbf (69GB)                                                                                            | 0.5.0   | c6gd.16xlarge (64cpu/128GB)     | 53m cpu:41h58m avg:47.1         | 79GB         | [logs](planet-logs/v0.5.0-planet-c6gd-128gb.txt), [VisualVM Profile](planet-logs/v0.5.0-planet-c6gd-128gb.nps)         |
+| s3://osm-pds/2022/planet-220530.osm.pbf (69GB)                                                                                            | 0.5.0   | c6gd.8xlarge (32cpu/64GB)       | 1h27m cpu:37h55m avg:26.1       | 79GB         | [logs](planet-logs/v0.5.0-planet-c6gd-64gb.txt)                                                                        |
+| s3://osm-pds/2022/planet-220530.osm.pbf (69GB)                                                                                            | 0.5.0   | c6gd.4xlarge (16cpu/32GB)       | 2h38m cpu:34h3m avg:12.9        | 79GB         | [logs](planet-logs/v0.5.0-planet-c6gd-32gb.txt)                                                                        |
+| s3://osm-pds/2021/planet-211011.osm.pbf (65GB)                                                                                            | 0.1.0   | DO 16cpu 128GB                  | 3h9m cpu:42h1m avg:13.3         | 99GB         | [logs](planet-logs/v0.1.0-planet-do-16cpu-128gb.txt), [VisualVM Profile](planet-logs/v0.1.0-planet-do-16cpu-128gb.nps) |
+| [Daylight Distribution v1.6](https://daylightmap.org/2021/09/29/daylight-v16-released.html) with ML buildings and admin boundaries (67GB) | 0.1.0   | DO 16cpu 128GB                  | 3h13m cpu:43h40m avg:13.5       | 101GB        | [logs](planet-logs/v0.1.0-daylight-do-16cpu-128gb.txt)                                                                 |
+
+Merging nearby buildings at z13 is very expensive, when run with `--building-merge-z13=false`:
+
+|                     Input                      | Version |                         Machine                          |           Time           | mbtiles size |                                                                            Logs                                                                            |
+|------------------------------------------------|---------|----------------------------------------------------------|--------------------------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| s3://osm-pds/2022/planet-220530.osm.pbf (69GB) | 0.5.0   | c2d-standard-112 (112cpu/448GB)                          | 26m cpu:27h47m avg:63.9  | 79GB         | [logs](planet-logs/v0.5.0-planet-c2d-standard-112-no-z13-building-merge.txt)                                                                               |
+| s3://osm-pds/2022/planet-220530.osm.pbf (69GB) | 0.5.0   | c6gd.16xlarge (64cpu/128GB)                              | 39m cpu:27h4m avg:42.1   | 79GB         | [logs](planet-logs/v0.5.0-planet-c6gd-128gb-no-z13-building-merge.txt), [VisualVM Profile](planet-logs/v0.5.0-planet-c6gd-128gb-no-z13-building-merge.nps) |
+| s3://osm-pds/2021/planet-220214.osm.pbf (67GB) | 0.3.0   | r6g.16xlarge (64cpu/512GB) with ramdisk and write to EFS | 1h1m cpu:24h33m avg:24.3 | 104GB        | [logs](planet-logs/v0.3.0-planet-r6g-64cpu-512gb-ramdisk.txt)                                                                                              |
+| s3://osm-pds/2021/planet-211011.osm.pbf (65GB) | 0.1.0   | Linode 50cpu 128GB                                       | 1h9m cpu:24h36m avg:21.2 | 97GB         | [logs](planet-logs/v0.1.0-planet-linode-50cpu-128gb.txt), [VisualVM Profile](planet-logs/v0.1.0-planet-linode-50cpu-128gb.nps)                             |
+
+## Alternatives
+
+Some other tools that generate vector tiles from OpenStreetMap data:
+
+- [OpenMapTiles](https://github.com/openmaptiles/openmaptiles) is the reference implementation of
+  the [OpenMapTiles schema](https://openmaptiles.org/schema/) that
+  the [OpenMapTiles profile](https://github.com/openmaptiles/planetiler-openmaptiles)
+  is based on. It uses an intermediate postgres database and operates in two modes:
+  1. Import data into database (~1 day) then serve vector tiles directly from the database. Tile serving is slower and
+     requires bigger machines, but lets you easily incorporate realtime updates
+  2. Import data into database (~1 day) then pregenerate every tile for the planet into an mbtiles file which
+     takes [over 100 days](https://github.com/openmaptiles/openmaptiles/issues/654#issuecomment-724606293)
+     or a cluster of machines, but then tiles can be served faster on smaller machines
+- [Tilemaker](https://github.com/systemed/tilemaker) uses a similar approach to Planetiler (no intermediate database),
+  is more mature, and has a convenient lua API for building custom profiles without recompiling the tool, but takes
+  [about a day](https://github.com/systemed/tilemaker/issues/315#issue-994322040) to generate a map of the world
+
+Some companies that generate and host tiles for you:
+
+- [Mapbox](https://www.mapbox.com/) - data from the pioneer of vector tile technologies
+- [Maptiler](https://www.maptiler.com/) - data from the creator of OpenMapTiles schema
+- [Stadia Maps](https://stadiamaps.com/) - what [onthegomap.com](https://onthegomap.com/) uses in production
+
+If you want to host tiles yourself but have someone else generate them for you, those companies also offer plans to
+download regularly-updated tilesets.
 
 ## Features
 
- * Audio/subtitle track selection
- * Playback speed control
- * Horizontal swipe and double tap to quickly seek
- * Vertical swipe to change brightness (left) / volume (right)
- * Pinch to zoom (Android 7+)
- * PiP (Picture in Picture) on Android 8+ (resizable on Android 11+)
- * Resize (fit/crop)
- * Volume boost
- * Auto frame rate matching on Android TV/boxes (Android 6+)
- * Post-playback actions (delete file/skip to next)
- * Touch lock (long tap)
- * App shortcut for direct access to file chooser (Android 7.1+)
- * 3rd party equalizer / audio processing support (e.g. [Wavelet](https://github.com/Pittvandewitt/Wavelet))
- * Media Session and Audio Focus support
- * Pause playback when disconnecting headphones
- * No ads, tracking or excessive permissions
+- Supports [Natural Earth](https://www.naturalearthdata.com/),
+  OpenStreetMap [.osm.pbf](https://wiki.openstreetmap.org/wiki/PBF_Format),
+  [`geopackage`](https://www.geopackage.org/),
+  and [Esri Shapefiles](https://en.wikipedia.org/wiki/Shapefile) data sources
+- Writes to [MBTiles](https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md) or
+  or [PMTiles](https://github.com/protomaps/PMTiles) output.
+- Java-based [Profile API](planetiler-core/src/main/java/com/onthegomap/planetiler/Profile.java) to customize how source
+  elements map to vector tile features, and post-process generated tiles
+  using [JTS geometry utilities](https://github.com/locationtech/jts)
+- [YAML config file format](planetiler-custommap) that lets you create custom schemas without writing Java code
+- Merge nearby lines or polygons with the same tags before emitting vector tiles
+- Automatically fixes self-intersecting polygons
+- Built-in OpenMapTiles profile based on [OpenMapTiles](https://openmaptiles.org/) v3.13.1
+- Optionally download additional name translations for elements from Wikidata
+- Export real-time stats to a [prometheus push gateway](https://github.com/prometheus/pushgateway) using
+  `--pushgateway=http://user:password@ip` argument (and a [grafana dashboard](grafana.json) for viewing)
+- Automatically downloads region extracts from [Geofabrik](https://download.geofabrik.de/)
+  using `geofabrik:australia` shortcut as a source URL
+- Unit-test profiles to verify mapping logic, or integration-test to verify the actual contents of a generated mbtiles
+  file ([example](planetiler-examples/src/test/java/com/onthegomap/planetiler/examples/BikeRouteOverlayTest.java))
 
-Some advanced features can be enabled or configured in settings. To access it, long press the ⚙️ gear icon. (Alternatively, you can also enter this settings from App info screen.)
+## Limitations
 
- * Default audio tracks. Set specific language, prefer device language, media file defaults.
- * File access mode. Use of Storage Access Framework / MediaStore / legacy file access.
- * Decoder priority. Prefer device or app decoders.
- * Auto frame rate matching. (On Android 11+ and "compatible" displays, ExoPlayer supports [seamless refresh rate switching](https://source.android.com/devices/graphics/multiple-refresh-rate))
- * [Tunneled playback](https://medium.com/google-exoplayer/tunneled-video-playback-in-exoplayer-84f084a8094d). Enabling tunneling can improve playback of 4K/HDR content on Android TV.
- * Playback of Dolby Vision profile 7 (UHD Blu-ray) as HDR HEVC
- * Auto picture-in-picture. When you leave Just Player through the home button and video is playing, PiP will be activated automatically.
- * Skip silence
- * Repeat toggle
+- It is harder to join and group data than when using database. Planetiler automatically groups features into tiles, so
+  you can easily post-process nearby features in the same tile before emitting, but if you want to group or join across
+  features in different tiles, then you must explicitly store data when processing a feature to use with later features
+  or store features and defer processing until an input source is
+  finished  ([boundary layer example](https://github.com/onthegomap/planetiler/blob/9e9cf7c413027ffb3ab5c7436d11418935ae3f6a/planetiler-basemap/src/main/java/com/onthegomap/planetiler/basemap/layers/Boundary.java#L294))
+- Planetiler only does full imports from `.osm.pbf` snapshots, there is no way to incorporate real-time updates.
 
-**`WRITE_SETTINGS` ("Modify system settings") permission**: When the system file chooser is opened, it will always use current system orientation, even if the Player app sets its own. Granting this permission via adb (`adb shell pm grant com.brouken.player android.permission.WRITE_SETTINGS`) or App info screen will allow this app to temporarily enable Auto-rotate to at least partially mitigate [this imperfection](https://issuetracker.google.com/issues/141968218).
+## Use as a library
 
-Donate: [PayPal](https://paypal.me/MarcelDopita) | [Bitcoin](https://live.blockcypher.com/btc/address/bc1q9u2ezgsnug995fv0m4vaxa90ujjwlucp78w4n0) | [Litecoin](https://live.blockcypher.com/ltc/address/LLZ3fULGwxbs6W9Vf7gtu1EjZvviCka7zP)
+Planetiler can be used as a maven-style dependency in a Java project using the settings below:
 
-Translate: [Weblate](https://hosted.weblate.org/engage/just-player/)
+### Maven
 
-## Download
+Add this repository block to your `pom.xml`:
 
-[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="75">](https://play.google.com/store/apps/details?id=com.brouken.player)
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="75">](https://f-droid.org/packages/com.brouken.player/)
-[<img src="https://raw.githubusercontent.com/andOTP/andOTP/master/assets/badges/get-it-on-github.png" alt="Get it on GitHub" height="75">](https://github.com/moneytoo/Player/releases/latest)
-[<img src="https://brouken.com/img/get-it-on-gitlab.png" alt="Get it on GitLab" height="75">](https://gitlab.com/moneytoo/Player/-/releases)
-[<img src="https://brouken.com/img/galaxy-store.png" alt="Available on Galaxy Store" height="75">](https://galaxy.store/justplay)
-[<img src="https://brouken.com/img/huawei-appgallery.png" alt="Explore it on AppGallery" height="75">](https://appgallery.cloud.huawei.com/ag/n/app/C104147921)
-[<img src="https://brouken.com/img/get-it-on-amazon.png" alt="available at amazon" height="75">](https://www.amazon.com/gp/product/B091N8TTJH)
-[<img src="https://brouken.com/img/get-it-on-aptoide.png" alt="Get it on Aptoide" height="75">](https://just-player-marcel-dopita.en.aptoide.com/app)
+```xml
+<repositories>
+  <repository>
+    <id>osgeo</id>
+    <name>OSGeo Release Repository</name>
+    <url>https://repo.osgeo.org/repository/release/</url>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+  </repository>
+</repositories>
+```
 
-Also available on **OPPO App Market**, **Xiaomi GetApps** or [Uptodown](https://just-video-player.en.uptodown.com/android).
+Then add the following dependency:
 
-Other links/channels: application thread on [XDA Developers](https://forum.xda-developers.com/t/app-5-0-just-video-player-no-bluetooth-lag-exoplayer-ffmpeg-audio-codecs.4189183/), subreddit on [reddit](https://www.reddit.com/r/JustPlayer/), entry on [AlternativeTo](https://alternativeto.net/software/just-video-player/about/), git mirror on [GitLab](https://gitlab.com/moneytoo/Player)
+```xml
+<dependency>
+  <groupId>com.onthegomap.planetiler</groupId>
+  <artifactId>planetiler-core</artifactId>
+  <version>${planetiler.version}</version>
+</dependency>
+```
 
-## ❓FAQ
+### Gradle
 
-### How do I open subtitle file (e.g. .srt)?
+Set up your repositories block::
 
-To load external (non-embedded) subtitles, long press the 📁 file open action in the bottom bar. The first time you do that, you will be offered to select root video folder to enable automatic loading of external subtitles.
+```groovy
+mavenCentral()
+maven {
+    url "https://repo.osgeo.org/repository/release/"
+}
+```
 
-💡📺 Because of [limitations on Android TV](https://github.com/moneytoo/Player/issues/248#issuecomment-1019565204), Just Player is also able to open subtitle files from external file managers. You can open video file from your file manager, then return back and also  open subtitle file in Just Player. Subtitle will be available in the last selected video.
+Set up your dependencies block:
 
-Just Player is also able to detect some subtitle files when accessing videos over HTTP/HTTPS. Just use the [same naming](https://github.com/moneytoo/Player/issues/173) for video files as well as subtitles (e.g. `video.mkv` and `video.srt`).
+```groovy
+implementation 'com.onthegomap.planetiler:planetiler-core:<version>'
+```
 
-### How do I change subtitle font, size or color?
+## Contributing
 
-Open system [Caption preferences](https://support.google.com/accessibility/android/answer/6006554) on your device (usually in the _Accessibility_ section of _Settings_) and you will be able to fully customize the subtitle style.
+Pull requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-To quickly access the system _Caption preferences_ screen, long tap the subtitle button.
+## Support
 
-<img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/caption_preferences_1.png" width="140"> <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/caption_preferences_2.png" width="140">
+For general questions, check out the #planetiler channel on [OSM-US Slack](https://osmus.slack.com/) (get an
+invite [here](https://slack.openstreetmap.us/)), or start
+a [GitHub discussion](https://github.com/onthegomap/planetiler/discussions).
 
-### Are there any media formats it CANNOT play?
+Found a bug or have a feature request? Open a [GitHub issue](https://github.com/onthegomap/planetiler/issues) to report.
 
-Unfortunately, upstream ExoPlayer doesn't handle some older formats like ~~[AVI container](https://github.com/google/ExoPlayer/issues/2092)~~, WMV or [Theora](https://github.com/google/ExoPlayer/issues/4970). Majority of devices also cannot handle [10-bit AVC](https://github.com/moneytoo/Player/issues/87#issuecomment-816228143).
+This is a side project, so support is limited. If you have the time and ability, feel free to open a pull request to fix
+issues or implement new features.
 
-Just Player focuses on playing videos so audio only playback isn't officialy supported ([request](https://github.com/moneytoo/Player/issues/55)).
+## Acknowledgement
 
-### How to view detailed video information (like resolution, bitrate etc.)?
+Planetiler is made possible by these awesome open source projects:
 
-Install app like [MediaInfo](https://play.google.com/store/apps/details?id=net.mediaarea.mediainfo) (or APK from [MediaArea.net](https://mediaarea.net/en/MediaInfo/Download/Android)). Then, to quickly open MediaInfo from Just Player, long press the video name/title.
+- [OpenMapTiles](https://openmaptiles.org/) for the [schema](https://openmaptiles.org/schema/)
+  and [reference implementation](https://github.com/openmaptiles/openmaptiles)
+  that
+  the [openmaptiles profile](https://github.com/openmaptiles/planetiler-openmaptiles/tree/main/src/main/java/org/openmaptiles/layers)
+  is based on
+- [Graphhopper](https://www.graphhopper.com/) for basis of utilities to process OpenStreetMap data in Java
+- [JTS Topology Suite](https://github.com/locationtech/jts) for working with vector geometries
+- [Geotools](https://github.com/geotools/geotools) for shapefile processing
+- [SQLite JDBC Driver](https://github.com/xerial/sqlite-jdbc) for reading Natural Earth data and writing MBTiles files
+- [MessagePack](https://msgpack.org/) for compact binary encoding of intermediate map features
+- [geojson-vt](https://github.com/mapbox/geojson-vt) for the basis of
+  the [stripe clipping algorithm](planetiler-core/src/main/java/com/onthegomap/planetiler/render/TiledGeometry.java)
+  that planetiler uses to slice geometries into tiles
+- [java-vector-tile](https://github.com/ElectronicChartCentre/java-vector-tile) for the basis of
+  the [vector tile encoder](planetiler-core/src/main/java/com/onthegomap/planetiler/VectorTile.java)
+- [imposm3](https://github.com/omniscale/imposm3) for the basis
+  of [OSM multipolygon processing](planetiler-core/src/main/java/com/onthegomap/planetiler/reader/osm/OsmMultipolygon.java)
+  and [tag parsing utilities](planetiler-core/src/main/java/com/onthegomap/planetiler/util/Imposm3Parsers.java)
+- [HPPC](http://labs.carrotsearch.com/) for high-performance primitive Java collections
+- [Osmosis](https://wiki.openstreetmap.org/wiki/Osmosis) for Java utilities to parse OpenStreetMap data
+- [JNR-FFI](https://github.com/jnr/jnr-ffi) for utilities to access low-level system utilities to improve memory-mapped
+  file performance.
+- [cel-java](https://github.com/projectnessie/cel-java) for the Java implementation of
+  Google's [Common Expression Language](https://github.com/google/cel-spec) that powers dynamic expressions embedded in
+  schema config files.
+- [PMTiles](https://github.com/protomaps/PMTiles) optimized tile storage format
 
-### I prefer using media library instead of a file chooser...
+See [NOTICE.md](NOTICE.md) for a full list and license details.
 
-Just Player uses system file chooser which already allows two different browsing modes: 
+## Author
 
-1. **Videos** - listing only device directories that contain videos
+Planetiler was created by [Michael Barry](https://github.com/msbarry) for future use generating custom basemaps or
+overlays for [On The Go Map](https://onthegomap.com).
 
-    <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/files_1.png" width="280">
+## License and Attribution
 
-2. **File browser** - full navigation in the device file system structure
+Planetiler source code is licensed under the [Apache 2.0 License](LICENSE), so it can be used and modified in commercial
+or other open source projects according to the license guidelines.
 
-    <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/files_2.png" width="280">
+Maps built using planetiler do not require any special attribution, but the data or schema used might. Any maps
+generated from OpenStreetMap data
+must [visibly credit OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Any map generated with the
+profile based on OpenMapTiles or a derivative
+must [visibly credit OpenMapTiles](https://github.com/openmaptiles/openmaptiles/blob/master/LICENSE.md#design-license-cc-by-40)
+as well.
 
-Alternatively, some people choose to use the media library function of
-[Nova Video Player](https://github.com/nova-video-player/aos-AVP) and integrate it with Just Player by enabling "*Allow using another video player*" feature. This also gives you convenient access to content on network storages (SMB, UPnP, FTP and SFTP).
-
-### How to access videos on network storages (SMB, WebDAV, SFTP, etc.)?
-
-1. The default system file chooser allows access to any remote storage using appropriate _Document Provider_. I highly recommend [CIFS Documents Provider](https://github.com/wa2c/cifs-documents-provider) for accessing Samba shares. There are also providers like [WebDAV Provider](https://github.com/alexbakker/webdav-provider)/[DAVx⁵](https://github.com/bitfireAT/davx5-ose) (WebDAV), [FileManagerUtils](https://github.com/rikyiso01/FileManagerUtils) (SFTP) and [rcx](https://github.com/x0b/rcx). Sadly, Document providers are not supported on Android TV.
-
-2. Open video directly from your favorite file explorer. _Solid Explorer_ works really well, especially if you also want to automatically load subtitles.
-
-### How do I open a streaming link, where do I enter an url?
-
-Just Player does not have any UI to enter internet addresses, but it is registered for handling all compatible streaming links. When opening/tapping links in other apps, Just Player should be generally offered as an option. (Though this may not work in all situations, especially on Android 12+.)
-
-Alternatively, select the text url in the source app, choose _Share_ and find Just Player to play it.
-
-### How to zoom in to get rid of black bars?
-
-If your device has a touchscreen you can use the pinch-to-zoom gesture or just tap the Resize button for a Crop. **Android TV**: Long tap the Resize button to enter Zoom mode. Then use Up and Down keys for precise zoom.
-
-### What to do if Bluetooth audio is not in sync with video?
-
-Just pause and resume playback once again.
-
-### Why is the APK so big?
-
-The APK available here contains native libraries for all supported architectures (`armeabi-v7a`/`armeabi-v7a-neon`/`arm64-v8a`/`x86`/`x86_64`), which is what takes the most space. Although Just Player relies mostly on device decoders, it packs _FFmpeg_ for some advanced features (video chapters and frame rate detection). The second largest dependency is [ICU4J](https://github.com/moneytoo/Player/issues/76) - 10 MB only for charset detection of subtitle files. 🤷
-
-Please note that installs and updates made through Google Play are significantly smaller thanks to Android App Bundles and delta updates.
-
-## Other open source Android video players
-
-Here's a comparison table presenting all available and significant open source video players for Android I was able to find. Just Player is something like ~~80%~~ 90% feature complete. It will probably never have dozens of options or some rich media library UI. It will never truly compete with feature rich VLC. It just attempts to provide functional feature set and motive others to create greater players based on amazing ExoPlayer.
-
-| App name (source)                                                 | Media engine                                                                                                                                                            | Gestures                  | PiP    | Cutout (notch) | Android TV |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------ | -------------- | ---------- |
-| [Fermata Media Player](https://github.com/AndreyPavlenko/Fermata) | [MediaPlayer](https://developer.android.com/guide/topics/media/mediaplayer), [ExoPlayer](https://exoplayer.dev/) and [libVLC](https://www.videolan.org/vlc/libvlc.html) | 🟡 Seek/Volume            | 🔴 No  | 🔴 No          | 🟢 Yes     |
-| [Just (Video) Player](https://github.com/moneytoo/Player)         | [ExoPlayer](https://exoplayer.dev/)                                                                                                                                     | 🟢 Seek/Volume/Brightness | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
-| [Kodi](https://github.com/xbmc/xbmc)                              | ?                                                                                                                                                                       | 🔴 No                     | 🔴 No  | 🔴 No          | 🟢 Yes     |
-| [mpv](https://github.com/mpv-android/mpv-android)                 | [libmpv](https://github.com/mpv-player/mpv)                                                                                                                             | 🟢 Seek/Volume/Brightness | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
-| [Next Player](https://github.com/anilbeesetti/nextplayer)         | [ExoPlayer](https://exoplayer.dev/)                                                                                                                                     | 🟢 Seek/Volume/Brightness | 🔴 No  | 🟢 Yes         | 🔴 No      |
-| [Nova Video Player](https://github.com/nova-video-player/aos-AVP) | MediaPlayer                                                                                                                                                             | 🔴 No                     | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
-| [VLC](https://code.videolan.org/videolan/vlc-android)             | [libVLC](https://www.videolan.org/vlc/libvlc.html)                                                                                                                      | 🟢 Seek/Volume/Brightness | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
-
-To find other video players (including non-FOSS), check out [a list on IzzyOnDroid](https://android.izzysoft.de/applists/category/named/multimedia_video_player).
