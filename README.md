@@ -1,82 +1,126 @@
-![Iris: An open-source shaders mod compatible with OptiFine shaderpacks](docs/banner.png)
+<!-- SPDX-License-Identifier: GPL-3.0-or-later OR CC-BY-SA-4.0 -->
 
-# Iris
+<p align="center">
+  <img src="docs/raw/images/icon.png" alt="App Manager Logo" height="150dp">
+</p>
 
-## Links
+<h1 align="center">App Manager</h1>
 
-* **Visit [our website](https://irisshaders.dev) for downloads and pretty screenshots!**\
-  * **Visit [Modrinth](https://modrinth.com/shaders) to find shader packs!**
-* Visit [our Discord server](https://discord.gg/jQJnav2jPu) to chat about the mod and get support! It's also a great place to get development updates right as they're happening.
-* Visit [the developer documentation](https://github.com/IrisShaders/Iris/tree/trunk/docs/development) for information on developing, building, and contributing to Iris!
+<p align=center>
+  <a href="https://muntashirakon.github.io/AppManager">Docs</a> ·
+  <a href="https://github.com/MuntashirAkon/AppManager/releases">Releases</a> ·
+  <a href="https://t.me/AppManagerChannel">Telegram Channel</a>
+</p>
 
-## FAQ
+---
 
-- Find answers to frequently asked questions on our [FAQ page](docs/faq.md).
-- Iris supports almost all shaderpacks, but a list of unsupported shaderpacks is available [here](docs/unsupportedshaders.md).
-- A list of unfixable limitations in Iris is available [here](docs/usage/limitations.md).
+## Features
 
-## Why did you make Iris?
+### General features
+- Fully reproducible, copylefted libre software (GPLv3+)
+- Material 3 with dynamic colours
+- Displays as much information as possible in the main page
+- Lists activities, broadcast receivers, services, providers, app ops, permissions, signatures, shared libraries, etc.
+  of an application
+- Launch activities and services
+- Create shortcuts of activities
+- [Intercept activities](https://muntashirakon.github.io/AppManager/#sec:interceptor-page)
+- Scan for trackers and libraries in apps and list (all or only) tracking classes (and their code dump)
+- View/save the manifest of an app
+- Display app usage, data usage (mobile and Wi-Fi), and app storage info (requires “Usage Access” permission)
+- Install/uninstall APK files (including APKS, APKM and XAPK with OBB files)
+- Share APK files
+- Back up/restore APK files
+- Batch operations
+- Single-click operations
+- Logcat viewer, manager and exporter
+- [Profiles](https://muntashirakon.github.io/AppManager/#sec:profiles-page) (including presets for quick debloating)
+- Open an app in Aurora Store or in your favourite F-Droid client directly from App Manager
+- Sign APK files with custom signatures before installing
+- Backup encryption: OpenPGP via OpenKeychain, RSA, ECC (hybrid encryption with AES) and AES.
+- Track foreground UI components
 
-Iris was created to fill a void that I saw in the Minecraft customization and graphical enhancement community: the lack of an open-source shaders mod that would let me load my favorite shader packs on modern versions of the game, while retaining performance and compatibility with modpacks. OptiFine, the current dominant mod for loading shader packs, has restrictive licensing that firmly stands in the way of any sort of tinkering, and is fairly notorious for having compatibility issues with the mods that I like. It's also mutually incompatible with Sodium, the best rendering optimization mod in existence by a large margin. ShadersMod was never updated past 1.12, and it lacks support for many of the many modern popular shaderpacks. So I created Iris, to try and solve these issues, and also address many other longstanding issues with shader packs.
+### Root/ADB-only features
 
-I first and foremost develop Iris to meet my own needs of a performance-oriented shaders mod with good compatibility and potential for tinkering. Iris when paired with Sodium delivers great performance on my machine, finally making it fully possible for me to actually play with shaders instead of just periodically switching them on to take pretty screenshots, then switching them off once I get tired of frame drops. Of course, as it turns out, I'm far from the only person who benefits from the development of Iris, which is why I've decided to release it to the public as an open-source mod.
+- Revoke runtime (AKA dangerous) and development permissions
+- Change the mode of an app op
+- Display/kill/force-stop running apps or processes
+- Clear app data or app cache
+- View/change net policy
+- Control battery optimization
 
-Canvas is another shaders mod that has already gained some traction. Its big downside for me, however, is the fact that it doesn't support the existing popular OptiFine shaderpacks that I want to use. This is because it uses a new format for shader packs that isn't compatible with the existing format, in order to achieve many of its goals for better mod integration with shaders. And while Canvas now has a few nice shaders like Lumi Lights, I still want to have the option of using existing shader packs that were designed for OptiFine. Shader packs just aren't interchangeable, just like how you cannot hand a copy of *The Last Supper* to someone who wants a copy of the *Mona Lisa*. They're both great pieces of art, but you absolutely cannot just swap one out for the other. That being said, if you're a fan of the shader packs available for Canvas, then great! Canvas and Iris are both perfectly fine ways to enjoy shaders with Minecraft.
+### Root-only features
 
-## Goals
+- Block any activities, broadcast receivers, services, or providers of an app with native import/export as well as Watt
+  and Blocker import support
+- View/edit/delete shared preferences of any app
+- Back up/restore apps with data, rules and extras (such as permissions, battery optimization, SSAID, etc.)
+- View system configurations including blacklisted or whitelisted apps, permissions, etc.
+- View/change SSAID
 
-These are the goals of Iris. Iris hasn't fully achieved all these goals, however we are getting close.
+…and many more! This single app combines the features of 5 or 6 apps any tech-savvy person needs!
 
-* **Performance.** Iris should fully utilize your graphics card when paired with optimization mods like Sodium.
-* **Correctness.** Iris should try to be as issueless as possible in its implementation.
-* **Mod compatibility.** Iris should make a best effort to be compatible with modded environments.
-* **Backwards compatibility.** All existing ShadersMod / OptiFine shader packs should just work on Iris, without any modifications required.
-* **Features for shader pack developers.** Once Iris has full support for existing features of the shader pipeline and is reasonably bug free, I wish to expand the horizons of what's possible to do with Minecraft shader packs through the addition of new features to the shader pipeline. Unlimited color buffers, direct voxel data access, and fancy debug HUDs are some examples of features that I'd like to add in the future.
-* **A well-organized codebase.** I'd like for working with Iris code to be a pleasant experience overall.
+### Upcoming features
+- APK editing
+- Code editor
+- Routine operations
+- Finder: Find app components, permissions etc. in all apps
+- Enable/disable app actions such as launch on boot
+- Panic responder for Ripple
+- Crash monitor
+- Systemless disabling/uninstalling of the system apps
+- Import app list exported by App Manager
+- More advance terminal emulator
+- File manager
+- Database viewer and editor, etc.
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+alt="Get it on F-Droid"
+height="80" />](https://f-droid.org/packages/io.github.muntashirakon.AppManager)
+
+## Translations
+
+Help translate [the app strings](https://hosted.weblate.org/engage/app-manager/) and
+[the docs](https://hosted.weblate.org/projects/app-manager/docs/) at Hosted Weblate.
 
 
-## What's the current state of development?
+[![Translation status](https://hosted.weblate.org/widgets/app-manager/-/multi-auto.svg)](https://hosted.weblate.org/engage/app-manager/)
 
-Iris has public releases for 1.18.2, 1.19.2, 1.19.3, and 1.19.4 that work with the official releases of Sodium. Iris is generally usable on most shader packs, and most shader packs are being designed with Iris support in mind.
 
-However, Iris is still not complete software. Performance can be improved, and more features are being added for shader developers. There are also some minor missing features from OptiFine that make the implementation incomplete.
+## Mirrors
 
-## How can I help?
+[GitLab](https://gitlab.com/muntashir/AppManager) · [Riseup](https://0xacab.org/muntashir/AppManager) ·
+[Codeberg](https://codeberg.org/muntashir/AppManager)
 
-* The Iris Discord server is looking for people willing to provide support and moderate the server! Go to #applications on our server if you'd like to apply.
-* Code review on open PRs is appreciated! This helps get important issues with PRs resolved before I give them a look.
-* Code contributions through PRs are also welcome! If you're working on a large / significant feature it's usually a good idea to talk about your plans beforehand, to make sure that work isn't wasted.
+## Screenshots
 
-## But where's the Forge version?
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/8.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/9.png" height="500dp" />
 
-Iris doesn't support Forge. This is for a few reasons:
+## Build Instructions
+See [BUILDING.rst](BUILDING.rst)
 
-* My time is limited, and properly supporting all the mods available for Forge (as well as Forge itself) is a huge amount of work. When people ask for Forge support, they aren't asking just for Iris to run on Forge, they are also asking for it to be compatible out of the box with their kitchen sink modpack that contains over 300 mods. As a result, properly supporting Forge would require me to divert large amounts of precious time into fixing tedious compatibility issues and bugs, time that could instead be spent making the Fabric version of Iris better.
-* The Forge toolchain isn't really designed to play nice with mods like Iris that need to make many patches to the game code. It's possible, but Fabric & Quilt are just *better* for mods like Iris. It's no coincidence that the emergence of Fabric and the initial emergence of OptiFine replacements happened at around the same time.
-* Sodium, which Iris depends on to achieve its great performance, has no official Forge version. It's a long story, but in short: the lead developers of Forge were incredibly hostile to JellySquid when she developed for Forge, and since then have made no credible attempts to repair relations or even admit wrongdoing.
+## Contributing
 
-Some users have already ported Iris to Forge, however these ports generally come with mod compatibility issues and outdated updates.
-The license of Iris does permit others to legally port Iris to Forge, and we are not strictly opposed to the existence of an Iris Forge port created by others. However, what we are opposed to is someone doing a bare-minimum port of Iris to Forge, releasing it to the public, and then abandoning it or poorly maintaining it while compatibility issues and bug reports accumulate. When that happens, not only does that hurt the reputation of Iris, but we also ultimately get flooded by users wanting support with a low-effort Forge port that we didn't even make.
+See [CONTRIBUTING.rst](CONTRIBUTING.rst)
 
-So, if you want to distribute a Forge port of Iris, we'd prefer if you let us know. Please don't just name your port "Iris Forge," "Iris for Forge," or "Iris Forge Port" either. Be original, and don't just hijack our name, unless we've given you permission to use one of those kinds of names. If a well-qualified group of people willing to maintain a Forge port of Iris does appear, then a name like "Iris Forge" might be appropriate - otherwise, it probably isn't appropriate.
+## Donation and Funding
 
-## Credits
+_Donation or purchasing is not a requirement in order to use app Manager._ While App Manager does not support any
+purchases, donations can be sent to the owner of App Manager through Open Source Collective.
 
-* **TheOnlyThing and Vaerian**, for creating the excellent logo
-* **Mumfrey**, for creating the Mixin bytecode patching system used by Iris and Sodium internally
-* **The Fabric and Quilt projects**, for enabling the existence of mods like Iris that make many patches to the game
-* **JellySquid**, for creating Sodium, the best rendering optimization mod for Minecraft that currently exists, and for making it open-source
-* **All past, present, and future contributors to Iris**, for helping the project move along
-* **Dr. Rubisco**, for maintaining the website
-* **The Iris support and moderation team**, for handling user support requests and allowing me to focus on developing Iris
-* **daxnitro, karyonix, and sp614x**, for creating and maintaining the current shaders mods
+Open Source Collective is a fiscal host in the Open Collective platform which helps the open source projects manage
+their finances. At present, it supports payments through bank accounts, PayPal, credit or debit cards and
+cryptocurrencies.
 
-## License
+Link: https://opencollective.com/muntashir
 
-All code in this (Iris) repository is completely free and open source, and you are free to read, distribute, and modify the code as long as you abide by the (fairly reasonable) terms of the [GNU LGPLv3 license](https://github.com/IrisShaders/Iris/blob/master/LICENSE).
+By sending donations, the senders agree that they shall not use the donations as a leverage to prioritise their
+requested features. Feature requests do not require any bounties or donations, and they are prioritised in accordance
+with the preferences of the owner.
 
-Dependencies may not be under an applicable license: See the [Incompatible Dependencies](https://github.com/IrisShaders/Iris/blob/master/LICENSE-DEPENDENCIES) page for more information.
+**App Manager accepts any offers of funding/grants.** Representatives of the interested organization can contact the
+owner directly at muntashirakon [at] riseup [dot] net (FINGERPRINT: `7bad37c2981e41f8f6abea7f58f0b4f26c346fce`).
 
-You are not allowed to redistribute Iris commerically or behind a paywall, unless you get a commercial license for GLSL Transformer. See above for more information.
+## Credits and Libraries
 
-Though it's not legally required, I'd appreciate it if you could ask before hosting your own public downloads for compiled versions of Iris. Though if you want to add the mod to a site like MCBBS, that's fine, no need to ask me.
+A list of credits and libraries are available in the **About** section of the app.

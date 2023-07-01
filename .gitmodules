@@ -1,0 +1,3 @@
+[submodule "scripts/android-libraries"]
+	path = scripts/android-libraries
+	url = https://github.com/MuntashirAkon/android-libraries.git

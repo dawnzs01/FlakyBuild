@@ -1,46 +1,29 @@
-# custom sodium versions
-custom_sodium/
-
-# gradle
-
 .gradle/
-build/
-out/
-classes/
-
-# brachyura
-.brachyura
-*.jfr
-
-# custom sodium
-/custom_sodium/
-
-# idea
-
 .idea/
-*.iml
-*.ipr
-*.iws
-
-# vscode
-
-.settings/
-.vscode/
-bin/
-.classpath
-.project
-
-# eclipse
-
-*.launch
-
-# fabric
-
-run/
-/logs/latest.log
-
-# macOS
-
+crowdin.properties
+local.properties
 .DS_Store
-.AppleDouble
-.LSOverride
+build/
+app/preRelease/
+app/release/
+app/debug/
+app/libs/am-common.jar
+toybox/src/main/jniLibs
+app/src/main/assets/am.jar
+app/src/main/assets/main.jar
+pids
+logs
+node_modules
+npm-debug.log
+coverage/
+run
+dist
+.nyc_output
+.basement
+config.local.js
+basement_dist
+*.apk
+*.iml
+*.jks
+*~
+scripts/KeyStore.sh
