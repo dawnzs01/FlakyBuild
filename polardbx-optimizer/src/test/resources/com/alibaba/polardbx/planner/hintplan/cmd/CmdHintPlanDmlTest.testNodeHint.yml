@@ -1,0 +1,18 @@
+# CoronaDB HINT
+
+## node
+- sql: |
+    /*+TDDL: node(0)*/
+    update test_table_a a join (select max(bigint_test) m, pk from test_table_b b group by pk) b on a.pk = b.pk set a.bigint_test = b.m where a.bigint_test > b.m
+
+  plan: |
+
+    phyquery(node="optest_0000", sql="update `test_table_a` as `a` inner join (select max(`bigint_test`) as `m`, `pk` as `pk` from `test_table_b` as `b` group by `pk`) as `b` on (`a`.`pk` = `b`.`pk`) set `a`.`bigint_test` = `b`.`m` where (`a`.`bigint_test` > `b`.`m`)")
+
+- sql: |
+    /*+TDDL: node(0)*/
+    delete a from test_table_a a join (select max(bigint_test) m, pk from test_table_b b group by pk) b on a.pk = b.pk where a.bigint_test > b.m
+
+  plan: |
+
+    phyquery(node="optest_0000", sql="delete `a` from `test_table_a` as `a` inner join (select max(`bigint_test`) as `m`, `pk` as `pk` from `test_table_b` as `b` group by `pk`) as `b` on (`a`.`pk` = `b`.`pk`) where (`a`.`bigint_test` > `b`.`m`)")

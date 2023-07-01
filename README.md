@@ -1,60 +1,126 @@
 
-<p align="center">
-<img src="https://meteorclient.com/icon.png" alt="meteor-client-logo" width="15%"/>
-</p>
+[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://github.com/polardb/polardbx-sql/blob/main/LICENSE)
+[![Language](https://img.shields.io/badge/Language-Java-blue.svg)](https://www.java.com/)
+[![Leaderboard](https://img.shields.io/badge/PolarDB--X-Check%20Your%20Contribution-orange)](https://opensource.alibaba.com/contribution_leaderboard/details?projectValue=polardb-x)
 
-<h1 align="center">Meteor</h1>
-<p align="center">A Minecraft Fabric Utility Mod for anarchy servers.</p>
+[中文文档](https://polardbx.com)
 
-<div align="center">
-    <a href="https://discord.gg/bBGQZvd"><img src="https://img.shields.io/discord/689197705683140636?logo=discord" alt="Discord"/></a>
-    <br>
-    <img src="https://img.shields.io/github/last-commit/MeteorDevelopment/meteor-client" alt="GitHub last commit"/>
-    <img src="https://img.shields.io/github/commit-activity/w/MeteorDevelopment/meteor-client" alt="GitHub commit activity"/>
-    <img src="https://img.shields.io/github/contributors/MeteorDevelopment/meteor-client" alt="GitHub contributors"/>
-    <br>
-    <img src="https://img.shields.io/github/languages/code-size/MeteorDevelopment/meteor-client" alt="GitHub code size in bytes"/>
-    <img src="https://tokei.rs/b1/github/MeteorDevelopment/meteor-client" alt="GitHub lines of code"/>
-</div>
+## What is PolarDB-X ？
+PolarDB-X is a cloud native distributed SQL Database designed for high concurrency, massive storage and complex querying scenarios. It has a shared-nothing architecture in which computing is decoupled from storage. It supports horizontal scaling, distributed transactions and Hybrid Transactional and Analytical Processing (HTAP) workloads, and is characterized by enterprise-class, cloud native, high availability, highly compatible with MySQL and its ecosystem.
 
-## Usage
+PolarDB-X was originally created to solve the database's scalability bottleneck of Alibaba Tmall's "Double Eleven" core transaction system, and has grown with AliCloud along the way, and is a mature and stable database system that has been verified by many customers' core business systems.
 
-### Building
-- Clone this repository
-- Run `./gradlew build`
 
-### Installation
-Follow the [guide](https://meteorclient.com/faq/installation) on the wiki.
+The core features of PolarDB-X include:
 
-## Contributions
-We will review and help with all reasonable pull requests as long as the guidelines below are met.
+- Horizontal Scalability
 
-- The license header must be applied to all java source code files.
-- IDE or system-related files should be added to the `.gitignore`, never committed in pull requests.
-- In general, check existing code to make sure your code matches relatively close to the code already in the project.
-- Favour readability over compactness.
-- If you need help, check out the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) for a reference.
+PolarDB-X is designed with Shared-nothing architecture, supporting multiple Hash and Range data sharding algorithms and achieving transparent horizontal scaling through implicit primary key sharding and dynamic scheduling of data shard.
 
-## Bugs and Suggestions
-Bug reports and suggestions should be made in this repo's [issue tracker](https://github.com/MeteorDevelopment/meteor-client/issues) using the templates provided.  
-Please provide as much information as you can to best help us understand your issue and give a better chance of it being resolved.
 
-## Donations
-All of our work is completely free and non-profit (donations pay only for hosting costs), therefore we are very grateful for all donations made to support us in running our community.  
-Donations can be made via our [website](https://meteorclient.com/donate) and the minimum amount to get donor benefits is €5.  
-You will be rewarded with a role on our Discord server and a customisable in-game cape.  
-⚠️ _Make sure to create a Meteor account and link your Discord and Minecraft accounts to fully experience your rewards._ ⚠️
+- Distributed Transactions
 
-## Credits
-[Cabaletta](https://github.com/cabaletta) and [WagYourTail](https://github.com/wagyourtail) for [Baritone](https://github.com/cabaletta/baritone)  
-The [Fabric Team](https://github.com/FabricMC) for [Fabric](https://github.com/FabricMC/fabric-loader) and [Yarn](https://github.com/FabricMC/yarn)
+PolarDB-X adopts MVCC + TSO approach and 2PC protocol to implement distributed transactions. Transactions meet ACID characteristics, support RC/RR isolation levels, and achieve high performance through optimizations such as one-stage commit, read-only transaction, and asynchronous commit.
+
+
+- HTAP
+
+PolarDB-X supports analytical queries through native MPP capability, and achieves strong isolation of OLTP and OLAP traffic through CPU quota constraint, memory pooling, storage resource separation, etc.
+
+
+- Enterprise-class
+
+PolarDB-X has many capabilities designed for enterprise scenarios, such as SQL Concurrency Control, SQL Advisor, TDE, Triple Authority Seperation, Flashback Query, etc.
+
+
+- Cloud Native
+
+PolarDB-X has years of cloud native practice on AliCloud, supports managing cluster resources via K8S Operator, supports public cloud, hybrid cloud, private cloud and other forms for deployment.
+
+
+- High Availability
+
+PolarDB-X achieves strong data consistency through Multi-Paxos protocol, supports cross-data center deployment, and improves system availability through Table Group, Geo-locality, etc.
+
+
+- Compatible with MySQL and Its Ecosystem
+
+The goal of PolarDB-X is to be fully compatible with MySQL, which currently includes MySQL protocol, most of MySQL SQL syntax, Collations, transaction isolation level, binary log, etc.
+
+
+## Quick Start
+### To quick start with PolarDB-X
+PolarDB-X supports one-click installation by PXD tool, through which you can quickly try the functions of PolarDB-X.
+
+See the [PXD Quick Start](docs/en/quickstart.md).
+
+### To quick start with PolarDB-X on Kubernetes
+PolarDB-X provides K8S deployment mode, through which you can customize the configuration of PolarDB-X cluster.
+
+See the [K8S Quick Start](https://github.com/polardb/polardbx-operator#quick-start).
+
+### To start developing PolarDB-X
+If you want to compile and install PolarDB-X from source code, or start development, you can refer the [Development Guide](docs/en/quickstart-development.md).
+
+The core features of PolarDB-X community version will be consistent with the commercial version, and more manuals can be found in [the documentations of the commercial version](https://www.alibabacloud.com/help/doc-detail/71252.htm). The documentations of the community version are being compiled and will be released to the public in the near future.
+
+## Architecture
+![image.png](docs/architecture.png)
+PolarDB-X has a shared-nothing architecture in which compute and storage is decoupled, and the system consists of 4 core components.
+
+- CN (Compute Node)
+
+The Compute Node is the entry point of the system and is stateless, which includes modules such as SQL parser, optimizer, and executor. It is responsible for distributed data routing, 2PC coordination, global secondary index maintenance, etc. It also provides enterprise features such as SQL concurrency control and triple authority separation.
+
+
+- DN (Data Node)
+
+The Data Node is responsible for data persistence, providing strong data consistency based on the Multi-Paxos protocol, while maintaining distributed transaction visibility through MVCC.
+
+
+- GMS (Global Meta Service)
+
+The Gloal Meta Service is responsible for maintaining globally consistent Table/Schema, Statistics and other system Meta information, maintaining security information such as accounts and permissions, and providing global timing services (i.e. TSO).
+
+
+- CDC (Change Data Capture)
+
+The CDC Node provides change data capture capability that is fully compatible with the MySQL binary log format and MySQL DUMP protocol, and master-slave replication capability that is compatible with the MySQL Replication protocol.
+
+
+PolarDB-X provides tool to manage the above components through K8S Operator, and the RPC between the CN and DN can be done through private protocol component. The corresponding repositories of these components are as follows.
+
+| **Component Name**        | **Repository**                                                    | **Version** |
+|---------------------------|-------------------------------------------------------------------|---|
+| CN (Compute Node)         | [polardbx-sql](https://github.com/polardb/polardbx-sql)           | v5.4.13-16615127 |
+| GMS (Global Meta Service) | [polardbx-engine](https://github.com/polardb/polardbx-engine)     | v1.0.2 |
+| DN (Data Node)            | [polardbx-engine](https://github.com/polardb/polardbx-engine)     | v1.0.2 |
+| CDC (Change Data Capture) | [polardbx-cdc](https://github.com/polardb/polardbx-cdc)           | v5.4.13 |
+| RPC                       | [polardbx-glue](https://github.com/polardb/polardbx-glue)         | v5.4.13-16615127 |
+| K8S Operator              | [polardbx-operator](https://github.com/polardb/polardbx-operator) | v1.2.2 |
+
+
+## What is PolarDB-X SQL ？
+PolarDB-X SQL is one component of PolarDB-X, namely CN (Compute Node).
+
 
 ## Licensing
-This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). 
+PolarDB-X SQL is under the Apache License 2.0. See the [License](LICENSE) file for details.
 
-If you use **ANY** code from the source:
-- You must disclose the source code of your modified work and the source code you took from this project. This means you are not allowed to use code from this project (even partially) in a closed-source and/or obfuscated application.
-- You must state clearly and obviously to all end users that you are using code from this project.
-- Your application must also be licensed under the same license.
 
-*If you have any other questions, check our [FAQ](https://meteorclient.com/faq) or ask in our [Discord](https://meteorclient.com/discord) server.*
+## Contributing
+
+You are welcome to make contributions to PolarDB-X. We appreciate all the contributions. For more information about how to start development and pull requests, see [contributing](CONTRIBUTING.md).
+
+
+## Community
+You can join these groups and chats to discuss and ask PolarDB-X related questions:
+ - DingTalk Group: [32432897](https://h5.dingtalk.com/circle/healthCheckin.html?dtaction=os&corpId=dingc5456617ca6ab502e1cc01e222598659&1b3d4=1ec1b&cbdbhh=qwertyuiop#/)  
+   ![DingTalk Group](docs/images/dingtalk_group.jpg)
+ - WeChat Group: 阿里云 PolarDB-X 开源交流群 (Contact group manager to get into wechat group. Managers' ID: oldbread3, hustfxj, agapple0002)   
+   ![WeChat Manager 1](docs/images/wechat_manager_a.jpg)  ![WeChat Manager 2](docs/images/wechat_manager_b.jpg) ![WeChat Manager 3](docs/images/wechat_manager_c.jpg)
+
+   
+
+## Acknowledgements
+PolarDB-X SQL references from many open source projects, such as Calcite, Presto etc. Sincere thanks to these projects and contributors.

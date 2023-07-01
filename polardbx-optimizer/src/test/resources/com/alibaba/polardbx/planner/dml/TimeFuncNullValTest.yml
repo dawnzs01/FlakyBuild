@@ -1,0 +1,95 @@
+- sql: |
+    select * from week_tbl where k=2 and c is null;
+
+  plan: |
+    logicalview(tables="optest_0002.week_tbl_0", sql="select `id`, `k`, `c` from `week_tbl` as `week_tbl` where ((`c` is null) and (`k` = 2))")
+
+- sql: |
+
+    select * from mm_tbl where k=2 and c is null;
+
+  plan: |
+    logicalview(tables="optest_0002.mm_tbl_00", sql="select `id`, `k`, `c` from `mm_tbl` as `mm_tbl` where ((`c` is null) and (`k` = 2))")
+
+- sql: |
+    select * from dd_tbl where k=2 and c is null;
+
+  plan: |
+    logicalview(tables="optest_0002.dd_tbl_00", sql="select `id`, `k`, `c` from `dd_tbl` as `dd_tbl` where ((`c` is null) and (`k` = 2))")
+
+- sql: |
+    select * from mmdd_tbl where k=2 and c is null;
+
+  plan: |
+    logicalview(tables="optest_0002.mmdd_tbl_000", sql="select `id`, `k`, `c` from `mmdd_tbl` as `mmdd_tbl` where ((`c` is null) and (`k` = 2))")
+
+- sql: |
+    select * from yyyydd_tbl where k=2 and c is null;
+
+  plan: |
+    logicalview(tables="optest_0002.yyyydd_tbl_0", sql="select `id`, `k`, `c` from `yyyydd_tbl` as `yyyydd_tbl` where ((`c` is null) and (`k` = 2))")
+
+- sql: |
+   select * from yyyyweek_tbl where k=2 and c is null;
+
+  plan: |
+    logicalview(tables="optest_0002.yyyyweek_tbl_0", sql="select `id`, `k`, `c` from `yyyyweek_tbl` as `yyyyweek_tbl` where ((`c` is null) and (`k` = 2))")
+
+- sql: |
+   select * from yyyymm_tbl where k=2 and c is null;
+
+  plan: |
+    logicalview(tables="optest_0002.yyyymm_tbl_0", sql="select `id`, `k`, `c` from `yyyymm_tbl` as `yyyymm_tbl` where ((`c` is null) and (`k` = 2))")
+  
+
+
+- sql: |
+   insert into week_tbl values (1,2,null)
+
+  plan: |
+  
+    PhyTableOperation(tables="optest_0002.[week_tbl_0]", sql="INSERT INTO ? (`id`, `k`, `c`) VALUES(1, ?, ?)", params="`week_tbl_0`,2,NULL")
+
+
+- sql: |
+    insert into mm_tbl values (1,2,null)
+
+  plan: |
+  
+    PhyTableOperation(tables="optest_0002.[mm_tbl_00]", sql="INSERT INTO ? (`id`, `k`, `c`) VALUES(1, ?, ?)", params="`mm_tbl_00`,2,NULL")
+
+- sql: |
+    insert into dd_tbl values (1,2,null)
+
+  plan: |
+    PhyTableOperation(tables="optest_0002.[dd_tbl_00]", sql="INSERT INTO ? (`id`, `k`, `c`) VALUES(1, ?, ?)", params="`dd_tbl_00`,2,NULL")
+
+- sql: |
+    insert into mmdd_tbl values (1,2,null)
+
+  plan: |
+  
+    PhyTableOperation(tables="optest_0002.[mmdd_tbl_000]", sql="INSERT INTO ? (`id`, `k`, `c`) VALUES(1, ?, ?)", params="`mmdd_tbl_000`,2,NULL")
+
+
+- sql: |
+    insert into yyyydd_tbl values (1,2,null)
+
+  plan: |
+  
+    PhyTableOperation(tables="optest_0002.[yyyydd_tbl_0]", sql="INSERT INTO ? (`id`, `k`, `c`) VALUES(1, ?, ?)", params="`yyyydd_tbl_0`,2,NULL")
+
+
+- sql: |
+    insert into yyyyweek_tbl values (1,2,null)
+
+  plan: |
+  
+    PhyTableOperation(tables="optest_0002.[yyyyweek_tbl_0]", sql="INSERT INTO ? (`id`, `k`, `c`) VALUES(1, ?, ?)", params="`yyyyweek_tbl_0`,2,NULL")
+
+- sql: |
+    insert into yyyymm_tbl values (1,2,null)
+
+  plan: |
+  
+    PhyTableOperation(tables="optest_0002.[yyyymm_tbl_0]", sql="INSERT INTO ? (`id`, `k`, `c`) VALUES(1, ?, ?)", params="`yyyymm_tbl_0`,2,NULL")

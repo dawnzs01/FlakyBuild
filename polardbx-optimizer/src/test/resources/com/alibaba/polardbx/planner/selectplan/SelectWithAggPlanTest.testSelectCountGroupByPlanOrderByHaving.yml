@@ -1,0 +1,13 @@
+- sql: |
+    select count(id)
+    from test_hash_tb a
+    group by a.name having count(id)>1 order by count(id) ;
+
+
+  plan: |
+    memsort(sort="count(id) asc")
+      project(count(id)="count(id)")
+        filter(condition="count(id) > 1")
+          hashagg(group="name", count(id)="sum(count(id))")
+            gather(concurrent=true)
+              logicalview(tables="[0000-0003].test_hash_tb", shardcount=4, sql="select `name`, count(*) as `count(id)` from `test_hash_tb` as `test_hash_tb` group by `name`")
