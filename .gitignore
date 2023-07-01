@@ -1,37 +1,23 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Project exclude paths
+/buildSrc/.gradle/
+/buildSrc/build/
+/buildSrc/build/classes/java/main/
+/aospWithQuickstepOmega/
+db_files
 *.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+.project
+.classpath
+.project.properties
+gen/
+tests/stress/gen/
+WallpaperPicker/gen/
+WallpaperPicker/.project.properties
+bin/
+.idea/
+.gradle/
+local.properties
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-### pom flatten ###
-**/.flattened-pom.xml
-/chatgpt-bootstrap/src/main/resources/application-local.yaml
+.DS_Store
+*.hprof
+/.settings/org.eclipse.buildship.core.prefs
+/.vscode/settings.json
