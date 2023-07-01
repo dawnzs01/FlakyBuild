@@ -1,65 +1,27 @@
--keep class me.** { *; }
--keep class bsh.** { *; }
--keep class de.** { *; }
--keep class cc.** { *; }
--keep class io.** { *; }
--keep class org.** { *; }
--keep class com.microsoft.** { *; }
--keep class com.rymmmmm.** { *; }
--keep class com.codepwn.** { *; }
--keep class com.hicore.** { *; }
--keep class com.xiaoniu.** { *; }
--keep class cn.lliiooll.** { *; }
--keep class xyz.nextalone.** { *; }
--keep class cc.ioctl.** { *; }
--keep class sakura.kooi.** { *; }
--keep class com.tencent.mmkv.** { *; }
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
 
--keepclasseswithmembernames class * {
-    native <methods>;
-}
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
 
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
 
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile
 
--dontobfuscate
+-keep public class com.shatyuka.zhiliao.MainHook
+-repackageclasses "zhiliao"
+-allowaccessmodification
+-overloadaggressively
 
--dontwarn javax.**
--dontwarn java.awt.**
--dontwarn org.apache.bsf.*
-
--keepattributes LineNumberTable,SourceFile
--renamesourcefileattribute SourceFile
-
-# Keep `Companion` object fields of serializable classes.
-# This avoids serializer lookup through `getDeclaredClasses` as done for named companion objects.
--if @kotlinx.serialization.Serializable class **
--keepclassmembers class <1> {
-    static <1>$Companion Companion;
-}
-
-# Keep `serializer()` on companion objects (both default and named) of serializable classes.
--if @kotlinx.serialization.Serializable class ** {
-    static **$* *;
-}
--keepclassmembers class <2>$<3> {
-    kotlinx.serialization.KSerializer serializer(...);
-}
-
-# Keep `INSTANCE.serializer()` of serializable objects.
--if @kotlinx.serialization.Serializable class ** {
-    public static ** INSTANCE;
-}
--keepclassmembers class <1> {
-    public static <1> INSTANCE;
-    kotlinx.serialization.KSerializer serializer(...);
-}
-
-# @Serializable and @Polymorphic are used at runtime for polymorphic serialization.
--keepattributes RuntimeVisibleAnnotations,AnnotationDefault
