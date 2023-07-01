@@ -1,197 +1,142 @@
-# NekoX
+# CDC Connectors for Apache Flink<sup>®</sup>
 
-NekoX is an **free and open source** third-party Telegram client, based on Telegram-FOSS with features added.
+CDC Connectors for Apache Flink<sup>®</sup> is a set of source connectors for Apache Flink<sup>®</sup>, ingesting changes from different databases using change data capture (CDC).
+CDC Connectors for Apache Flink<sup>®</sup> integrates Debezium as the engine to capture data changes. So it can fully leverage the ability of Debezium. See more about what is [Debezium](https://github.com/debezium/debezium).
 
-[中文FAQ](https://github.com/NekoX-Dev/NekoX/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+This README is meant as a brief walkthrough on the core features of CDC Connectors for Apache Flink<sup>®</sup>. For a fully detailed documentation, please see [Documentation](https://ververica.github.io/flink-cdc-connectors/master/).
 
-[![Get it on F-Droid](https://i.imgur.com/HDicnzz.png)](https://f-droid.org/packages/nekox.messenger) Fdroid releases can not upgrade to other releases.
+## Supported (Tested) Databases
 
-- [Update News Telegram](https://t.me/NekogramX)
-- [GitHub Feedback](https://github.com/NekoX-Dev/NekoX/issues)
-- [Group Chat (English / Chinese)](https://t.me/NekoXChat) 
-- [Group Chat (Persian)](https://t.me/NekogramX_Persian)
-- [Group Chat (Indonesia)](https://t.me/NekoxID)
-- [Group Chat (Russian)](https://t.me/NekoXRussia)
-- [Group Chat (Hindi)](https://t.me/NekoXHindi)
-- [Group Chat (Turkish)](https://t.me/NekoXTurkish)
+| Connector                                                  | Database                                                                                                                                                                                                                                                                                                                                                                                               | Driver                    |
+|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| [mongodb-cdc](docs/content/connectors/mongodb-cdc.md)      | <li> [MongoDB](https://www.mongodb.com): 3.6, 4.x, 5.0                                                                                                                                                                                                                                                                                                                                                 | MongoDB Driver: 4.3.4     |
+| [mysql-cdc](docs/content/connectors/mysql-cdc.md)          | <li> [MySQL](https://dev.mysql.com/doc): 5.6, 5.7, 8.0.x <li> [RDS MySQL](https://www.aliyun.com/product/rds/mysql): 5.6, 5.7, 8.0.x <li> [PolarDB MySQL](https://www.aliyun.com/product/polardb): 5.6, 5.7, 8.0.x <li> [Aurora MySQL](https://aws.amazon.com/cn/rds/aurora): 5.6, 5.7, 8.0.x <li> [MariaDB](https://mariadb.org): 10.x <li> [PolarDB X](https://github.com/ApsaraDB/galaxysql): 2.0.1 | JDBC Driver: 8.0.28       |
+| [oceanbase-cdc](/docs/content/connectors/oceanbase-cdc.md) | <li> [OceanBase CE](https://open.oceanbase.com): 3.1.x, 4.x <li> [OceanBase EE](https://www.oceanbase.com/product/oceanbase): 2.x, 3.x, 4.x                                                                                                                                                                                                                                                            | OceanBase Driver: 2.4.x   |
+| [oracle-cdc](docs/content/connectors/oracle-cdc.md)        | <li> [Oracle](https://www.oracle.com/index.html): 11, 12, 19, 21                                                                                                                                                                                                                                                                                                                                       | Oracle Driver: 19.3.0.0   |
+| [postgres-cdc](docs/content/connectors/postgres-cdc.md)    | <li> [PostgreSQL](https://www.postgresql.org): 9.6, 10, 11, 12, 13, 14                                                                                                                                                                                                                                                                                                                                 | JDBC Driver: 42.5.1       |
+| [sqlserver-cdc](docs/content/connectors/sqlserver-cdc.md)  | <li> [Sqlserver](https://www.microsoft.com/sql-server): 2012, 2014, 2016, 2017, 2019                                                                                                                                                                                                                                                                                                                   | JDBC Driver: 9.4.1.jre8   |
+| [tidb-cdc](docs/content/connectors/tidb-cdc.md)            | <li> [TiDB](https://www.pingcap.com): 5.1.x, 5.2.x, 5.3.x, 5.4.x, 6.0.0                                                                                                                                                                                                                                                                                                                                | JDBC Driver: 8.0.27       |
+| [Db2-cdc](docs/content/connectors/db2-cdc.md)              | <li> [Db2](https://www.ibm.com/products/db2): 11.5                                                                                                                                                                                                                                                                                                                                                     | Db2 Driver: 11.5.0.0      |
+| [Vitess-cdc](docs/content/connectors/vitess-cdc.md)        | <li> [Vitess](https://vitess.io/): 8.0.x, 9.0.x                                                                                                                                                                                                                                                                                                                                                        | MySql JDBC Driver: 8.0.26 |
 
-## NekoX Changes
+## Features
 
-- Most of Nekogram's features
-- Unlimited login accounts
-- **Proxy**
-    - Built-in VMess, Shadowsocks, SSR, Trojan-GFW proxies support (No longer maintained)
-    - Built-in public proxy (WebSocket relay via Cloudflare CDN), [documentation and for PC](https://github.com/arm64v8a/NekoXProxy)
-    - Proxy subscription support
-    - Ipv6 MTProxy support
-    - Able to parse all proxy subscription format: SIP008, ssr, v2rayN, vmess1, shit ios app formats, clash config and more
-    - Proxies import and export, remarks, speed measurement, sorting, delete unusable nodes, etc
-    - Scan the QR code (any link, can add a proxy)
-    - The ( vmess / vmess1 / ss / ssr / trojan ) proxy link in the message can be clicked
-    - Allow auto-disabling proxy when VPN is enabled
-    - Proxy automatic switcher
-    - Don't alert "Proxy unavailable" for non-current account
-- **Stickers**
-    - Custom [Emoji packs](https://github.com/NekoX-Dev/NekoX/wiki/emoji)
-    - Add stickers without sticker pack
-    - Sticker set list backup / restore / share
-- **Internationalization**
-    - OpenCC Chinese Convert
-    - Full InstantView translation support
-    - Translation support for selected text on input and in messages
-    - Google Cloud Translate / Yandex.Translate support
-    - Force English emoji keywords to be loaded
-    - Persian calendar support
-- **Additional Options**
-    - Option to disable vibration
-    - Dialog sorting is optional "Unread and can be prioritized for reminding" etc
-    - Option to skip "regret within five seconds"
-    - Option to not send comment first when forwarding
-    - Option to use nekox chat input menu: replace record button with a menu which contains an switch to control link preview (enabled by default)
-    - Option to disable link preview by default: to prevent the server from knowing that the link is shared through Telegram.
-    - Option to ignore Android-only content restrictions (except for the Play Store version).
-    - Custom cache directory (supports external storage)
-    - Custom server (official, test DC)
-    - Option to block others from starting a secret chat with you
-    - Option to disable trending
-- **Additional Actions**
-    - Allow clicking on links in self profile
-    - Delete all messages in group
-    - Unblock all users support
-    - Login via QR code
-    - Scan and confirm the login QR code directly
-    - Allow clearing app data
-    - Proxies, groups, channels, sticker packs are able to be shared as QR codes
-    - Add "@Name" when long-pressing @user option
-    - Allow creating a group without inviting anyone
-    - Allow upgrading a group to a supergroup
-    - Mark dialogs as read using tab menu
-    - Enabled set auto delete timer option for private chats and private groups
-    - Support saving multiple selected messages to Saved Messages
-    - Support unpinning multiple selected messages
-    - View stats option for messages
-- **Optimization**
-    - Keep the original file name when downloading files
-    - View the data center you belong to when you don't have an avatar
-    - Enhanced notification service, optional version without Google Services
-    - Improved session dialog
-    - Improved link long click menu
-    - Improved hide messages from blocked users feature
-    - Don't process cleanup draft events after opening chat
-- **Others**
-    - OpenKeychain client (sign / verify / decrypt / import)
-    - Text replacer
-- **UI**
-    - Telegram X style menu for unpinning messages
-    - Built-in Material Design themes / Telegram X style icons
-- And more :)
+1. Supports reading database snapshot and continues to read transaction logs with **exactly-once processing** even failures happen.
+2. CDC connectors for DataStream API, users can consume changes on multiple databases and tables in a single job without Debezium and Kafka deployed.
+3. CDC connectors for Table/SQL API, users can use SQL DDL to create a CDC source to monitor changes on a single table.
 
-## Compilation Guide
+## Usage for Table/SQL API
 
-**NOTE: Building on Windows is, unfortunately, not supported.
-Consider using a Linux VM or dual booting.**
+We need several steps to setup a Flink cluster with the provided connector.
 
-**Important:**
+1. Setup a Flink cluster with version 1.12+ and Java 8+ installed.
+2. Download the connector SQL jars from the [Download](https://github.com/ververica/flink-cdc-connectors/releases) page (or [build yourself](#building-from-source)).
+3. Put the downloaded jars under `FLINK_HOME/lib/`.
+4. Restart the Flink cluster.
 
-0. Checkout all submodules
-```
-git submodule update --init --recursive
+The example shows how to create a MySQL CDC source in [Flink SQL Client](https://ci.apache.org/projects/flink/flink-docs-release-1.13/dev/table/sqlClient.html) and execute queries on it.
+
+```sql
+-- creates a mysql cdc table source
+CREATE TABLE mysql_binlog (
+ id INT NOT NULL,
+ name STRING,
+ description STRING,
+ weight DECIMAL(10,3)
+) WITH (
+ 'connector' = 'mysql-cdc',
+ 'hostname' = 'localhost',
+ 'port' = '3306',
+ 'username' = 'flinkuser',
+ 'password' = 'flinkpw',
+ 'database-name' = 'inventory',
+ 'table-name' = 'products'
+);
+
+-- read snapshot and binlog data from mysql, and do some transformation, and show on the client
+SELECT id, UPPER(name), description, weight FROM mysql_binlog;
 ```
 
-1. Install Android SDK and NDK (default location is $HOME/Android/SDK, otherwise you need to specify $ANDROID_HOME for it)
+## Usage for DataStream API
 
-It is recommended to use [AndroidStudio](https://developer.android.com/studio) to install.
+Include following Maven dependency (available through Maven Central):
 
-2. Install golang and yasm
-```shell
-apt install -y golang-1.16 yasm
+```
+<dependency>
+  <groupId>com.ververica</groupId>
+  <!-- add the dependency matching your database -->
+  <artifactId>flink-connector-mysql-cdc</artifactId>
+  <!-- The dependency is available only for stable releases, SNAPSHOT dependency need build by yourself. -->
+  <version>2.5-SNAPSHOT</version>
+</dependency>
 ```
 
-3. Install Rust and its stdlib for Android ABIs, and add environment variables for it.
+```java
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import com.ververica.cdc.debezium.JsonDebeziumDeserializationSchema;
+import com.ververica.cdc.connectors.mysql.source.MySqlSource;
 
-It is recommended to use the official script, otherwise you may not find rustup.
+public class MySqlSourceExample {
+  public static void main(String[] args) throws Exception {
+    MySqlSource<String> mySqlSource = MySqlSource.<String>builder()
+            .hostname("yourHostname")
+            .port(yourPort)
+            .databaseList("yourDatabaseName") // set captured database
+            .tableList("yourDatabaseName.yourTableName") // set captured table
+            .username("yourUsername")
+            .password("yourPassword")
+            .deserializer(new JsonDebeziumDeserializationSchema()) // converts SourceRecord to JSON String
+            .build();
 
-```shell
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
-echo "source \$HOME/.cargo/env" >> $HOME/.bashrc && source $HOME/.cargo/env
+    StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-rustup install $(cat ss-rust/src/main/rust/shadowsocks-rust/rust-toolchain)
-rustup default $(cat ss-rust/src/main/rust/shadowsocks-rust/rust-toolchain)
-rustup target install armv7-linux-androideabi aarch64-linux-android i686-linux-android x86_64-linux-android
+    // enable checkpoint
+    env.enableCheckpointing(3000);
+
+    env
+      .fromSource(mySqlSource, WatermarkStrategy.noWatermarks(), "MySQL Source")
+      // set 4 parallel source tasks
+      .setParallelism(4)
+      .print().setParallelism(1); // use parallelism 1 for sink to keep message ordering
+
+    env.execute("Print MySQL Snapshot + Binlog");
+  }
+}
 ```
 
-4. Build native dependencies: `./run init libs`
-5. Build external libraries and native code: `./run libs update`
-6. Fill out `TELEGRAM_APP_ID` and `TELEGRAM_APP_HASH` in `local.properties`
-7. Replace TMessagesProj/google-services.json if you want fcm to work.
-8. Replace release.keystore with yours and fill out `ALIAS_NAME`, `KEYSTORE_PASS` and `ALIAS_PASS` in `local.properties` if you want a custom sign key.
+## Building from source
 
-`./gradlew assemble<Full/Mini><Debug/Release/ReleaseNoGcm>`
+- Prerequisites:
+    - git
+    - Maven
+    - At least Java 8
 
-## FAQ
+```
+git clone https://github.com/ververica/flink-cdc-connectors.git
+cd flink-cdc-connectors
+mvn clean install -DskipTests
+```
 
-#### What is the differences between NekoX and Nekogram?
+The dependencies are now available in your local `.m2` repository.
 
-Developed by different developers, read the feature list above to understand the differences.
+## License
 
-#### What is the difference between the Full and Mini version?
+The code in this repository is licensed under the [Apache Software License 2](https://github.com/ververica/flink-cdc-connectors/blob/master/LICENSE).
 
-The full version comes with built-in proxy support for v2ray, shadowsocks, shadowsocksr, and trojan, which is usually provided to advanced users to help friends who have no computer knowledge in mainland China to bypass censorship. Don't complain about imperfect functions or ask to add other rare proxy types, you can use their clients directly.
+## Contributing
 
-#### What if I don't need a proxy?
+CDC Connectors for Apache Flink<sup>®</sup> welcomes anyone that wants to help out in any way, whether that includes reporting problems, helping with documentation, or contributing code changes to fix bugs, add tests, or implement new features. You can report problems to request features in the [GitHub Issues](https://github.com/ververica/flink-cdc-connectors/issues).
 
-Then it is recommended to use the `Mini` version.
+## Community
 
-#### What is the noGcm version?
+* [DingTalk](https://www.dingtalk.com/) Chinese User Group
 
-Google Cloud Messaging, also known as gcm / fcm, message push service by google used by original Telegram android app, it requires your device to have Google Service Framework (non-free) installed.
+  You can search the group number [**33121212**] or scan the following QR code to join in the group.
+  
+  <div align=center>
+     <img src="https://user-images.githubusercontent.com/5163645/233297896-0195d0ae-eb1c-4604-977b-1d08e424c7e7.png" width=400 />
+   </div>
 
-#### I've encountered a bug!
-
-First, make sure you have the latest version installed (check the channel, Play store versions usually have a delay).
-
-Then, if the issue appears in the official Telegram client too, please submit it to the officials, (be careful not to show NekoX in the description and screenshots, the official developers doesn't like us!).
-
-Then, please *detail* your issue, create an issue or submit it to our [group](https://t.me/NekoXChat) with #bug.
-
-If you experience a *crash*, you also need to click on the version number at the bottom of the settings and select "Enable Log" and send it to us.
-
-## Localization
-
-Is NekoX not in your language, or the translation is incorrect or incomplete? Get involved in the translations on our [Weblate](https://hosted.weblate.org/engage/nekox/).
-
-[![Translation status](https://hosted.weblate.org/widgets/nekox/-/horizontal-auto.svg)](https://hosted.weblate.org/engage/nekox/)
-
-### Adding a new language
-
-First and foremost, Android must already support the specific language and locale you want to add. We cannot work with languages that Android and the SDK do not support, the tools simply break down. Next, if you are considering adding a country-specific variant of a language (e.g. de-AT), first make sure that the main language is well maintained (e.g. de). Your contribution might be useful to more people if you contribute to the existing version of your language rather than the country-specific variant.
-
-Anyone can create a new language via Weblate.
-
-### Adding unofficial translations for Telegram
-
-Current built-in language packs:
-
-* 简体中文: [moecn](https://translations.telegram.org/moecn)
-* 正體中文: [taiwan](https://translations.telegram.org/taiwan)
-* 日本語: [ja_raw](https://translations.telegram.org/ja_raw)
-
-You can [open an issue to](https://github.com/NekoX-Dev/NekoX/issues/new?&template=language_request.md) request to amend the built-in translation.
-
-## Credits
-
-<ul>
-    <li>Telegram-FOSS: <a href="https://github.com/Telegram-FOSS-Team/Telegram-FOSS/blob/master/LICENSE">GPLv2</a></li>
-    <li>Nekogram: <a href="https://gitlab.com/Nekogram/Nekogram/-/blob/master/LICENSE">GPLv2</a></li>
-    <li>v2rayNG: <a href="https://github.com/2dust/v2rayNG/blob/master/LICENSE">GPLv3</a></li>
-    <li>AndroidLibV2rayLite: <a href="https://github.com/2dust/AndroidLibV2rayLite/blob/master/LICENSE">LGPLv3</a></li>
-    <li>shadowsocks-android: <a href="https://github.com/shadowsocks/shadowsocks-android/blob/master/LICENSE">GPLv3</a></li>
-    <li>shadowsocksRb-android: <a href="https://github.com/shadowsocksRb/shadowsocksRb-android/blob/master/LICENSE">GPLv3</a></li>
-    <li>HanLP: <a href="https://github.com/hankcs/HanLP/blob/1.x/LICENSE">Apache License 2.0</a></li>
-    <li>OpenCC: <a href="https://github.com/BYVoid/OpenCC/blob/master/LICENSE">Apache License 2.0</a></li>
-    <li>opencc-data: <a href="https://github.com/nk2028/opencc-data">Apache License 2.0</a></li>
-    <li>android-device-list: <a href="https://github.com/pbakondy/android-device-list/blob/master/LICENSE">MIT</a> </li>
-    <li>JetBrains: for allocating free open-source licences for IDEs</li>
-</ul>
-
-[<img src=".github/jetbrains-variant-3.png" width="200"/>](https://jb.gg/OpenSource)
+## Documents
+To get started, please see https://ververica.github.io/flink-cdc-connectors/
