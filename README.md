@@ -1,111 +1,279 @@
-# PojavLauncher for iOS
-[![Development build](https://github.com/PojavLauncherTeam/PojavLauncher_iOS/actions/workflows/development.yml/badge.svg?branch=main)](https://github.com/PojavLauncherTeam/PojavLauncher_iOS/actions/workflows/development.yml)
-[![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
-[![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/pojavlauncher-724163890803638273)
+<!--
 
+Copyright 2022-2023 Bytedance Ltd. and/or its affiliates.
+         
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
+    http://www.apache.org/licenses/LICENSE-2.0
 
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-->
+
+![logo](website/images/bitsail_logo.png)
+
+English | [简体中文](README_zh.md)
+
+[![Build](https://github.com/bytedance/bitsail/actions/workflows/cicd.yml/badge.svg)](https://github.com/bytedance/bitsail/actions/workflows/cicd.yml)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Join Slack](https://img.shields.io/badge/slack-%23BitSail-72eff8?logo=slack&color=5DADE2&label=Join%20Slack)](https://join.slack.com/t/bitsailworkspace/shared_invite/zt-1l1vgcnlj-gPSWqggOeRHrSO5l7na2WQ)
+[![Website](https://img.shields.io/badge/Website-%23BitSail-blue)](https://bytedance.github.io/bitsail/)
 ## Introduction
-PojavLauncher is a Minecraft: Java Edition launcher for Android, iOS, and iPadOS, based off of zhouwei's [Boardwalk](https://github.com/zhouwei/Boardwalk) project.
-* Supports most versions of Minecraft: Java Edition, from the very first beta to the newest snapshots.
-* Supports Forge, Fabric, OptiFine, and Quilt for you to customize the experience with supported mods.
-* Includes customizable on-screen controls, keyboard and mouse support, and game controller support.
-* Optimized for jailbroken and TrollStore devices to enable better capabilities.
-* Microsoft account and demo mode support for logging into Minecraft.
-* ...and much more!
+BitSail is ByteDance's open source data integration engine which is based on distributed architecture and provides high performance. It supports data synchronization between multiple heterogeneous data sources, and provides global data integration solutions in batch, streaming, and incremental scenarios. At present, it serves almost all business lines in ByteDance, such as Douyin, Toutiao, etc., and synchronizes hundreds of trillions of data every day.
 
-This repository contains the code for our iOS and iPadOS port of PojavLauncher. Looking for [Android?](https://github.com/PojavLauncherTeam/PojavLauncher)
+Official website of BitSail:  https://bytedance.github.io/bitsail/
 
-## Getting started with PojavLauncher
-The [PojavLauncher Website](https://pojavlauncherteam.github.io/INSTALL.html#ios) has extensive documentation on how to install, set up, and play! For those who wish to install quickly, here's the basics:
+## Why Do We Use BitSail
+BitSail has been widely used and supports hundreds of trillions of large traffic. At the same time, it has been verified in various scenarios such as the cloud native environment of the volcano engine and the on-premises private cloud environment.
 
-### Requirements
-At the minimum, you'll need one of the following devices on **iOS 14.0** and later:
-- iPhone 6s and later
-- iPad (5th generation) and later
-- iPad Air (2nd generation) and later
-- iPad mini (4th generation) and later
-- iPad Pro (all models)
-- iPod touch (7th generation)
+We have accumulated a lot of experience and made a number of optimizations to improve the function of data integration
 
-However, we recommend one of the following devices on **iOS 14.0** and later:
-- iPhone XS and later, excluding iPhone XR and iPhone SE (2nd generation)
-- iPad (10th generation) and later
-- iPad Air (4th generation) and later
-- iPad mini (6th generation) and later
+- Global Data Integration, covering batch, streaming and incremental scenarios
 
-Recommended devices provide a smoother and more enjoyable gameplay experience compared to other supported devices.
-- tvOS support is in development.
-- iOS 17 is not currently supported, as Apple broke every iOS app debugger outside of Xcode.
+- Distributed and cloud-native architecture, supporting horizontal scaling
 
-### Setting up to sideload
-PojavLauncher can be sideloaded in many ways. Our recommended solution is to install [TrollStore](https://github.com/opa334/TrollStore) if your iOS version supports it. Installing with TrollStore allows you to permenantly sign the application, automatically enable JIT, and increase memory limits.
+- High maturity in terms of accuracy, stability and performance
 
-If you cannot, [AltStore](https://altstore.io) and [SideStore](https://sidestore.io) are your next best options.
-- Signing services that do not use your UDID (and use distribution certificates) are not supported, as PojavLauncher requires capabilities they do not allow.
-- Only install sideloading software and PojavLauncher from trusted sources. We are not responsible for any harm caused by using unofficial software.
-- Jailbreaks also benefit from permenant signing, autoJIT, and increased memory limits, however we do not recommend them for regular use.
+- Rich basic functions, such as type conversion, dirty data processing, flow control, data lake integration, automatic parallelism calculation
+, etc.
 
-### Installing PojavLauncher
-#### Release build (TrollStore)
-1. Download an IPA of PojavLauncher in [Releases](https://github.com/PojavLauncherTeam/PojavLauncher_iOS/releases).
-2. Open the package in TrollStore using the share menu.
+- Task running status monitoring, such as traffic, QPS, dirty data, latency, etc.
 
-#### Release build (AltStore/SideStore trusted source)
-1. Add `PojavLauncher Repository` from the Trusted Sources menu.
-2. Tap `FREE` to begin installing.
+## BitSail Use Scenarios
+- Mass data synchronization in heterogeneous data sources
 
-#### Nightly builds
-*These builds can contain game-breaking bugs. Use with caution.*
-1. Download an IPA build of PojavLauncher in the [Actions tab](https://github.com/PojavLauncherTeam/PojavLauncher_iOS/actions).
-2. Open the downloaded IPA in your sideloading app to install.
+- Streaming and batch integration data processing capability
 
-### Enabling JIT
-PojavLauncher makes use of **just-in-time compilation**, or JIT, to provide usable speeds for the end user. JIT is not supported on iOS without the application being debugged, so workarounds are required to enable it. You can use this chart to determine the best solution for you and your setup.
-| Application         | AltStore | SideStore | TrollStore | JitStreamer | Jitterbug          | Jailbroken |
-|---------------------|----------|-----------|------------|-------------|--------------------|------------|
-| Requires ext-device | Yes      | No        | No         | No          | If VPN unavailable | No         |
-| Requires Wi-Fi      | Yes      | Yes       | No         | Yes         | Yes                | No         |
-| Auto enabled        | Yes(*)   | No        | Yes        | Yes         | No                 | Yes        |
+- Data lake and warehouse integration data processing capability
 
-(*) AltServer running on the local network is required.
+- High performance, high reliability data synchronization
+
+- Distributed, cloud-native architecture data integration engine
+
+## Features of BitSail
+
+- Low start-up cost and high flexibility
+
+- Stream-batch integration and Data lake-warehouse integration architecture, one framework covers almost all data synchronization scenarios
+
+- High-performance, massive data processing capabilities
+
+- DDL automatic synchronization
+
+- Type system, conversion between different data source types
+
+- Engine independent reading and writing interface, low development cost
+
+- Real-time display of task progress, under development
+
+- Real-time monitoring of task status
+
+## Architecture of BitSail
+ ![](website/images/bitsail_arch.png)
+
+ ```
+ Source[Input Sources] -> Framework[Data Transmission] -> Sink[Output Sinks]
+ ```
+The data processing pipeline is as follows. First, pull the source data through Input Sources, then process it through the intermediate framework layer, and finally write the data to the target through Output Sinks
+
+At the framework layer, we provide rich functions and take effect for all synchronization scenarios, such as dirty data collection, auto parallelism calculation, task monitoring, etc.
+
+In data synchronization scenarios, it covers batch, streaming, and incremental data synchronization
+
+In the Runtime layer, it supports multiple execution modes, such as yarn, local, and k8s is under development
+
+## Supported Connectors
+
+<table>
+  <tr>
+    <th>DataSource</th>
+    <th>Sub Modules</th>
+    <th>Reader</th>
+    <th>Writer</th>
+  </tr>
+  <tr>
+    <td>Assert</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>ClickHouse</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>Doris</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Druid</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Elasticsearch</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Fake</td>
+    <td>-</td>
+    <td>✅</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>FTP/SFTP</td>
+    <td>-</td>
+    <td>✅</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>Hadoop</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>HBase</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Hive</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Hudi</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>LocalFileSystem</td>
+    <td>-</td>
+    <td>✅</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="4">JDBC</td>
+    <td>MySQL</td>
+    <td rowspan="4">✅</td>
+    <td rowspan="4">✅</td>
+  </tr>
+  <tr>
+    <td>Oracle</td>
+  </tr>
+  <tr>
+    <td>PostgreSQL</td>
+  </tr>
+  <tr>
+    <td>SqlServer</td>
+  </tr>
+  <tr>
+    <td>Kafka</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Kudu</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>LarkSheet</td>
+    <td>-</td>
+    <td>✅</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>MongoDB</td>
+    <td>-</td>
+    <td>✅</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Print</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Redis</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>RocketMQ</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>SelectDB</td>
+    <td>-</td>
+    <td> </td>
+    <td>✅</td>
+  </tr>
+</table>
+
+Documentation for [Connectors](website/en/documents/connectors/README.md).
+
+## Community Support
+### Slack
+Join BitSail Slack channel via this [link](https://join.slack.com/t/bitsailworkspace/shared_invite/zt-1l1vgcnlj-gPSWqggOeRHrSO5l7na2WQ)
+
+### Mailing List
+Currently, BitSail community use Google Group as the mailing list provider.
+You need to subscribe to the mailing list before starting a conversation
+
+Subscribe: Email to this address `bitsail+subscribe@googlegroups.com`
+
+Start a conversation: Email to this address `bitsail@googlegroups.com`
+
+Unsubscribe: Email to this address `bitsail+unsubscribe@googlegroups.com`
+
+### WeChat Group
+Welcome to scan this QR code and to join the WeChat group chat.
+
+<img src="website/images/wechat_QR.png" alt="qr" width="100"/>
+
+## Environment Setup
+Link to [Environment Setup](website/en/documents/start/env_setup.md).
+
+## Deployment Guide
+Link to [Deployment Guide](website/en/documents/start/deployment.md).
+
+## BitSail Configuration
+Link to [Configuration Guide](website/en/documents/start/config.md).
+
+## Contributing Guide
+Link to [Contributing Guide](website/en/community/contribute.md).
 
 ## Contributors
-PojavLauncher is amazing, and surprisingly stable, and it wouldn't be this way without the commmunity that helped and contribute to the project! Some notable names:
+**Thanks all contributors**<br>
 
-@khanhduytran0 - Lead iOS port developer  
-@crystall1nedev - Lead iOS port developer  
-@artdeell  
-@Mathius-Boulay  
-@zhuowei  
-@jkcoxson   
-@Diatrus 
+<a href="https://github.com/bytedance/bitsail/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=bytedance/bitsail" />
+</a>
 
-## Third party components and their licenses
-- [Caciocavallo](https://github.com/PojavLauncherTeam/caciocavallo): [GNU GPLv2 License](https://github.com/PojavLauncherTeam/caciocavallo/blob/master/LICENSE).
-- [jsr305](https://code.google.com/p/jsr-305): [3-Clause BSD License](http://opensource.org/licenses/BSD-3-Clause).
-- [Boardwalk](https://github.com/zhuowei/Boardwalk): [Apache 2.0 License](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) 
-- [GL4ES](https://github.com/ptitSeb/gl4es) by @lunixbochs @ptitSeb: [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).
-- [Mesa 3D Graphics Library](https://gitlab.freedesktop.org/mesa/mesa): [MIT License](https://docs.mesa3d.org/license.html).
-- [MetalANGLE](https://github.com/khanhduytran0/metalangle) by @kakashidinho and ANGLE team: [BSD 2.0 License](https://github.com/kakashidinho/metalangle/blob/master/LICENSE).
-- [MoltenVK](https://github.com/KhronosGroup/MoltenVK): [Apache 2.0 License](https://github.com/KhronosGroup/MoltenVK/blob/master/LICENSE).
-- [openal-soft](https://github.com/kcat/openal-soft): [LGPLv2 License](https://github.com/kcat/openal-soft/blob/master/COPYING).
-- [Azul Zulu JDK](https://www.azul.com/downloads/?package=jdk): [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).
-- [LWJGL3](https://github.com/PojavLauncherTeam/lwjgl3): [BSD-3 License](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md).
-- [LWJGLX](https://github.com/PojavLauncherTeam/lwjglx) (LWJGL2 API compatibility layer for LWJGL3): unknown license.
-- [DBNumberedSlider](https://github.com/khanhduytran0/DBNumberedSlider): [Apache 2.0 License](https://github.com/immago/DBNumberedSlider/blob/master/LICENSE)
-- [fishhook](https://github.com/khanhduytran0/fishhook): [BSD-3 License](https://github.com/facebook/fishhook/blob/main/LICENSE).
-- [Java Native Access](https://github.com/java-native-access/jna): [Apache 2.0 License](https://github.com/java-native-access/jna/blob/master/LICENSE).
-- [shaderc](https://github.com/khanhduytran0/shaderc) (used by Vulkan rendering mods): [Apache 2.0 License](https://github.com/google/shaderc/blob/main/LICENSE).
-- [NRFileManager](https://github.com/mozilla-mobile/firefox-ios/tree/b2f89ac40835c5988a1a3eb642982544e00f0f90/ThirdParty/NRFileManager): [MPL-2.0 License](https://www.mozilla.org/en-US/MPL/2.0)
-- [AltKit](https://github.com/rileytestut/AltKit)
-- [UnzipKit](https://github.com/abbeycode/UnzipKit): [BSD-2 License](https://github.com/abbeycode/UnzipKit/blob/master/LICENSE).
-- [DyldDeNeuralyzer](https://github.com/xpn/DyldDeNeuralyzer): bypasses Library Validation for loading external runtime
-- Thanks to [MCHeads](https://mc-heads.net) for providing Minecraft avatars.
+## License
+[Apache 2.0 License](LICENSE).
 
-## Special thanks to MacStadium!
-This project is listed under the MacStadium Open Source Program, which allows all of us developers to keep on moving forward even without physical access to a Mac.
-
-![](https://user-images.githubusercontent.com/55281754/183129754-c3736bb9-d528-4af7-9351-a12b3be7549e.png)
-
-<!-- sillysock was here -->
