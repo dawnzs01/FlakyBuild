@@ -1,56 +1,27 @@
-# Eclipse project files
-.project
-.classpath
-.settings
-
-# IntelliJ IDEA project files and directories
 *.iml
-*.ipr
-*.iws
-.idea/
-
-# Build targets
-/target
-*/target
-target
-/applog
-*/applog
-applog
-
-# Mac-specific directory that no other operating system needs.
+.idea
+.gradle
+/tools
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
 .DS_Store
-
-# JVM crash logs
-hs_err_pid*.log
-
-dependency-reduced-pom.xml
-
-*/.unison.*
-
-# exclude docker-sync stuff
-.docker-sync
-*/.docker-sync
-
-# exclude vscode files
-.vscode/
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.factorypath
-
-# misc
-*classes
-*.class
-.svn
-logs/
-lib/
-applog/
-
-# Maven ignore
-.flattened-pom.xml
-
-# Polaris
-*/backup
-/backup
-backup
+/build
+/release
+/captures
+.externalNativeBuild
+*.apk
+*.exe
+.idea/caches/build_file_checksums.ser
+replay_pid11132.log
+hs_err_pid11132.log
+.idea/jarRepositories.xml
+inrt/release/output.json
+inrt/coolapk/release/output.json
+app/common/release/app-common-release.aab
+app/common/release/output-metadata.json
+*.log
+autojs/.cxx/ndk_locator_record_68547592.json
+autojs/.cxx/ndk_locator_record_68547592_key.json
+*.aab
+output-metadata.json
