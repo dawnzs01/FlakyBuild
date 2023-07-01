@@ -1,0 +1,29 @@
+name: Create Release
+on:
+  push:
+    branches: [ apple-notes-liberator ]
+
+
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+    with:
+      uploadJar: true
+  create-release:
+    needs: ci
+    runs-on: ubuntu-latest
+    name: Create release
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download release jar
+        uses: actions/download-artifact@v3
+        with:
+          name: jar
+          path: release
+      - name: Create release
+        uses: eloquent/github-release-action@v3
+        with:
+          assets: |
+            - path: release
+              name: apple-notes-liberator.jar
