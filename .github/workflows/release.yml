@@ -1,33 +1,42 @@
-name: release
-
+name: Release
 on:
   push:
-    branches: [ bytelegend ]
+    branches: [ ytvanced ]
+
+
+
+
+
 
 
 
 
 jobs:
   release:
-    runs-on: ubuntu-latest
-    if: github.repository == 'ByteLegend/ByteLegend'
+    name: Release
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          submodules: recursive
-          token: ${{ secrets.BYTELEGENDBOT_TOKEN }}
-      - name: Set up JDK 11
+          fetch-depth: 0
+      - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
-          java-version: 11
-      - name: "Release to ECR and S3"
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: release -PupdateVersions -DagreePublicBuildScanTermOfService=yes
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+      - name: Build with Gradle
         env:
-          ACCESS_KEY_ID_BEIJING: ${{ secrets.ACCESS_KEY_ID_BEIJING }}
-          SECRET_ACCESS_KEY_BEIJING: ${{ secrets.SECRET_ACCESS_KEY_BEIJING }}
-          ACCESS_KEY_ID_SEOUL: ${{ secrets.ACCESS_KEY_ID_SEOUL }}
-          SECRET_ACCESS_KEY_SEOUL: ${{ secrets.SECRET_ACCESS_KEY_SEOUL }}
-          GITHUB_TOKEN: ${{ secrets.BYTELEGENDBOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew build clean generateMeta
+      - name: Install Android build-tools
+        run: sdkmanager "build-tools;32.0.0"
+      - name: Setup semantic-release
+        run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog gradle-semantic-release-plugin -D
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release

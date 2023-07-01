@@ -1,146 +1,227 @@
-# ByteLegend - learn programming while playing a game
+# YouTube Vanced
+Another YouTube Vanced Unofficial project maintained by [Cuynu](https://github.com/cuynu)
 
-[![check](https://github.com/ByteLegend/ByteLegend/actions/workflows/check.yml/badge.svg)](https://github.com/ByteLegend/ByteLegend/actions/workflows/check.yml)
+<a href="https://github.com/cuynu/ytvanced#download">
+<img alt="YouTube Vanced logo" src="https://github.com/cuynu/archive/releases/download/archive/vanced2.jpg" width="270" height="150" />
+</a>
 
-<details>
-  <summary>简体中文</summary>
+</p>
 
-# 字节传说：玩游戏，学编程
+<p align="left">
+    <a href="https://github.com/cuynu/ytvanced/releases/latest"><img src="https://custom-icon-badges.demolab.com/github/v/release/cuynu/ytvanced?color=brightgreen&label=Latest%20release" alt="Badge"></img></a>
+    <a href="https://github.com/cuynu/ytvanced/releases/latest"><img src="https://img.shields.io/github/downloads/cuynu/ytvanced/total?label=Download" alt="Badge"></img></a>
+    <a href="https://github.com/cuynu/ytvanced/issues"><img src="https://custom-icon-badges.demolab.com/github/issues-raw/cuynu/ytvanced?logo=issue-opened&label=Issues" alt="Badge"></img></a>
 
-# 字节传说是什么
+<p align="left">
+   <img src="https://img.shields.io/github/stars/cuynu/ytvanced?style=social" alt="Badge"/>
+   <img src="https://img.shields.io/github/forks/cuynu/ytvanced?style=social" alt="Badge"/>
+</p>
 
-[字节传说](https://bytelegend.com)是一个免费、开源的多人在线RPG游戏，通过这个游戏，你可以学到现实世界里的编程技能。
+## Table of Contents (Quick navigation)
 
-![1](https://raw.githubusercontent.com/ByteLegend/ByteLegend/master/docs/images/index-page-zh.png)
+* [Credits](#credits)
+* [Features](#features)
+* [Known issues](#known-issues)
+* [Download pre-bulit apk](#download)
+* [Older version](#oldoutdated-version)
+* [Vanced for Android Head Unit Car](#for-android-car-screen-not-android-auto)
+* [Troubleshoot](#troubleshoot)
+* [Source code](#source-code)
+* [Stargazers over time](#stargazers-over-time)
 
-## 如何玩
+# Features 
 
-- 访问[字节传说](https://bytelegend.com)，点击右上角的登录按钮并使用GitHub账号登录。
-- 和其他游戏一样，玩就是了——和NPC对话，收集物品，完成任务，等等。
-- 和其他游戏不同的是，你在这个游戏中获得的是真实世界里的高薪编程技能。
+- YouTube Vanced blocks ads from YouTube and uses SponsorBlock to skip in-video sponsor segments
+- The picture-in-picture mode allows watching videos in a floating window
+- Background play allows playing video sound in background
+- Forced VP9 codec
+- Override max resolution
+- Swipe control for brightness and volume
+- Google login like the original YouTube app using MicroG
+- Dislike counter re-added using the Return YouTube Dislike database
+- Disable YouTube Shorts function
+- Enable old layout of YouTube
+- Download videos from YouTube using external downloader app
+- Custom video speed
+- Enable YouTube Premium header (not actually enable Premium features!)
+- Many more...
 
-## 为什么选择字节传说
+# Telegram channel
+Join unofficial update/news channel </p> <a href="https://telegram.me/ytvancedupdates" ><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"></a> 
 
-- 免费
-  - 是的，我们是免费的。
-- 开源
-  - 是的，我们是开源的。这意味着你在游戏里看到的任何东西都是可以修改的：游戏地图、流程、NPC对话、国际化的文本，等等。
-  - 如果您在游戏中看到任何不对的地方，请不要犹豫直接提交issues/pull requests。我们和成千上万的玩家一起感谢您的贡献。
-  - 点击[这里](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/CONTRIBUTING.md)查看如何贡献代码。
-- 好玩
-  - 因为这是一个游戏，不是啰里八嗦的说教。
-- 特别为中国玩家优化的服务器
-  - 我们有ICP备案，因此特别在国内部署了服务器和CDN。
-  - 您不需要做任何配置，我们通过基于地理位置的DNS服务自动为您分配国内服务器和CDN。
-- 国际化
-  - 从第一天起，我们就支持地球上的**所有语言**，您只需要点击[字节传说](https://bytelegend.com)右上角的切换语言按钮即可。
-  - 如前所述，你可以对[字节传说](https://bytelegend.com)中能看到的任何东西做出修改，包括修正不佳的翻译或者添加一种新语言。
-  - 点击[这里](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/i18n.md)查看如何增加一种语言或者帮助我们改进翻译的质量。  
+# Download 
 
-## 联系我们
+## Before download, you should know this project has been discontinued, [View details.](https://github.com/cuynu/ytvanced/discussions/205)
 
-您可以在[Discord](https://discord.gg/PvmqK3hF)上加入我们或者通过email联系： [contact@bytelegend.com](mailto:contact@bytelegend.com)。
+> **Warning** : Minimum required Android version : 8.0+ for version 17.41.34 and above (6 & 7 for version [17.39.35](https://github.com/cuynu/ytvanced/wiki/17.39.35-(Android-6-&-7)) or older)
 
-## 加入玩家QQ群
+> Architecture : arm64-v8a, armeabi-v7a, x86, x86_64 (Universal), click [here to download variant](https://github.com/cuynu/ytvanced/wiki/arch_split) for separate architecture
 
-我们的玩家QQ群是`788942934`，但是请注意您需要在登录游戏之后打开右下角的`关于&联系`菜单获取入群密码后方可加入。入群密码各不相同，且只能
-使用一次，请勿泄漏给他人。
+> Theme : Black, Dark and Monet theme, Monet theme only can install on Android 12 and above!
 
-![1](https://raw.githubusercontent.com/ByteLegend/ByteLegend/master/docs/images/qq-group.png)
+**Vanced MicroG : (Install it only if you install non-root variant)**
 
-## 致谢
+[Download Vanced MicroG 0.2.27.231712](https://github.com/cuynu/ytvanced/releases/download/18.01.38/Vanced.microG.0.2.27.231712.apk)
 
-没有社区和开源世界的帮助，这个游戏不可能存在。我们唯一能做的就是让它免费开源，从而使更多人受益。
+[Download Vanced MicroG 0.2.27.231612](https://github.com/cuynu/ytvanced/releases/download/18.01.38/Vanced.microG.0.2.27.231612.apk)
 
-请访问[字节传说](https://bytelegend.com)并点击右下角的`致谢`按钮查看本游戏使用的开源项目和游戏资源。
+**YouTube Vanced/YouTube Vanced+ non-root variant** : 
 
-## 贡献
+Stable version is : 18.21.34
+[(Changelogs)](https://github.com/cuynu/ytvanced/releases/tag/18.21.34)
 
-我们感谢您作出的任何贡献：
+**Video playback freeze or buffering?, see [video playback buffer fix solution and troubleshoots](https://github.com/cuynu/ytvanced#troubleshoot).**
 
-- 任何文字错误：typo、用词或者翻译不当。
-- 游戏地图错误：有问题的格子图片、错误的标注等。
-- Bugs：前端、后端以及游戏脚本。
+#### 18.21.34 IS LAST VERSION FOR ALL, UNLESS I CAN DEVELOP OWN PATCH!
 
-详情请阅读[贡献者指南](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/CONTRIBUTING.md)。
+[Download YouTube Vanced+ version 18.21.34 Black](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.v18.21.34_Black_Universal_bye.apk)
 
-## 本地启动
+[Download YouTube Vanced+ version 18.21.34 Dark](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.v18.21.34_Dark_Universal_bye.apk)
 
-请确保你的`JAVA_HOME`指向JDK 11。
+[Download YouTube Vanced+ version 18.21.34 Monet (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.v18.21.34_Monet_Universal_bye.apk)
 
-- `git clone https://github.com/ByteLegend/ByteLegend`
-- `cd ByteLegend`
-- `git submodule update --init -- game-data`
-- 运行`./gradlew bootRun`，然后访问`http://localhost:8080`
+[Download YouTube Vanced Unofficial version 18.02.33 Black hotfix](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.v18.02.33_Black_Universal_hotfix.apk)
 
-第一次运行可能要花费几分钟，因为我们需要生成所有的游戏资源。后续的启动应该只花几秒钟。
+[Download YouTube Vanced Unofficial version 18.02.33 Dark hotfix](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.v18.02.33_Dark_Universal_hotfix.apk)
 
-请注意`server` git submodule目前尚未开源，因为其中包含复杂的后端配置和敏感信息（GitHub webhook, GitHub app, k8s secrets等）。
-不过，我们在`server-opensource`中提供了一个开源版本的后端服务实现。
+[Download YouTube Vanced Unofficial version 18.02.33 Monet theme hotfix (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.v18.02.33_Monet_Universal_hotfix.apk)
 
-点击[这里](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/game-code-contributor-guide.md) 查看开发者文档。
+[Download YouTube Vanced Unofficial version 18.01.38 Black](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Black_Universal.apk)
 
-</details>
+[Download YouTube Vanced Unofficial version 18.01.38 Dark](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Dark_Universal.apk)
 
-## What is ByteLegend
+[Download YouTube Vanced Unofficial version 18.01.38 Monet theme (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Monet_Universal.apk)
 
-[ByteLegend](https://bytelegend.com) is a free, opensource MMORPG game where you acquire realworld high-paying programming skills.
+[Download YouTube Vanced Unofficial version 17.39.35 (for Android 6 & 7)](https://github.com/cuynu/ytvanced/wiki/17.39.35-(Android-6-&-7))
 
-![Index page](https://raw.githubusercontent.com/ByteLegend/ByteLegend/master/docs/images/index-page-en.png)
+[Download YouTube Vanced for Android car screen](https://github.com/cuynu/ytvanced#for-android-car-screen-not-android-auto)
 
-## How to play
+**YouTube Vanced root variant [Magisk Module]**
 
-- Go to [ByteLegend](https://bytelegend.com), click "Log in" at right-top corner, then log in with your GitHub account.
-- Like any other games, you just play the game, by talking to NPCs, collecting items, finishing the missions etc.
-- Unlike any other games, your get real, high-paid-job-ready programming skills in the real world!
-  
-## Why ByteLegend
+> **Tips**: If module script not working, try extract the base.apk or youtube.apk from the zip and install it manually, then try again.
 
-- Free
-  - Yes, it's free, as in "free beer". :-)
-- Opensource
-  - Yes, it's opensource. This means everything you see in the game is customizable: game map, story, NPC conversations, i18n texts, ...
-  - Please don't hesitate to create issues/pull requests for anything bad you see in the game. We and thousands of players appreciate your contribution very much.
-  - See [here](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/CONTRIBUTING.md) for more information on how to contribute.
-- Fun
-  - It's a game!
-- Internationalization
-  - We support **ALL** languages on this planet since day 1. You just need to click and select language on right-top corner of [ByteLegend](https://bytelegend.com).
-  - As we said above, you can make a contribution to anything you see in [ByteLegend](https://bytelegend.com), including fixing bad translations or adding more languages to the game.
-  - Check out [here](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/i18n.md) to see how to add a language or help us improve translation quality.
+Notice : Root variant does not have buffering issue, so use 18.01.38 is highly recommend!
 
-## Contact
+[Download Magisk Module YouTube Vanced 18.01.38 Black](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Black_MagiskModule.zip)
 
-Join us at [Discord](https://discord.gg/35RreUUGWt) or contact us via [contact@bytelegend.com](mailto:contact@bytelegend.com).
+[Download Magisk Module YouTube Vanced 18.01.38 Dark](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Dark_MagiskModule.zip)
 
-## Credits
+[Download Magisk Module YouTube Vanced 18.01.38 Monet (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Monet_MagiskModule.zip)
 
-This game would be impossible without the community and the opensource world, so we make it free and opensource to benefit more people.
+**YouTube Music Vanced non-root variant:**
 
-To see the software and game materials used in this game, go to the right-bottom corner of [ByteLegend](https://bytelegend.com) and click `Credits` button.
+[Download YouTube Music Vanced Unofficial version 5.39.52](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YouTube.Music.Vanced.v5.39.52_Universal.apk)
 
-## Contributing
+[Download YouTube Music Vanced Unofficial version 5.39.52 (Only armeabi-v7a,arm64-v8a)](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YouTube.Music.Vanced.v5.39.52_2arch.apk)
 
-We appreciate your contribution to anything in the game:
+**YouTube Music Vanced root variant [Magisk Module]:**
 
-- Any bad texts: typo, wording or translation.
-- Game map errors: bad tile image, incorrect marking, etc..
-- Bugs: frontend/backend/game script.
+[Download YouTube Music Vanced Unofficial version 5.39.52 Magisk Module (arm64-v8a)](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YTM.Vanced.v5.39.52_arm64-v8a_MagiskModule.zip)
 
-Please read the [contributing guide](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/CONTRIBUTING.md) before you start.
+[Download YouTube Music Vanced Unofficial version 5.39.52 Magisk Module (armeabi-v7a)](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YTM.Vanced.v5.39.52_armeabi-v7a_MagiskModule.zip)
 
-## Start locally
+[Download older version of YouTube Music Vanced](https://github.com/cuynu/ytvanced#youtube-vanced-oldoutdated-version)
 
-Please make sure your `JAVA_HOME` configured to JDK 11.
+____________________________________________________
 
-- `git clone https://github.com/ByteLegend/ByteLegend`
-- `cd ByteLegend`
-- `git submodule update --init -- game-data`
-- Run `./gradlew server-opensource:bootRun`, then access `http://localhost:8080`.
+## Old/outdated version:
 
-The first run may take minutes because all game resources need to be generated. Subsequent runs should start in seconds.
+> **Warning**: Older/outdated version may have bugs or unexpected behavior, use it as your own risk!
 
-Please note that `server` git submodule hasn't been opensource yet, as we have complex backend services/credentials there (GitHub webhook, GitHub app, k8s secrets, etc.).
-However, we do provide a opensource version of backend service in `server-opensource` module.
+[Download older version of YouTube Vanced in wiki page](https://github.com/cuynu/ytvanced/wiki/old#youtube-vanced)
 
-See [here](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/game-code-contributor-guide.md) for more details.
+[Download older version of YouTube Music Vanced in wiki page](https://github.com/cuynu/ytvanced/wiki/old#youtube-music-vanced)
+
+[Download older verson of Vanced MicroG](https://github.com/cuynu/ytvanced/wiki/MicroG)
+____________________________________________________
+
+## For Android Car screen (Not Android Auto) 
+
+Use 17.39.35 for Android Car device that run Android 6 & 7.
+
+DO NOT INSTALL ON REGULAR ANDROID DEVICE.
+
+[Download YouTube Vanced+ 18.21.34 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.AndroidCarOled_v18.21.34_bye.apk)
+
+[Download YouTube Vanced 18.02.33 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.AndroidCarOled.v18.02.33.apk)
+
+[Download YouTube Vanced 18.01.38 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.AndroidCarOled.v18.01.38.apk)
+
+[Download YouTube Vanced 17.39.35 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/17.39.35/YouTube.Vanced.AndroidCarOled_v17.39.35.apk)
+
+[Download YouTube Vanced 17.34.36 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/17.34.36/YouTube.Vanced.v17.34.36.AndroidCarOled.apk)
+____________________________________________________
+
+### Source code
+
+**Official YouTube app itself are proprietary and closed source, we can't access YouTube source code because its are private which only Google/YouTube engineer developer can see and modify it. So we can only patch and modify YouTube from published apk. Here is source code for modified classes dexs and additional modification/features:**
+
+https://github.com/cuynu/oldvanced-patches-rvx
+
+https://github.com/cuynu/oldvanced-integrations-rvx
+
+### Known issues 
+
+- Chromecast v2 casting does not works on non-root variant due to Vanced microG
+- In-app purchases can't be processed on non-root variant
+- Protobuf spoof option (buffering issue fix solution) not work for some users
+- Random crash on some Android 9,10 device using Unisoc SC9863A processsor
+- App might crash if open video description that contain YouTube link on 17.39.35 for Android 6 & 7 
+
+### Troubleshoot 
+
+> If these solution isn't fix your problem, please create issues [here.](https://github.com/cuynu/ytvanced/issues)
+
+**Video playback not working (buffer issue)**
+
+For 17.34.36/17.39.35/18.02.33/18.21.34 :
+- Enable `spoof protobuf` option on Vanced settings -> Video (If `protobuf spoof` option is enabled by default, re-enable `spoof protobuf` option. Buffering problem should fix.
+
+For older version :
+- Enable `Fix video playback buffer issue` option on YouTube Settings -> Vanced Settings -> Extended Settings and try again, if not works, install newer version.
+
+**No internet connection:**
+- Remove your account from Vanced MicroG (If have and try again)
+- Wipe Vanced MicroG & YouTube Vanced & YouTube Music Vanced app data and cache
+- Enable auto start for Vanced MicroG if you use heavy customized Android version such as  MIUI,OneUI,FlymeOS,HarmonyOS,etc
+- For Tecno user : Find and open Phone Master app, go to auto start manager, allow Vanced microG and YouTube Vanced auto start.
+
+**App not installed :**
+- Free up some storage space and try again
+- Uninstall official YouTube Vanced client downloaded from Vanced Manager or other unknown sources then try again. Reason : Mismatch signature.
+- Make sure you have downloaded Universal version of YouTube Vanced/YouTube Music Vanced.
+- Check out if old Vanced still installed in multiple user & virtual space mode
+
+**Crash when opening & MicroG does not run in background :**
+- Install or reinstall Vanced MicroG 
+- Turn off battery optimization for Vanced MicroG
+- Allow Vanced MicroG run on background or auto start (on heavy customized OS : MIUI,OneUI,FlymeOS,HarmonyOS,etc)
+- For Tecno user : Find and open Phone Master app, go to auto start manager, allow Vanced microG and YouTube Vanced auto start.
+- Wipe app data and cache
+- Reinstall YouTube Vanced client
+
+**There was a problem parsing the package:**
+- Check your Android version, Make sure your current Android version meet minimum required Android version.
+- Redownload APK file.
+
+### Installation for MIUI
+
+If you can't install YouTube Vanced in MIUI, try turn off MIUI Optimization in Developer options then try install again.
+
+
+# Credits
+
+[Team Vanced](https://github.com/TeamVanced) : Old YouTube Vanced official which is closed source
+
+[inotia00](https://github.com/inotia00) : Provide ReVanced Extended patch used to patch Unofficial YouTube Vanced builds (17.41.34-18.02.33)
+
+[ReVanced Team](https://github.com/revanced) : ReVanced Team which develop ReVanced patches from scratch.
+
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/cuynu/ytvanced.svg)](https://starchart.cc/cuynu/ytvanced)
+
+
+
+### [Go back to the top of the page](https://github.com/cuynu/ytvanced#youtube-vanced)

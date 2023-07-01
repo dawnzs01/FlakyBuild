@@ -1,0 +1,3 @@
+n
+  push:
+    branches: [ ytvanced ]
