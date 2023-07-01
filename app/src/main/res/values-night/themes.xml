@@ -1,4 +1,0 @@
-<resources>
-    <style name="Theme.MagiskModuleManager"
-        parent="Theme.MagiskModuleManager.Dark" />
-</resources>

@@ -1,1 +1,0 @@
-En modulhåndterer for Magisk fordi det offisielle støtten er trukket.

@@ -1,185 +1,150 @@
-# Androidacy Module Manager
+# Dinky
 
-### Developed by Androidacy. Find us on the web [here](https://www.androidacy.com/?utm_source=fox-readme&utm_medium=web&utm_campagin=github).
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=socialflat-square&)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Total Lines](https://img.shields.io/github/stars/DataLinkDC/dinky?style=socialflat-square&label=stars)](https://github.com/DataLinkDC/dinky/stargazers)
+[![CN doc](https://img.shields.io/badge/文档-中文版-blue.svg?style=socialflat-square&)](README_zh_CN.md)
+[![EN doc](https://img.shields.io/badge/document-English-blue.svg?style=socialflat-square&)](README.md)
 
-_If you're seeing this at the Fox2Code repo, the new repo is at [Androidacy/AndroidacyModuleManager](https://github.com/Androidacy/AndroidacyModuleManager)! The old repo may not receive consistent updates anymore!_
+[![Stargazers over time](https://starchart.cc/DataLinkDC/dinky.svg)](https://starchart.cc/DataLinkDC/dinky)
 
-## About
+## Introduction
 
-The official Magisk Manager app has dropped it's support for downloading online modules, leaving users without a way to easily search for and download them. This app was created to help users download and install modules, and manage their own modules.
+Dinky is an out of the box one-stop real-time computing platform dedicated to the construction and practice of Unified Streaming & Batch and Unified Data Lake & Data Warehouse. Based on Apache Flink, Dinky provides the ability to connect many big data frameworks including OLAP and Data Lake.
 
-**This app is not officially supported by Magisk or its developers**
+## Feature
 
-**The modules shown in this app are not affiliated with this app or Magisk**.
+Its main feature are as follows:
 
-## Features
-- Download and install modules
-- Manage your own modules
-- Search for and download modules
-- Supports custom repos
-- Separate lists of local and remote modules
-- Check for module updates automatically
-- Monet theming
-- Fully MD3 themed 
-- (Coming soon) Repo creation wizard
-- (Coming soon) Module creator
+- Immersive Flink SQL Data Development: Automatic prompt completion, syntax highlighting, statement beautification, online debugging, syntax verification, execution plan, MetaStore, lineage, version comparison, etc.
+- Support FlinkSQL multi-version development and execution modes: Local,Standalone,Yarn/Kubernetes Session,Yarn Per-Job,Yarn/Kubernetes Application.
+- Support Apache Flink ecology: Connector,FlinkCDC,Table Store,etc.
+- Support FlinkSQL syntax enhancement: Database synchronization, execution environments, global variables, statement merging, table-valued aggregate functions, load dependency, row-level permissions, etc.
+- Supports real-time warehousing and lake entry of the entire FlinkCDC database, multi-database output, and automatic table creation.
+- Support SQL job development: ClickHouse, Doris, Hive, Mysql, Oracle, Phoenix, PostgreSql, Presto, SqlServer, StarRocks, etc.
+- Support real-time online debugging preview Table, ChangeLog, statistical chart and UDF.
+- Support Flink Catalog, data source metadata online query and management.
+- Support real-time task operation and maintenance: Online and offline, job information, cluster information, job snapshot, exception information, data map, data exploration, historical version, alarm record, etc.
+- Support as multi-version FlinkSQL Server and OpenApi capability.
+- Support real-time job alarm and alarm group: DingTalk, WeChat, Feishu, E-mail, etc.
+- Support automatically managed SavePoint/CheckPoint recovery and triggering mechanisms: latest, earliest, specified, etc.
+- Support resource management: Cluster instance, cluster configuration, jar, data source, alarm group, alarm instance, document, global variable, system configuration, etc.
+- Support enterprise-level management: multi-tenant, user, role, project space.
+- More hidden features are waiting for friends to explore.
 
-## Community
+## Principle
 
-[![Telegram Group](https://img.shields.io/endpoint?color=neon&style=flat&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fandroidacy_discussions)](https://telegram.dog/androidacy_discussions)
-<a href="https://translate.nift4.org/engage/foxmmm/">
-<img src="https://translate.nift4.org/widgets/foxmmm/-/foxmmm/svg-badge.svg" alt="Translation status" />
-</a>
+![dinky_principle](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/main/dinky_principle.png)
 
-### We'd like to thank Fox2Code for his initial work on the app.
+## Run the Screenshot
 
-This app was previously known as Fox's Magisk Module Manager (FoxMMM) and may still be referred to as that. Androidacy thanks Fox2Code for their initial work on this app, and wishes him the best in his future endeavours.
+> FlinkSQL Studio
 
-## Screenshots
+![datastudio](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/datastudio.png)
 
-Main activity:
+> Grammar Check
 
-|                                  Dark theme                                   |                                   Light theme                                   |
-|:-----------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
-| [<img src="docs/screenshot-dark.jpg" width="250"/>](docs/screenshot-dark.jpg) | [<img src="docs/screenshot-light.jpg" width="250"/>](docs/screenshot-light.jpg) |
+![checksql](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/checksql.png)
 
-## Requirements
+> Version Management
 
-### Minimum / Recommended:
+![versiondiff](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/versiondiff.png)
 
-- Android 7.0+ / Android 8.0+
-- Magisk 19.0+ / Magisk 21.2+
-- An internet connection / A stable wifi connection
+> lineage
 
-Note: This app may require the use of a VPN in countries with a state wide firewall.
+![lineage](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/lineage.png)
 
-## Installation
+> BI Charts
 
-To install the app go to [our website](https://www.androidacy.com/downloads/?view=FoxMMM),
-and download and install the latest `.apk` for your architecture on your device.
+![charts](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/charts.png)
 
-## Repositories Available
+> Metadata Query
 
-#### Please note that we reserve the right to add, remove, and change default repos at any time, and the inclusion of any repo does not equate endorsement or any agreement with or of said repo.
+![metadata](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/metadata.png)
 
-The app currently use the below repos as module sources, each with their own benefits and
-drawbacks. Note that the app developers do not actively monitor any repos, and downloading or
-installing from them is at the user's own risk. Default repos can be enabled or disabled in-app.
+> Task Monitoring
 
-#### [Androidacy](https://www.androidacy.com/magisk-modules-repository/?utm_source=fox-readme&utm_medium=web&utm_campagin=github)
+![monitor](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/monitor.png)
 
-- Accepting new
-  modules [here](https://www.androidacy.com/module-repository-applications/?utm_source=fox-readme&utm_medium=web&utm_campagin=github)
-- Modules downloadable easily outside the app
-- Rigorously reviewed and tested modules
-- Officially supported by Fox's mmm
-- May show ads to help cover infrastructure costs.
-    - [Read more](https://www.androidacycom/doing-it-alone-the-what-the-how-and-the-why/?utm_source=fox-readme&utm_medium=web&utm_campagin=github)
-      | [Privacy policy](https://www.androidacy.com/privacy/?utm_source=fox-readme&utm_medium=web&utm_campagin=github)
-- Added features like module reviews, automatic VirusTotal scans, and more.
-    - Pays module developers for their work as part of the Revenue Sharing Program 
+> Job Information
 
-**Support:**
+![jobinfo](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/070/jobinfo.png)
 
-&emsp; [![Telegram Group](https://img.shields.io/endpoint?color=neon&style=flat&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fandroidacy_discussions)](https://telegram.dog/androidacy_discussions)
+## Participate in Contributions
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/DataLinkDC/dinky/pulls)
 
-#### [Magisk Alt Repo](https://github.com/Magisk-Modules-Alt-Repo)
+Welcome to join the community, build a win-win situation, please refer to the contribution process： [How to contribute](https://github.com/DataLinkDC/dinky/blob/dev/docs/docs/developer_guide/contribution/how_contribute.md).
 
-- Accepting new modules [here](https://github.com/Magisk-Modules-Alt-Repo/submission)
-- Less restrictive than the original repo
-    - May have lower quality, untested, or otherwise broken modules due to their policies or lack
-      thereof.
-- Officially supported by Fox's mmm
-- Disabled by default and no longer recommended. Kept as an alternative for those who want it
+Thank you to all the people who already contributed to Dinky!
 
-**Support:**
+[![contrib graph](https://contrib.rocks/image?repo=DataLinkDC/dinky)](https://github.com/DataLinkDC/dinky/graphs/contributors)
 
-&emsp; [![GitHub issues](https://img.shields.io/github/issues/Magisk-Modules-Alt-Repo/submission)](https://github.com/Magisk-Modules-Alt-Repo/submission/issues)
+## How to Deploy
 
-**Please do not use GitHub issues for help or questions. GitHub issues are specifically for bug
-reporting and general app feedback.**
+- The dev branch is the 0.8 reconstructed version, which is still unstable.
 
-If a module is in multiple repos, the manager will just pick the most up to date version of the
-module, if a module is in multiple repos it will just use first registered repo.
+- The 0.7 branch is the current stable version. Please use this branch for compilation and debugging.
 
-## For developers
+See [source code compilation](https://github.com/DataLinkDC/dinky/blob/dev/docs/docs/deploy_guide/compile.mdx) and [installation and deployment](https://github.com/DataLinkDC/dinky/blob/dev/docs/docs/deploy_guide/deploy.mdx) for details.
 
-The manager can read a few new meta keys to allow modules to customize their own entry
+## How to Upgrade
 
-It also use `minApi`, `maxApi` and `minMagisk` in the `module.prop` to detect compatibility  
-And support the `support` and `donate` properties to allow them to add their own support links  
-And if you want to be event fancier you can setup `config` to your own config app.  
-(Note: the manager use fallback values for some modules, see developer documentation for more info)
+Due to many functions, there are many bugs and optimization points. It is strongly recommended to use or upgrade to the latest version.
 
-It also add new ways to control the installer ui via a new `#!` command system  
-It allows module developers to craft a more customizable install experience.
+Upgrade steps:
 
-If you created and uploaded a module and it doesn't appear in your module list you can disable
-the low quality filter in the app settings after enabling developer mode. **Ideally, we recommend you to fix your module metadata rather than disabling that filter.**
+(1) Upgrade the app: Replace all dependencies of latest Dinky.
 
-For more information please check the [developer documentation](docs/DEVELOPERS.md)
+(2) Upgrade the DDL: Execute the relevant version upgrade statements in the sql/upgrade directory, and execute them in the order of the version numbers.
 
-## Help us make our app more accessible!
+## Thanks
 
-**We need your help!** The app has started lagging behind in translations, and we need your help to
-catch up! As a reminder, translations are required to be at 60% or more to be included in the app.
+Standing on the shoulders of giants, Dinky was born. For this we express our heartfelt thanks to all the open source software used and its communities! We also hope that we are not only beneficiaries of open source, but also contributors to open source. We also hope that partners who have the same enthusiasm and belief in open source will join in and contribute to open source together.
 
-### Weblate (recommended)
+A partial list of acknowledgements follows:
 
-We use Weblate for
-translations: [https://translate.nift4.org/engage/foxmmm/](https://translate.nift4.org/engage/foxmmm/)
+[Apache Flink](https://github.com/apache/flink)
 
-- You can create an account and start translating
-- You may need to check your spam folder for the confirmation email
+[FlinkCDC](https://github.com/ververica/flink-cdc-connectors)
 
-### GitHub method (advanced users)
+[Apache Flink Table Store](https://github.com/apache/flink-table-store)
 
-See [`app/src/main/res/values/strings.xml`](https://github.com/Androidacy/MagiskModuleManager/blob/master/app/src/main/res/values/strings.xml)
+[Apache Dolphinscheduler](https://github.com/apache/dolphinscheduler)
 
-If your language is right to left don't forget to set `lang_support_rtl` to `true`.
+[Apache Doris](https://github.com/apache/doris)
 
-Translators do not need to have any previous coding experience.
+[Druid](https://github.com/alibaba/druid)
 
-## Add your own repos
+[Ant-Design-Pro](https://github.com/ant-design/ant-design-pro)
 
-See [the documentation](docs/add-repo.md).
+[Mybatis Plus](https://github.com/baomidou/mybatis-plus)
 
-## Issues with a repo
+[Monaco Editor](https://github.com/Microsoft/monaco-editor)
 
-If you have a problem with a repo, please contact the repo owner **first**. If you are unable to
-reach them or they are not willing to help, you can contact us as a last resort.
+[Sa Token](https://github.com/dromara/Sa-Token)
 
-_The developers of this app are unable to help with any issues arising from use or installation of
-modules, and may be of limited help with issues arising from a specific repo._
+[SpringBoot]()
 
-Default repo owners:
+Thanks to [JetBrains](https://www.jetbrains.com/?from=dlink) for sponsoring a free open source license.
 
-- Androidacy: [Telegram](https://telegram.dog/androidacy_discussions)
-- Magisk-Modules-Alt-Repo: [GitHub](https://github.com/Magisk-Modules-Alt-Repo/submission/issues)
+[![JetBrains](https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/main/jetbrains.svg)](https://www.jetbrains.com/?from=dlink)
 
-Custom repos may have their own support channels, and we are unable to provide any support
-whatsoever for them, outside of direct implementation bugs.
+## Get Help
 
-## License
+1.Create an issue and describe it clearly.
 
-Fox's Magisk Module Manager, the icon, and names are copyright
-2021-present [Fox2Code](https://github.com/Fox2Code). The Androidacy name(s), logo, integration, and
-later portions of the code are copyright
-2022-present [Androidacy](https://www.androidacy.com/?utm_source=fox-repo&utm_medium=web). See
-[LICENSE](LICENCE) for details. Library licenses can be found in the licenses section of the app.
+2.Visit the [official website](http://www.dlink.top/#/) website to read the latest documentation manual.
 
-Modules and their files, names, and other assets are not covered by this license or other
-agreements, and are not warranted, checked, or otherwise guaranteed by the authors of this app, and may have their own licenses, agreements, and terms, of which the author(s) of this app do not check or have any responsibility for.
+3.It is recommended to scan the code to enter the DingTalk group.
 
-Some third party backend services may have additional terms, please check their
-terms of service before
-using them.
+<img src="https://raw.githubusercontent.com/DataLinkDC/dinky/dev/images/main/dinkydingding.jpg" alt="dinkydingding" style="zoom:30%;" />
 
-## EULA
+4.Enter the WeChat user community group (recommended, add WeChat `wenmo_ai` to invite into the group) and QQ user community group (**543709668**) to communicate, and apply for the remarks "Dinky + company name + position".
 
-The EULA can be found [here](https://www.androidacy.com/foxmmm-eula/). By downloading, installing,
-or using this app you agree to the supplemental terms of the EULA.
+5.Follow the WeChat public account to get the latest official articles: [Dinky Open Source](https://mmbiz.qpic.cn/mmbiz_jpg/dyicwnSlTFTp6w4PuJruFaLV6uShCJDkzqwtnbQJrQ90yKDuuIC8tyMU5DK69XZibibx7EPPBRQ3ic81se5UQYs21g/0?wx_fmt=jpeg).
 
-**IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR AN CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.**
+6.Follow bilibili UP master (Shi Wen Mo A) to get the latest video teaching.
+
+## Copyright
+
+Please refer to the [LICENSE](https://github.com/DataLinkDC/dinky/blob/dev/LICENSE) document.
+
