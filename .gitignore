@@ -1,51 +1,94 @@
-######################################################################
-# Build Tools
+# Compiled class file
+*.class
 
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
-
-target/
-!.mvn/wrapper/maven-wrapper.jar
-
-######################################################################
-# IDE
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-nbproject/private/
-build/*
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-######################################################################
-# Others
+#idea
+*.idea
+# Log file
 *.log
-*.xml.versionsBackup
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.nar
+*.ear
+*.zip
+*.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build/
+out/
+
+# Ignore Gradle properties
+gradle.properties
+
+# Eclipse
+.project
+.classpath
+.settings
+.metadata
+.properties
+bin/
+tmp/
+*.tmp
+*.bak
 *.swp
+*~.nib
+.loadpath
+.recommenders
 
-!*/build/*.java
-!*/build/*.html
-!*/build/*.xml
+# VSCode
+.vscode
 
-### JRebel ###
-rebel.xml
+# Grasscutter
+/cache
+/resources
+/logs
+/plugins
+/data
+/keys
+/language
+/languages
+/proto
 
-application-my.yaml
+/*.jar
+/*.sh
 
-/yudao-ui-app/unpackage/
+GM Handbook*.txt
+handbook.html
+
+config.json
+mitmdump.exe
+mongod.exe
+
+gacha-mapping.js
+mappings.js
+BuildConfig.java
+data/hk4e/announcement/
+
+# lombok
+/.apt_generated/
+
+# macOS
+.DS_Store
+.directory
+
+# Hotswap Agent
+hotswap-agent.properties
+
+# Debug patches
+patches/*.patch
+
+# Artifact Signatures
+*.asc
