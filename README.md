@@ -1,404 +1,82 @@
-[![Java CI](https://img.shields.io/github/actions/workflow/status/alibaba/fastjson2/ci.yaml?branch=main&logo=github&logoColor=white)](https://github.com/alibaba/fastjson2/actions/workflows/ci.yaml)
-[![Codecov](https://img.shields.io/codecov/c/github/alibaba/fastjson2/main?logo=codecov&logoColor=white)](https://codecov.io/gh/alibaba/fastjson2/branch/main)
-[![Maven Central](https://img.shields.io/maven-central/v/com.alibaba.fastjson2/fastjson2?logo=apache-maven&logoColor=white)](https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2)
-[![GitHub release](https://img.shields.io/github/release/alibaba/fastjson2)](https://github.com/alibaba/fastjson2/releases)
-[![Java support](https://img.shields.io/badge/Java-8+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
-[![License](https://img.shields.io/github/license/alibaba/fastjson2?color=4D7A97&logo=apache)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-green?label=gitpod&logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/alibaba/fastjson2)
-[![Last SNAPSHOT](https://img.shields.io/nexus/snapshots/https/oss.sonatype.org/com.alibaba.fastjson2/fastjson2?label=latest%20snapshot)](https://oss.sonatype.org/content/repositories/snapshots/com/alibaba/fastjson2/)
-[![GitHub Stars](https://img.shields.io/github/stars/alibaba/fastjson2)](https://github.com/alibaba/fastjson2/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/alibaba/fastjson2)](https://github.com/alibaba/fastjson2/fork)
-[![user repos](https://badgen.net/github/dependents-repo/alibaba/fastjson2?label=user%20repos)](https://github.com/alibaba/fastjson2/network/dependents)
-[![GitHub Contributors](https://img.shields.io/github/contributors/alibaba/fastjson2)](https://github.com/alibaba/fastjson2/graphs/contributors)
+![Iris: An open-source shaders mod compatible with OptiFine shaderpacks](docs/banner.png)
 
-##### [📖 English Documentation](README_EN.md) | 📖 中文文档
-##### 本项目的Issues会被同步沉淀至[阿里云开发者社区](https://developer.aliyun.com/ask/)
-
-# FASTJSON v2
-
-`FASTJSON 2`是一个性能极致并且简单易用的Java JSON库。
-
-- `FASTJSON 2`是`FASTJSON`项目的重要升级，和FASTJSON 1相比，性能有非常大的提升，解决了autoType功能因为兼容和白名单的安全性问题。
-- 性能极致，性能远超过其他流行JSON库，包括jackson/gson/org.json，性能数据: [https://github.com/alibaba/fastjson2/wiki/fastjson_benchmark](https://github.com/alibaba/fastjson2/wiki/fastjson_benchmark)
-- 支持JDK新特性，包括`JDK 11`/`JDK 17`，针对`compact string`优化，支持Record，支持`GraalVM Native-Image`
-- 完善的[`JSONPath`](https://alibaba.github.io/fastjson2/jsonpath_cn)支持，支持[SQL:2016](https://en.wikipedia.org/wiki/SQL:2016)的JSONPath语法
-- 支持`Android 8+`，客户端和服务器一套API
-- 支持`Kotlin` [https://alibaba.github.io/fastjson2/kotlin_cn](https://alibaba.github.io/fastjson2/kotlin_cn)
-- 支持`JSON Schema` [https://alibaba.github.io/fastjson2/json_schema_cn](https://alibaba.github.io/fastjson2/json_schema_cn)
-- 新增加支持二进制格式JSONB [https://alibaba.github.io/fastjson2/jsonb_format_cn](https://alibaba.github.io/fastjson2/jsonb_format_cn)
+# Iris
 
-![fastjson logo](https://user-images.githubusercontent.com/1063891/233821110-0c912009-4de3-4664-a27e-25274f2fa9c1.jpg)
+## Links
 
-# 1. 使用准备
+* **Visit [our website](https://irisshaders.dev) for downloads and pretty screenshots!**\
+  * **Visit [Modrinth](https://modrinth.com/shaders) to find shader packs!**
+* Visit [our Discord server](https://discord.gg/jQJnav2jPu) to chat about the mod and get support! It's also a great place to get development updates right as they're happening.
+* Visit [the developer documentation](https://github.com/IrisShaders/Iris/tree/trunk/docs/development) for information on developing, building, and contributing to Iris!
 
-## 1.1 添加依赖
-
-在`fastjson v2`中，`groupId`和`1.x`不一样，是`com.alibaba.fastjson2`：
-
-`Maven`:
-
-```xml
-<dependency>
-    <groupId>com.alibaba.fastjson2</groupId>
-    <artifactId>fastjson2</artifactId>
-    <version>2.0.34</version>
-</dependency>
-```
-
-`Gradle`:
-
-```groovy
-dependencies {
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.34'
-}
-```
-
-可以在 [maven.org](https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2) 查看最新可用的版本。
-
-## 1.2 其他模块
-
-### `Fastjson v1`兼容模块
-
-如果原来使用`fastjson 1.2.x`版本，可以使用兼容包，兼容包不能保证100%兼容，请仔细测试验证，发现问题请及时反馈。
-
-`Maven`:
-
-```xml
-<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>fastjson</artifactId>
-    <version>2.0.34</version>
-</dependency>
-```
+## FAQ
 
-`Gradle`:
+- Find answers to frequently asked questions on our [FAQ page](docs/faq.md).
+- Iris supports almost all shaderpacks, but a list of unsupported shaderpacks is available [here](docs/unsupportedshaders.md).
+- A list of unfixable limitations in Iris is available [here](docs/usage/limitations.md).
 
-```groovy
-dependencies {
-    implementation 'com.alibaba:fastjson:2.0.34'
-}
-```
+## Why did you make Iris?
 
-### `Fastjson Kotlin`集成模块
+Iris was created to fill a void that I saw in the Minecraft customization and graphical enhancement community: the lack of an open-source shaders mod that would let me load my favorite shader packs on modern versions of the game, while retaining performance and compatibility with modpacks. OptiFine, the current dominant mod for loading shader packs, has restrictive licensing that firmly stands in the way of any sort of tinkering, and is fairly notorious for having compatibility issues with the mods that I like. It's also mutually incompatible with Sodium, the best rendering optimization mod in existence by a large margin. ShadersMod was never updated past 1.12, and it lacks support for many of the many modern popular shaderpacks. So I created Iris, to try and solve these issues, and also address many other longstanding issues with shader packs.
 
-如果项目使用`Kotlin`，可以使用`fastjson-kotlin`模块，使用方式上采用`kotlin`的特性。
+I first and foremost develop Iris to meet my own needs of a performance-oriented shaders mod with good compatibility and potential for tinkering. Iris when paired with Sodium delivers great performance on my machine, finally making it fully possible for me to actually play with shaders instead of just periodically switching them on to take pretty screenshots, then switching them off once I get tired of frame drops. Of course, as it turns out, I'm far from the only person who benefits from the development of Iris, which is why I've decided to release it to the public as an open-source mod.
 
-* `Maven`:
+Canvas is another shaders mod that has already gained some traction. Its big downside for me, however, is the fact that it doesn't support the existing popular OptiFine shaderpacks that I want to use. This is because it uses a new format for shader packs that isn't compatible with the existing format, in order to achieve many of its goals for better mod integration with shaders. And while Canvas now has a few nice shaders like Lumi Lights, I still want to have the option of using existing shader packs that were designed for OptiFine. Shader packs just aren't interchangeable, just like how you cannot hand a copy of *The Last Supper* to someone who wants a copy of the *Mona Lisa*. They're both great pieces of art, but you absolutely cannot just swap one out for the other. That being said, if you're a fan of the shader packs available for Canvas, then great! Canvas and Iris are both perfectly fine ways to enjoy shaders with Minecraft.
 
-```xml
-<dependency>
-    <groupId>com.alibaba.fastjson2</groupId>
-    <artifactId>fastjson2-kotlin</artifactId>
-    <version>2.0.34</version>
-</dependency>
-```
+## Goals
 
-```xml
-<dependency>
-    <groupId>org.jetbrains.kotlin</groupId>
-    <artifactId>kotlin-stdlib</artifactId>
-    <version>${kotlin-version}</version>
-</dependency>
+These are the goals of Iris. Iris hasn't fully achieved all these goals, however we are getting close.
 
-<dependency>
-    <groupId>org.jetbrains.kotlin</groupId>
-    <artifactId>kotlin-reflect</artifactId>
-    <version>${kotlin-version}</version>
-</dependency>
-```
+* **Performance.** Iris should fully utilize your graphics card when paired with optimization mods like Sodium.
+* **Correctness.** Iris should try to be as issueless as possible in its implementation.
+* **Mod compatibility.** Iris should make a best effort to be compatible with modded environments.
+* **Backwards compatibility.** All existing ShadersMod / OptiFine shader packs should just work on Iris, without any modifications required.
+* **Features for shader pack developers.** Once Iris has full support for existing features of the shader pipeline and is reasonably bug free, I wish to expand the horizons of what's possible to do with Minecraft shader packs through the addition of new features to the shader pipeline. Unlimited color buffers, direct voxel data access, and fancy debug HUDs are some examples of features that I'd like to add in the future.
+* **A well-organized codebase.** I'd like for working with Iris code to be a pleasant experience overall.
 
-* `Kotlin Gradle`:
 
-```kotlin
-dependencies {
-    implementation("com.alibaba.fastjson2:fastjson2-kotlin:2.0.34")
-}
-```
+## What's the current state of development?
 
-```kotlin
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlin_version")
-}
-```
+Iris has public releases for 1.18.2, 1.19.2, 1.19.3, and 1.19.4 that work with the official releases of Sodium. Iris is generally usable on most shader packs, and most shader packs are being designed with Iris support in mind.
 
-### `Fastjson Extension`扩展模块
+However, Iris is still not complete software. Performance can be improved, and more features are being added for shader developers. There are also some minor missing features from OptiFine that make the implementation incomplete.
 
-如果项目使用`SpringFramework`等框架，可以使用`fastjson-extension`模块，使用方式参考 [SpringFramework Support](docs/spring_support_cn.md)。
+## How can I help?
 
-`Maven`:
+* The Iris Discord server is looking for people willing to provide support and moderate the server! Go to #applications on our server if you'd like to apply.
+* Code review on open PRs is appreciated! This helps get important issues with PRs resolved before I give them a look.
+* Code contributions through PRs are also welcome! If you're working on a large / significant feature it's usually a good idea to talk about your plans beforehand, to make sure that work isn't wasted.
 
-```xml
-<dependency>
-    <groupId>com.alibaba.fastjson2</groupId>
-    <artifactId>fastjson2-extension-spring5</artifactId>
-    <version>2.0.34</version>
-</dependency>
-```
+## But where's the Forge version?
 
-```xml
-<dependency>
-    <groupId>com.alibaba.fastjson2</groupId>
-    <artifactId>fastjson2-extension-spring6</artifactId>
-    <version>2.0.34</version>
-</dependency>
-```
+Iris doesn't support Forge. This is for a few reasons:
 
-`Gradle`:
+* My time is limited, and properly supporting all the mods available for Forge (as well as Forge itself) is a huge amount of work. When people ask for Forge support, they aren't asking just for Iris to run on Forge, they are also asking for it to be compatible out of the box with their kitchen sink modpack that contains over 300 mods. As a result, properly supporting Forge would require me to divert large amounts of precious time into fixing tedious compatibility issues and bugs, time that could instead be spent making the Fabric version of Iris better.
+* The Forge toolchain isn't really designed to play nice with mods like Iris that need to make many patches to the game code. It's possible, but Fabric & Quilt are just *better* for mods like Iris. It's no coincidence that the emergence of Fabric and the initial emergence of OptiFine replacements happened at around the same time.
+* Sodium, which Iris depends on to achieve its great performance, has no official Forge version. It's a long story, but in short: the lead developers of Forge were incredibly hostile to JellySquid when she developed for Forge, and since then have made no credible attempts to repair relations or even admit wrongdoing.
 
-```groovy
-dependencies {
-    implementation 'com.alibaba.fastjson2:fastjson2-extension-spring5:2.0.34'
-}
-```
+Some users have already ported Iris to Forge, however these ports generally come with mod compatibility issues and outdated updates.
+The license of Iris does permit others to legally port Iris to Forge, and we are not strictly opposed to the existence of an Iris Forge port created by others. However, what we are opposed to is someone doing a bare-minimum port of Iris to Forge, releasing it to the public, and then abandoning it or poorly maintaining it while compatibility issues and bug reports accumulate. When that happens, not only does that hurt the reputation of Iris, but we also ultimately get flooded by users wanting support with a low-effort Forge port that we didn't even make.
 
+So, if you want to distribute a Forge port of Iris, we'd prefer if you let us know. Please don't just name your port "Iris Forge," "Iris for Forge," or "Iris Forge Port" either. Be original, and don't just hijack our name, unless we've given you permission to use one of those kinds of names. If a well-qualified group of people willing to maintain a Forge port of Iris does appear, then a name like "Iris Forge" might be appropriate - otherwise, it probably isn't appropriate.
 
-```groovy
-dependencies {
-    implementation 'com.alibaba.fastjson2:fastjson2-extension-spring6:2.0.34'
-}
-```
+## Credits
 
-# 2. 简单使用
+* **TheOnlyThing and Vaerian**, for creating the excellent logo
+* **Mumfrey**, for creating the Mixin bytecode patching system used by Iris and Sodium internally
+* **The Fabric and Quilt projects**, for enabling the existence of mods like Iris that make many patches to the game
+* **JellySquid**, for creating Sodium, the best rendering optimization mod for Minecraft that currently exists, and for making it open-source
+* **All past, present, and future contributors to Iris**, for helping the project move along
+* **Dr. Rubisco**, for maintaining the website
+* **The Iris support and moderation team**, for handling user support requests and allowing me to focus on developing Iris
+* **daxnitro, karyonix, and sp614x**, for creating and maintaining the current shaders mods
 
-在`fastjson v2`中，`package`和`1.x`不一样，是`com.alibaba.fastjson2`。如果你之前用的是`fastjson1`，大多数情况直接更包名就即可。
+## License
 
-### 2.1 将`JSON`解析为`JSONObject`
+All code in this (Iris) repository is completely free and open source, and you are free to read, distribute, and modify the code as long as you abide by the (fairly reasonable) terms of the [GNU LGPLv3 license](https://github.com/IrisShaders/Iris/blob/master/LICENSE).
 
-`Java`:
+Dependencies may not be under an applicable license: See the [Incompatible Dependencies](https://github.com/IrisShaders/Iris/blob/master/LICENSE-DEPENDENCIES) page for more information.
 
-```java
-String text = "...";
-JSONObject data = JSON.parseObject(text);
+You are not allowed to redistribute Iris commerically or behind a paywall, unless you get a commercial license for GLSL Transformer. See above for more information.
 
-byte[] bytes = ...;
-JSONObject data = JSON.parseObject(bytes);
-```
-
-`Kotlin`:
-
-```kotlin
-import com.alibaba.fastjson2.*
-
-val text = ... // String
-val data = text.parseObject()
-
-val bytes = ... // ByteArray
-val data = bytes.parseObject() // JSONObject
-```
-
-### 2.2 将`JSON`解析为`JSONArray`
-
-`Java`:
-
-```java
-String text = "...";
-JSONArray data = JSON.parseArray(text);
-```
-
-`Kotlin`:
-
-```kotlin
-import com.alibaba.fastjson2.*
-
-val text = ... // String
-val data = text.parseArray() // JSONArray
-```
-
-### 2.3 将`JSON`解析为`Java`对象
-
-`Java`:
-
-```java
-String text = "...";
-User data = JSON.parseObject(text, User.class);
-```
-
-`Kotlin`:
-
-```kotlin
-import com.alibaba.fastjson2.*
-
-val text = ... // String
-val data = text.to<User>() // User
-val data = text.parseObject<User>() // User
-```
-
-### 2.4 将`Java`对象序列化为`JSON`
-
-`Java`:
-
-```java
-Object data = "...";
-String text = JSON.toJSONString(data);
-byte[] text = JSON.toJSONBytes(data);
-```
-
-`Kotlin`:
-
-```kotlin
-import com.alibaba.fastjson2.*
-
-val data = ... // Any
-val text = text.toJSONString() // String
-val bytes = text.toJSONByteArray() // ByteArray
-```
-
-### 2.5 使用`JSONObject`、`JSONArray`
-
-#### 2.5.1 获取简单属性
-
-```java
-String text = "{\"id\": 2,\"name\": \"fastjson2\"}";
-JSONObject obj = JSON.parseObject(text);
-
-int id = obj.getIntValue("id");
-String name = obj.getString("name");
-```
-
-```java
-String text = "[2, \"fastjson2\"]";
-JSONArray array = JSON.parseArray(text);
-
-int id = array.getIntValue(0);
-String name = array.getString(1);
-```
-
-#### 2.5.2 读取`JavaBean`
-
-`Java`:
-
-```java
-JSONArray array = ...
-JSONObject obj = ...
-
-User user = array.getObject(0, User.class);
-User user = obj.getObject("key", User.class);
-```
-
-`Kotlin`:
-
-```kotlin
-val array = ... // JSONArray
-val obj = ... // JSONObject
-
-val user = array.to<User>(0)
-val user = obj.to<User>("key")
-```
-
-#### 2.5.3 转为`JavaBean`
-
-`Java`:
-
-```java
-JSONArray array = ...
-JSONObject obj = ...
-
-User user = obj.toJavaObject(User.class);
-List<User> users = array.toJavaList(User.class);
-```
-
-`Kotlin`:
-
-```kotlin
-val array = ... // JSONArray
-val obj = ... // JSONObject
-
-val user = obj.to<User>() // User
-val users = array.toList<User>() // List<User>
-```
-
-### 2.6 将`JavaBean`对象序列化为`JSON`
-
-`Java`:
-
-```java
-class User {
-    public int id;
-    public String name;
-}
-
-User user = new User();
-user.id = 2;
-user.name = "FastJson2";
-
-String text = JSON.toJSONString(user);
-byte[] bytes = JSON.toJSONBytes(user);
-```
-
-`Kotlin`:
-
-```kotlin
-class User(
-    var id: Int,
-    var name: String
-)
-
-val user = User()
-user.id = 2
-user.name = "FastJson2"
-
-val text = user.toJSONString() // String
-val bytes = user.toJSONByteArray() // ByteArray
-```
-
-序列化结果:
-
-```json
-{
-    "id"   : 2,
-    "name" : "FastJson2"
-}
-```
-
-# 3. 进阶使用
-
-### 3.1 使用`JSONB`
-
-#### 3.1.1 将`JavaBean`对象序列化`JSONB`
-
-```java
-User user = ...;
-byte[] bytes = JSONB.toBytes(user);
-byte[] bytes = JSONB.toBytes(user, JSONWriter.Feature.BeanToArray);
-```
-
-#### 3.1.2 将`JSONB`数据解析为`JavaBean`
-
-```java
-byte[] bytes = ...
-User user = JSONB.parseObject(bytes, User.class);
-User user = JSONB.parseObject(bytes, User.class, JSONReader.Feature.SupportBeanArrayMapping);
-```
-
-### 3.2 使用`JSONPath`
-
-#### 3.2.1 使用`JSONPath`读取部分数据
-
-```java
-String text = ...;
-JSONPath path = JSONPath.of("$.id"); // 缓存起来重复使用能提升性能
-
-JSONReader parser = JSONReader.of(text);
-Object result = path.extract(parser);
-```
-
-#### 3.2.2 使用`JSONPath`读取部分`byte[]`的数据
-
-```java
-byte[] bytes = ...;
-JSONPath path = JSONPath.of("$.id"); // 缓存起来重复使用能提升性能
-
-JSONReader parser = JSONReader.of(bytes);
-Object result = path.extract(parser);
-```
-
-#### 3.2.3 使用`JSONPath`读取部分`byte[]`的数据
-
-```java
-byte[] bytes = ...;
-JSONPath path = JSONPath.of("$.id"); // 缓存起来重复使用能提升性能
-
-JSONReader parser = JSONReader.ofJSONB(bytes); // 注意这里使用ofJSONB方法
-Object result = path.extract(parser);
-```
+Though it's not legally required, I'd appreciate it if you could ask before hosting your own public downloads for compiled versions of Iris. Though if you want to add the mod to a site like MCBBS, that's fine, no need to ask me.
