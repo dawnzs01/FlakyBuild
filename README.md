@@ -1,82 +1,137 @@
+<h1 align="center">
+    Corona-Warn-App Verification Server
+</h1>
+
 <p align="center">
-  <img width="80px" src="https://raw.githubusercontent.com/SonicCloudOrg/sonic-server/main/logo.png">
-</p>
-<p align="center">🎉Agent of Sonic Cloud Real Machine Platform</p>
-<p align="center">
-  <span>English |</span>
-  <a href="https://github.com/SonicCloudOrg/sonic-agent/blob/main/README_CN.md">  
-     简体中文
-  </a>
-</p>
-<p align="center">
-  <a href="#">  
-    <img src="https://img.shields.io/github/v/release/SonicCloudOrg/sonic-agent?include_prereleases">
-  </a>
-  <a href="#">  
-    <img src="https://img.shields.io/badge/platform-windows|macosx|linux-success">
-  </a>
-</p>
-<p align="center">
-  <a href="#">  
-    <img src="https://img.shields.io/github/commit-activity/m/SonicCloudOrg/sonic-agent">
-  </a>
-  <a href="#">  
-    <img src="https://img.shields.io/github/downloads/SonicCloudOrg/sonic-agent/total">
-  </a>
-  <a href="https://github.com/SonicCloudOrg/sonic-server/blob/main/LICENSE">  
-    <img src="https://img.shields.io/github/license/SonicCloudOrg/sonic-server?color=green&label=license&logo=license&logoColor=green">
-  </a>
+    <a href="https://github.com/corona-warn-app/cwa-verification-server/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/corona-warn-app/cwa-verification-server?style=flat"></a>
+    <a href="https://github.com/corona-warn-app/cwa-verification-server/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-verification-server?style=flat"></a>
+    <a href="https://github.com/corona-warn-app/cwa-verification-server/blob/master/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=flat"></a>
 </p>
 
-### Official Website
+<p align="center">
+  <a href="#development">Development</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#support-and-feedback">Support</a> •
+  <a href="#how-to-contribute">Contribute</a> •
+  <a href="#contributors">Contributors</a> •
+  <a href="#repositories">Repositories</a> •
+  <a href="#licensing">Licensing</a>
+</p>
 
-[Sonic Official Website](https://sonic-cloud.cn)
+The goal of this project is to develop the official Corona-Warn-App for Germany based on the exposure notification API from [Apple](https://www.apple.com/covid19/contacttracing/) and [Google](https://www.google.com/covid19/exposurenotifications/). The apps (for both iOS and Android) use Bluetooth technology to exchange anonymous encrypted data with other mobile phones (on which the app is also installed) in the vicinity of an app user's phone. The data is stored locally on each user's device, preventing authorities or other parties from accessing or controlling the data. This repository contains the **verification service** for the Corona-Warn-App.
 
-## Background
+## Status
+![ci](https://github.com/corona-warn-app/cwa-verification-server/workflows/ci/badge.svg)
+[![quality gate](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=alert_status)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
+[![coverage](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=coverage)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
+[![bugs](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=bugs)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
 
-#### What is sonic ?
+## About this component
 
-> Sonic is a platform that integrates remote control debugging and automated testing of mobile devices, and strives to
-> create a better use experience for global developers and test engineers.
->
->If you want to participate, welcome to join us! 💪
->
->If you want to support, you can give me a star. ⭐
+In the world of the Corona Warn App the Verification Server helps validating whether upload requests from the mobile App are valid or not. The parts of the verification component cooperate in the following manner:
 
-## Deploy
+- The Verification Server of the Corona Warn App (repository: cwa-verification-server) helps validating whether upload requests from the mobile App are valid or not.
+- The Verification Portal of the Corona Warn App (repository: cwa-verification-portal) allows hotline employees to generate teleTANs which are used by users of the mobile App to upload their diagnostic keys.
+- The Verification Identity and Access of the Corona Warn App (repository: cwa-verification-iam) ensures that only authorized health personnel get access to the Verification Portal.
+- The Test Result Server of the Corona Warn App (repository: cwa-testresult-server) receives the results from laboratories and delivers these results to the app via the verification-server.
 
-[Look Here!](https://sonic-cloud.cn/deploy/agent-deploy.html)
+## Architecture overview
+You can find an architectural overview of the component in the [solution architecture document](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md).  
+This component of the Corona-Warn-App whereas named **verification process** provides indeed two functionalities:  
+1. prove that a pretended positive case is indeed positive  
+2. provide the result of a COVID-19 test  
 
-## Package
+To achieve this, the verification service gets the result of COVID-19 tests from LIS (**L**abor **I**nformation **S**ystem) which delivers test results to it. The complete process is described in [cwa-documentation/Solution Architecture](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md) to which you may refer for detailed information about the workflow.
 
-[Look Here!](https://sonic-cloud.cn/contribute?tag=con-agent)
+The software stack of the verification server is based on [Spring Boot](https://spring.io/projects/spring-boot), currently with an in-memory H2 database. As the persistence relies on [Liquibase](https://www.liquibase.org).
 
-## Sponsors
+## Development
+This component can be locally build in order to test the functionality of the interfaces and verify the concepts it is built upon.  
 
-Thank you to all our sponsors!
+There are two ways to build:
+ - [Maven](https:///maven.apache.org) build - to run this component as spring application on your local machine
+ - [Docker](https://www.docker.com) build - to run it as docker container build from the provided docker build [file](https://github.com/corona-warn-app/cwa-verification-server/blob/master/Dockerfile)
 
-[<img src="https://ceshiren.com/uploads/default/original/3X/7/0/70299922296e93e2dcab223153a928c4bfb27df9.jpeg" alt="霍格沃兹测试开发学社" width="500">](https://qrcode.testing-studio.com/f?from=sonic&url=https://ceshiren.com)
+### Prerequisites
+ - [Open JDK 11](https://openjdk.java.net)  
+ - [Maven](https://maven.apache.org)
+ - *(optional)*: [Docker](https://www.docker.com)  
 
-> [霍格沃兹测试开发学社](https://qrcode.testing-studio.com/f?from=sonic&url=https://ceshiren.com)
-> 是业界领先的测试开发技术高端教育品牌，隶属于[测吧（北京）科技有限公司](http://qrcode.testing-studio.com/f?from=sonic&url=https://www.testing-studio.com)
-> 。学院课程由一线大厂测试经理与资深测试开发专家参与研发，实战驱动。课程涵盖 web/app
->
-自动化测试、接口测试、性能测试、安全测试、持续集成/持续交付/DevOps，测试左移&右移、精准测试、测试平台开发、测试管理等内容，帮助测试工程师实现测试开发技术转型。通过优秀的学社制度（奖学金、内推返学费、行业竞赛等多种方式）来实现学员、学社及用人企业的三方共赢。[进入测试开发技术能力测评!](https://qrcode.testing-studio.com/f?from=sonic&url=https://ceshiren.com/t/topic/14940)
+### Build
+Whether you cloned or downloaded the 'zipped' sources you will either find the sources in the chosen checkout-directory or get a zip file with the source code, which you can expand to a folder of your choice.
 
-## LICENSE
+In either case open a terminal pointing to the directory you put the sources in. The local build process is described afterwards depending on the way you choose.
 
-[License](LICENSE)
+#### Maven based build
+This is the recommended way for taking part in the development.  
+Please check, whether following prerequisites are installed on your machine:
+- [Open JDK 11](https://openjdk.java.net) or a similar JDK 11 compatible VM  
+- [Maven](https://maven.apache.org)
 
-- Binary files in the mini folder are from [minicap](https://github.com/openstf/minicap)
-  license: [Apache 2.0 License](licenses/LICENSE.minicap)
-- sonic-android-scrcpy.jar in the plugins folder is from sonic-android-scrcpy fork
-  from [scrcpy](https://github.com/Genymobile/scrcpy) license: [Apache 2.0 License](licenses/LICENSE.scrcpy)
-- sonic-appium-uiautomator2-server*.apk in the plugins folder are from sonic-appium-uiautomator2-server fork
-  from [appium-uiautomator2-server](https://github.com/appium/appium-uiautomator2-server)
-  license: [Apache 2.0 License](licenses/LICENSE.appium-uiautomator2-server)
-- sonic-go-mitmproxy in the plugins folder is from sonic-go-mitmproxy fork
-  from [go-mitmproxy](https://github.com/lqqyt2423/go-mitmproxy) license: [MIT License](licenses/LICENSE.go-mitmproxy)
-- WebDriverAgent is from sonic-ios-wda fork from [WebDriverAgent](https://github.com/appium/WebDriverAgent)
-  license: [BSD License](licenses/LICENSE.WebDriverAgent)
-- Poco-SDK is from sonic-sdk-poco fork from [Poco-SDK](https://github.com/AirtestProject/Poco-SDK)
-  license: [Apache 2.0 License](licenses/LICENSE.Poco-SDK)
+You can then open a terminal pointing to the root directory of the verification server and do the following:
+
+    mvn package
+    java -jar target/cwa-verification-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=local                               
+
+The verification server will start up and run locally on your machine available on port 8080.
+
+#### Docker based build  
+We recommend that you first check to ensure that [Docker](https://www.docker.com) is installed on your machine.
+
+On the command line do the following:
+```bash
+docker build -f|--file <path to dockerfile>  -t <imagename>  <path-to-verificationserver-root>
+docker run -p 127.0.0.1:8080:8080/tcp -it <imagename>
+```
+or simply  
+```bash
+docker build --pull --rm -f "Dockerfile" -t cwa-verificationserver "."
+docker run -p 127.0.0.1:8080:8080/tcp -it cwa-verificationserver
+```
+if you are in the root of the checked out repository.  
+The docker image will then run on your local machine on port 8080 assuming you configured docker for shared network mode.
+
+#### API documentation  
+Along with the application there comes a [swagger2](https://swagger.io) API documentation, which you can access in your web browser when the verification server applications runs:
+
+    <base-url>/api/swagger
+
+Which results in the following URL on your local machine:
+http://localhost:8080/api/swagger
+
+#### Remarks
+This repository contains files which support our CI/CD pipeline and will be removed without further notice  
+ - DockerfileCi - used for the GitHub build chain
+ - Jenkinsfile - used for Telekom internal SBS (**S**oftware**B**uild**S**ervice)
+
+## Documentation  
+The full documentation for the Corona-Warn-App can be found in the [cwa-documentation](https://github.com/corona-warn-app/cwa-documentation) repository. The documentation repository contains technical documents, architecture information, and white papers related to this implementation.
+
+## Support and feedback
+The following channels are available for discussions, feedback, and support requests:
+
+| Type                     | Channel                                                |
+| ------------------------ | ------------------------------------------------------ |
+| **General Discussion**   | <a href="https://github.com/corona-warn-app/cwa-documentation/issues/new/choose" title="General Discussion"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-documentation/question.svg?style=flat-square"></a> </a>   |
+| **Concept Feedback**    | <a href="https://github.com/corona-warn-app/cwa-documentation/issues/new/choose" title="Open Concept Feedback"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-documentation/architecture.svg?style=flat-square"></a>  |
+| **Verification server issues**    | <a href="https://github.com/corona-warn-app/cwa-verification-server/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-verification-server?style=flat"></a>  |
+| **Other requests**    | <a href="mailto:opensource@telekom.de" title="Email CWA Team"><img src="https://img.shields.io/badge/email-CWA%20team-green?logo=mail.ru&style=flat-square&logoColor=white"></a>   |
+
+## How to contribute  
+Contribution and feedback is encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](./CONTRIBUTING.md). By participating in this project, you agree to abide by its [Code of Conduct](./CODE_OF_CONDUCT.md) at all times.
+
+## Contributors  
+The German government has asked SAP AG and Deutsche Telekom AG to develop the Corona-Warn-App for Germany as open source software. Deutsche Telekom is providing the network and mobile technology and will operate and run the backend for the app in a safe, scalable and stable manner. SAP is responsible for the app development, its framework and the underlying platform. Therefore, development teams of SAP and Deutsche Telekom are contributing to this project. At the same time our commitment to open source means that we are enabling -in fact encouraging- all interested parties to contribute and become part of its developer community.
+
+## Repositories
+
+A list of all public repositories from the Corona-Warn-App can be found [here](https://github.com/corona-warn-app/cwa-documentation/blob/master/README.md#repositories).
+
+## Licensing
+Copyright (c) 2020-2023 Deutsche Telekom AG.
+
+Licensed under the **Apache License, Version 2.0** (the "License"); you may not use this file except in compliance with the License.
+
+You may obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the [LICENSE](./LICENSE) for the specific language governing permissions and limitations under the License.

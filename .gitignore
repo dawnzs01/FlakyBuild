@@ -1,13 +1,35 @@
-/.idea/
-/test-output/
-/target/
-/.gradle/
-/logs/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
-*/.DS_Store
-.DS_Store
-.sib/
-/webview/
-/plugins/sonic-go-mitmproxy*
-/plugins/sonic-ios-bridge*
-/plugins/sonic-android-supply*
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+nbactions.txt
+nbactions.xml
+
+### VS Code ###
+.vscode/
+
+/nb-configuration.xml
+/nbproject/
