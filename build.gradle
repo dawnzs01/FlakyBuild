@@ -1,0 +1,30 @@
+buildscript {
+    //注意:加上这句,Config中关于Gradle的统一设置才能生效
+    apply from: "config.gradle"
+    repositories {
+        maven { url = "http://maven.aliyun.com/nexus/content/groups/public/" }
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        // ButterKnife
+        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
+        // Needed for gRPC
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url = "http://maven.aliyun.com/nexus/content/groups/public/" }
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

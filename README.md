@@ -1,199 +1,76 @@
-<img src="doc/assets/img/logo-small.png">
+# OBAndroid
 
-#### **[Quickstart](#quickstart)** • **[Examples](#the-demo)** • **[Landscape](#landscape-of-central-platform)** • **[Chat with us](https://gitter.im/cp-ddd-framework/community)**
 
-[![Mavenn Central](https://img.shields.io/maven-central/v/io.github.dddplus/dddplus.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:io.github.dddplus)
-![Requirement](https://img.shields.io/badge/JDK-8+-blue.svg)
-[![CI](https://github.com/funkygao/cp-ddd-framework/workflows/CI/badge.svg?branch=master)](https://github.com/funkygao/cp-ddd-framework/actions?query=branch%3Amaster+workflow%3ACI)
-[![Code Quality: Java](https://img.shields.io/lgtm/grade/java/g/funkygao/cp-ddd-framework.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/funkygao/cp-ddd-framework/context:java)
-[![Maintainability](https://api.codeclimate.com/v1/badges/84b05607593179e62374/maintainability)](https://codeclimate.com/github/funkygao/cp-ddd-framework/maintainability)
-[![Coverage Status](https://img.shields.io/codecov/c/github/funkygao/cp-ddd-framework.svg)](https://codecov.io/gh/funkygao/cp-ddd-framework)
+OBAndroid is a self-custodial [OmniBOLT](https://github.com/omnilaboratory/obd) Lightning wallet for android devices. It provides a platform for simple, instantaneous Bitcoin/Omnilayer asset payments. OBAndroid is now in developer beta, and will be in public beta in Nov/Dec 2022, available on Android only.  
 
-[![Mentioned in Awesome DDD](https://awesome.re/mentioned-badge.svg)](https://github.com/heynickc/awesome-ddd#jvm)
-[![Javadoc](https://img.shields.io/badge/javadoc-Reference-blue.svg)](https://funkygao.github.io/cp-ddd-framework/doc/apidocs/)
-[![TODO](https://badgen.net/https/api.tickgit.com/badgen/github.com/funkygao/cp-ddd-framework?label=todos)](https://www.tickgit.com/browse?repo=github.com/funkygao/cp-ddd-framework)
-[![Gitter chat](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/cp-ddd-framework/community)
+<p align="center">
+  <img width="500" alt="obwallet screenshots" src="https://github.com/omnilaboratory/obd/blob/master/docs/prototype/obwalletscreenshots.png">
+</p>
 
-<details>
-<summary><b>Table of content</b></summary>
+## Features
 
-## Table of content
-   * [What is DDDplus](#what-is-dddplus)
-      * [Current status](#current-status)
-      * [Quickstart](#quickstart)
-      * [Features](#features)
-      * [Modules](#modules)
-      * [Key abstractions](#key-abstractions)
-   * [Using DDDplus](#using-dddplus)
-      * [Maven](#maven)
-      * [Gradle](#gradle)
-      * [Building from Source](#building-from-source)
-      * [With dddplus-archetype](#with-dddplus-archetype)
-   * [Demos](#demos)
-   * [DDDplus Ecosystem](#dddplus-ecosystem)
-   * [FAQ](#faq)
-   * [Landscape of Central Platform](#landscape-of-central-platform)
-   * [Contribution](#contribution)
-   * [Release Planning](#release-planning)
-   * [Licensing](#licensing)
+- [x] Self-custodial
+- [x] obd-lnd on Android
+- [x] Mainnet, testnet, regtest
+- [x] Bitcoin/Omnilayer wallet(layer 1): store, pay, receive, backup, restore
+- [x] Bitcoin lightning payment(layer 2)  
+- [x] Omnilayer assets lightning payment(layer 2), e.g. OMNI, USDT, etc  
+- [x] Manage local and remote nodes
+- [x] Create and fund channels by any Omnilayer assets
+- [x] Management liquidity   
+- [x] Create, manage invoices( [OmniBOLT 7](https://github.com/omnilaboratory/OmniBOLT-spec/blob/master/OmniBOLT-07-Hierarchical-Deterministic-(HD)-wallet.md#invoice-encoding))  
+- [x] Pay invoices ( [OmniBOLT 7](https://github.com/omnilaboratory/OmniBOLT-spec/blob/master/OmniBOLT-07-Hierarchical-Deterministic-(HD)-wallet.md#invoice-encoding)) 
+- [x] Cloud and local backup for channels  
 
-</details>
+- [ ] DEX in wallet
+- [ ] Marketplace
+- [ ] Trading histroy 
 
-----
+## System Requirements
 
-## What is DDDplus?
+* Android 8+ 64bits
 
-DDDplus, originally cp-ddd-framework(cp means Central Platform：中台), is a lightweight flexible development framework for complex business architecture.
+## Compatibility
 
-Originated from business，serve business！
+#### Bitcoin and Omnilayer addresses
 
-一套轻量级业务中台开发框架，以[DDD](https://github.com/funkygao/cp-ddd-framework/wiki/DDD)思想为本，致力于业务资产的可沉淀可传承，全方位解决复杂业务场景的扩展问题，实现[中台核心要素](https://github.com/funkygao/cp-ddd-framework/wiki/%E4%B8%9A%E5%8A%A1%E4%B8%AD%E5%8F%B0%E7%9A%84%E6%A0%B8%E5%BF%83%E8%A6%81%E7%B4%A0)，赋能中台建设。
+For onchain transactions, the receiving address of omni assets must be `p2pkh`, that is:  
+1. Mainnet: address starting with `1`  
+2. Testnet: address starting with 'm' or 'n'  
+3. Regtest: address starting with 'm' or 'n'  
 
-融合了前中台复杂生态协作方法论，充分考虑组织架构、技术债、学习门槛、可演进性、运维成本和风险而开发的，解决[业务开发痛点](https://github.com/funkygao/cp-ddd-framework/wiki/Why-we-need-this-framework)，是中台架构的顶层设计和完整解决方案。
+BECH32 addresses(pubkey hash or script hash starting with `bc1` on mainnet, `tb1` on testnet) are not supported[(OmniBOLT 2)](https://github.com/omnilaboratory/OmniBOLT-spec/blob/master/OmniBOLT-02-peer-protocol.md#omni-addresses), and sending omni assets to BECH32 addresses will result in permanent fund loss. OBAndroid protects users from such dangerous operations.
 
-从业务中来，到业务中去！
+Bitcoin transactions support all legal BTC receiving addresses, including bech32 (starting with bc) addresses.
 
-### Current status
+#### Invoice format
 
-Used for several complex critical central platform projects in production environment.
+The currently supported invoice format is [OmniBOLT 7](https://github.com/omnilaboratory/OmniBOLT-spec/blob/master/OmniBOLT-07-Hierarchical-Deterministic-(HD)-wallet.md#invoice-encoding).  
 
-多个复杂的中台核心项目生产环境下使用。
+BOLT 11 lacks asset awareness and is not supported by OBAndroid at this stage, paying BTC/satoshi to a BOLT 11 invoice will cause the payment to fail.  
 
-### Quickstart
+#### obd and lnd versions
 
-Please visit [Quickstart](https://github.com/funkygao/cp-ddd-framework/wiki).
+Full OBAndroid functionality depends on running a certain version of obd on mobile devices. View the table below to ensure that you run the correct version of obd with the relevant OBAndroid release. The bundled version will always come with the correct, compatible versioning. To connect to remote obd nodes, you should check the compatibility dependency below. 
 
-### Features
 
-- Based on DDD, but beyond DDD
-- 14 key business abstractions cover most complex business scenarios
-- Full layered extensibility
-- Empowers InnerSource
-- Provide maven archetype that generates a DDDplus integrated project
-- Total solutions oriented
-- Above all, DDDplus is simple enough
 
-核心特性：
-- 以DDD架构思想为本，面向复杂业务场景架构设计
-   - 通过代码框架提供足够的约束和指导，让DDD不再仅停留在思想层面
-   - 只引入弱依赖的 [IDomainModel](dddplus-spec/src/main/java/io/github/dddplus/model/IDomainModel.java)，弱化其他概念，降低DDD上手门槛
-   - 提供 [dddplus-archetype](https://github.com/dddplus/dddplus-archetype)，直接生成最佳实践的脚手架代码
-   - DDD分层架构上增加一层`spec layer`，解决前中台协同问题
-- 14个核心业务抽象(常用9个)，勾勒出业务中台骨架
-   - 中台架构的顶层设计
-   - less is more，以不变应万变
-   - 研发专注于填空式开发，只需解决局部问题
-- 全方位解决业务的不确定性
-   - 业务逻辑、流程、逻辑模型、数据模型的扩展、多态体系
-   - 框架本身支持再次扩展，便于被集成
-   - 抽象出独立的业务扩展包，框架底层通过`ClassLoader`机制进行业务隔离，支持热更新
-   - 平台容器包、平台业务包与业务扩展包：分离
-- 支撑中台战略的复杂生态协作
-   - 前台、中台解耦
-   - 业务隔离，不同前台间业务隔离，前台和中台隔离
-   - 支持稳态、敏态双速应用
-   - InnerSource，生态合作协同机制
-- 完整的解决方案
-   - 业务能力演化，业务测试，最佳实践，架构持续防腐，重构的导流验证，绞杀者落地方案等
-   - 提供 [一套完整的Demo工程](https://github.com/dddplus/dddplus-demo)
-   - 演示 [5分钟搭建一个仓储中台WMS](https://github.com/dddplus/dddplus-archetype-demo)，手把手真实场景教学
-- DDDplus框架，始终保持简单性
-
-### Modules
+| OBWallet		|	obd				  |	 
+| -------- 	  |	----------- |	 
+| v0.1-alpha	|	to be added	|	 
+ 
+## Token/Bitcoin Testnet Faucets  
 
 ```
-dddplus
-   ├── dddplus-spec    - Specification of DDDplus
-   ├── dddplus-runtime - Runtime implementation
-   ├── dddplus-plugin  - Plugin jar hot reloading mechanism
-   ├── dddplus-unit    - Extra unit test facilities
-   ├── dddplus-enforce - Enforce expected evolvement of the business architecture
-   └── dddplus-test    - Fully covered unit test cases
+token faucet: http://43.138.107.248:9090/swaggerTool/?surl=http://192.144.199.67:8090/openapiv2/foo.swagger.json#/tools/tools_SendCoin
+token-property id: 2147485160  
+
+btc-testnet faucet: https://testnet-faucet.com/btc-testnet/ 
 ```
 
-### Key abstractions
 
-![](http://www.plantuml.com/plantuml/svg/XLHDRnCn4BtxLunwQW-fn3LQLIq4f1v0LSiTJUn9rehNZkpPfAZqlpDE7DWF8tAAvxrvyxttYJ5otpcLTjRlCM87BNfpZ9QPF6pG9HfWgKKJZjPlc-PekVrnVj_T0SUUbACD0mU8Tjio61j9imrUgJtg7Mu9dbo_jHwQvek8aRYzAP2VzKnnWvhWyT6GPyi_doa5Tw0unLUXG-i_lpBv9D9JE0V0jQEf_Mimv1wOKRSTUHR_cJ1fQ-Y5QPykg7QO4ZmX2ycFB94zHVMkb0zCSDK6XaWkeCcnhm0JVFkWIh6tj_cXPZMyK3nOJHL0Sb23_x04UYNTCrtV3DdFT0Yx773eLZ6AVmpEhMK68l2dHT3yMYnc3PtXiu5KUddASEz4HmBKyKZUK1GOruaZQeRIQjBVgHDVfh_GHqmb_uUrTH9SpImYkIM-f2rngvIDZUc_94CRxDs8DijjD8FLQYNljyJ8LhzB46-AMXqygGaqsR4SkXWAFksrC3fatLwNAPqwUwFKU8FAeEhBKy3ghinLAfrNqmqfYkDQwgpgtStBF7FBdVqJBaTN6M4ZiBHzN7QnLHAhbRa45pGoLVYBnTqbjoMiPPnrIiclKDIdu5au525BeybNbSzZY6ItixsGb2egyjR1a2fnotCUkDWh-vgr1_rOGeYwfSHHG7LFtkHl_cy0)
+## Get Help
+If you encounter any issues please report the issue in this [repo](https://github.com/omnilaboratory/OBAndroid/issues) or on [discord](http://discord.gg/2QYqzSMZuy) with screenshots and how to reproduce the bug/error.
 
-## Using DDDplus
-
-已推送至[Maven中央库](https://search.maven.org/search?q=g:io.github.dddplus)，可直接引入。
-
-### Maven
-
-```xml
-<dependency>
-    <groupId>io.github.dddplus</groupId>
-    <artifactId>dddplus-runtime</artifactId>
-    <version>1.1.2</version>
-</dependency>
-```
-
-### Gradle
-
-```groovy
-dependencies {
-    ...
-    compile 'io.github.dddplus:dddplus-runtime:1.1.2'
-}
-```
-
-### Building from Source
-
-``` bash
-git clone https://github.com/funkygao/cp-ddd-framework.git
-cd cp-ddd-framework/
-mvn install
-```
-
-### With dddplus-archetype
-
-``` bash
-mvn archetype:generate                          \
-    -DarchetypeGroupId=io.github.dddplus        \
-    -DarchetypeArtifactId=dddplus-archetype     \
-    -DarchetypeVersion=1.1.1                    \
-    -DgroupId=com.foo -DartifactId=demo         \
-    -Dpackage=com.foo -Dversion=1.0.0-SNAPSHOT  \
-    -B
-```
-
-For more, please visit [dddplus-archetype project](https://github.com/dddplus/dddplus-archetype).
-
-## Demos
-
-- [使用DDDplus搭建`订单履约中台`的例子](https://github.com/dddplus/dddplus-demo)
-- [使用DDDplus，5分钟搭建一个仓储中台WMS](https://github.com/dddplus/dddplus-archetype-demo)
-
-## DDDplus Ecosystem
-
-- [dddplus-archetype](https://github.com/dddplus/dddplus-archetype)
-   - a maven archetype that generates a complete DDDplus driven project skeleton
-- [dddplus-visualizer](https://github.com/dddplus/vis)
-   - a CLI parsing DDDplus driven project Java AST with ANTLR and visualize your business artifacts
-
-## FAQ
-
-Please visit [FAQ](https://github.com/funkygao/cp-ddd-framework/wiki/FAQ).
-
-## Landscape of Central Platform
-
-业务中台建设全景图。
-
-![](doc/assets/img/landscape.png)
-
-## Contribution
-
-You are welcome to contribute to the project with pull requests on GitHub.
-
-If you find a bug or want to request a feature, please use the [Issue Tracker](https://github.com/funkygao/cp-ddd-framework/issues).
-
-For any question, you can use [Gitter Chat](https://gitter.im/cp-ddd-framework/community) to ask.
-
-## Release Planning
-
-Interested on when the next release is coming? Check our [release planning](https://github.com/funkygao/cp-ddd-framework/wiki/Release-Planning) document for details.
-
-## Licensing
-
-DDDplus is licensed under the Apache License, Version 2.0 (the "License"); you may not use this project except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
+## License
+This project is open source under the MIT license, which means you have full access to the source code and can modify it to fit your own needs. See LICENSE for more information.
