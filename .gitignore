@@ -1,46 +1,15 @@
-# Created by .ignore support plugin (hsz.mobi)
+.gradle
+/local.properties
 .DS_Store
-node_modules
-node/
-/dist
-
-# local env files
-.env.local
-.env.*.local
-.history/
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories and files
-.idea/*
-!.idea/icon.png
-**/*.iml
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.mvn
-!.mvn/maven-wrapper.properties
-
-src/main/resources/static
-src/main/resources/templates
-target
-.settings
-.project
-.classpath
-.jython_cache
-qywx.json
-
-
-### VS Code ###
-.vscode/
-**/src/test/
-### flattened
-.flattened-pom.xml
-
-.node/
+/build
+/src
+*.iml
+.idea
+/captures
+release
+google-services.json
+java_pid10692.hprof
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+/app/.cxx/
+/Commend.md
