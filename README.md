@@ -1,227 +1,225 @@
-# YouTube Vanced
-Another YouTube Vanced Unofficial project maintained by [Cuynu](https://github.com/cuynu)
 
-<a href="https://github.com/cuynu/ytvanced#download">
-<img alt="YouTube Vanced logo" src="https://github.com/cuynu/archive/releases/download/archive/vanced2.jpg" width="270" height="150" />
+<h1 align="center">Exadel CompreFace is a leading free and open-source face recognition system</h1>
+
+<p align="center">
+    <a target="_blank" href="https://exadel.com/solutions/compreface/">
+  <img src="https://user-images.githubusercontent.com/3736126/147130206-17234c47-8d40-490f-8d93-57014fa6d87e.png" alt="angular-logo" height="250px"/>
+ </a>
+  <br>
+  <i>Exadel CompreFace is a free and open-source face recognition service that can be easily integrated into any system without prior machine learning skills. 
+     CompreFace provides REST API for face recognition, face verification, face detection, landmark detection, mask detection, head pose detection, age, and gender recognition and is easily deployed with docker.
+     </i>
+  <br>
+</p>
+
+<p align="center">
+  <a href="https://exadel.com/solutions/compreface/"><strong>Official website</strong></a>
+  <br>
+</p>
+
+<p align="center">
+  <a href="#contributing">Contributing</a>
+  ·
+  <a href="https://github.com/exadel-inc/CompreFace/issues">Submit an Issue</a>
+  ·
+  <a href="https://exadel.com/news/tag/compreface/">Blog</a>
+  ·
+  <a href="https://gitter.im/CompreFace/community">Community chat</a>
+  <br>
+</p>
+
+<p align="center">
+  <a href="https://www.apache.org/licenses/LICENSE-2.0">
+    <img src="https://img.shields.io/github/license/exadel-inc/CompreFace" alt="GitHub license" />
+  </a>&nbsp;
+  <a href="https://github.com/exadel-inc/CompreFace/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/exadel-inc/CompreFace" alt="GitHub contributors" />
+  </a>&nbsp;
+</p>
+<hr>
+
+# Table Of Contents
+
+  * [Overview](#overview)
+  * [Screenshots](#screenshots)
+  * [Video tutorials](#videos)
+  * [News and updates](#news-and-updates)
+  * [Features](#features)
+  * [Functionalities](#functionalities)
+  * [Getting Started with CompreFace](#getting-started-with-compreface)
+  * [CompreFace SDKs](#compreface-sdks)
+  * [Documentation](/docs)
+    * [How to Use CompreFace](/docs/How-to-Use-CompreFace.md)
+    * [Face Services and Plugins](/docs/Face-services-and-plugins.md)
+    * [Rest API Description](/docs/Rest-API-description.md)
+    * [Postman documentation and collection](https://documenter.getpostman.com/view/17578263/UUxzAnde)
+    * [Face Recognition Similarity Threshold](/docs/Face-Recognition-Similarity-Threshold.md)
+    * [Configuration](/docs/Configuration.md)
+    * [Architecture and Scalability](/docs/Architecture-and-scalability.md)
+    * [Custom Builds](/docs/Custom-builds.md)
+    * [Face data migration](/docs/Face-data-migration.md)
+    * [User Roles System](/docs/User-Roles-System.md)
+    * [Face Mask Detection Plugin](/docs/Mask-detection-plugin.md)
+    * [Kubernetes configuration](https://github.com/exadel-inc/compreface-kubernetes)
+    * [Gathering Anonymous Statistics](/docs/Gathering-anonymous-statistics.md)
+    * [Installation Options](/docs/Installation-options.md)
+  * [Contributing](#contributing)
+  * [License info](#license-info)
+
+# Overview
+
+Exadel CompreFace is a free and open-source face recognition GitHub project. 
+Essentially, it is a docker-based application that can be used as a standalone server or deployed in the cloud. 
+You don’t need prior machine learning skills to set up and use CompreFace.
+
+The system provides REST API for face recognition, face verification, face detection, landmark detection, mask detection, head pose detection, age, and gender recognition. 
+The solution also features a role management system that allows you to easily control who has access to your Face Recognition Services.
+
+CompreFace is delivered as a docker-compose config and supports different models that work on CPU and GPU. 
+Our solution is based on state-of-the-art methods and libraries like FaceNet and InsightFace.
+
+# Screenshots
+
+<p align="center">
+<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/7b86a96f-844b-4e4b-9456-c53f6e45f305" 
+alt="compreface-recognition-page" width=390px style="padding: 0px 10px 0px 0px;">
+<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/51efb9d0-70cc-4902-bc3f-fd85de004b67" 
+alt="compreface-dashboard-page" width="390px" style="padding: 0px 0px 0px 10px;">
+</p>
+
+<details>
+  <summary> <b>More Screenshots</b> </summary>
+  <!-- have to be followed by an empty line! -->
+
+<p align="center">
+<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/3ae0ce68-588b-4370-8eaf-32668c96fa63"
+alt="compreface-verification-page" width=390px style="padding: 0px 10px 0px 0px;">
+<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/9246702d-1c9b-4435-8098-89e0fb616b0d"
+alt="compreface-detection-page" width="390px" style="padding: 0px 0px 0px 10px;">
+</p>
+<p align="center">
+<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/3a5787e6-9a85-4852-92dc-a82fe7ef8f7c" 
+alt="compreface-services-page" width=390px style="padding: 0px 10px 0px 0px;">
+<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/e7fd0258-2643-4cec-809d-988502eb857f" 
+alt="compreface-wizzard-page" width="390px" style="padding: 0px 0px 0px 10px;">
+</p>
+
+</details>
+
+# Videos
+
+<p align="center">
+<a target="_blank" href="https://www.youtube.com/watch?v=LS4sVTnI-gI">
+     <img src="https://user-images.githubusercontent.com/3736126/241272669-8609463b-8b22-4ae7-bf21-36761f00734b.jpg" 
+        alt="CompreFace Face Detection Demo" width=390px style="padding: 0px 10px 0px 0px;">
 </a>
-
+<a target="_blank" href="https://www.youtube.com/watch?v=jkiA3S-LYSk">
+     <img src="https://user-images.githubusercontent.com/3736126/242002411-3c06d3f7-c0ac-49f8-ac79-42bd8c431570.png" 
+        alt="CompreFace Appery.io Demo" width=390px style="padding: 0px 10px 0px 0px;">
+</a>
 </p>
 
-<p align="left">
-    <a href="https://github.com/cuynu/ytvanced/releases/latest"><img src="https://custom-icon-badges.demolab.com/github/v/release/cuynu/ytvanced?color=brightgreen&label=Latest%20release" alt="Badge"></img></a>
-    <a href="https://github.com/cuynu/ytvanced/releases/latest"><img src="https://img.shields.io/github/downloads/cuynu/ytvanced/total?label=Download" alt="Badge"></img></a>
-    <a href="https://github.com/cuynu/ytvanced/issues"><img src="https://custom-icon-badges.demolab.com/github/issues-raw/cuynu/ytvanced?logo=issue-opened&label=Issues" alt="Badge"></img></a>
+<details>
+  <summary> <b>More Videos</b> </summary>
+  <!-- have to be followed by an empty line! -->
 
-<p align="left">
-   <img src="https://img.shields.io/github/stars/cuynu/ytvanced?style=social" alt="Badge"/>
-   <img src="https://img.shields.io/github/forks/cuynu/ytvanced?style=social" alt="Badge"/>
+<p align="center">
+<a target="_blank" href="https://www.youtube.com/watch?v=cF3P7bTJXY0">
+     <img src="https://user-images.githubusercontent.com/3736126/241274256-0dc6d8a0-91d5-42c4-b029-200b72bb169b.jpg" 
+        alt="CompreFace .NET SDK Demo" width=390px style="padding: 0px 10px 0px 0px;">
+</a>
+<a target="_blank" href="https://www.youtube.com/watch?v=9mQULPrTVP4">
+     <img src="https://user-images.githubusercontent.com/3736126/241274522-a152221f-e382-416c-9a71-f7694e73cf3e.jpg" 
+        alt="CompreFace JavaScript SDK Demo" width=390px style="padding: 0px 10px 0px 0px;">
+</a>
 </p>
 
-## Table of Contents (Quick navigation)
+</details>
 
-* [Credits](#credits)
-* [Features](#features)
-* [Known issues](#known-issues)
-* [Download pre-bulit apk](#download)
-* [Older version](#oldoutdated-version)
-* [Vanced for Android Head Unit Car](#for-android-car-screen-not-android-auto)
-* [Troubleshoot](#troubleshoot)
-* [Source code](#source-code)
-* [Stargazers over time](#stargazers-over-time)
+# News and updates
 
-# Features 
+[Subscribe](https://info.exadel.com/en/compreface-news-and-updates) to CompreFace News and Updates to never miss new features and product improvements.
 
-- YouTube Vanced blocks ads from YouTube and uses SponsorBlock to skip in-video sponsor segments
-- The picture-in-picture mode allows watching videos in a floating window
-- Background play allows playing video sound in background
-- Forced VP9 codec
-- Override max resolution
-- Swipe control for brightness and volume
-- Google login like the original YouTube app using MicroG
-- Dislike counter re-added using the Return YouTube Dislike database
-- Disable YouTube Shorts function
-- Enable old layout of YouTube
-- Download videos from YouTube using external downloader app
-- Custom video speed
-- Enable YouTube Premium header (not actually enable Premium features!)
-- Many more...
+# Features
+The system can accurately identify people even when it has only “seen” their photo once. Technology-wise, CompreFace has several advantages over similar free face recognition solutions. CompreFace:
 
-# Telegram channel
-Join unofficial update/news channel </p> <a href="https://telegram.me/ytvancedupdates" ><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"></a> 
+- Supports both CPU and GPU and is easy to scale up
+- Is open source and self-hosted, which gives you additional guarantees for data security
+- Can be deployed either in the cloud or on premises
+- Can be set up and used without machine learning expertise
+- Uses FaceNet and InsightFace libraries, which use state-of-the-art face recognition methods
+- Starts quickly with just one docker command
 
-# Download 
+# Functionalities
 
-## Before download, you should know this project has been discontinued, [View details.](https://github.com/cuynu/ytvanced/discussions/205)
+- Supports many face recognition services:
+  - [face detection](/docs/Face-services-and-plugins.md#face-detection)
+  - [face recognition](/docs/Face-services-and-plugins.md#face-recognition)
+  - [face verification](/docs/Face-services-and-plugins.md#face-verification)
+  - [landmark detection plugin](/docs/Face-services-and-plugins.md#face-plugins)
+  - [age recognition plugin](/docs/Face-services-and-plugins.md#face-plugins)
+  - [gender recognition plugin](/docs/Face-services-and-plugins.md#face-plugins)
+  - [face mask detection plugin](/docs/Face-services-and-plugins.md#face-plugins)
+  - [head pose plugin](/docs/Face-services-and-plugins.md#face-plugins)
+- Use the CompreFace UI panel for convenient user roles and access management
 
-> **Warning** : Minimum required Android version : 8.0+ for version 17.41.34 and above (6 & 7 for version [17.39.35](https://github.com/cuynu/ytvanced/wiki/17.39.35-(Android-6-&-7)) or older)
+# Getting Started with CompreFace
 
-> Architecture : arm64-v8a, armeabi-v7a, x86, x86_64 (Universal), click [here to download variant](https://github.com/cuynu/ytvanced/wiki/arch_split) for separate architecture
+### Requirements
 
-> Theme : Black, Dark and Monet theme, Monet theme only can install on Android 12 and above!
+1. Docker and Docker compose (or Docker Desktop)
+2. CompreFace could be run on most modern computers with [x86 processor](https://en.wikipedia.org/wiki/X86) and [AVX support](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions).
+   To check AVX support on Linux run `lscpu | grep avx` command
 
-**Vanced MicroG : (Install it only if you install non-root variant)**
+### To get started (Linux, MacOS):
 
-[Download Vanced MicroG 0.2.27.231712](https://github.com/cuynu/ytvanced/releases/download/18.01.38/Vanced.microG.0.2.27.231712.apk)
+1. Install Docker and Docker Compose
+2. Download the archive from our latest release: https://github.com/exadel-inc/CompreFace/releases
+3. Unzip the archive
+4. Open the terminal in this folder and run this command: `docker-compose up -d`
+5. Open the service in your browser: http://localhost:8000/login
 
-[Download Vanced MicroG 0.2.27.231612](https://github.com/cuynu/ytvanced/releases/download/18.01.38/Vanced.microG.0.2.27.231612.apk)
+### To get started (Windows):
 
-**YouTube Vanced/YouTube Vanced+ non-root variant** : 
+1. Install Docker Desktop
+2. Download the archive from our latest release: https://github.com/exadel-inc/CompreFace/releases
+3. Unzip the archive
+4. Run Docker
+5. Open Command prompt (write `cmd` in windows search bar)
+6. Open folder where you extracted zip archive (Write `cd path_of_the_folder`, press enter).
+7. Run command: `docker-compose up -d`
+8. Open http://localhost:8000/login
 
-Stable version is : 18.21.34
-[(Changelogs)](https://github.com/cuynu/ytvanced/releases/tag/18.21.34)
+### Getting started for contributors
 
-**Video playback freeze or buffering?, see [video playback buffer fix solution and troubleshoots](https://github.com/cuynu/ytvanced#troubleshoot).**
+Follow this [link](/dev)
 
-#### 18.21.34 IS LAST VERSION FOR ALL, UNLESS I CAN DEVELOP OWN PATCH!
+# CompreFace SDKs
 
-[Download YouTube Vanced+ version 18.21.34 Black](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.v18.21.34_Black_Universal_bye.apk)
+| SDK        | Repository                                              |
+|------------|---------------------------------------------------------|
+| JavaScript | https://github.com/exadel-inc/compreface-javascript-sdk |
+| Python     | https://github.com/exadel-inc/compreface-python-sdk     |
+| .NET       | https://github.com/exadel-inc/compreface-net-sdk        |
 
-[Download YouTube Vanced+ version 18.21.34 Dark](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.v18.21.34_Dark_Universal_bye.apk)
+# Documentation
 
-[Download YouTube Vanced+ version 18.21.34 Monet (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.v18.21.34_Monet_Universal_bye.apk)
+More documentation is available [here](/docs)
 
-[Download YouTube Vanced Unofficial version 18.02.33 Black hotfix](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.v18.02.33_Black_Universal_hotfix.apk)
+# Contributing
 
-[Download YouTube Vanced Unofficial version 18.02.33 Dark hotfix](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.v18.02.33_Dark_Universal_hotfix.apk)
+We want to improve our open-source face recognition solution, so your contributions are welcome and greatly appreciated. 
 
-[Download YouTube Vanced Unofficial version 18.02.33 Monet theme hotfix (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.v18.02.33_Monet_Universal_hotfix.apk)
+* Just use CompreFace and [report](https://github.com/exadel-inc/CompreFace/issues) ideas and bugs on GitHub
+* Share knowledge and experience via posting guides and articles, or just improve our [documentation](https://github.com/exadel-inc/CompreFace/tree/master/docs)
+* Create [SDKs](https://github.com/topics/compreface-sdk) for favorite programming language, we will add it to our documentation
+* Integrate CompreFace support to other platforms like [Home Assistant](https://www.home-assistant.io/) or [DreamFactory](https://www.dreamfactory.com/), we will add it to our documentation
+* [Contribute](CONTRIBUTING.md) code
+* Add [plugin](/docs/Face-services-and-plugins.md#face-plugins) to face services
+* And last, but not least, you can just give a star to our free facial recognition system on GitHub
 
-[Download YouTube Vanced Unofficial version 18.01.38 Black](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Black_Universal.apk)
+For more information, visit our [contributing](CONTRIBUTING.md) guide, or create a [discussion](https://github.com/exadel-inc/CompreFace/discussions).
 
-[Download YouTube Vanced Unofficial version 18.01.38 Dark](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Dark_Universal.apk)
+# License info 
 
-[Download YouTube Vanced Unofficial version 18.01.38 Monet theme (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Monet_Universal.apk)
-
-[Download YouTube Vanced Unofficial version 17.39.35 (for Android 6 & 7)](https://github.com/cuynu/ytvanced/wiki/17.39.35-(Android-6-&-7))
-
-[Download YouTube Vanced for Android car screen](https://github.com/cuynu/ytvanced#for-android-car-screen-not-android-auto)
-
-**YouTube Vanced root variant [Magisk Module]**
-
-> **Tips**: If module script not working, try extract the base.apk or youtube.apk from the zip and install it manually, then try again.
-
-Notice : Root variant does not have buffering issue, so use 18.01.38 is highly recommend!
-
-[Download Magisk Module YouTube Vanced 18.01.38 Black](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Black_MagiskModule.zip)
-
-[Download Magisk Module YouTube Vanced 18.01.38 Dark](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Dark_MagiskModule.zip)
-
-[Download Magisk Module YouTube Vanced 18.01.38 Monet (Android 12+ only)](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.v18.01.38_Monet_MagiskModule.zip)
-
-**YouTube Music Vanced non-root variant:**
-
-[Download YouTube Music Vanced Unofficial version 5.39.52](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YouTube.Music.Vanced.v5.39.52_Universal.apk)
-
-[Download YouTube Music Vanced Unofficial version 5.39.52 (Only armeabi-v7a,arm64-v8a)](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YouTube.Music.Vanced.v5.39.52_2arch.apk)
-
-**YouTube Music Vanced root variant [Magisk Module]:**
-
-[Download YouTube Music Vanced Unofficial version 5.39.52 Magisk Module (arm64-v8a)](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YTM.Vanced.v5.39.52_arm64-v8a_MagiskModule.zip)
-
-[Download YouTube Music Vanced Unofficial version 5.39.52 Magisk Module (armeabi-v7a)](https://github.com/cuynu/ytvanced/releases/download/5.39.52/YTM.Vanced.v5.39.52_armeabi-v7a_MagiskModule.zip)
-
-[Download older version of YouTube Music Vanced](https://github.com/cuynu/ytvanced#youtube-vanced-oldoutdated-version)
-
-____________________________________________________
-
-## Old/outdated version:
-
-> **Warning**: Older/outdated version may have bugs or unexpected behavior, use it as your own risk!
-
-[Download older version of YouTube Vanced in wiki page](https://github.com/cuynu/ytvanced/wiki/old#youtube-vanced)
-
-[Download older version of YouTube Music Vanced in wiki page](https://github.com/cuynu/ytvanced/wiki/old#youtube-music-vanced)
-
-[Download older verson of Vanced MicroG](https://github.com/cuynu/ytvanced/wiki/MicroG)
-____________________________________________________
-
-## For Android Car screen (Not Android Auto) 
-
-Use 17.39.35 for Android Car device that run Android 6 & 7.
-
-DO NOT INSTALL ON REGULAR ANDROID DEVICE.
-
-[Download YouTube Vanced+ 18.21.34 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/18.21.34/YouTube.Vanced+.AndroidCarOled_v18.21.34_bye.apk)
-
-[Download YouTube Vanced 18.02.33 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/18.02.33/YouTube.Vanced.AndroidCarOled.v18.02.33.apk)
-
-[Download YouTube Vanced 18.01.38 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/18.01.38/YouTube.Vanced.AndroidCarOled.v18.01.38.apk)
-
-[Download YouTube Vanced 17.39.35 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/17.39.35/YouTube.Vanced.AndroidCarOled_v17.39.35.apk)
-
-[Download YouTube Vanced 17.34.36 for Android Car screen](https://github.com/cuynu/ytvanced/releases/download/17.34.36/YouTube.Vanced.v17.34.36.AndroidCarOled.apk)
-____________________________________________________
-
-### Source code
-
-**Official YouTube app itself are proprietary and closed source, we can't access YouTube source code because its are private which only Google/YouTube engineer developer can see and modify it. So we can only patch and modify YouTube from published apk. Here is source code for modified classes dexs and additional modification/features:**
-
-https://github.com/cuynu/oldvanced-patches-rvx
-
-https://github.com/cuynu/oldvanced-integrations-rvx
-
-### Known issues 
-
-- Chromecast v2 casting does not works on non-root variant due to Vanced microG
-- In-app purchases can't be processed on non-root variant
-- Protobuf spoof option (buffering issue fix solution) not work for some users
-- Random crash on some Android 9,10 device using Unisoc SC9863A processsor
-- App might crash if open video description that contain YouTube link on 17.39.35 for Android 6 & 7 
-
-### Troubleshoot 
-
-> If these solution isn't fix your problem, please create issues [here.](https://github.com/cuynu/ytvanced/issues)
-
-**Video playback not working (buffer issue)**
-
-For 17.34.36/17.39.35/18.02.33/18.21.34 :
-- Enable `spoof protobuf` option on Vanced settings -> Video (If `protobuf spoof` option is enabled by default, re-enable `spoof protobuf` option. Buffering problem should fix.
-
-For older version :
-- Enable `Fix video playback buffer issue` option on YouTube Settings -> Vanced Settings -> Extended Settings and try again, if not works, install newer version.
-
-**No internet connection:**
-- Remove your account from Vanced MicroG (If have and try again)
-- Wipe Vanced MicroG & YouTube Vanced & YouTube Music Vanced app data and cache
-- Enable auto start for Vanced MicroG if you use heavy customized Android version such as  MIUI,OneUI,FlymeOS,HarmonyOS,etc
-- For Tecno user : Find and open Phone Master app, go to auto start manager, allow Vanced microG and YouTube Vanced auto start.
-
-**App not installed :**
-- Free up some storage space and try again
-- Uninstall official YouTube Vanced client downloaded from Vanced Manager or other unknown sources then try again. Reason : Mismatch signature.
-- Make sure you have downloaded Universal version of YouTube Vanced/YouTube Music Vanced.
-- Check out if old Vanced still installed in multiple user & virtual space mode
-
-**Crash when opening & MicroG does not run in background :**
-- Install or reinstall Vanced MicroG 
-- Turn off battery optimization for Vanced MicroG
-- Allow Vanced MicroG run on background or auto start (on heavy customized OS : MIUI,OneUI,FlymeOS,HarmonyOS,etc)
-- For Tecno user : Find and open Phone Master app, go to auto start manager, allow Vanced microG and YouTube Vanced auto start.
-- Wipe app data and cache
-- Reinstall YouTube Vanced client
-
-**There was a problem parsing the package:**
-- Check your Android version, Make sure your current Android version meet minimum required Android version.
-- Redownload APK file.
-
-### Installation for MIUI
-
-If you can't install YouTube Vanced in MIUI, try turn off MIUI Optimization in Developer options then try install again.
-
-
-# Credits
-
-[Team Vanced](https://github.com/TeamVanced) : Old YouTube Vanced official which is closed source
-
-[inotia00](https://github.com/inotia00) : Provide ReVanced Extended patch used to patch Unofficial YouTube Vanced builds (17.41.34-18.02.33)
-
-[ReVanced Team](https://github.com/revanced) : ReVanced Team which develop ReVanced patches from scratch.
-
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/cuynu/ytvanced.svg)](https://starchart.cc/cuynu/ytvanced)
-
-
-
-### [Go back to the top of the page](https://github.com/cuynu/ytvanced#youtube-vanced)
+CompreFace is open-source real-time facial recognition software released under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.html).

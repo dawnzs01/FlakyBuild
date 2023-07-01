@@ -1,46 +1,47 @@
 ---
-name: Bug report non-root variant
-about: Report a problem related to YouTube Vanced & YouTube Music Vanced non-root variant
-title: '[Bug] '
-labels: bug
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
 assignees: ''
 
 ---
 
-PLEASE FILL OUT THIS FORM, DO NOT CREATE ISSUE WITHOUT THIS FORM, OTHERWISE, ISSUE WILL CLOSE WITHOUT ANY NOTICE OR CONVERT TO DISCUSSION.
+**Describe the bug**
 
-Environment
-===========
-Platform:Android
-OS Version:
-YouTube Vanced Version:
-Vanced MicroG:
-Device:
+A clear and concise description of what the bug is.
 
-Description
-===========
+**To Reproduce**
+
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+**Expected behavior**
+
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+
+If applicable, add screenshots to help explain your problem.
+
+**Desktop (please complete the following information):**
+
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
+
+**Logs**
+
+Run those commands and attach result to the ticket:
+
+`docker ps`
+
+`docker-compose logs`
 
 
-Steps to reproduce
-==================
-1.
-2.
-3.
-4.
+**Additional context**
 
-
-Expected result
-===============
-
-
-Actual result
-=============
-
-
-Screenshots / Videos / Logs
-===========================
-
-
-Notes
-=====
-
+Add any other context about the problem here.
