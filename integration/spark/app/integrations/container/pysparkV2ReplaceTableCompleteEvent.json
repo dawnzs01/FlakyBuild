@@ -1,0 +1,40 @@
+{
+  "eventType" : "COMPLETE",
+  "job" : {
+    "namespace" : "delta-namespace",
+    "name" : "delta_integration_test.atomic_replace_table"
+  },
+  "inputs" : [ ],
+  "outputs" : [ {
+    "namespace" : "file",
+    "name" : "/tmp/delta/v2_replace_table",
+    "facets" : {
+      "dataSource" : {
+        "name" : "file",
+        "uri" : "file"
+      },
+      "schema" : {
+        "fields" : [ {
+          "name" : "c",
+          "type" : "string"
+        }, {
+          "name" : "d",
+          "type" : "string"
+        } ]
+      },
+      "symlinks": {
+        "identifiers": [
+          {
+            "namespace": "/tmp/delta",
+            "name": "default.tbl",
+            "type": "TABLE"
+          }
+        ]
+      },
+      "version" : {},
+      "lifecycleStateChange": {
+        "lifecycleStateChange": "OVERWRITE"
+      }
+    }
+  } ]
+}

@@ -1,0 +1,11 @@
+workflows:
+  openlineage-integration-publish:
+    jobs:
+      - publish-spec:
+          filters:
+            branches:
+              only: main
+          context: release
+      - workflow_complete:
+          requires:
+            - publish-spec

@@ -1,62 +1,114 @@
-## How to contribute
+# Contributing to OpenLineage
 
-Contributors are welcome to submit their code and ideas. In a long run, we hope this project can be managed by developers from both inside and outside Alibaba.
+This project welcomes contributors from any organization or background, provided they are
+willing to follow the simple processes outlined below, as well as adhere to the 
+[Code of Conduct](CODE_OF_CONDUCT.md).
 
-### Before contributing
+## Joining the community
 
-* Sign CLA of PolarDB-X:
-  Please download PolarDB-X [CLA](https://gist.github.com/alibaba-oss/151a13b0a72e44ba471119c7eb737d74). Follow the instructions to sign it.
+The community collaborates primarily through  `GitHub` and the instance messaging tool, `Slack`.
+There is also a mailing list.
+See how to join [here](https://github.com/OpenLineage/OpenLineage#community)
 
-Here is a checklist to prepare and submit your PR (pull request).
+## Reporting an Issue
 
-* Create your own Github branch by forking PolarDB-X related repositories.
-* Checkout [README](README.md) for how to start PolarDB-X from source code.
-* Push changes to your personal fork and make sure they follow our coding style (descriped in each repository)
-* Create a PR with a detail description, if commit messages do not express themselves.
-* Submit PR for review and address all feedbacks.
-* Wait for merging (done by committers).
+Please use the [issues][issues] section of the OpenLineage repository and search for a similar problem. If you don't find it, submit your bug, question, proposal or feature request.
 
-Let's use an example to walk through the list.
+Use tags to indicate parts of the OpenLineage that your issue relates to.
+For example, in the case of bugs, please provide steps to reproduce it and tag your issue with `bug` and integration that has that bug, for example `integration/spark`.
 
-## An Example of Submitting Code Change to PolarDB-X
 
-### Fork Your Own Branch
+## Contributing to the project
 
-There are many PolarDB-X related repositories, take PolarDB-X SQL and PolarDB-X Glue for an example. On Github page of [PolarDB-X SQL](https://github.com/polardb/polardbx-sql) and [PolarDB-X Glue](https://github.com/polardbx/polardbx-glue), Click **fork** button to create your own polardbx-sql and polardbx-glue repository.
+### Creating Pull Requests
+Before sending a Pull Request with significant changes, please use the [issue tracker][issues] to discuss the potential improvements you want to make.
 
-### Create Local Repository
-```bash
-git clone --recursive https://github.com/your_github/polardbx-sql.git
-```
-### Create a dev Branch (named as your_github_id_feature_name)
-```bash
-git branch your_github_id_feature_name
-```
-### Make Changes and Commit Locally
-```bash
-git status
-git add files-to-change
-git commit -m "messages for your modifications"
-```
+OpenLineage uses [GitHub's fork and pull model](https://help.github.com/articles/about-collaborative-development-models/)
+to create a contribution.
 
-### Rebase and Commit to Remote Repository
-```bash
-git checkout develop
-git pull
-git checkout your_github_id_feature_name
-git rebase develop
--- resolve conflict, compile and test --
-git push --recurse-submodules=on-demand origin your_github_id_feature_name
-```
+Make sure to [sign-off](https://github.com/OpenLineage/OpenLineage/blob/main/why-the-dco.md) your work to say that the contributor has the rights to make the contribution and
+agrees with the [Developer Certificate of Origin (DCO)](why-the-dco.md).
 
-### Create a PR
-Click **New pull request** or **Compare & pull request** button, choose to compare branches polardb/polardbx-sql/main and your_github/your_github_id_feature_name, and write PR description.
+To ensure your pull request is accepted, follow these guidelines:
 
-### Address Reviewers' Comments
-Resolve all problems raised by reviewers and update PR.
+* All changes should be accompanied by tests
+* Do your best to have a [well-formed commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) for your change
+* Do your best to have a [well-formed](https://frontside.com/blog/2020-7-reasons-for-good-pull-request-descriptions) pull request description for your change
+* [Keep diffs small](https://kurtisnusbaum.medium.com/stacked-diffs-keeping-phabricator-diffs-small-d9964f4dcfa6) and self-contained
+* If your change fixes a bug, please [link the issue](https://help.github.com/articles/closing-issues-using-keywords) in your pull request description
+* Your pull request title should be of the form `component: name`, where `component` is the part of openlineage repo that your PR changes. For example: `flink: add Iceberg source visitor`
+* Use tags to indicate parts of the repository that your PR refers to
 
-### Merge
-It is done by PolarDB-X committers.
-___
+### Branching
 
-Copyright © Alibaba Group, Inc.
+* Use a _group_ at the beginning of your branch names:
+
+  ```
+  feature  Add or expand a feature
+  bug      Fix a bug
+  ```
+
+  _For example_:
+
+  ```
+  feature/my-cool-new-feature
+  bug/my-bug-fix
+  bug/my-other-bug-fix
+  ```
+
+* Choose _short_ and _descriptive_ branch names
+* Use dashes (`-`) to separate _words_ in branch names
+* Use _lowercase_ in branch names
+
+## Proposing changes
+
+Create an issue and tag it as `proposal`.
+
+In the description provide the following sections:
+ - Purpose (Why?): What is the use case this is for. 
+ - Proposed implementation (How?): Quick description of how do you propose to implement it. Are you proposing a new facet?
+
+This can be just a couple paragraphs to start with.
+
+Proposals that change OpenLineage specifications should be tagged as `spec`.
+Small changes to the spec, like adding a facet, only require opening an issue describing the new facet.
+Larger changes to the spec, changes to the core spec or new integrations require a longer form proposal following [this process](https://github.com/OpenLineage/OpenLineage/blob/main/proposals/336/PROPOSALS.md)
+
+## New Integrations
+New integrations should be added under the [./integrations](/integrations) folder. Each module
+should have its own build configuration (e.g., `build.gradle` for a Gradle project, `setup.py` for 
+python, etc.) with appropriate unit tests and integration tests (when possible).
+
+Adding a new integration requires updating the CI build configuration with a new workflow. Job
+definitions, orbs, parameters, etc. shoudl be added to the
+[.circleci/continue_config.yml](`continue_config.yml`) file. Workflow definition files are added to
+the [.circleci/workflows](.circleci/workflows) directory. Each workflow file adheres to the CircleCI
+config.yml schema, including only the workflows subschema (see
+[https://circleci.com/docs/2.0/configuration-reference/#workflows](the CircleCI docs) for the schema
+specification). Each workflow must include a `workflow_complete` job that `requires` each terminal
+required step in the workflow (e.g., you might depend on `run-feature-integration-tests` as the
+final step in the workflow). Job names must be unique across all workflows, as ultimately the
+workflows are merged into a single config file. See existing workflows for examples.
+
+## First-Time Contributors
+
+If this is your first contribution to open source, you can [follow this tutorial][contributiontutorial] or check out [this video series][contributionvideos] to learn about the contribution workflow with GitHub.
+
+Look for tickets labeled ['good first issue'][goodfirstissues] and ['help wanted'][helpwantedissues]. These are a great starting point if you want to contribute. Don't hesitate to ask questions about the issue if you are not sure about the strategy to follow.
+
+
+[issues]: https://github.com/OpenLineage/OpenLineage/issues
+[contributiontutorial]: https://github.com/firstcontributions/first-contributions#first-contributions
+[contributionvideos]: https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github
+[goodfirstissues]: https://github.com/OpenLineage/OpenLineage/labels/good%20first%20issue
+[helpwantedissues]: https://github.com/OpenLineage/OpenLineage/labels/help%20wanted
+
+## Triggering CI runs from forks (committers)
+
+CI runs on forks are disabled due to the possibility of access by external services via CI run. 
+Once a contributor decides a PR is ready to be checked, they can use [this script](https://github.com/jklukas/git-push-fork-to-upstream-branch)
+to trigger a CI run on a separate branch with the same commit ID. This will update the CI status of a PR.
+
+----
+SPDX-License-Identifier: Apache-2.0\
+Copyright 2018-2023 contributors to the OpenLineage project

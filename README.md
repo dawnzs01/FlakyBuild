@@ -1,126 +1,100 @@
+<div align="center">
+  <img src="./doc/openlineage-logo.png" width="375px" />
+  <a href="https://lfaidata.foundation/projects">
+      <img src="./doc/lfaidata-project-badge-sandbox-black.png" width="115px" />
+  </a>
+</div>
 
-[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://github.com/polardb/polardbx-sql/blob/main/LICENSE)
-[![Language](https://img.shields.io/badge/Language-Java-blue.svg)](https://www.java.com/)
-[![Leaderboard](https://img.shields.io/badge/PolarDB--X-Check%20Your%20Contribution-orange)](https://opensource.alibaba.com/contribution_leaderboard/details?projectValue=polardb-x)
+## Badges
 
-[中文文档](https://polardbx.com)
+[![CircleCI](https://circleci.com/gh/OpenLineage/OpenLineage/tree/main.svg?style=shield)](https://circleci.com/gh/OpenLineage/OpenLineage/tree/main)
+[![status](https://img.shields.io/badge/status-active-brightgreen.svg)](#status)
+[![Slack](https://img.shields.io/badge/slack-chat-blue.svg)](http://bit.ly/OpenLineageSlack)
+[![license](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](https://github.com/OpenLineage/OpenLineage/blob/main/LICENSE)
+[![maven](https://img.shields.io/maven-central/v/io.openlineage/openlineage-java.svg)](https://search.maven.org/search?q=g:io.openlineage)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4888/badge)](https://bestpractices.coreinfrastructure.org/projects/4888)
 
-## What is PolarDB-X ？
-PolarDB-X is a cloud native distributed SQL Database designed for high concurrency, massive storage and complex querying scenarios. It has a shared-nothing architecture in which computing is decoupled from storage. It supports horizontal scaling, distributed transactions and Hybrid Transactional and Analytical Processing (HTAP) workloads, and is characterized by enterprise-class, cloud native, high availability, highly compatible with MySQL and its ecosystem.
+## Overview
+OpenLineage is an Open standard for metadata and lineage collection designed to instrument jobs as they are running.
+It defines a generic model of run, job, and dataset entities identified using consistent naming strategies.
+The core lineage model is extensible by defining specific facets to enrich those entities.
 
-PolarDB-X was originally created to solve the database's scalability bottleneck of Alibaba Tmall's "Double Eleven" core transaction system, and has grown with AliCloud along the way, and is a mature and stable database system that has been verified by many customers' core business systems.
+## Status
 
+OpenLineage is an [LF AI & Data Foundation](https://lfaidata.foundation/projects/openlineage) incubation project under active development, and we'd love your help!
 
-The core features of PolarDB-X include:
+## Problem
 
-- Horizontal Scalability
+### Before
 
-PolarDB-X is designed with Shared-nothing architecture, supporting multiple Hash and Range data sharding algorithms and achieving transparent horizontal scaling through implicit primary key sharding and dynamic scheduling of data shard.
+- Duplication of effort: each project has to instrument all jobs
+- Integrations are external and can break with new versions
 
+![Before OpenLineage](doc/before-ol.svg)
 
-- Distributed Transactions
+### With OpenLineage
 
-PolarDB-X adopts MVCC + TSO approach and 2PC protocol to implement distributed transactions. Transactions meet ACID characteristics, support RC/RR isolation levels, and achieve high performance through optimizations such as one-stage commit, read-only transaction, and asynchronous commit.
+- Effort of integration is shared
+- Integration can be pushed in each project: no need to play catch up
 
+![With OpenLineage](doc/with-ol.svg)
 
-- HTAP
+## Scope
+OpenLineage defines the metadata for running jobs and the corresponding events.
+A configurable backend allows the user to choose what protocol to send the events to.
+ ![Scope](doc/scope.svg)
 
-PolarDB-X supports analytical queries through native MPP capability, and achieves strong isolation of OLTP and OLAP traffic through CPU quota constraint, memory pooling, storage resource separation, etc.
+## Core model
 
+ ![Model](doc/datamodel.svg)
 
-- Enterprise-class
+ A facet is an atomic piece of metadata attached to one of the core entities.
+ See the spec for more details.
 
-PolarDB-X has many capabilities designed for enterprise scenarios, such as SQL Concurrency Control, SQL Advisor, TDE, Triple Authority Seperation, Flashback Query, etc.
+## Spec
+The [specification](spec/OpenLineage.md) is defined using OpenAPI and allows extension through custom facets.
 
+## Integrations
 
-- Cloud Native
+The OpenLineage repository contains integrations with several systems.
 
-PolarDB-X has years of cloud native practice on AliCloud, supports managing cluster resources via K8S Operator, supports public cloud, hybrid cloud, private cloud and other forms for deployment.
+- [Apache Spark](https://github.com/OpenLineage/OpenLineage/tree/main/integration/spark)
+- [Apache Airflow](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow)
+- [Dagster](https://github.com/OpenLineage/OpenLineage/tree/main/integration/dagster)
+- [dbt](https://github.com/OpenLineage/OpenLineage/tree/main/integration/dbt)
+- [Flink](https://github.com/OpenLineage/OpenLineage/tree/main/integration/flink)
 
+## Related projects
+- [Marquez](https://marquezproject.ai/): Marquez is an [LF AI & DATA](https://lfaidata.foundation/) project to collect, aggregate, and visualize a data ecosystem's metadata. It is the reference implementation of the OpenLineage API.
+  - [OpenLineage collection implementation](https://github.com/MarquezProject/marquez/blob/main/api/src/main/java/marquez/api/OpenLineageResource.java)
+- [Egeria](https://egeria.odpi.org/): Egeria offers open metadata and governance for enterprises - automatically capturing, managing and exchanging metadata between tools and platforms, no matter the vendor.
 
-- High Availability
+## Community
+- Slack: [OpenLineage.slack.com](http://bit.ly/OLslack)
+- Twitter: [@OpenLineage](https://twitter.com/OpenLineage)
+- Mailing list: [openlineage-tsc](https://lists.lfaidata.foundation/g/openlineage-tsc)
+- Wiki: [OpenLineage+Home](https://wiki.lfaidata.foundation/display/OpenLineage/OpenLineage+Home)
+- LinkedIn: [13927795](https://www.linkedin.com/groups/13927795/)
+- YouTube: [channel](https://www.youtube.com/channel/UCRMLy4AaSw_ka-gNV9nl7VQ)
+- Mastodon: [@openlineage@fostodon.org](openlineage@fosstodon.org)
+- Website: [openlineage.io](http://openlineage.io)
 
-PolarDB-X achieves strong data consistency through Multi-Paxos protocol, supports cross-data center deployment, and improves system availability through Table Group, Geo-locality, etc.
-
-
-- Compatible with MySQL and Its Ecosystem
-
-The goal of PolarDB-X is to be fully compatible with MySQL, which currently includes MySQL protocol, most of MySQL SQL syntax, Collations, transaction isolation level, binary log, etc.
-
-
-## Quick Start
-### To quick start with PolarDB-X
-PolarDB-X supports one-click installation by PXD tool, through which you can quickly try the functions of PolarDB-X.
-
-See the [PXD Quick Start](docs/en/quickstart.md).
-
-### To quick start with PolarDB-X on Kubernetes
-PolarDB-X provides K8S deployment mode, through which you can customize the configuration of PolarDB-X cluster.
-
-See the [K8S Quick Start](https://github.com/polardb/polardbx-operator#quick-start).
-
-### To start developing PolarDB-X
-If you want to compile and install PolarDB-X from source code, or start development, you can refer the [Development Guide](docs/en/quickstart-development.md).
-
-The core features of PolarDB-X community version will be consistent with the commercial version, and more manuals can be found in [the documentations of the commercial version](https://www.alibabacloud.com/help/doc-detail/71252.htm). The documentations of the community version are being compiled and will be released to the public in the near future.
-
-## Architecture
-![image.png](docs/architecture.png)
-PolarDB-X has a shared-nothing architecture in which compute and storage is decoupled, and the system consists of 4 core components.
-
-- CN (Compute Node)
-
-The Compute Node is the entry point of the system and is stateless, which includes modules such as SQL parser, optimizer, and executor. It is responsible for distributed data routing, 2PC coordination, global secondary index maintenance, etc. It also provides enterprise features such as SQL concurrency control and triple authority separation.
-
-
-- DN (Data Node)
-
-The Data Node is responsible for data persistence, providing strong data consistency based on the Multi-Paxos protocol, while maintaining distributed transaction visibility through MVCC.
-
-
-- GMS (Global Meta Service)
-
-The Gloal Meta Service is responsible for maintaining globally consistent Table/Schema, Statistics and other system Meta information, maintaining security information such as accounts and permissions, and providing global timing services (i.e. TSO).
-
-
-- CDC (Change Data Capture)
-
-The CDC Node provides change data capture capability that is fully compatible with the MySQL binary log format and MySQL DUMP protocol, and master-slave replication capability that is compatible with the MySQL Replication protocol.
-
-
-PolarDB-X provides tool to manage the above components through K8S Operator, and the RPC between the CN and DN can be done through private protocol component. The corresponding repositories of these components are as follows.
-
-| **Component Name**        | **Repository**                                                    | **Version** |
-|---------------------------|-------------------------------------------------------------------|---|
-| CN (Compute Node)         | [polardbx-sql](https://github.com/polardb/polardbx-sql)           | v5.4.13-16615127 |
-| GMS (Global Meta Service) | [polardbx-engine](https://github.com/polardb/polardbx-engine)     | v1.0.2 |
-| DN (Data Node)            | [polardbx-engine](https://github.com/polardb/polardbx-engine)     | v1.0.2 |
-| CDC (Change Data Capture) | [polardbx-cdc](https://github.com/polardb/polardbx-cdc)           | v5.4.13 |
-| RPC                       | [polardbx-glue](https://github.com/polardb/polardbx-glue)         | v5.4.13-16615127 |
-| K8S Operator              | [polardbx-operator](https://github.com/polardb/polardbx-operator) | v1.2.2 |
-
-
-## What is PolarDB-X SQL ？
-PolarDB-X SQL is one component of PolarDB-X, namely CN (Compute Node).
-
-
-## Licensing
-PolarDB-X SQL is under the Apache License 2.0. See the [License](LICENSE) file for details.
-
+## Talks
+- [Berlin Buzzwords June 2022. Cross-Platform Data Lineage with OpenLineage](https://www.youtube.com/watch?v=pLBVGIPuwEo)
+- [Berlin Buzzwords June 2021. Observability for Data Pipelines with OpenLineage](https://2021.berlinbuzzwords.de/member/julien-le-dem)
+- [Data Driven NYC February 2021. Data Observability and Pipelines: OpenLineage and Marquez](https://mattturck.com/datakin/)
+- [Big Data Technology Warsaw Summit February 2021. Data lineage and Observability with Marquez and OpenLineage](https://bigdatatechwarsaw.eu/edition-2021/)
+- [Metadata Day 2020. OpenLineage Lightning Talk](https://www.youtube.com/watch?v=anlV5Er_BpM)
+- [Open Core Summit 2020. Observability for Data Pipelines: OpenLineage Project Launch](https://www.coss.community/coss/ocs-2020-breakout-julien-le-dem-3eh4)
 
 ## Contributing
 
-You are welcome to make contributions to PolarDB-X. We appreciate all the contributions. For more information about how to start development and pull requests, see [contributing](CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://github.com/OpenLineage/OpenLineage/blob/main/CONTRIBUTING.md) for more details about how to contribute.
 
+## Report a Vulnerability
 
-## Community
-You can join these groups and chats to discuss and ask PolarDB-X related questions:
- - DingTalk Group: [32432897](https://h5.dingtalk.com/circle/healthCheckin.html?dtaction=os&corpId=dingc5456617ca6ab502e1cc01e222598659&1b3d4=1ec1b&cbdbhh=qwertyuiop#/)  
-   ![DingTalk Group](docs/images/dingtalk_group.jpg)
- - WeChat Group: 阿里云 PolarDB-X 开源交流群 (Contact group manager to get into wechat group. Managers' ID: oldbread3, hustfxj, agapple0002)   
-   ![WeChat Manager 1](docs/images/wechat_manager_a.jpg)  ![WeChat Manager 2](docs/images/wechat_manager_b.jpg) ![WeChat Manager 3](docs/images/wechat_manager_c.jpg)
+If you discover a vulnerability in the project, please [open an issue](https://github.com/OpenLineage/OpenLineage/issues/new/choose) and attach the "security" label.
 
-   
-
-## Acknowledgements
-PolarDB-X SQL references from many open source projects, such as Calcite, Presto etc. Sincere thanks to these projects and contributors.
+----
+SPDX-License-Identifier: Apache-2.0\
+Copyright 2018-2023 contributors to the OpenLineage project
