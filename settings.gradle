@@ -1,4 +1,2 @@
-rootProject.name = 'MaterialFX'
-include 'materialfx'
-include 'demo'
-
+include ':app', ':doubletapplayerview', 'android-file-chooser'
+rootProject.name = "Player"

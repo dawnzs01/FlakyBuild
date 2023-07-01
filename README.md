@@ -1,448 +1,170 @@
-[![HitCount](http://hits.dwyl.com/PAlex404/MaterialFX.svg)](http://hits.dwyl.com/PAlex404/MaterialFX)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/palexdev/materialfx/Java%20CI%20with%20Gradle?label=github%20build&style=flat-square)
-![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.palexdev/materialfx?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square)
-[![javadoc](https://javadoc.io/badge2/io.github.palexdev/materialfx/javadoc.svg?logo=java)](https://javadoc.io/doc/io.github.palexdev/materialfx)
-![GitHub issues](https://img.shields.io/github/issues-raw/palexdev/materialfx?style=flat-square)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/palexdev/materialfx?style=flat-square)
-![GitHub](https://img.shields.io/github/license/palexdev/materialfx?style=flat-square)
----
-
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/palexdev/MaterialFX">
-    <img src=https://imgur.com/7NdnoFl.png" alt="Logo">
-  </a>
-</p>
-
-
-<h3 align="center">MaterialFX</h3>
-
-<p align="center">
-    MaterialFX is an open source Java library which provides material design components for JavaFX
-    <br />
-    <a href="https://github.com/palexdev/MaterialFX/wiki"><strong>Explore the wiki »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/palexdev/MaterialFX/releases">Download Latest Demo</a>
-    ·
-    <a href="https://github.com/palexdev/MaterialFX/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/palexdev/MaterialFX/issues">Request Feature</a>
-</p>
-
-<!-- TABLE OF CONTENTS -->
-
-## Table of Contents
-
-* [Important Notes!](#important-notes)
-* [About the Project and History of JavaFX](#about-the-project-and-history-of-javafx)
-* [About the Logo](#about-the-logo)
-* [Some GIFs](#preview-gifs)
-* [Getting Started](#getting-started)
-    * [Build](#build)
-    * [Usage](#usage)
-        * [Gradle](#gradle)
-        * [Maven](#maven)
-* [Documentation](#documentation)
-* [Changelog](#changelog)
-* [Roadmap](#roadmap)
-* [Theming System](#theming-system)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Donation](#donation)
-* [Supporters](#supporters)
-
-<!-- IMPORTANT NOTES -->
-
-## Important notes
-
-Please, **before** using this library and submitting an issue complaining that controls are **not styled and bugged** check how the **stilying system has changed** since
-version 11.14.0
-
-<!-- ABOUT THE PROJECT -->
-
-## About The Project and History of JavaFX
-
-JavaFX is a software platform intended to replace Swing in creating and delivering rich client applications that operate
-consistently across diverse platforms. With the release of JDK 11 in 2018, Oracle has made JavaFX part of the OpenJDK
-under the OpenJFX project in order to increase the pace of its development.
-
-Key features:
-
-- FXML and SceneBuilder, A designer can code in FXML or use JavaFX Scene Builder to interactively design the graphical
-  user interface (GUI). Scene Builder generates FXML markup that can be ported to an IDE where a developer can add the
-  business logic.
-- Built-in UI controls and CSS, JavaFX provides all the major UI controls required to develop a full-featured
-  application. Components can be skinned with standard Web technologies such as CSS.
-- Self-contained application deployment model. Self-contained application packages have all the application resources
-  and a private copy of the Java and JavaFX runtimes. They are distributed as native installable packages and provide
-  the same installation and launch experience as native applications for that operating system. JavaFX is a software
-  platform for creating and delivering desktop applications, as well as rich Internet applications (RIAs) that can run
-  across a wide variety of devices.
-
-Over the years the way of creating GUIs has often changed and JavaFX default appearance is still pretty much the same.
-That's where this project comes in. The aim of my project is to bring components which follow as much as possible the
-Google's material design guidelines to JavaFX. The second purpose is to provide a successor to the already
-available [JFoenix](https://github.com/jfoenixadmin/JFoenix) library, which is a bit old and has a lot of issues.
-
-In recent months the project has evolved a lot, to the point that it is no longer a simple substitute.  
-To date MaterialFX offers not only restyled controls, but also: new and unique controls such as the Stepper,
-controls completely redone from scratch such as ComboBoxes or TableViews (and many others),
-and many utilities for JavaFX and Java (NodeUtils, ColorUtils, StringUtils ...).
-
-<!-- ABOUT THE PROJECT -->
-
-## About The Logo
-
-MaterialFX v11.13.0 brought a lot of fixes and new features, but it also brought a new logo, something that is more
-meaningful for me and that somewhat represents the new version.  
-The new logo is a Phoenix, the immortal bird from Greek mythology, associated to regeneration/rebirth.
-When a Phoenix dies it obtains new life by raising from its ashes.  
-MaterialFX v11.13.0 fixed many critical bugs and broken features, I like to think that it is reborn from
-the previous version, so I thought a new logo would have been a good idea.
-
-<!-- PREVIEW GIFS -->
-
-## Preview GIFs
-
-#### Imgur Link: [Gallery](https://imgur.com/a/IrDirnI)
-
-<i>
-<details>
-<summary>Buttons</summary>
-<br>
-<img src="https://imgur.com/jATdGFL.gif" alt="Buttons" border="0">
-</details>
-<p></p>
-
-<details>
-<summary>Check Boxes, Radio Buttons and Toggles</summary>
-<br>
-<img src="https://imgur.com/ArUhH58.gif" alt="Checkboxes" border="0">
-</details>
-<p></p>
-
-<details>
-<summary>Combo Boxes</summary>
-<br>
-<img src="https://imgur.com/BO0twpA.gif" alt="Comboboxes" border="0">
-</details>
-<p></p>
-
-<details>
-<summary>Dialogs</summary>
-<br>
-<img src="https://imgur.com/LsxGeJh.gif" alt="Dialogs" border="0">
-</details>
-
-<p></p>
-<details>
-<summary>Fields</summary>
-<br>
-<img src="https://imgur.com/XT2iVU7.gif" alt="Fields" border="0">
-</details>
-<p></p>
-
-<details>
-<summary>Lists</summary>
-<br>
-<img src="https://imgur.com/4Ckdn5z.gif" alt="Listviews" border="0">
-</details>
-<p></p>
-
-<details>
-<summary>Notifications</summary>
-<br>
-<img src="https://imgur.com/lgex2yO.gif" alt="Notifications" border="0">
-</details>
-<p></p>
-
-<details>
-<summary>Pickers</summary>
-<br>
-<img src="https://imgur.com/J3v3i9w.gif" alt="Pickers" border="0">
-</details>
-<p></p>
+# Just (Video) Player 
 
-<details>
-<summary>Progress</summary>
-<br>
-<img src="https://imgur.com/2E6X3uJ.gif" alt="Progress" border="0">
-</details>
-<p></p>
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/moneytoo/Player.svg?logo=github&label=GitHub&cacheSeconds=3600)](https://github.com/moneytoo/Player/releases/latest)
+[![Google Play](https://img.shields.io/endpoint?color=green&logo=google-play&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.brouken.player%26l%3DGoogle%2520Play%26m%3Dv%24version)](https://play.google.com/store/apps/details?id=com.brouken.player)
+[![F-Droid](https://img.shields.io/f-droid/v/com.brouken.player.svg?logo=f-droid&label=F-Droid&cacheSeconds=3600)](https://f-droid.org/packages/com.brouken.player/)
+[![GitHub all releases](https://img.shields.io/github/downloads/moneytoo/Player/total?logo=github&cacheSeconds=3600)](https://github.com/moneytoo/Player/releases/latest)
+[![Google Play](https://img.shields.io/endpoint?color=green&logo=google-play&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.brouken.player%26l%3Ddownloads%26m%3D%24totalinstalls)](https://play.google.com/store/apps/details?id=com.brouken.player)
+[![Google Play](https://img.shields.io/endpoint?color=green&logo=google-play&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.brouken.player%26l%3Drating%26m%3D%25E2%2598%2585%2520%24rating)](https://play.google.com/store/apps/details?id=com.brouken.player)
+[![Media3](https://img.shields.io/badge/Media3-1.1.0--rc01-007ec6?cacheSeconds=3600)](https://github.com/androidx/media/releases/tag/1.1.0-rc01)
+[![Weblate project translated](https://img.shields.io/weblate/progress/just-player?logo=weblate&logoColor=white&cacheSeconds=36000)](https://hosted.weblate.org/engage/just-player/)
+[![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/JustPlayer?label=r%2FJustPlayer&logo=reddit&logoColor=white&cacheSeconds=3600)](https://www.reddit.com/r/JustPlayer/)
 
-<details>
-<summary>Scroll Panes</summary>
-<br>
-<img src="https://imgur.com/8Jxu3TM.gif" alt="Scrollpanes" border="0">
-</details>
-<p></p>
+Android video player based on [Media3](https://github.com/androidx/media) (formerly [ExoPlayer](https://github.com/google/ExoPlayer)), compatible with Android 5+ and Android TV.
 
-<details>
-<summary>Sliders</summary>
-<br>
-<img src="https://imgur.com/nOrsa1n.gif" alt="Sliders" border="0">
-</details>
-<p></p>
-
-
-<details>
-<summary>Stepper</summary>
-<br>
-<img src="https://imgur.com/nEgV9F1.gif" alt="Stepper" border="0">
-</details>
-<p></p>
-
-<details>
-<summary>Tables</summary>
-<br>
-<img src="https://imgur.com/nj6xhUT.gif" alt="Tableviews" border="0">
-</details>
-<p></p>
-</i>
-
-<!-- GETTING STARTED -->
-
-## Getting Started
-
-In this section you can learn what do you need to use my library in your project or see a preview/demo which I'm
-planning to release as runtime images here on github.
-
-### Build
-
-To build MaterialFX, execute the following command:
-
-    gradlew build
-
-To run the main demo, execute the following command:
-
-    gradlew run
-
-**NOTE**: MaterialFX requires **Java 11** and above.
-
-### Usage
-
-###### Gradle
-
-```groovy
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'io.github.palexdev:materialfx:11.16.1'
-}
-```
-
-###### Maven
-
-```xml
-
-<dependency>
-    <groupId>io.github.palexdev</groupId>
-    <artifactId>materialfx</artifactId>
-    <version>11.16.1</version>
-</dependency>
-```
-
-<!-- DOCUMENTATION -->
-
-## Documentation
-
-You can read MaterialFX's documentation at [javadoc.io](https://javadoc.io/doc/io.github.palexdev/materialfx)
-
-<!-- CHANGELOG -->
-
-## Changelog
-
-See the [CHANGELOG](https://github.com/palexdev/MaterialFX/blob/main/CHANGELOG.md) file for a list of changes per
-version.
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-See the [Open Issues](https://github.com/palexdev/MaterialFX/issues) for a list of proposed features (and known issues)
-.  
-See the [ROADMAP](https://github.com/palexdev/MaterialFX/blob/main/ROADMAP.md) for a list of implemented and upcoming
-features.
-
-<!-- THEMING SYSTEM -->
-
-## Theming System
-
-Since MaterialFX 11.14.0 the way controls are styles through CSS has drastically changed. Before telling you about the
-new
-Theming System, and about its pros and cons, let's talk a bit on the history of this project, the causes that brought to
-this drastic change.
-
-When I started developing MaterialFX I was a complete noob, I knew nothing about JavaFX. But I really wanted to use it
-and
-to make it look good. Competitors had broken libraries that made usage difficult for the end user, I didn't like them at
-all.  
-And so the journey begun, MaterialFX is born. Like any newbies, what do you do when you know nothing but want to
-learn?  
-You check others work and try to copy them but still make the changes you want to implement.  
-This lead me to create controls that made use of the infamous `getUserAgentStylesheet()` method. For those of you that
-do not
-know about it, a developer of custom controls is supposed to override that method to provide a CSS stylesheet to define
-the
-author intended style for the custom control.  
-Sounds great right, just the thing I need... Well, I'd say that if only it worked properly. This system has been the
-root
-cause of CSS issues right from the start of the project, with little I could do to fix it **properly**.  
-_(Little secret that almost no one know: I actually sent a PR on the JavaFX repo to improve the system and make it
-dynamic,
-guess what, it's still there lol)_
-
-The two most annoying issues caused by this system are:
-
-1) The little buggers didn't think of nested custom controls. For example, if a custom control(parent) has a skin that
-   uses other
-   custom controls(children), the user agent of the parent will be **completely ignored** by the children, the result is
-   a
-   bunch of children that **cannot** be styled in any way unless you create a custom skin yourself. A fix I implemented
-   for this
-   in the past, was to override inline the `getUserAgentStylesheet()` method of each children node to use the one of the
-   parent,
-   and even this drastic solution was working half the time (didn't work in some user cases)
-2) For some reason, sometimes stylesheets provided by the user were half or completely **ignored** leading to half/not
-   styled(as intended) custom controls. This was the most annoying issue, as the causes would vary from case to case,
-   not always
-   there was a easy/feasible solution, a nightmare, really
-
-**End of the rant**  
-How can I fix it? I asked myself many many times.  
-Recently I've been working on a rewrite of [MaterialFX](https://github.com/palexdec/MaterialFX/tree/rewrite), this new
-version will have controls based on the new Material Design 3 Guidelines, will implement modular themes thanks to the
-usage
-of [SASS](https://sass-lang.com/) and a Theming API that will let user change themes, implement new ones, very easily.  
-So the idea is to backport at least the concept on the main branch at least until the rewrite is done.
-
-**The Theme API**  
-An interface called `Theme` allows users to define custom themes entries. It defines the bare minimum for a theme,
-its path and a way to load it.  
-There are two implementations of this interface:
-
-1) `Themes`: this enumerator defines the default themes of MaterialFX, there is the `DEFAULT` theme that includes the
-   stylesheets
-   of all MaterialFX controls, as well as dialogs, popups, menus, etc...
-2) `Stylesheets`: this enumerator defines all the stylesheets of every single control, allowing the user to not use a
-   theme
-   (for whatever reason) and instead choose which component he wants to style
-
-`MFXThemeManager` is a utility class that will help the user add/set themes and stylesheets (which implement `Theme`) on
-nodes or scenes.
-
-**Pros**
-
-- The biggest pro is to have a more reliable styling system. With this users shouldn't hava any issue anymore while
-  styling
-  MaterialFX controls with their custom stylesheets. Of course, I consider the system _experimental_, I don't expect to
-  not have even a single report about CSS bugs, but they should be way less and much easier to fix
-- Another pro is to have less code duplication as now I don't need to override the infamous `getUserAgentStylesheet()`
-  anymore anywhere
-- This change should have also impacted on memory usage in a good way as now controls do not store the "url" to their
-  stylesheet anymore
-
-**Cons**
-
-- One con is that now themes must be managed by the user. Since controls are not styled by default, the user must
-  use the aforementioned manager or enumerators to load/add the themes on the App.  
-  The preferred way to do so would be to add the themes/stylesheets on the root scene, like this:
-  ```java
-  public class App extends Application {
-  
-    @Override
-    public void start(Stage stage) {
-     ...
-     Scene scene = ...;
-     MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-    }
-  }
-  ```
-- Another con that derives from the above example are dialogs/popups or any separate stage/scene.
-  Since you are applying the themes on the primary stage's scene, it means that all other scenes will be un-styled.
-  **You have to add the Themes on every separate scene**.
-  To simplify things, MaterialFX automatically applies the Themes on its dialogs and popups, but since now they
-  are added to the `getStylesheets()` list it's easy to remove them and define your own
-- ~~The last con I can think of is SceneBuilder. As of now there is no support for it, I have some ideas on how to style
-  controls inside of it though. The issue is that even if I figure out a way,~~ I doubt the system will be flexible
-  enough.
-  ~~What I mean is, I can probably set the default themes on the SceneBuilder' scene,~~ but it's very unlikely there
-  will
-  be a way to choose which themes/stylesheets will be applied.  
-  Since version 11.15.0, MaterialFX controls are capable of detecting if they are being used in SceneBuilder and can
-  automatically
-  style themselves. From my little testings, it seems that this doesn't break the styling system in any way, I was able
-  to style a button
-  by adding a custom stylesheet on itself or on its parent. There's also an emergency system to completely shut down the
-  SceneBuilder integration, more info
-  here: [Themable](https://github.com/palexdev/MaterialFX/blob/main/materialfx/src/main/java/io/github/palexdev/materialfx/controls/base/Themable.java)
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
-contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the GNU LGPLv3 License. See `LICENSE` for more information.
-
-<!-- CONTACT -->
-
-## Contact
-
-Alex - alessandro.parisi406@gmail.com  
-[![Discord](https://img.shields.io/discord/771702793378988054?label=Discord&style=flat-square)](https://discord.com/invite/zFa93NE)
-<br /><br />
-Project Link: [https://github.com/palexdev/MaterialFX](https://github.com/palexdev/MaterialFX)
-
-<!-- DONATION -->
-
-#### Donation
-
-It's been more than a year since I started developing MaterialFX. Implementing cool looking, fully functional controls,
-introducing new components and features as well as providing many utilities for JavaFX and Java is really hard,
-especially considering that developing for JavaFX also means to deal with its closeness, its bugs, its annoying
-design decisions. Many times I've honestly been on the verge of giving up because sometimes it's really too much
-stress to handle.  
-**But**, today MaterialFX is a great library, supported by many people and I'm proud of it.
-If you are using MaterialFX in your projects and feel like it, I recently
-activated [GitHub Sponsors](https://github.com/sponsors/palexdev) so
-you can easily donate/sponsor.
-
-<!-- SUPPORTERS -->
-
-# Supporters:
-
-(If you want your github page to be linked here and you didn't specify your username in the donation, feel free to
-contact me by email and tell me. Also contact me if for some some reason you don't want to be listed here)
-
-- Alaa Abu Zidan
-- Alex Hawk
-- Aloento
-- Mauro de Wit
-- Mohammad Chaudhry (thank you very much for the huge donation, YOU are the legend)
-- Jtpatato21
-- Sourabh Bhat
-- stefanofornari (thank you very much for the big donation!)
-- Ultraviolet-Ninja
-- Yahia Rehab
-- Yiding He
-- *Your name can be here by supporting me at this link, [GitHub Sponsors](https://github.com/sponsors/palexdev)*
-
-Thank you very very much to all supporters, to all people who contribute to the project, to all people that thanked me,
-you really made my day
+It uses ExoPlayer's ``ffmpeg`` extension with [all its audio formats](https://exoplayer.dev/supported-formats.html#ffmpeg-extension) enabled (it can handle even special formats like AC3, EAC3, DTS, DTS HD, TrueHD etc.).
+
+It properly syncs audio with video track when using Bluetooth earphones/speaker. (I was not able to find any other nice ExoPlayer based video player so I created this one.)
+
+## Supported formats
+
+ * **Audio**: Vorbis, Opus, FLAC, ALAC, PCM/WAVE (μ-law, A-law), MP1, MP2, MP3, AMR (NB, WB), AAC (LC, ELD, HE; xHE on Android 9+), AC-3, E-AC-3, DTS, DTS-HD, TrueHD
+ * **Video**: H.263, H.264 AVC (Baseline Profile; Main Profile on Android 6+), H.265 HEVC, MPEG-4 SP, VP8, VP9, AV1
+ * **Containers**: MP4, MOV, WebM, MKV, Ogg, MPEG-TS, MPEG-PS, FLV, AVI (🚧)
+ * **Streaming**: DASH, HLS, SmoothStreaming, RTSP
+ * **Subtitles**: SRT, SSA/ASS ([limited styling](https://github.com/google/ExoPlayer/issues/8435)), TTML, VTT, DVB
+
+HDR (HDR10+ and Dolby Vision) video playback on compatible/supported hardware.
+
+AC-4 audio is supported on devices providing such system decoder (e.g. Samsung Galaxy A, S and Z series running Android 11 or later).
+
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="806"> <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="400"> <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="400">
+
+## Features
+
+ * Audio/subtitle track selection
+ * Playback speed control
+ * Horizontal swipe and double tap to quickly seek
+ * Vertical swipe to change brightness (left) / volume (right)
+ * Pinch to zoom (Android 7+)
+ * PiP (Picture in Picture) on Android 8+ (resizable on Android 11+)
+ * Resize (fit/crop)
+ * Volume boost
+ * Auto frame rate matching on Android TV/boxes (Android 6+)
+ * Post-playback actions (delete file/skip to next)
+ * Touch lock (long tap)
+ * App shortcut for direct access to file chooser (Android 7.1+)
+ * 3rd party equalizer / audio processing support (e.g. [Wavelet](https://github.com/Pittvandewitt/Wavelet))
+ * Media Session and Audio Focus support
+ * Pause playback when disconnecting headphones
+ * No ads, tracking or excessive permissions
+
+Some advanced features can be enabled or configured in settings. To access it, long press the ⚙️ gear icon. (Alternatively, you can also enter this settings from App info screen.)
+
+ * Default audio tracks. Set specific language, prefer device language, media file defaults.
+ * File access mode. Use of Storage Access Framework / MediaStore / legacy file access.
+ * Decoder priority. Prefer device or app decoders.
+ * Auto frame rate matching. (On Android 11+ and "compatible" displays, ExoPlayer supports [seamless refresh rate switching](https://source.android.com/devices/graphics/multiple-refresh-rate))
+ * [Tunneled playback](https://medium.com/google-exoplayer/tunneled-video-playback-in-exoplayer-84f084a8094d). Enabling tunneling can improve playback of 4K/HDR content on Android TV.
+ * Playback of Dolby Vision profile 7 (UHD Blu-ray) as HDR HEVC
+ * Auto picture-in-picture. When you leave Just Player through the home button and video is playing, PiP will be activated automatically.
+ * Skip silence
+ * Repeat toggle
+
+**`WRITE_SETTINGS` ("Modify system settings") permission**: When the system file chooser is opened, it will always use current system orientation, even if the Player app sets its own. Granting this permission via adb (`adb shell pm grant com.brouken.player android.permission.WRITE_SETTINGS`) or App info screen will allow this app to temporarily enable Auto-rotate to at least partially mitigate [this imperfection](https://issuetracker.google.com/issues/141968218).
+
+Donate: [PayPal](https://paypal.me/MarcelDopita) | [Bitcoin](https://live.blockcypher.com/btc/address/bc1q9u2ezgsnug995fv0m4vaxa90ujjwlucp78w4n0) | [Litecoin](https://live.blockcypher.com/ltc/address/LLZ3fULGwxbs6W9Vf7gtu1EjZvviCka7zP)
+
+Translate: [Weblate](https://hosted.weblate.org/engage/just-player/)
+
+## Download
+
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="75">](https://play.google.com/store/apps/details?id=com.brouken.player)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="75">](https://f-droid.org/packages/com.brouken.player/)
+[<img src="https://raw.githubusercontent.com/andOTP/andOTP/master/assets/badges/get-it-on-github.png" alt="Get it on GitHub" height="75">](https://github.com/moneytoo/Player/releases/latest)
+[<img src="https://brouken.com/img/get-it-on-gitlab.png" alt="Get it on GitLab" height="75">](https://gitlab.com/moneytoo/Player/-/releases)
+[<img src="https://brouken.com/img/galaxy-store.png" alt="Available on Galaxy Store" height="75">](https://galaxy.store/justplay)
+[<img src="https://brouken.com/img/huawei-appgallery.png" alt="Explore it on AppGallery" height="75">](https://appgallery.cloud.huawei.com/ag/n/app/C104147921)
+[<img src="https://brouken.com/img/get-it-on-amazon.png" alt="available at amazon" height="75">](https://www.amazon.com/gp/product/B091N8TTJH)
+[<img src="https://brouken.com/img/get-it-on-aptoide.png" alt="Get it on Aptoide" height="75">](https://just-player-marcel-dopita.en.aptoide.com/app)
+
+Also available on **OPPO App Market**, **Xiaomi GetApps** or [Uptodown](https://just-video-player.en.uptodown.com/android).
+
+Other links/channels: application thread on [XDA Developers](https://forum.xda-developers.com/t/app-5-0-just-video-player-no-bluetooth-lag-exoplayer-ffmpeg-audio-codecs.4189183/), subreddit on [reddit](https://www.reddit.com/r/JustPlayer/), entry on [AlternativeTo](https://alternativeto.net/software/just-video-player/about/), git mirror on [GitLab](https://gitlab.com/moneytoo/Player)
+
+## ❓FAQ
+
+### How do I open subtitle file (e.g. .srt)?
+
+To load external (non-embedded) subtitles, long press the 📁 file open action in the bottom bar. The first time you do that, you will be offered to select root video folder to enable automatic loading of external subtitles.
+
+💡📺 Because of [limitations on Android TV](https://github.com/moneytoo/Player/issues/248#issuecomment-1019565204), Just Player is also able to open subtitle files from external file managers. You can open video file from your file manager, then return back and also  open subtitle file in Just Player. Subtitle will be available in the last selected video.
+
+Just Player is also able to detect some subtitle files when accessing videos over HTTP/HTTPS. Just use the [same naming](https://github.com/moneytoo/Player/issues/173) for video files as well as subtitles (e.g. `video.mkv` and `video.srt`).
+
+### How do I change subtitle font, size or color?
+
+Open system [Caption preferences](https://support.google.com/accessibility/android/answer/6006554) on your device (usually in the _Accessibility_ section of _Settings_) and you will be able to fully customize the subtitle style.
+
+To quickly access the system _Caption preferences_ screen, long tap the subtitle button.
+
+<img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/caption_preferences_1.png" width="140"> <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/caption_preferences_2.png" width="140">
+
+### Are there any media formats it CANNOT play?
+
+Unfortunately, upstream ExoPlayer doesn't handle some older formats like ~~[AVI container](https://github.com/google/ExoPlayer/issues/2092)~~, WMV or [Theora](https://github.com/google/ExoPlayer/issues/4970). Majority of devices also cannot handle [10-bit AVC](https://github.com/moneytoo/Player/issues/87#issuecomment-816228143).
+
+Just Player focuses on playing videos so audio only playback isn't officialy supported ([request](https://github.com/moneytoo/Player/issues/55)).
+
+### How to view detailed video information (like resolution, bitrate etc.)?
+
+Install app like [MediaInfo](https://play.google.com/store/apps/details?id=net.mediaarea.mediainfo) (or APK from [MediaArea.net](https://mediaarea.net/en/MediaInfo/Download/Android)). Then, to quickly open MediaInfo from Just Player, long press the video name/title.
+
+### I prefer using media library instead of a file chooser...
+
+Just Player uses system file chooser which already allows two different browsing modes: 
+
+1. **Videos** - listing only device directories that contain videos
+
+    <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/files_1.png" width="280">
+
+2. **File browser** - full navigation in the device file system structure
+
+    <img src="https://raw.githubusercontent.com/moneytoo/Player/master/fastlane/metadata/android/en-US/images/readmeScreenshots/files_2.png" width="280">
+
+Alternatively, some people choose to use the media library function of
+[Nova Video Player](https://github.com/nova-video-player/aos-AVP) and integrate it with Just Player by enabling "*Allow using another video player*" feature. This also gives you convenient access to content on network storages (SMB, UPnP, FTP and SFTP).
+
+### How to access videos on network storages (SMB, WebDAV, SFTP, etc.)?
+
+1. The default system file chooser allows access to any remote storage using appropriate _Document Provider_. I highly recommend [CIFS Documents Provider](https://github.com/wa2c/cifs-documents-provider) for accessing Samba shares. There are also providers like [WebDAV Provider](https://github.com/alexbakker/webdav-provider)/[DAVx⁵](https://github.com/bitfireAT/davx5-ose) (WebDAV), [FileManagerUtils](https://github.com/rikyiso01/FileManagerUtils) (SFTP) and [rcx](https://github.com/x0b/rcx). Sadly, Document providers are not supported on Android TV.
+
+2. Open video directly from your favorite file explorer. _Solid Explorer_ works really well, especially if you also want to automatically load subtitles.
+
+### How do I open a streaming link, where do I enter an url?
+
+Just Player does not have any UI to enter internet addresses, but it is registered for handling all compatible streaming links. When opening/tapping links in other apps, Just Player should be generally offered as an option. (Though this may not work in all situations, especially on Android 12+.)
+
+Alternatively, select the text url in the source app, choose _Share_ and find Just Player to play it.
+
+### How to zoom in to get rid of black bars?
+
+If your device has a touchscreen you can use the pinch-to-zoom gesture or just tap the Resize button for a Crop. **Android TV**: Long tap the Resize button to enter Zoom mode. Then use Up and Down keys for precise zoom.
+
+### What to do if Bluetooth audio is not in sync with video?
+
+Just pause and resume playback once again.
+
+### Why is the APK so big?
+
+The APK available here contains native libraries for all supported architectures (`armeabi-v7a`/`armeabi-v7a-neon`/`arm64-v8a`/`x86`/`x86_64`), which is what takes the most space. Although Just Player relies mostly on device decoders, it packs _FFmpeg_ for some advanced features (video chapters and frame rate detection). The second largest dependency is [ICU4J](https://github.com/moneytoo/Player/issues/76) - 10 MB only for charset detection of subtitle files. 🤷
+
+Please note that installs and updates made through Google Play are significantly smaller thanks to Android App Bundles and delta updates.
+
+## Other open source Android video players
+
+Here's a comparison table presenting all available and significant open source video players for Android I was able to find. Just Player is something like ~~80%~~ 90% feature complete. It will probably never have dozens of options or some rich media library UI. It will never truly compete with feature rich VLC. It just attempts to provide functional feature set and motive others to create greater players based on amazing ExoPlayer.
+
+| App name (source)                                                 | Media engine                                                                                                                                                            | Gestures                  | PiP    | Cutout (notch) | Android TV |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------ | -------------- | ---------- |
+| [Fermata Media Player](https://github.com/AndreyPavlenko/Fermata) | [MediaPlayer](https://developer.android.com/guide/topics/media/mediaplayer), [ExoPlayer](https://exoplayer.dev/) and [libVLC](https://www.videolan.org/vlc/libvlc.html) | 🟡 Seek/Volume            | 🔴 No  | 🔴 No          | 🟢 Yes     |
+| [Just (Video) Player](https://github.com/moneytoo/Player)         | [ExoPlayer](https://exoplayer.dev/)                                                                                                                                     | 🟢 Seek/Volume/Brightness | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
+| [Kodi](https://github.com/xbmc/xbmc)                              | ?                                                                                                                                                                       | 🔴 No                     | 🔴 No  | 🔴 No          | 🟢 Yes     |
+| [mpv](https://github.com/mpv-android/mpv-android)                 | [libmpv](https://github.com/mpv-player/mpv)                                                                                                                             | 🟢 Seek/Volume/Brightness | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
+| [Next Player](https://github.com/anilbeesetti/nextplayer)         | [ExoPlayer](https://exoplayer.dev/)                                                                                                                                     | 🟢 Seek/Volume/Brightness | 🔴 No  | 🟢 Yes         | 🔴 No      |
+| [Nova Video Player](https://github.com/nova-video-player/aos-AVP) | MediaPlayer                                                                                                                                                             | 🔴 No                     | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
+| [VLC](https://code.videolan.org/videolan/vlc-android)             | [libVLC](https://www.videolan.org/vlc/libvlc.html)                                                                                                                      | 🟢 Seek/Volume/Brightness | 🟢 Yes | 🟢 Yes         | 🟢 Yes     |
+
+To find other video players (including non-FOSS), check out [a list on IzzyOnDroid](https://android.izzysoft.de/applists/category/named/multimedia_video_player).
