@@ -1,44 +1,22 @@
-### Prepare a Pull Request
+## Type of change
 
-- Title: [BitSail-XYZ][XxxType] Title of the pull request
+- [ ] Bug fix
+- [ ] New feature
 
-- Fixes: #XYZ
+## Description
 
-> **Please change the PR title and the related issue number refer to the following description.**
->
-> The above *XYZ* must be replaced with the actual [GitHub Issue](https://github.com/bytedance/bitsail/issues) number, indicating that the current PR is used to solve the problem described in this Issue.
->
-> If you don't find an Issue that matches your changes, please [Create Issue](https://github.com/bytedance/bitsail/issues/new/choose) first, then commit this PR.
->
-> For more info about the contributing guide, see: [Contributing Guide](https://github.com/bytedance/bitsail/blob/master/website/en/community/contribute.md)
+A summary of the changes along with the reasoning behind the changes.
 
-### Motivation
+## Related issues
 
-*Describe what this PR does and what problems you're trying to solve.*
+Mention any issues that this pr relates to.
 
-### Modifications
+# How Has This Been Tested?
 
-*Describe the modifications you've done.*
+Videos or screenshots of the changes if applicable.
 
-### Verifying this change
+# Checklist:
 
-**Please pick either of the following options.**
-
-- [ ] This change is a trivial rework/code cleanup without any test coverage.
-
-- [ ] This change is already covered by existing tests, such as:
-  *(please describe tests, example:)*
-  - com.bytedance.bitsail.core.EngineTest#testRunEngine
-
-- [ ] This change added tests and can be verified as follows:
-
-  *(example:)*
-  - Added unit tests for parsing of configs
-  - Optimized integration tests for recovery after task failure
-
-### Documentation
-
-- Does this pull request introduce a new feature? (yes / no)
-- If yes, how is the feature documented? (not applicable / docs / JavaDocs / not documented)
-- If a feature is not applicable for documentation, explain why?
-- If a feature is not documented yet in this PR, please create a follow-up issue for adding the documentation
+- [ ] My code follows the style guidelines of this project.
+- [ ] I have added comments to my code in more complex areas.
+- [ ] I have tested the code in both development and production environments.

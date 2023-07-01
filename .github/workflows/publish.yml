@@ -1,0 +1,23 @@
+name: Publish
+
+on:
+  push:
+    branches: [ meteor-client ]
+
+
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - run: chmod +x gradlew
+
+      - name: Publish
+        run: ./gradlew publish

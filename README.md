@@ -1,279 +1,60 @@
-<!--
 
-Copyright 2022-2023 Bytedance Ltd. and/or its affiliates.
-         
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+<p align="center">
+<img src="https://meteorclient.com/icon.png" alt="meteor-client-logo" width="15%"/>
+</p>
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<h1 align="center">Meteor</h1>
+<p align="center">A Minecraft Fabric Utility Mod for anarchy servers.</p>
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+<div align="center">
+    <a href="https://discord.gg/bBGQZvd"><img src="https://img.shields.io/discord/689197705683140636?logo=discord" alt="Discord"/></a>
+    <br>
+    <img src="https://img.shields.io/github/last-commit/MeteorDevelopment/meteor-client" alt="GitHub last commit"/>
+    <img src="https://img.shields.io/github/commit-activity/w/MeteorDevelopment/meteor-client" alt="GitHub commit activity"/>
+    <img src="https://img.shields.io/github/contributors/MeteorDevelopment/meteor-client" alt="GitHub contributors"/>
+    <br>
+    <img src="https://img.shields.io/github/languages/code-size/MeteorDevelopment/meteor-client" alt="GitHub code size in bytes"/>
+    <img src="https://tokei.rs/b1/github/MeteorDevelopment/meteor-client" alt="GitHub lines of code"/>
+</div>
 
--->
+## Usage
 
-![logo](website/images/bitsail_logo.png)
+### Building
+- Clone this repository
+- Run `./gradlew build`
 
-English | [简体中文](README_zh.md)
+### Installation
+Follow the [guide](https://meteorclient.com/faq/installation) on the wiki.
 
-[![Build](https://github.com/bytedance/bitsail/actions/workflows/cicd.yml/badge.svg)](https://github.com/bytedance/bitsail/actions/workflows/cicd.yml)
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Join Slack](https://img.shields.io/badge/slack-%23BitSail-72eff8?logo=slack&color=5DADE2&label=Join%20Slack)](https://join.slack.com/t/bitsailworkspace/shared_invite/zt-1l1vgcnlj-gPSWqggOeRHrSO5l7na2WQ)
-[![Website](https://img.shields.io/badge/Website-%23BitSail-blue)](https://bytedance.github.io/bitsail/)
-## Introduction
-BitSail is ByteDance's open source data integration engine which is based on distributed architecture and provides high performance. It supports data synchronization between multiple heterogeneous data sources, and provides global data integration solutions in batch, streaming, and incremental scenarios. At present, it serves almost all business lines in ByteDance, such as Douyin, Toutiao, etc., and synchronizes hundreds of trillions of data every day.
+## Contributions
+We will review and help with all reasonable pull requests as long as the guidelines below are met.
 
-Official website of BitSail:  https://bytedance.github.io/bitsail/
+- The license header must be applied to all java source code files.
+- IDE or system-related files should be added to the `.gitignore`, never committed in pull requests.
+- In general, check existing code to make sure your code matches relatively close to the code already in the project.
+- Favour readability over compactness.
+- If you need help, check out the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) for a reference.
 
-## Why Do We Use BitSail
-BitSail has been widely used and supports hundreds of trillions of large traffic. At the same time, it has been verified in various scenarios such as the cloud native environment of the volcano engine and the on-premises private cloud environment.
+## Bugs and Suggestions
+Bug reports and suggestions should be made in this repo's [issue tracker](https://github.com/MeteorDevelopment/meteor-client/issues) using the templates provided.  
+Please provide as much information as you can to best help us understand your issue and give a better chance of it being resolved.
 
-We have accumulated a lot of experience and made a number of optimizations to improve the function of data integration
+## Donations
+All of our work is completely free and non-profit (donations pay only for hosting costs), therefore we are very grateful for all donations made to support us in running our community.  
+Donations can be made via our [website](https://meteorclient.com/donate) and the minimum amount to get donor benefits is €5.  
+You will be rewarded with a role on our Discord server and a customisable in-game cape.  
+⚠️ _Make sure to create a Meteor account and link your Discord and Minecraft accounts to fully experience your rewards._ ⚠️
 
-- Global Data Integration, covering batch, streaming and incremental scenarios
+## Credits
+[Cabaletta](https://github.com/cabaletta) and [WagYourTail](https://github.com/wagyourtail) for [Baritone](https://github.com/cabaletta/baritone)  
+The [Fabric Team](https://github.com/FabricMC) for [Fabric](https://github.com/FabricMC/fabric-loader) and [Yarn](https://github.com/FabricMC/yarn)
 
-- Distributed and cloud-native architecture, supporting horizontal scaling
+## Licensing
+This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). 
 
-- High maturity in terms of accuracy, stability and performance
+If you use **ANY** code from the source:
+- You must disclose the source code of your modified work and the source code you took from this project. This means you are not allowed to use code from this project (even partially) in a closed-source and/or obfuscated application.
+- You must state clearly and obviously to all end users that you are using code from this project.
+- Your application must also be licensed under the same license.
 
-- Rich basic functions, such as type conversion, dirty data processing, flow control, data lake integration, automatic parallelism calculation
-, etc.
-
-- Task running status monitoring, such as traffic, QPS, dirty data, latency, etc.
-
-## BitSail Use Scenarios
-- Mass data synchronization in heterogeneous data sources
-
-- Streaming and batch integration data processing capability
-
-- Data lake and warehouse integration data processing capability
-
-- High performance, high reliability data synchronization
-
-- Distributed, cloud-native architecture data integration engine
-
-## Features of BitSail
-
-- Low start-up cost and high flexibility
-
-- Stream-batch integration and Data lake-warehouse integration architecture, one framework covers almost all data synchronization scenarios
-
-- High-performance, massive data processing capabilities
-
-- DDL automatic synchronization
-
-- Type system, conversion between different data source types
-
-- Engine independent reading and writing interface, low development cost
-
-- Real-time display of task progress, under development
-
-- Real-time monitoring of task status
-
-## Architecture of BitSail
- ![](website/images/bitsail_arch.png)
-
- ```
- Source[Input Sources] -> Framework[Data Transmission] -> Sink[Output Sinks]
- ```
-The data processing pipeline is as follows. First, pull the source data through Input Sources, then process it through the intermediate framework layer, and finally write the data to the target through Output Sinks
-
-At the framework layer, we provide rich functions and take effect for all synchronization scenarios, such as dirty data collection, auto parallelism calculation, task monitoring, etc.
-
-In data synchronization scenarios, it covers batch, streaming, and incremental data synchronization
-
-In the Runtime layer, it supports multiple execution modes, such as yarn, local, and k8s is under development
-
-## Supported Connectors
-
-<table>
-  <tr>
-    <th>DataSource</th>
-    <th>Sub Modules</th>
-    <th>Reader</th>
-    <th>Writer</th>
-  </tr>
-  <tr>
-    <td>Assert</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>ClickHouse</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>Doris</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Druid</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Elasticsearch</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Fake</td>
-    <td>-</td>
-    <td>✅</td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>FTP/SFTP</td>
-    <td>-</td>
-    <td>✅</td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>Hadoop</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>HBase</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Hive</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Hudi</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>LocalFileSystem</td>
-    <td>-</td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td rowspan="4">JDBC</td>
-    <td>MySQL</td>
-    <td rowspan="4">✅</td>
-    <td rowspan="4">✅</td>
-  </tr>
-  <tr>
-    <td>Oracle</td>
-  </tr>
-  <tr>
-    <td>PostgreSQL</td>
-  </tr>
-  <tr>
-    <td>SqlServer</td>
-  </tr>
-  <tr>
-    <td>Kafka</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Kudu</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>LarkSheet</td>
-    <td>-</td>
-    <td>✅</td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>MongoDB</td>
-    <td>-</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Print</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>Redis</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>RocketMQ</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-  <tr>
-    <td>SelectDB</td>
-    <td>-</td>
-    <td> </td>
-    <td>✅</td>
-  </tr>
-</table>
-
-Documentation for [Connectors](website/en/documents/connectors/README.md).
-
-## Community Support
-### Slack
-Join BitSail Slack channel via this [link](https://join.slack.com/t/bitsailworkspace/shared_invite/zt-1l1vgcnlj-gPSWqggOeRHrSO5l7na2WQ)
-
-### Mailing List
-Currently, BitSail community use Google Group as the mailing list provider.
-You need to subscribe to the mailing list before starting a conversation
-
-Subscribe: Email to this address `bitsail+subscribe@googlegroups.com`
-
-Start a conversation: Email to this address `bitsail@googlegroups.com`
-
-Unsubscribe: Email to this address `bitsail+unsubscribe@googlegroups.com`
-
-### WeChat Group
-Welcome to scan this QR code and to join the WeChat group chat.
-
-<img src="website/images/wechat_QR.png" alt="qr" width="100"/>
-
-## Environment Setup
-Link to [Environment Setup](website/en/documents/start/env_setup.md).
-
-## Deployment Guide
-Link to [Deployment Guide](website/en/documents/start/deployment.md).
-
-## BitSail Configuration
-Link to [Configuration Guide](website/en/documents/start/config.md).
-
-## Contributing Guide
-Link to [Contributing Guide](website/en/community/contribute.md).
-
-## Contributors
-**Thanks all contributors**<br>
-
-<a href="https://github.com/bytedance/bitsail/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=bytedance/bitsail" />
-</a>
-
-## License
-[Apache 2.0 License](LICENSE).
-
+*If you have any other questions, check our [FAQ](https://meteorclient.com/faq) or ask in our [Discord](https://meteorclient.com/discord) server.*

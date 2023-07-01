@@ -1,6 +1,0 @@
-{
-  "name": "flink",
-  "libs": [
-    "bitsail-client-flink-1.11-${version}.jar"
-  ]
-}
