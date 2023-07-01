@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="LoginTitleView">
-        <!--标题-->
-        <attr name="titleStr" format="string" />
-        <!--是否显示返回按钮-->
-        <attr name="showBack" format="boolean" />
-    </declare-styleable>
-</resources>

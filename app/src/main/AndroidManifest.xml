@@ -1,160 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.omni.wallet"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <application
-        android:name=".base.AppApplication"
-        android:allowBackup="false"
-        android:configChanges="orientation"
-        android:hardwareAccelerated="true"
-        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:largeHeap="true"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:label,android:icon,android:theme">
-        
+        android:theme="@style/AppTheme.AOSPMods"
+        android:enableOnBackInvokedCallback="true"
+        android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".ui.activity.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:name=".UpdateActivity"
+            android:exported="false"
+            android:label="@string/title_activity_update"
+            android:parentActivityName=".SettingsActivity"/>
+        <activity
+            android:name=".updateActivity"
+            android:exported="false"
+            android:label="@string/title_activity_update"
+            android:parentActivityName=".SettingsActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            <!-- 注意：这里必须新建一个Intent-filter,如果直接写在launcher打开的filter中则会app图标消失（因为category被覆盖为DEAFAULT） -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <!-- 便于JS能够唤醒 -->
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <!-- url唤醒App的Scheme和host -->
-                <data
-                    android:host="com.omni.wallet"
-                    android:scheme="content"/>
+                <action android:name="android.intent.action.RUN" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- Unlock页面 -->
-        <activity
-            android:name=".ui.activity.UnlockActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.activity.InitWalletMenuActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- Set Pass页面 -->
-        <!-- ForgetPwd页面 -->
-        <activity
-            android:name=".ui.activity.ForgetPwdActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- ForgetPwdNext页面 -->
-        <activity
-            android:name=".ui.activity.ForgetPwdNextActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- Create页面 -->
-        <activity
-            android:name=".ui.activity.CreateActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- CreateWalletStepOne页面 -->
-        <activity
-            android:name=".ui.activity.createwallet.CreateWalletStepOneActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- CreateWalletStepTwo页面 -->
-        <activity
-            android:name=".ui.activity.createwallet.CreateWalletStepTwoActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- CreateWalletStepThree页面 -->
-        <activity
-            android:name=".ui.activity.createwallet.CreateWalletStepThreeActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- ChooseBackupType页面 -->
-        <activity
-            android:name=".ui.activity.ChooseBackupTypeActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- RecoverWalletStepOne页面 -->
-        <activity
-            android:name=".ui.activity.recoverwallet.RecoverWalletStepOneActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- RecoverWalletStepTwo页面 -->
-        <activity
-            android:name=".ui.activity.recoverwallet.RecoverWalletStepTwoActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- GetBlockData页面 -->
-        <activity
-            android:name=".ui.activity.GetBlockDataActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- AccountLightning页面 -->
-        <activity
-            android:name=".ui.activity.AccountLightningActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- Channels页面 -->
-        <activity
-            android:name=".ui.activity.channel.ChannelsActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- backupBlock页面 -->
-        <activity
-            android:name=".ui.activity.backup.BackupBlockProcessActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- BalanceDetail页面 -->
-        <activity
-            android:name=".ui.activity.BalanceDetailActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- ScanQRCode页面 -->
-        <activity
-            android:name=".ui.activity.ScanActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- Search页面 -->
-        <activity
-            android:name=".ui.activity.SearchActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- ScanQRCode Channel页面 -->
-        <activity
-            android:name=".ui.activity.ScanChannelActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <!-- ScanQRCode Send页面 -->
-        <activity
-            android:name=".ui.activity.ScanSendActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity 
-            android:name=".ui.activity.backup.RestoreChannelActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.activity.backup.BackupChannelActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings">
+        </activity>
+
+        <activity-alias
+            android:name=".SettingsActivityNormalIcon"
+            android:targetActivity=".SettingsActivity"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:exported="true"
+            android:label="@string/title_activity_settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".SettingsActivityAlternateIcon"
+            android:targetActivity=".SettingsActivity"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_themed"
+            android:exported="true"
+            android:label="@string/title_activity_settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <service
+            android:name=".utils.VolumeTileService"
+            android:label="@string/volume_tile_title"
+            android:icon="@drawable/ic_volume"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name=".utils.RemotePrefProvider"
+            android:authorities="sh.siava.AOSPMods"
+            android:directBootAware="true"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
+        <meta-data
+            android:name="xposeddescription"
+            android:value="@string/xposed_desc" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="82" />
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/module_scope" />
     </application>
 
 </manifest>

@@ -1,1 +1,5 @@
-include ':app', ':baselibrary', ':resource', ':framelibrary', ':thirdsupport', ':MPChartLib'
+rootProject.name = "AOSPMods"
+include ':app'
+include ':RangeSliderPreference'
+
+project(':RangeSliderPreference').projectDir = new File(rootDir, 'Submodules/RangeSliderPreference/')

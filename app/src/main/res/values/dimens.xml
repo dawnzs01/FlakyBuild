@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="radius_owner_manager_item">@dimen/main_4</dimen>
-    <dimen name="owner_manager_item_stroke">@dimen/main_1</dimen>
+	<dimen name="ui_container_radius">24dp</dimen>
+	<dimen name="ui_container_margin_side">16dp</dimen>
+	<dimen name="cpv_color_preference_normal">32dp</dimen>
+	<dimen name="cpv_color_preference_large">44dp</dimen>
 </resources>
