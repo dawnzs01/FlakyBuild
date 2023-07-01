@@ -1,9 +1,0 @@
-{
-  "eventType" : "START",
-  "job" : {
-    "namespace" : "delta-namespace",
-    "name" : "delta_integration_test.atomic_replace_table"
-  },
-  "inputs" : [ ],
-  "outputs" : [ ]
-}

@@ -1,100 +1,177 @@
-<div align="center">
-  <img src="./doc/openlineage-logo.png" width="375px" />
-  <a href="https://lfaidata.foundation/projects">
-      <img src="./doc/lfaidata-project-badge-sandbox-black.png" width="115px" />
-  </a>
-</div>
+English | [简体中文](./README_CN.md)
+<a href="https://github.com/zfoo-project/zfoo"><img src="/doc/image/logo.jpg" width="30%"></a>
 
-## Badges
+-----------
+Why is zfoo protocol ?
+-----------
 
-[![CircleCI](https://circleci.com/gh/OpenLineage/OpenLineage/tree/main.svg?style=shield)](https://circleci.com/gh/OpenLineage/OpenLineage/tree/main)
-[![status](https://img.shields.io/badge/status-active-brightgreen.svg)](#status)
-[![Slack](https://img.shields.io/badge/slack-chat-blue.svg)](http://bit.ly/OpenLineageSlack)
-[![license](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](https://github.com/OpenLineage/OpenLineage/blob/main/LICENSE)
-[![maven](https://img.shields.io/maven-central/v/io.openlineage/openlineage-java.svg)](https://search.maven.org/search?q=g:io.openlineage)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4888/badge)](https://bestpractices.coreinfrastructure.org/projects/4888)
+- The protocol currently supports C++ C# Go Java Javascript TypeScript GDScript Lua
+- Universal distributed server protocol implementation, there are implementations in other languages, which can easily
+  implement RPC, servers, and microservices on other platforms
+- The fastest custom format framework for Java binary serialization, with the fewest serialized bytes, more secure and
+  compatible
+- In the single-threaded benchmark test, serialization and deserialization are 50% faster than Protobuf and 100% faster
+  than Kryo
 
-## Overview
-OpenLineage is an Open standard for metadata and lineage collection designed to instrument jobs as they are running.
-It defines a generic model of run, job, and dataset entities identified using consistent naming strategies.
-The core lineage model is extensible by defining specific facets to enrich those entities.
+Ⅰ. Introduction of zfoo🚩
+-----------
 
-## Status
+- **Extremely fast, asynchronous, Actor design pattern, lock-free design, RPC framework based on Spring MVC**
+- **Fastest serialization and deserialization**，use [zfoo protocol](protocol/README.md) as a network protocol
+- **High scalability**，Single server deployment, microservice deployment, cluster deployment, gateway deployment
+- **Can be used as a game server framework or website server framework.**
 
-OpenLineage is an [LF AI & Data Foundation](https://lfaidata.foundation/projects/openlineage) incubation project under active development, and we'd love your help!
+Perfect work development process, complete online solution
 
-## Problem
+- Spring projects, distributed projects, container projects， **hot update code without
+  downtime** [hotswap](hotswap/src/test/java/com/zfoo/hotswap/ApplicationTest.java)
+- Excel json csv configuration is automatically mapped and parsed，**Online hotswap
+  configuration** [storage](storage/src/test/java/com/zfoo/storage/ApplicationTest.java)
+- Automapping framework for MongoDB [orm](orm/README.md)
+- Event bus [event](event/src/test/java/com/zfoo/event/ApplicationTest.java)
+- Time task scheduling [scheduler](scheduler/README.md)
+- **cpu, memory, hard disk, network monitoring built into the program** no code and extra tools
+  required [monitor](monitor/src/test/java/com/zfoo/monitor/ApplicationTest.java)
 
-### Before
+Ⅱ. Who use this project
+---------------
 
-- Duplication of effort: each project has to instrument all jobs
-- Integrations are external and can break with new versions
+- Projects with extremely high performance requirements, such as website and game server frameworks, single server,
+  global server, live chat, IM system, real-time push
+- Projects such as saving, development, deployment, operation and maintenance costs
+- As a backend infrastructure for **Godot，Unity，Cocos，Webgl，H5**，Network protocol supports tcp udp websocket http
+- [Keep it Simple and Stupid](https://baike.baidu.com/item/KISS原则/3242383) ，simple configuration, lightweight code
 
-![Before OpenLineage](doc/before-ol.svg)
+Ⅲ. Tutorials
+--------------------
 
-### With OpenLineage
+- [FAQ](./doc/FAQ.md)，There are standard demo display and instructions in the test folder of each project directory,
+  which can be run directly
 
-- Effort of integration is shared
-- Integration can be pushed in each project: no need to play catch up
+- [tank-game-server](https://github.com/zfoo-project/tank-game-server) Online game《The Fight of Tanks》，novice friendly,
+  difficulty 2 stars
+    - Quick star, tank game entry [tank.zfoo.net](http://tank.zfoo.net)
+    - Quick star, tank background management [tank-admin.zfoo.net](http://tank-admin.zfoo.net)
 
-![With OpenLineage](doc/with-ol.svg)
+- [godot-bird](https://github.com/zfoo-project/godot-bird) bird and bird，powered by godot
 
-## Scope
-OpenLineage defines the metadata for running jobs and the corresponding events.
-A configurable backend allows the user to choose what protocol to send the events to.
- ![Scope](doc/scope.svg)
+- [cocos-fivechess](https://github.com/zfoo-project/fivechess) five chess，use cocos as client
 
-## Core model
 
- ![Model](doc/datamodel.svg)
+Ⅳ. Install and use⭐
+------------
 
- A facet is an atomic piece of metadata attached to one of the core entities.
- See the spec for more details.
+#### 1. Environmental Requirements and Installation
 
-## Spec
-The [specification](spec/OpenLineage.md) is defined using OpenAPI and allows extension through custom facets.
+**JDK 11 or 17**，**OpenJDK** or **Oracle JDK** ，maven install to local repository
 
-## Integrations
+```
+If you do not have JDK 11+ installed, the quick installation method is to download directly 
+from Project Structure, Platform Settings, SDKs in the upper right corner of Idea
+```
 
-The OpenLineage repository contains integrations with several systems.
+#### 2. [protocol](protocol/README.md) fastest serialization and deserialization
 
-- [Apache Spark](https://github.com/OpenLineage/OpenLineage/tree/main/integration/spark)
-- [Apache Airflow](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow)
-- [Dagster](https://github.com/OpenLineage/OpenLineage/tree/main/integration/dagster)
-- [dbt](https://github.com/OpenLineage/OpenLineage/tree/main/integration/dbt)
-- [Flink](https://github.com/OpenLineage/OpenLineage/tree/main/integration/flink)
+```
+// zfoo protocol registration, can only be initialized once
+ProtocolManager.initProtocol(Set.of(ComplexObject.class, ObjectA.class, ObjectB.class));
 
-## Related projects
-- [Marquez](https://marquezproject.ai/): Marquez is an [LF AI & DATA](https://lfaidata.foundation/) project to collect, aggregate, and visualize a data ecosystem's metadata. It is the reference implementation of the OpenLineage API.
-  - [OpenLineage collection implementation](https://github.com/MarquezProject/marquez/blob/main/api/src/main/java/marquez/api/OpenLineageResource.java)
-- [Egeria](https://egeria.odpi.org/): Egeria offers open metadata and governance for enterprises - automatically capturing, managing and exchanging metadata between tools and platforms, no matter the vendor.
+// serialization
+ProtocolManager.write(byteBuf, complexObject);
 
-## Community
-- Slack: [OpenLineage.slack.com](http://bit.ly/OLslack)
-- Twitter: [@OpenLineage](https://twitter.com/OpenLineage)
-- Mailing list: [openlineage-tsc](https://lists.lfaidata.foundation/g/openlineage-tsc)
-- Wiki: [OpenLineage+Home](https://wiki.lfaidata.foundation/display/OpenLineage/OpenLineage+Home)
-- LinkedIn: [13927795](https://www.linkedin.com/groups/13927795/)
-- YouTube: [channel](https://www.youtube.com/channel/UCRMLy4AaSw_ka-gNV9nl7VQ)
-- Mastodon: [@openlineage@fostodon.org](openlineage@fosstodon.org)
-- Website: [openlineage.io](http://openlineage.io)
+// deserialization
+var packet = ProtocolManager.read(byteBuf);
+```
 
-## Talks
-- [Berlin Buzzwords June 2022. Cross-Platform Data Lineage with OpenLineage](https://www.youtube.com/watch?v=pLBVGIPuwEo)
-- [Berlin Buzzwords June 2021. Observability for Data Pipelines with OpenLineage](https://2021.berlinbuzzwords.de/member/julien-le-dem)
-- [Data Driven NYC February 2021. Data Observability and Pipelines: OpenLineage and Marquez](https://mattturck.com/datakin/)
-- [Big Data Technology Warsaw Summit February 2021. Data lineage and Observability with Marquez and OpenLineage](https://bigdatatechwarsaw.eu/edition-2021/)
-- [Metadata Day 2020. OpenLineage Lightning Talk](https://www.youtube.com/watch?v=anlV5Er_BpM)
-- [Open Core Summit 2020. Observability for Data Pipelines: OpenLineage Project Launch](https://www.coss.community/coss/ocs-2020-breakout-julien-le-dem-3eh4)
+#### 3. [net](net/README.md) fastest RPC framework, supports tcp udp websocket http
 
-## Contributing
+```
+// Service provider, only need to add an annotation to the method, the interface will be automatically registered
+@PacketReceiver
+public void atUserInfoAsk(Session session, UserInfoAsk ask) {
+}
 
-See [CONTRIBUTING.md](https://github.com/OpenLineage/OpenLineage/blob/main/CONTRIBUTING.md) for more details about how to contribute.
+// Consumers, synchronously requesting remote service, will block the current thread
+var userInfoAsk = UserInfoAsk.valueOf(userId);
+var answer = NetContext.getCosumer().syncAsk(userInfoAsk, UserInfoAnswer.class, userId).packet();
 
-## Report a Vulnerability
+// Consumers, asynchronously requesting remote service, and will still execute logic in the current thread after the asynchronous
+NetContext.getCosumer()
+                    .asyncAsk(userInfoAsk, UserInfoAnswer.class, userId)
+                    .whenComplete(sm -> {
+                        // do something
+                    );
+```
 
-If you discover a vulnerability in the project, please [open an issue](https://github.com/OpenLineage/OpenLineage/issues/new/choose) and attach the "security" label.
+#### 4. [hotswap](hotswap/src/test/java/com/zfoo/hotswap/ApplicationTest.java) hot update code, no need to stop the server, no additional configuration, just one line of code to start hot update
 
-----
-SPDX-License-Identifier: Apache-2.0\
-Copyright 2018-2023 contributors to the OpenLineage project
+```
+// Pass in the class file that needs to be updated
+HotSwapUtils.hotswapClass(bytes);
+```
+
+#### 5. [orm](orm/README.md) automatic mapping framework based on mongodb，The secondary cache is designed using [caffeine](https://github.com/ben-manes/caffeine) to fully release the database pressure
+
+```
+// You don't need to write sql and any configuration yourself, define a table in the database directly through annotation definitions
+@EntityCache
+public class UserEntity implements IEntity<Long> {
+    @Id
+    private long id;
+    private String name;
+}
+
+// update database data
+entityCaches.update(userEntity);
+```
+
+#### 6. [event](event/src/test/java/com/zfoo/event/ApplicationTest.java) use the observer design pattern, decouples different modules and improves the quality of the code
+
+```
+// To receive an event, you only need to add an annotation to the method and the method will be automatically listen for the event
+@EventReceiver
+public void onMyNoticeEvent(MyNoticeEvent event) {
+    // do something
+}
+
+// fire an event
+EventBus.post(MyNoticeEvent.valueOf("My event"));
+```
+
+#### 7. [scheduler](scheduler/README.md) scheduling Framework Based on Cron Expression
+
+````
+@Scheduler(cron = "0/1 * * * * ?")
+public void cronSchedulerPerSecond() {
+    // do something
+}
+````
+
+#### 8. [storage](storage/src/test/java/com/zfoo/storage/ApplicationTest.java) Excel to class automatic mapping framework, you only need to define a class corresponding to Excel, and directly parse Excel
+
+```
+@Resource
+public class StudentResource {
+    @Id
+    private int id;
+    @Index
+    private String name;
+    private int age;
+}
+```
+
+Ⅴ. Commit specification👏
+----------
+
+- People who like this project are welcome to maintain this project together, and pay attention to the following
+  specifications when submitting code
+- The code formats uses the default formatting of IntelliJ Idea
+- [conventional-changelog-metahub](https://github.com/pvdlg/conventional-changelog-metahub#commit-types)
+
+Ⅵ. License
+-----------
+
+zfoo use [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
+
