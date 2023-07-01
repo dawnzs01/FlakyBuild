@@ -1,142 +1,146 @@
-# CDC Connectors for Apache Flink<sup>®</sup>
+# ByteLegend - learn programming while playing a game
 
-CDC Connectors for Apache Flink<sup>®</sup> is a set of source connectors for Apache Flink<sup>®</sup>, ingesting changes from different databases using change data capture (CDC).
-CDC Connectors for Apache Flink<sup>®</sup> integrates Debezium as the engine to capture data changes. So it can fully leverage the ability of Debezium. See more about what is [Debezium](https://github.com/debezium/debezium).
+[![check](https://github.com/ByteLegend/ByteLegend/actions/workflows/check.yml/badge.svg)](https://github.com/ByteLegend/ByteLegend/actions/workflows/check.yml)
 
-This README is meant as a brief walkthrough on the core features of CDC Connectors for Apache Flink<sup>®</sup>. For a fully detailed documentation, please see [Documentation](https://ververica.github.io/flink-cdc-connectors/master/).
+<details>
+  <summary>简体中文</summary>
 
-## Supported (Tested) Databases
+# 字节传说：玩游戏，学编程
 
-| Connector                                                  | Database                                                                                                                                                                                                                                                                                                                                                                                               | Driver                    |
-|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| [mongodb-cdc](docs/content/connectors/mongodb-cdc.md)      | <li> [MongoDB](https://www.mongodb.com): 3.6, 4.x, 5.0                                                                                                                                                                                                                                                                                                                                                 | MongoDB Driver: 4.3.4     |
-| [mysql-cdc](docs/content/connectors/mysql-cdc.md)          | <li> [MySQL](https://dev.mysql.com/doc): 5.6, 5.7, 8.0.x <li> [RDS MySQL](https://www.aliyun.com/product/rds/mysql): 5.6, 5.7, 8.0.x <li> [PolarDB MySQL](https://www.aliyun.com/product/polardb): 5.6, 5.7, 8.0.x <li> [Aurora MySQL](https://aws.amazon.com/cn/rds/aurora): 5.6, 5.7, 8.0.x <li> [MariaDB](https://mariadb.org): 10.x <li> [PolarDB X](https://github.com/ApsaraDB/galaxysql): 2.0.1 | JDBC Driver: 8.0.28       |
-| [oceanbase-cdc](/docs/content/connectors/oceanbase-cdc.md) | <li> [OceanBase CE](https://open.oceanbase.com): 3.1.x, 4.x <li> [OceanBase EE](https://www.oceanbase.com/product/oceanbase): 2.x, 3.x, 4.x                                                                                                                                                                                                                                                            | OceanBase Driver: 2.4.x   |
-| [oracle-cdc](docs/content/connectors/oracle-cdc.md)        | <li> [Oracle](https://www.oracle.com/index.html): 11, 12, 19, 21                                                                                                                                                                                                                                                                                                                                       | Oracle Driver: 19.3.0.0   |
-| [postgres-cdc](docs/content/connectors/postgres-cdc.md)    | <li> [PostgreSQL](https://www.postgresql.org): 9.6, 10, 11, 12, 13, 14                                                                                                                                                                                                                                                                                                                                 | JDBC Driver: 42.5.1       |
-| [sqlserver-cdc](docs/content/connectors/sqlserver-cdc.md)  | <li> [Sqlserver](https://www.microsoft.com/sql-server): 2012, 2014, 2016, 2017, 2019                                                                                                                                                                                                                                                                                                                   | JDBC Driver: 9.4.1.jre8   |
-| [tidb-cdc](docs/content/connectors/tidb-cdc.md)            | <li> [TiDB](https://www.pingcap.com): 5.1.x, 5.2.x, 5.3.x, 5.4.x, 6.0.0                                                                                                                                                                                                                                                                                                                                | JDBC Driver: 8.0.27       |
-| [Db2-cdc](docs/content/connectors/db2-cdc.md)              | <li> [Db2](https://www.ibm.com/products/db2): 11.5                                                                                                                                                                                                                                                                                                                                                     | Db2 Driver: 11.5.0.0      |
-| [Vitess-cdc](docs/content/connectors/vitess-cdc.md)        | <li> [Vitess](https://vitess.io/): 8.0.x, 9.0.x                                                                                                                                                                                                                                                                                                                                                        | MySql JDBC Driver: 8.0.26 |
+# 字节传说是什么
 
-## Features
+[字节传说](https://bytelegend.com)是一个免费、开源的多人在线RPG游戏，通过这个游戏，你可以学到现实世界里的编程技能。
 
-1. Supports reading database snapshot and continues to read transaction logs with **exactly-once processing** even failures happen.
-2. CDC connectors for DataStream API, users can consume changes on multiple databases and tables in a single job without Debezium and Kafka deployed.
-3. CDC connectors for Table/SQL API, users can use SQL DDL to create a CDC source to monitor changes on a single table.
+![1](https://raw.githubusercontent.com/ByteLegend/ByteLegend/master/docs/images/index-page-zh.png)
 
-## Usage for Table/SQL API
+## 如何玩
 
-We need several steps to setup a Flink cluster with the provided connector.
+- 访问[字节传说](https://bytelegend.com)，点击右上角的登录按钮并使用GitHub账号登录。
+- 和其他游戏一样，玩就是了——和NPC对话，收集物品，完成任务，等等。
+- 和其他游戏不同的是，你在这个游戏中获得的是真实世界里的高薪编程技能。
 
-1. Setup a Flink cluster with version 1.12+ and Java 8+ installed.
-2. Download the connector SQL jars from the [Download](https://github.com/ververica/flink-cdc-connectors/releases) page (or [build yourself](#building-from-source)).
-3. Put the downloaded jars under `FLINK_HOME/lib/`.
-4. Restart the Flink cluster.
+## 为什么选择字节传说
 
-The example shows how to create a MySQL CDC source in [Flink SQL Client](https://ci.apache.org/projects/flink/flink-docs-release-1.13/dev/table/sqlClient.html) and execute queries on it.
+- 免费
+  - 是的，我们是免费的。
+- 开源
+  - 是的，我们是开源的。这意味着你在游戏里看到的任何东西都是可以修改的：游戏地图、流程、NPC对话、国际化的文本，等等。
+  - 如果您在游戏中看到任何不对的地方，请不要犹豫直接提交issues/pull requests。我们和成千上万的玩家一起感谢您的贡献。
+  - 点击[这里](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/CONTRIBUTING.md)查看如何贡献代码。
+- 好玩
+  - 因为这是一个游戏，不是啰里八嗦的说教。
+- 特别为中国玩家优化的服务器
+  - 我们有ICP备案，因此特别在国内部署了服务器和CDN。
+  - 您不需要做任何配置，我们通过基于地理位置的DNS服务自动为您分配国内服务器和CDN。
+- 国际化
+  - 从第一天起，我们就支持地球上的**所有语言**，您只需要点击[字节传说](https://bytelegend.com)右上角的切换语言按钮即可。
+  - 如前所述，你可以对[字节传说](https://bytelegend.com)中能看到的任何东西做出修改，包括修正不佳的翻译或者添加一种新语言。
+  - 点击[这里](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/i18n.md)查看如何增加一种语言或者帮助我们改进翻译的质量。  
 
-```sql
--- creates a mysql cdc table source
-CREATE TABLE mysql_binlog (
- id INT NOT NULL,
- name STRING,
- description STRING,
- weight DECIMAL(10,3)
-) WITH (
- 'connector' = 'mysql-cdc',
- 'hostname' = 'localhost',
- 'port' = '3306',
- 'username' = 'flinkuser',
- 'password' = 'flinkpw',
- 'database-name' = 'inventory',
- 'table-name' = 'products'
-);
+## 联系我们
 
--- read snapshot and binlog data from mysql, and do some transformation, and show on the client
-SELECT id, UPPER(name), description, weight FROM mysql_binlog;
-```
+您可以在[Discord](https://discord.gg/PvmqK3hF)上加入我们或者通过email联系： [contact@bytelegend.com](mailto:contact@bytelegend.com)。
 
-## Usage for DataStream API
+## 加入玩家QQ群
 
-Include following Maven dependency (available through Maven Central):
+我们的玩家QQ群是`788942934`，但是请注意您需要在登录游戏之后打开右下角的`关于&联系`菜单获取入群密码后方可加入。入群密码各不相同，且只能
+使用一次，请勿泄漏给他人。
 
-```
-<dependency>
-  <groupId>com.ververica</groupId>
-  <!-- add the dependency matching your database -->
-  <artifactId>flink-connector-mysql-cdc</artifactId>
-  <!-- The dependency is available only for stable releases, SNAPSHOT dependency need build by yourself. -->
-  <version>2.5-SNAPSHOT</version>
-</dependency>
-```
+![1](https://raw.githubusercontent.com/ByteLegend/ByteLegend/master/docs/images/qq-group.png)
 
-```java
-import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import com.ververica.cdc.debezium.JsonDebeziumDeserializationSchema;
-import com.ververica.cdc.connectors.mysql.source.MySqlSource;
+## 致谢
 
-public class MySqlSourceExample {
-  public static void main(String[] args) throws Exception {
-    MySqlSource<String> mySqlSource = MySqlSource.<String>builder()
-            .hostname("yourHostname")
-            .port(yourPort)
-            .databaseList("yourDatabaseName") // set captured database
-            .tableList("yourDatabaseName.yourTableName") // set captured table
-            .username("yourUsername")
-            .password("yourPassword")
-            .deserializer(new JsonDebeziumDeserializationSchema()) // converts SourceRecord to JSON String
-            .build();
+没有社区和开源世界的帮助，这个游戏不可能存在。我们唯一能做的就是让它免费开源，从而使更多人受益。
 
-    StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+请访问[字节传说](https://bytelegend.com)并点击右下角的`致谢`按钮查看本游戏使用的开源项目和游戏资源。
 
-    // enable checkpoint
-    env.enableCheckpointing(3000);
+## 贡献
 
-    env
-      .fromSource(mySqlSource, WatermarkStrategy.noWatermarks(), "MySQL Source")
-      // set 4 parallel source tasks
-      .setParallelism(4)
-      .print().setParallelism(1); // use parallelism 1 for sink to keep message ordering
+我们感谢您作出的任何贡献：
 
-    env.execute("Print MySQL Snapshot + Binlog");
-  }
-}
-```
+- 任何文字错误：typo、用词或者翻译不当。
+- 游戏地图错误：有问题的格子图片、错误的标注等。
+- Bugs：前端、后端以及游戏脚本。
 
-## Building from source
+详情请阅读[贡献者指南](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/CONTRIBUTING.md)。
 
-- Prerequisites:
-    - git
-    - Maven
-    - At least Java 8
+## 本地启动
 
-```
-git clone https://github.com/ververica/flink-cdc-connectors.git
-cd flink-cdc-connectors
-mvn clean install -DskipTests
-```
+请确保你的`JAVA_HOME`指向JDK 11。
 
-The dependencies are now available in your local `.m2` repository.
+- `git clone https://github.com/ByteLegend/ByteLegend`
+- `cd ByteLegend`
+- `git submodule update --init -- game-data`
+- 运行`./gradlew bootRun`，然后访问`http://localhost:8080`
 
-## License
+第一次运行可能要花费几分钟，因为我们需要生成所有的游戏资源。后续的启动应该只花几秒钟。
 
-The code in this repository is licensed under the [Apache Software License 2](https://github.com/ververica/flink-cdc-connectors/blob/master/LICENSE).
+请注意`server` git submodule目前尚未开源，因为其中包含复杂的后端配置和敏感信息（GitHub webhook, GitHub app, k8s secrets等）。
+不过，我们在`server-opensource`中提供了一个开源版本的后端服务实现。
+
+点击[这里](https://github.com/ByteLegend/ByteLegend/blob/master/docs/zh_hans/game-code-contributor-guide.md) 查看开发者文档。
+
+</details>
+
+## What is ByteLegend
+
+[ByteLegend](https://bytelegend.com) is a free, opensource MMORPG game where you acquire realworld high-paying programming skills.
+
+![Index page](https://raw.githubusercontent.com/ByteLegend/ByteLegend/master/docs/images/index-page-en.png)
+
+## How to play
+
+- Go to [ByteLegend](https://bytelegend.com), click "Log in" at right-top corner, then log in with your GitHub account.
+- Like any other games, you just play the game, by talking to NPCs, collecting items, finishing the missions etc.
+- Unlike any other games, your get real, high-paid-job-ready programming skills in the real world!
+  
+## Why ByteLegend
+
+- Free
+  - Yes, it's free, as in "free beer". :-)
+- Opensource
+  - Yes, it's opensource. This means everything you see in the game is customizable: game map, story, NPC conversations, i18n texts, ...
+  - Please don't hesitate to create issues/pull requests for anything bad you see in the game. We and thousands of players appreciate your contribution very much.
+  - See [here](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/CONTRIBUTING.md) for more information on how to contribute.
+- Fun
+  - It's a game!
+- Internationalization
+  - We support **ALL** languages on this planet since day 1. You just need to click and select language on right-top corner of [ByteLegend](https://bytelegend.com).
+  - As we said above, you can make a contribution to anything you see in [ByteLegend](https://bytelegend.com), including fixing bad translations or adding more languages to the game.
+  - Check out [here](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/i18n.md) to see how to add a language or help us improve translation quality.
+
+## Contact
+
+Join us at [Discord](https://discord.gg/35RreUUGWt) or contact us via [contact@bytelegend.com](mailto:contact@bytelegend.com).
+
+## Credits
+
+This game would be impossible without the community and the opensource world, so we make it free and opensource to benefit more people.
+
+To see the software and game materials used in this game, go to the right-bottom corner of [ByteLegend](https://bytelegend.com) and click `Credits` button.
 
 ## Contributing
 
-CDC Connectors for Apache Flink<sup>®</sup> welcomes anyone that wants to help out in any way, whether that includes reporting problems, helping with documentation, or contributing code changes to fix bugs, add tests, or implement new features. You can report problems to request features in the [GitHub Issues](https://github.com/ververica/flink-cdc-connectors/issues).
+We appreciate your contribution to anything in the game:
 
-## Community
+- Any bad texts: typo, wording or translation.
+- Game map errors: bad tile image, incorrect marking, etc..
+- Bugs: frontend/backend/game script.
 
-* [DingTalk](https://www.dingtalk.com/) Chinese User Group
+Please read the [contributing guide](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/CONTRIBUTING.md) before you start.
 
-  You can search the group number [**33121212**] or scan the following QR code to join in the group.
-  
-  <div align=center>
-     <img src="https://user-images.githubusercontent.com/5163645/233297896-0195d0ae-eb1c-4604-977b-1d08e424c7e7.png" width=400 />
-   </div>
+## Start locally
 
-## Documents
-To get started, please see https://ververica.github.io/flink-cdc-connectors/
+Please make sure your `JAVA_HOME` configured to JDK 11.
+
+- `git clone https://github.com/ByteLegend/ByteLegend`
+- `cd ByteLegend`
+- `git submodule update --init -- game-data`
+- Run `./gradlew server-opensource:bootRun`, then access `http://localhost:8080`.
+
+The first run may take minutes because all game resources need to be generated. Subsequent runs should start in seconds.
+
+Please note that `server` git submodule hasn't been opensource yet, as we have complex backend services/credentials there (GitHub webhook, GitHub app, k8s secrets, etc.).
+However, we do provide a opensource version of backend service in `server-opensource` module.
+
+See [here](https://github.com/ByteLegend/ByteLegend/blob/master/docs/en/game-code-contributor-guide.md) for more details.
