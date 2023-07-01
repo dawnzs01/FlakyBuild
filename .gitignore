@@ -1,31 +1,11 @@
-# gradle
-
+.idea/
 .gradle/
 build/
-out/
-classes/
-
-# idea
-
-.idea/
+obj/
 *.iml
-*.ipr
-*.iws
-
-# vscode
-
-.settings/
-.vscode/
-bin/
-.classpath
-.project
-
-# fabric
-
-run/
-
-# macOS
-
-.DS_Store
-.AppleDouble
-.LSOverride
+local.properties
+.externalNativeBuild
+.cxx
+service_account_credentials.json
+*.aar
+*.so
