@@ -1,15 +1,45 @@
-.gradle
-/local.properties
-.DS_Store
-/build
-/src
-*.iml
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
 .idea
-/captures
-release
-google-services.json
-java_pid10692.hprof
-gradle/wrapper/gradle-wrapper.jar
-gradle/wrapper/gradle-wrapper.properties
-/app/.cxx/
-/Commend.md
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### others ###
+*.jar
+*.log
+*/.DS_Store
+.DS_Store
+
+.phd
+.txt
+.trc
+*/.phd
+*/.txt
+*/.trc
+powerjob-data/
