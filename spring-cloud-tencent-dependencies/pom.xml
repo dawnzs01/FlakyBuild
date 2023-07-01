@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-dependencies-parent</artifactId>
+		<version>3.1.5</version>
+		<relativePath/>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.tencent.cloud</groupId>
+	<artifactId>spring-cloud-tencent-dependencies</artifactId>
+	<version>${revision}</version>
+	<packaging>pom</packaging>
+	<name>Spring Cloud Tencent Dependencies</name>
+	<description>Spring Cloud Tencent Dependencies</description>
+	<url>https://github.com/Tencent/spring-cloud-tencent/tree/2021.0</url>
+
+	<organization>
+		<name>Tencent</name>
+		<url>https://opensource.tencent.com/</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>The BSD 3-Clause License (BSD3)</name>
+			<url>https://raw.githubusercontent.com/Tencent/spring-cloud-tencent/2021.0/LICENSE</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/Tencent/spring-cloud-tencent</url>
+		<connection>scm:git:git@github.com:Tencent/spring-cloud-tencent.git</connection>
+		<developerConnection>scm:git:git@github.com:Tencent/spring-cloud-tencent.git</developerConnection>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>SkyeBeFreeman</id>
+			<name>Haotian Zhang</name>
+			<email>928016560@qq.com</email>
+			<organization>Tencent</organization>
+			<url>https://github.com/SkyeBeFreeman/</url>
+		</developer>
+
+		<developer>
+			<id>lepdou</id>
+			<name>lepdou</name>
+			<email>lepdou@126.com</email>
+			<organization>Tencent</organization>
+			<url>https://github.com/lepdou</url>
+		</developer>
+
+		<developer>
+			<name>Andrew Shan</name>
+			<email>samshan08@126.com</email>
+			<organization>Tencent</organization>
+		</developer>
+
+		<developer>
+			<id>xiaoyao1999hn</id>
+			<name>Jie Cheng</name>
+			<email>348893717@qq.com</email>
+			<organization>Tencent</organization>
+			<url>https://github.com/xiaoyao1999hn/</url>
+		</developer>
+	</developers>
+
+	<properties>
+		<revision>1.12.0-2021.0.6-SNAPSHOT</revision>
+
+		<!-- Dependencies -->
+		<polaris.version>1.13.0-SNAPSHOT</polaris.version>
+		<guava.version>32.0.1-jre</guava.version>
+		<logback.version>1.2.11</logback.version>
+		<mocktio.version>4.5.1</mocktio.version>
+		<byte-buddy.version>1.12.10</byte-buddy.version>
+		<protobuf-java.version>3.21.7</protobuf-java.version>
+		<bcprov-jdk15on.version>1.69</bcprov-jdk15on.version>
+		<system-stubs-jupiter.version>2.0.2</system-stubs-jupiter.version>
+
+		<!-- Maven Plugin Versions -->
+		<maven-javadoc-plugin.verison>3.3.0</maven-javadoc-plugin.verison>
+		<maven-source-plugin.version>3.2.0</maven-source-plugin.version>
+		<flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
+		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<artifactId>polaris-dependencies</artifactId>
+				<groupId>com.tencent.polaris</groupId>
+				<version>${polaris.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-tencent-commons</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-tencent-polaris-context</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-tencent-rpc-enhancement</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-metadata-transfer</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<!--	polaris starter-->
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-polaris-ratelimit</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-polaris-circuitbreaker</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-polaris-router</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-polaris-config</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-polaris-discovery</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-all</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<!-- spring cloud tencent plugins -->
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-discovery-adapter-plugin</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-starter-tencent-tsf-adapter-plugin</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-tencent-featureenv-plugin</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.tencent.cloud</groupId>
+				<artifactId>spring-cloud-tencent-gateway-plugin</artifactId>
+				<version>${revision}</version>
+			</dependency>
+
+			<!-- third part framework dependencies -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>jsr305</artifactId>
+						<groupId>com.google.code.findbugs</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>animal-sniffer-annotations</artifactId>
+						<groupId>org.codehaus.mojo</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>error_prone_annotations</artifactId>
+						<groupId>com.google.errorprone</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.protobuf</groupId>
+				<artifactId>protobuf-java</artifactId>
+				<version>${protobuf-java.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk15on</artifactId>
+				<version>${bcprov-jdk15on.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.bytebuddy</groupId>
+				<artifactId>byte-buddy</artifactId>
+				<version>${byte-buddy.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-inline</artifactId>
+				<version>${mocktio.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mocktio.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>uk.org.webcompere</groupId>
+				<artifactId>system-stubs-jupiter</artifactId>
+				<version>${system-stubs-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>${flatten-maven-plugin.version}</version>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven-javadoc-plugin.verison}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven-source-plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus-releases</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+</project>

@@ -1,0 +1,82 @@
+{
+  "properties": [
+    {
+      "name": "spring.cloud.polaris.config.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": "true",
+      "description": "The switch of polaris configuration module.",
+      "sourceType": "com.tencent.cloud.polaris.config.config.PolarisConfigProperties"
+    },
+    {
+      "name": "spring.cloud.polaris.config.address",
+      "type": "java.lang.String",
+      "defaultValue": "",
+      "description": "The polaris configuration server address.",
+      "sourceType": "com.tencent.cloud.polaris.config.config.PolarisConfigProperties"
+    },
+    {
+      "name": "spring.cloud.polaris.config.port",
+      "type": "java.lang.Integer",
+      "defaultValue": "8093",
+      "description": "The polaris configuration server port.",
+      "sourceType": "com.tencent.cloud.polaris.config.config.PolarisConfigProperties"
+    },
+    {
+      "name": "spring.cloud.polaris.config.auto-refresh",
+      "type": "java.lang.Boolean",
+      "defaultValue": "true",
+      "description": "Whether to automatically update to the spring context when the configuration file is updated.",
+      "sourceType": "com.tencent.cloud.polaris.config.config.PolarisConfigProperties"
+    },
+    {
+      "name": "spring.cloud.polaris.config.groups",
+      "type": "com.tencent.cloud.polaris.config.config.ConfigFileGroup",
+      "defaultValue": "",
+      "description": "List of imported config files.",
+      "sourceType": "com.tencent.cloud.polaris.config.config.PolarisConfigProperties"
+    },
+    {
+      "name": "spring.cloud.polaris.config.connect-remote-server",
+      "type": "java.lang.Boolean",
+      "defaultValue": "true",
+      "description": "Whether to connect to a remote server, suitable for local development mode.",
+      "sourceType": "com.tencent.cloud.polaris.config.config.PolarisConfigProperties"
+    },
+    {
+      "name": "spring.cloud.polaris.config.import-check.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Whether to enable import-check."
+    },
+    {
+      "name": "spring.cloud.polaris.config.preference",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Whether to preferentially load the remote configuration."
+    },
+    {
+      "name": "spring.cloud.polaris.config.refresh-type",
+      "type": "com.tencent.cloud.polaris.config.enums.RefreshType",
+      "defaultValue": "reflect",
+      "description": "Attribute refresh type when config updated. refresh_context or reflect."
+    },
+    {
+      "name": "spring.cloud.polaris.config.shutdown-if-connect-to-config-server-failed",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Whether shutdown server if connect to config server failed."
+    },
+    {
+      "name": "spring.cloud.polaris.config.data-source",
+      "type": "java.lang.String",
+      "defaultValue": "polaris",
+      "description": "Where to load config file, polaris or local."
+    },
+    {
+      "name": "spring.cloud.polaris.config.local-file-root-path",
+      "type": "java.lang.String",
+      "defaultValue": "./polaris/backup/config",
+      "description": "Where to load config file, polaris or local."
+    }
+  ]
+}

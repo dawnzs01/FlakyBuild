@@ -1,225 +1,124 @@
+<img src="https://github.com/Tencent/spring-cloud-tencent/raw/2021.0/doc/logo/rectangle-white.png" width="60%" height="60%"  alt="Spring-Cloud-Tencent-Logo"/>
 
-<h1 align="center">Exadel CompreFace is a leading free and open-source face recognition system</h1>
+[![Wiki](https://badgen.net/badge/icon/wiki?icon=wiki&label)](https://github.com/Tencent/spring-cloud-tencent/wiki)
+[![Maven Central](https://img.shields.io/maven-central/v/com.tencent.cloud/spring-cloud-tencent?label=Maven%20Central)](https://search.maven.org/search?q=g:com.tencent.cloud%20AND%20a:spring-cloud-tencent)
+[![Contributors](https://img.shields.io/github/contributors/Tencent/spring-cloud-tencent)](https://github.com/Tencent/spring-cloud-tencent/graphs/contributors)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-<p align="center">
-    <a target="_blank" href="https://exadel.com/solutions/compreface/">
-  <img src="https://user-images.githubusercontent.com/3736126/147130206-17234c47-8d40-490f-8d93-57014fa6d87e.png" alt="angular-logo" height="250px"/>
- </a>
-  <br>
-  <i>Exadel CompreFace is a free and open-source face recognition service that can be easily integrated into any system without prior machine learning skills. 
-     CompreFace provides REST API for face recognition, face verification, face detection, landmark detection, mask detection, head pose detection, age, and gender recognition and is easily deployed with docker.
-     </i>
-  <br>
-</p>
+[![Test with Junit](https://github.com/Tencent/spring-cloud-tencent/actions/workflows/junit_test.yml/badge.svg?branch=2021.0)](https://github.com/Tencent/spring-cloud-tencent/actions/workflows/junit_test.yml)
+[![codecov.io](https://codecov.io/gh/Tencent/spring-cloud-tencent/branch/2021.0/graph/badge.svg)](https://codecov.io/gh/Tencent/spring-cloud-tencent?branch=2021.0)
 
-<p align="center">
-  <a href="https://exadel.com/solutions/compreface/"><strong>Official website</strong></a>
-  <br>
-</p>
+English | [简体中文](./README-zh.md)
 
-<p align="center">
-  <a href="#contributing">Contributing</a>
-  ·
-  <a href="https://github.com/exadel-inc/CompreFace/issues">Submit an Issue</a>
-  ·
-  <a href="https://exadel.com/news/tag/compreface/">Blog</a>
-  ·
-  <a href="https://gitter.im/CompreFace/community">Community chat</a>
-  <br>
-</p>
+README:
 
-<p align="center">
-  <a href="https://www.apache.org/licenses/LICENSE-2.0">
-    <img src="https://img.shields.io/github/license/exadel-inc/CompreFace" alt="GitHub license" />
-  </a>&nbsp;
-  <a href="https://github.com/exadel-inc/CompreFace/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/exadel-inc/CompreFace" alt="GitHub contributors" />
-  </a>&nbsp;
-</p>
-<hr>
+- [Introduction](#introduction)
+- [How to build](#how-to-build)
+- [How to use](#how-to-use)
+- [Examples](#examples)
 
-# Table Of Contents
+Visit [Wiki](https://github.com/Tencent/spring-cloud-tencent/wiki) to learn more
 
-  * [Overview](#overview)
-  * [Screenshots](#screenshots)
-  * [Video tutorials](#videos)
-  * [News and updates](#news-and-updates)
-  * [Features](#features)
-  * [Functionalities](#functionalities)
-  * [Getting Started with CompreFace](#getting-started-with-compreface)
-  * [CompreFace SDKs](#compreface-sdks)
-  * [Documentation](/docs)
-    * [How to Use CompreFace](/docs/How-to-Use-CompreFace.md)
-    * [Face Services and Plugins](/docs/Face-services-and-plugins.md)
-    * [Rest API Description](/docs/Rest-API-description.md)
-    * [Postman documentation and collection](https://documenter.getpostman.com/view/17578263/UUxzAnde)
-    * [Face Recognition Similarity Threshold](/docs/Face-Recognition-Similarity-Threshold.md)
-    * [Configuration](/docs/Configuration.md)
-    * [Architecture and Scalability](/docs/Architecture-and-scalability.md)
-    * [Custom Builds](/docs/Custom-builds.md)
-    * [Face data migration](/docs/Face-data-migration.md)
-    * [User Roles System](/docs/User-Roles-System.md)
-    * [Face Mask Detection Plugin](/docs/Mask-detection-plugin.md)
-    * [Kubernetes configuration](https://github.com/exadel-inc/compreface-kubernetes)
-    * [Gathering Anonymous Statistics](/docs/Gathering-anonymous-statistics.md)
-    * [Installation Options](/docs/Installation-options.md)
-  * [Contributing](#contributing)
-  * [License info](#license-info)
+## Introduction
 
-# Overview
+Spring Cloud Tencent is an one-stop microservice solution which implements the standard Spring Cloud SPI. It integrates
+Spring Cloud with Tencent middlewares and makes it easy to develop microservice.
 
-Exadel CompreFace is a free and open-source face recognition GitHub project. 
-Essentially, it is a docker-based application that can be used as a standalone server or deployed in the cloud. 
-You don’t need prior machine learning skills to set up and use CompreFace.
+<img src="https://user-images.githubusercontent.com/4991116/170412596-692f8dae-42f7-495f-a451-01396e381eb0.png" width="80%" />
 
-The system provides REST API for face recognition, face verification, face detection, landmark detection, mask detection, head pose detection, age, and gender recognition. 
-The solution also features a role management system that allows you to easily control who has access to your Face Recognition Services.
+**Service discovery and governance**
 
-CompreFace is delivered as a docker-compose config and supports different models that work on CPU and GPU. 
-Our solution is based on state-of-the-art methods and libraries like FaceNet and InsightFace.
+Spring Cloud Tencent integrates Spring Cloud with Polaris which is an open source system for service discovery and
+governance.
 
-# Screenshots
+- [Polaris Github](https://github.com/polarismesh/polaris)
 
-<p align="center">
-<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/7b86a96f-844b-4e4b-9456-c53f6e45f305" 
-alt="compreface-recognition-page" width=390px style="padding: 0px 10px 0px 0px;">
-<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/51efb9d0-70cc-4902-bc3f-fd85de004b67" 
-alt="compreface-dashboard-page" width="390px" style="padding: 0px 0px 0px 10px;">
-</p>
+Spring Cloud with Polaris can solve these problem:
 
-<details>
-  <summary> <b>More Screenshots</b> </summary>
-  <!-- have to be followed by an empty line! -->
+- service management: service discovery, service registry and health check
+- traffic control: customizable routing, load balance, rate limiting and access control
+- fault tolerance: circuit breaker for service, interface and instance
+- config management: config version control, grayscale release and dynamic update
 
-<p align="center">
-<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/3ae0ce68-588b-4370-8eaf-32668c96fa63"
-alt="compreface-verification-page" width=390px style="padding: 0px 10px 0px 0px;">
-<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/9246702d-1c9b-4435-8098-89e0fb616b0d"
-alt="compreface-detection-page" width="390px" style="padding: 0px 0px 0px 10px;">
-</p>
-<p align="center">
-<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/3a5787e6-9a85-4852-92dc-a82fe7ef8f7c" 
-alt="compreface-services-page" width=390px style="padding: 0px 10px 0px 0px;">
-<img src="https://github.com/exadel-inc/CompreFace/assets/3736126/e7fd0258-2643-4cec-809d-988502eb857f" 
-alt="compreface-wizzard-page" width="390px" style="padding: 0px 0px 0px 10px;">
-</p>
+## How to build
 
-</details>
+Run these commands to build this project as follow.
 
-# Videos
+**Linux and Mac**
 
-<p align="center">
-<a target="_blank" href="https://www.youtube.com/watch?v=LS4sVTnI-gI">
-     <img src="https://user-images.githubusercontent.com/3736126/241272669-8609463b-8b22-4ae7-bf21-36761f00734b.jpg" 
-        alt="CompreFace Face Detection Demo" width=390px style="padding: 0px 10px 0px 0px;">
-</a>
-<a target="_blank" href="https://www.youtube.com/watch?v=jkiA3S-LYSk">
-     <img src="https://user-images.githubusercontent.com/3736126/242002411-3c06d3f7-c0ac-49f8-ac79-42bd8c431570.png" 
-        alt="CompreFace Appery.io Demo" width=390px style="padding: 0px 10px 0px 0px;">
-</a>
-</p>
+```
+./mvnw clean package
+```
 
-<details>
-  <summary> <b>More Videos</b> </summary>
-  <!-- have to be followed by an empty line! -->
+**Windows**
 
-<p align="center">
-<a target="_blank" href="https://www.youtube.com/watch?v=cF3P7bTJXY0">
-     <img src="https://user-images.githubusercontent.com/3736126/241274256-0dc6d8a0-91d5-42c4-b029-200b72bb169b.jpg" 
-        alt="CompreFace .NET SDK Demo" width=390px style="padding: 0px 10px 0px 0px;">
-</a>
-<a target="_blank" href="https://www.youtube.com/watch?v=9mQULPrTVP4">
-     <img src="https://user-images.githubusercontent.com/3736126/241274522-a152221f-e382-416c-9a71-f7694e73cf3e.jpg" 
-        alt="CompreFace JavaScript SDK Demo" width=390px style="padding: 0px 10px 0px 0px;">
-</a>
-</p>
+```
+.\mvnw.cmd clean package
+```
 
-</details>
+## How to use
 
-# News and updates
+All the components of Spring Cloud Tencent have been uploaded to the Maven central repository, just need to introduce
+dependencies.
 
-[Subscribe](https://info.exadel.com/en/compreface-news-and-updates) to CompreFace News and Updates to never miss new features and product improvements.
+> Notice:
+>
+> Support Spring Cloud 2022.0, 2021.0, 2020.0, Hoxton.
+>
+> The version list of Spring Cloud Tencent can be found
+> in
+> [Spring Cloud Tencent Version Management](https://github.com/Tencent/spring-cloud-tencent/wiki/Spring-Cloud-Tencent-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86)
+> .
 
-# Features
-The system can accurately identify people even when it has only “seen” their photo once. Technology-wise, CompreFace has several advantages over similar free face recognition solutions. CompreFace:
+For example:
 
-- Supports both CPU and GPU and is easy to scale up
-- Is open source and self-hosted, which gives you additional guarantees for data security
-- Can be deployed either in the cloud or on premises
-- Can be set up and used without machine learning expertise
-- Uses FaceNet and InsightFace libraries, which use state-of-the-art face recognition methods
-- Starts quickly with just one docker command
+```` xml  
+<!-- add spring-cloud-tencent bom  -->
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.tencent.cloud</groupId>
+            <artifactId>spring-cloud-tencent-dependencies</artifactId>
+            <!--version number-->
+            <version>1.11.7-2021.0.6</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>    
+                 
+<!-- add spring-cloud-starter-tencent-polaris-discovery dependency  -->
+<dependencies>
+    <dependency>
+        <groupId>com.tencent.cloud</groupId>
+        <artifactId>spring-cloud-starter-tencent-polaris-discovery</artifactId>
+    </dependency>
+</dependencies>
 
-# Functionalities
+````
 
-- Supports many face recognition services:
-  - [face detection](/docs/Face-services-and-plugins.md#face-detection)
-  - [face recognition](/docs/Face-services-and-plugins.md#face-recognition)
-  - [face verification](/docs/Face-services-and-plugins.md#face-verification)
-  - [landmark detection plugin](/docs/Face-services-and-plugins.md#face-plugins)
-  - [age recognition plugin](/docs/Face-services-and-plugins.md#face-plugins)
-  - [gender recognition plugin](/docs/Face-services-and-plugins.md#face-plugins)
-  - [face mask detection plugin](/docs/Face-services-and-plugins.md#face-plugins)
-  - [head pose plugin](/docs/Face-services-and-plugins.md#face-plugins)
-- Use the CompreFace UI panel for convenient user roles and access management
+## Examples
 
-# Getting Started with CompreFace
+The experience environment of Polaris is provided for developers:
 
-### Requirements
+- [Polaris Console](http://119.91.66.223:80)
+- Polaris Server Address: `grpc://119.91.66.223:8091`
 
-1. Docker and Docker compose (or Docker Desktop)
-2. CompreFace could be run on most modern computers with [x86 processor](https://en.wikipedia.org/wiki/X86) and [AVX support](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions).
-   To check AVX support on Linux run `lscpu | grep avx` command
+The address of Polaris server in spring-cloud-tencent-example is `grpc://119.91.66.223:8091` by default.
 
-### To get started (Linux, MacOS):
+## Chat Group
 
-1. Install Docker and Docker Compose
-2. Download the archive from our latest release: https://github.com/exadel-inc/CompreFace/releases
-3. Unzip the archive
-4. Open the terminal in this folder and run this command: `docker-compose up -d`
-5. Open the service in your browser: http://localhost:8000/login
+Please scan the QR code to join the chat group.
 
-### To get started (Windows):
+<img src="https://user-images.githubusercontent.com/24446200/169198148-d4cc3494-3485-4515-9897-c8cb5504f706.png" width="20%" height="20%" />
 
-1. Install Docker Desktop
-2. Download the archive from our latest release: https://github.com/exadel-inc/CompreFace/releases
-3. Unzip the archive
-4. Run Docker
-5. Open Command prompt (write `cmd` in windows search bar)
-6. Open folder where you extracted zip archive (Write `cd path_of_the_folder`, press enter).
-7. Run command: `docker-compose up -d`
-8. Open http://localhost:8000/login
+If the above QR code fails, please scan the QR code to add WeChat, and send "Spring Cloud Tencent" to apply for joining the group.
 
-### Getting started for contributors
+<img src="https://github.com/Tencent/spring-cloud-tencent/assets/24446200/77912670-aa7b-44ec-a312-42a05d59b109" width=20% height=20%>
 
-Follow this [link](/dev)
 
-# CompreFace SDKs
+## Stargazers over time
 
-| SDK        | Repository                                              |
-|------------|---------------------------------------------------------|
-| JavaScript | https://github.com/exadel-inc/compreface-javascript-sdk |
-| Python     | https://github.com/exadel-inc/compreface-python-sdk     |
-| .NET       | https://github.com/exadel-inc/compreface-net-sdk        |
+If you are interested in Spring Cloud Tencent, please follow our project, thank you very much.
 
-# Documentation
-
-More documentation is available [here](/docs)
-
-# Contributing
-
-We want to improve our open-source face recognition solution, so your contributions are welcome and greatly appreciated. 
-
-* Just use CompreFace and [report](https://github.com/exadel-inc/CompreFace/issues) ideas and bugs on GitHub
-* Share knowledge and experience via posting guides and articles, or just improve our [documentation](https://github.com/exadel-inc/CompreFace/tree/master/docs)
-* Create [SDKs](https://github.com/topics/compreface-sdk) for favorite programming language, we will add it to our documentation
-* Integrate CompreFace support to other platforms like [Home Assistant](https://www.home-assistant.io/) or [DreamFactory](https://www.dreamfactory.com/), we will add it to our documentation
-* [Contribute](CONTRIBUTING.md) code
-* Add [plugin](/docs/Face-services-and-plugins.md#face-plugins) to face services
-* And last, but not least, you can just give a star to our free facial recognition system on GitHub
-
-For more information, visit our [contributing](CONTRIBUTING.md) guide, or create a [discussion](https://github.com/exadel-inc/CompreFace/discussions).
-
-# License info 
-
-CompreFace is open-source real-time facial recognition software released under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.html).
+[![Stargazers over time](https://starchart.cc/Tencent/spring-cloud-tencent.svg)](https://starchart.cc/Tencent/spring-cloud-tencent)

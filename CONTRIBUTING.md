@@ -1,53 +1,27 @@
-# Contributing to CompreFace
-Contributions are welcomed and greatly appreciated. We want to make contributing to this project as easy and transparent as possible, whether it's:
-- Reporting a bug
-- Proposing new features
-- Discussing the current state of the code
-- Submitting a fix or solutions
-- Integrating CompreFace with other solutions
-- Adding plugins to face recognition services
+# Contributing
+---
+If you have good comments or suggestions, welcome to create [Issues](https://github.com/Tencent/spring-cloud-tencent/issues) or [Pull Requests](https://github.com/Tencent/spring-cloud-tencent/pulls), contribute to the Spring Cloud Tencent open source community. Spring Cloud Tencent continues to recruit contributors, even if it is answering questions in the issue, or doing some simple bugfixes, it will be of great help to Spring Cloud Tencent.
 
-## We develop with GitHub
-We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
+[Tencent Open Source Incentive Program](https://opensource.tencent.com/contribution) Encourage developers to participate and contribute, and look forward to your joining.
 
-## We use GitHub Flow
-All code changes happen through Pull Requests.
+## Issue
+#### For contributors
 
-Pull requests are the best way to propose changes to the codebase (please follow this guid [Github Flow](https://guides.github.com/introduction/flow/index.html)).
+Please ensure that the following conditions are met before submitting an issue:
 
-We actively welcome your pull requests:
-1. Fork the repo and create your branch from `master`.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. Ensure the test suite passes.
-5. Make sure your code lints.
-6. Issue that pull request!
+* Must be a bug or new feature
+* Have searched in the issue, and did not find a similar issue or solution
+* When creating a new issue, please provide a detailed description, screenshot or short video to help us locate the problem
 
-After creating your first contributing pull request, you will receive a request to sign our Contributor License Agreement by commenting your pull request with a special message.
+## Pull Request
+We welcome everyone to contribute code to make our product more powerful. The code team will monitor all pull requests, and we will do the corresponding code inspection and testing. After the test passes, we will accept the PR, but will not immediately merge into the master branch.
 
-## Any contributions you make will be under the Apache License 2.0 License
-In short, when you submit code changes, your submissions are understood to be under the same Apache License 2.0 that covers the project. Feel free to contact the maintainers if that's a concern.
+Please confirm before completing a PR:
 
-## Report Bugs
-
-Please report any bugs [here](https://github.com/exadel-inc/CompreFace/issues).
-
-If you are reporting a bug, please specify:
-
-- Your operating system name and version
-- Any details about your local setup that might be helpful in troubleshooting
-- Detailed steps to reproduce the bug
-
-
-## Submit Feedback
-
-The best way to send us feedback is to file an issue at https://github.com/exadel-inc/CompreFace/issues.
-
-If you are proposing a feature, please:
-
-- Explain in detail how it should work.
-- Keep the scope as narrow as possible to make it easier to implement.
-
-## Use a Consistent Coding Style
-
-For java just import dev/team_codestyle.xml file in your IntelliJ IDEA.
+1. Fork your own branch from the master branch.
+2. Please modify the corresponding documents and comments after modifying the code.
+3. Please add License and Copyright declarations in the newly created file.
+4. Ensure a consistent code style.
+5. Do adequate testing.
+6. Add this pull request info to [CHANGELOG](./CHANGELOG.md).
+7. Then, you can submit your code to the dev branch.
