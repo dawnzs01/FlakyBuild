@@ -1,137 +1,104 @@
-<h1 align="center">
-    Corona-Warn-App Verification Server
-</h1>
+<div align="center">
+    <h1> QAuxiliary </h1>
 
-<p align="center">
-    <a href="https://github.com/corona-warn-app/cwa-verification-server/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/corona-warn-app/cwa-verification-server?style=flat"></a>
-    <a href="https://github.com/corona-warn-app/cwa-verification-server/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-verification-server?style=flat"></a>
-    <a href="https://github.com/corona-warn-app/cwa-verification-server/blob/master/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=flat"></a>
-</p>
+[![GitHub release](https://img.shields.io/github/release/cinit/QAuxiliary.svg)](https://github.com/cinit/QAuxiliary/releases/latest)
+[![main](https://github.com/cinit/QAuxiliary/actions/workflows/push_ci.yml/badge.svg)](https://github.com/cinit/QAuxiliary/actions/workflows/push_ci.yml)
+[![Telegram](https://img.shields.io/static/v1?label=Telegram&message=Channel&color=0088cc)](https://t.me/QAuxiliary)
+[![Telegram](https://img.shields.io/static/v1?label=Telegram&message=CI&color=0088cc)](https://t.me/QAuxiliary_CI)
+[![Telegram](https://img.shields.io/static/v1?label=Telegram&message=Chat&color=0088cc)](https://t.me/QAuxiliaryChat)
 
-<p align="center">
-  <a href="#development">Development</a> •
-  <a href="#documentation">Documentation</a> •
-  <a href="#support-and-feedback">Support</a> •
-  <a href="#how-to-contribute">Contribute</a> •
-  <a href="#contributors">Contributors</a> •
-  <a href="#repositories">Repositories</a> •
-  <a href="#licensing">Licensing</a>
-</p>
+</div>
 
-The goal of this project is to develop the official Corona-Warn-App for Germany based on the exposure notification API from [Apple](https://www.apple.com/covid19/contacttracing/) and [Google](https://www.google.com/covid19/exposurenotifications/). The apps (for both iOS and Android) use Bluetooth technology to exchange anonymous encrypted data with other mobile phones (on which the app is also installed) in the vicinity of an app user's phone. The data is stored locally on each user's device, preventing authorities or other parties from accessing or controlling the data. This repository contains the **verification service** for the Corona-Warn-App.
+---
 
-## Status
-![ci](https://github.com/corona-warn-app/cwa-verification-server/workflows/ci/badge.svg)
-[![quality gate](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=alert_status)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
-[![coverage](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=coverage)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
-[![bugs](https://sonarcloud.io/api/project_badges/measure?project=corona-warn-app_cwa-verification-server&metric=bugs)](https://sonarcloud.io/dashboard?id=corona-warn-app_cwa-verification-server)
+QAuxiliary 是一个基于 QNotified 的开源 Xposed 模块
 
-## About this component
+## 使用方法
 
-In the world of the Corona Warn App the Verification Server helps validating whether upload requests from the mobile App are valid or not. The parts of the verification component cooperate in the following manner:
+激活本模块后，在 QQ 或者 TIM 自带设置中点击 QAuxiliary 即可进入设置页面
 
-- The Verification Server of the Corona Warn App (repository: cwa-verification-server) helps validating whether upload requests from the mobile App are valid or not.
-- The Verification Portal of the Corona Warn App (repository: cwa-verification-portal) allows hotline employees to generate teleTANs which are used by users of the mobile App to upload their diagnostic keys.
-- The Verification Identity and Access of the Corona Warn App (repository: cwa-verification-iam) ensures that only authorized health personnel get access to the Verification Portal.
-- The Test Result Server of the Corona Warn App (repository: cwa-testresult-server) receives the results from laboratories and delivers these results to the app via the verification-server.
+- Android >= 7.0
+- QQ >= 8.2.0, TIM >= 2.2.0, QQLite >= 4.0, QQ HD >= 5.9.3
 
-## Architecture overview
-You can find an architectural overview of the component in the [solution architecture document](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md).  
-This component of the Corona-Warn-App whereas named **verification process** provides indeed two functionalities:  
-1. prove that a pretended positive case is indeed positive  
-2. provide the result of a COVID-19 test  
+## 一切开发旨在学习，请勿用于非法用途
 
-To achieve this, the verification service gets the result of COVID-19 tests from LIS (**L**abor **I**nformation **S**ystem) which delivers test results to it. The complete process is described in [cwa-documentation/Solution Architecture](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md) to which you may refer for detailed information about the workflow.
+- 本项目保证永久开源，欢迎提交 PR，但是请不要提交用于非法用途的功能。
+- 如果某功能被大量运用于非法用途或严重侵害插件使用者权益，那么该功能将会被移除。
+- 本模块完全免费开源，没有任何收费，请勿二次贩卖。
+- 鉴于项目的特殊性，开发团队可能在任何时间**停止更新**或**删除项目**
 
-The software stack of the verification server is based on [Spring Boot](https://spring.io/projects/spring-boot), currently with an in-memory H2 database. As the persistence relies on [Liquibase](https://www.liquibase.org).
+### 许可证
 
-## Development
-This component can be locally build in order to test the functionality of the interfaces and verify the concepts it is built upon.  
+- [EULA](https://github.com/qwq233/License/blob/master/v2/LICENSE.md)
 
-There are two ways to build:
- - [Maven](https:///maven.apache.org) build - to run this component as spring application on your local machine
- - [Docker](https://www.docker.com) build - to run it as docker container build from the provided docker build [file](https://github.com/corona-warn-app/cwa-verification-server/blob/master/Dockerfile)
-
-### Prerequisites
- - [Open JDK 11](https://openjdk.java.net)  
- - [Maven](https://maven.apache.org)
- - *(optional)*: [Docker](https://www.docker.com)  
-
-### Build
-Whether you cloned or downloaded the 'zipped' sources you will either find the sources in the chosen checkout-directory or get a zip file with the source code, which you can expand to a folder of your choice.
-
-In either case open a terminal pointing to the directory you put the sources in. The local build process is described afterwards depending on the way you choose.
-
-#### Maven based build
-This is the recommended way for taking part in the development.  
-Please check, whether following prerequisites are installed on your machine:
-- [Open JDK 11](https://openjdk.java.net) or a similar JDK 11 compatible VM  
-- [Maven](https://maven.apache.org)
-
-You can then open a terminal pointing to the root directory of the verification server and do the following:
-
-    mvn package
-    java -jar target/cwa-verification-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=local                               
-
-The verification server will start up and run locally on your machine available on port 8080.
-
-#### Docker based build  
-We recommend that you first check to ensure that [Docker](https://www.docker.com) is installed on your machine.
-
-On the command line do the following:
-```bash
-docker build -f|--file <path to dockerfile>  -t <imagename>  <path-to-verificationserver-root>
-docker run -p 127.0.0.1:8080:8080/tcp -it <imagename>
 ```
-or simply  
-```bash
-docker build --pull --rm -f "Dockerfile" -t cwa-verificationserver "."
-docker run -p 127.0.0.1:8080:8080/tcp -it cwa-verificationserver
+版权所有©2022 gao_cai_sheng <qwq233@qwq2333.top, qwq2333.top>
+
+允许在遵守 CC BY-NC-SA 4.0 协议的同时，复制和分发此协议文档的逐字记录副本，
+且允许对其进行更改，但必须保留其版权信息与原作者。如果您提出申请特殊权限，协议
+作者可在其口头或书面授予任何人任何但不包括以盈利为目的的使用本协议的权利。
+
+请务必仔细阅读和理解通用许可协议书中规定的所有权利和限制。在使用前，您需要仔细
+阅读并决定接受或不接受本协议的条款。除非或直至您接受本协议的条款，否则本作品及
+其相关副本、相关程序代码或相关资源不得在您的任何终端上下载、安装或使用。
+
+您一旦下载、使用本作品及其相关副本、相关程序代码或相关资源，即表示您同意接受本
+协议各项条款的约束。如您不同意本协议中的条款，您则应当立即删除本作品、附属资源
+及其相关源代码。
+
+本作品权利只许可使用，而不出售。
 ```
-if you are in the root of the checked out repository.  
-The docker image will then run on your local machine on port 8080 assuming you configured docker for shared network mode.
 
-#### API documentation  
-Along with the application there comes a [swagger2](https://swagger.io) API documentation, which you can access in your web browser when the verification server applications runs:
+## 发行渠道说明
 
-    <base-url>/api/swagger
+<details>
 
-Which results in the following URL on your local machine:
-http://localhost:8080/api/swagger
+QAuxiliary 采用滚动更新方式发布新版本，我们总是推荐用户使用最新版 QAuxiliary，无论您的 QQ 或者 TIM 客户端是哪个版本。
 
-#### Remarks
-This repository contains files which support our CI/CD pipeline and will be removed without further notice  
- - DockerfileCi - used for the GitHub build chain
- - Jenkinsfile - used for Telekom internal SBS (**S**oftware**B**uild**S**ervice)
+QAuxiliary 将为分 `CI` 和 `推荐的CI` 两个版本
 
-## Documentation  
-The full documentation for the Corona-Warn-App can be found in the [cwa-documentation](https://github.com/corona-warn-app/cwa-documentation) repository. The documentation repository contains technical documents, architecture information, and white papers related to this implementation.
+- `CI` 版本为 commit 后自动触发更新，可能包含外围文档或 CI 流程更新，不会编写任何更新文档或说明，
+  具体更新内容可在[GitHub](https://github.com/cinit/QAuxiliary/commits/master)
+  自行查看，本更新由开源的流程自动编译发布，可能包含严重的功能及行为异常。
 
-## Support and feedback
-The following channels are available for discussions, feedback, and support requests:
+- `推荐的CI` 版本为重大功能变更或长期积累更新，发布频率由开发组决定，包含上次`CI`
+  版至今的所有功能更新及 Bug 修复，但可能不包括尚未稳定或正在开发中的功能；
+  `推荐的CI` 版本是被挑选出的推荐用户更新的 `CI` 版本 (如：添加功能或者修复重要 Bug)
 
-| Type                     | Channel                                                |
-| ------------------------ | ------------------------------------------------------ |
-| **General Discussion**   | <a href="https://github.com/corona-warn-app/cwa-documentation/issues/new/choose" title="General Discussion"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-documentation/question.svg?style=flat-square"></a> </a>   |
-| **Concept Feedback**    | <a href="https://github.com/corona-warn-app/cwa-documentation/issues/new/choose" title="Open Concept Feedback"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-documentation/architecture.svg?style=flat-square"></a>  |
-| **Verification server issues**    | <a href="https://github.com/corona-warn-app/cwa-verification-server/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/corona-warn-app/cwa-verification-server?style=flat"></a>  |
-| **Other requests**    | <a href="mailto:opensource@telekom.de" title="Email CWA Team"><img src="https://img.shields.io/badge/email-CWA%20team-green?logo=mail.ru&style=flat-square&logoColor=white"></a>   |
+开发组不限制用户选择自己需要的版本，同时也不为任何版本产生的任何后果承担任何责任
+（详情请见[QAuxiliary EULA](https://github.com/cinit/QAuxiliary/blob/master/app/src/main/assets/eula.md)），
+但希望各位用户各取所需，根据自己的能力范围选择适合自己的版本。
 
-## How to contribute  
-Contribution and feedback is encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](./CONTRIBUTING.md). By participating in this project, you agree to abide by its [Code of Conduct](./CODE_OF_CONDUCT.md) at all times.
+- QAuxiliary 的版本号组成为`major.minor.bugfix.rev.commit`
+- 其中 major 为 主版本号，minor 为 次版本号，bugfix 为修正版本号；
+- 所有版本更新的`rev`为 commit 计数，`commit` 位都会是触发此次更新的 commit 的 hash 的前 7 位。
 
-## Contributors  
-The German government has asked SAP AG and Deutsche Telekom AG to develop the Corona-Warn-App for Germany as open source software. Deutsche Telekom is providing the network and mobile technology and will operate and run the backend for the app in a safe, scalable and stable manner. SAP is responsible for the app development, its framework and the underlying platform. Therefore, development teams of SAP and Deutsche Telekom are contributing to this project. At the same time our commitment to open source means that we are enabling -in fact encouraging- all interested parties to contribute and become part of its developer community.
+1. [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=QAuxiliary频道&color=0088cc)](https://t.me/QAuxiliary) 将只发布 `推荐的CI` 版更新。
 
-## Repositories
+2. [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=QAuxiliary_CI频道&color=0088cc)](https://t.me/QAuxiliary_CI) 发布 `CI` 版更新。
 
-A list of all public repositories from the Corona-Warn-App can be found [here](https://github.com/corona-warn-app/cwa-documentation/blob/master/README.md#repositories).
+3. [![GitHub release](https://img.shields.io/github/release/cinit/QAuxiliary.svg)](https://github.com/cinit/QAuxiliary/releases/latest) 将只发布 `推荐的CI` 版更新。
 
-## Licensing
-Copyright (c) 2020-2023 Deutsche Telekom AG.
+4. [![](https://img.shields.io/badge/LSPosed-ClickMe-blue?link=https://github.com/Xposed-Modules-Repo/io.github.qauxv/releases/)](https://github.com/Xposed-Modules-Repo/io.github.qauxv/releases/) 将只发布 `推荐的CI` 版更新。
+</details>
 
-Licensed under the **Apache License, Version 2.0** (the "License"); you may not use this file except in compliance with the License.
+## 不会支持的功能
 
-You may obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0.
+- 抢红包及其他金钱相关功能
+- 修改聊天记录等可能被恶意利用的功能
+- 群发消息
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the [LICENSE](./LICENSE) for the specific language governing permissions and limitations under the License.
+## 编译
+
+1. 安装 git, ccache(可选), cmake, SDK 和 NDK, 版本参考 [Version.kt](build-logic/convention/src/main/kotlin/Version.kt);
+2. 将本仓库 clone 至本地，本仓库含有 git submodule 所以请使用 git clone 而不是下载源代码压缩包；
+3. 拉取 MMKV, DexKit 等子模块, `git submodule init && git submodule update --recursive`;
+4. 使用 Gradle 编译安装包。
+
+---
+
+## 赞助
+
+- 由于项目的特殊性，我们不接受任何形式的捐赠，但是我们希望有更多的人能够参与本项目的开发
+
+## [通用许可协议](https://github.com/qwq233/License/blob/master/v2/LICENSE.md)

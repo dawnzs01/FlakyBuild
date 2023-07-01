@@ -1,0 +1,27 @@
+[submodule "libs/mmkv/MMKV"]
+	path = libs/mmkv/MMKV
+	url = https://github.com/Tencent/MMKV
+[submodule "libs/stub/qq-stub"]
+	path = libs/stub/qq-stub
+	url = https://github.com/LuckyPray/qq-stub
+[submodule "libs/dexkit/DexKit"]
+	path = libs/dexkit/DexKit
+	url = https://github.com/LuckyPray/DexKit
+[submodule "libs/linux-syscall-support"]
+	path = libs/linux-syscall-support
+	url = https://chromium.googlesource.com/linux-syscall-support
+[submodule "libs/Dobby"]
+	path = libs/Dobby
+	url = https://github.com/LSPosed/Dobby
+[submodule "libs/libunwindstack"]
+	path = libs/libunwindstack
+	url = https://github.com/cinit/libunwindstack
+[submodule "libs/xView/EasyAdapter"]
+	path = libs/xView/EasyAdapter
+	url = https://github.com/Hicores/EasyAdapter
+[submodule "libs/xView/XPopup"]
+	path = libs/xView/XPopup
+	url = https://github.com/Hicores/XPopup
+[submodule "libs/fmt"]
+	path = libs/fmt
+	url = https://github.com/fmtlib/fmt
