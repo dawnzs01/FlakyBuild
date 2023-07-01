@@ -1,8 +1,31 @@
-/.gradle
-/build
-/*/build
-app_pojavlauncher/src/main/assets/components/jre
-local.properties
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# idea
+
 .idea/
-app_pojavlauncher/.cxx/
-.vs/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# fabric
+
+run/
+
+# macOS
+
+.DS_Store
+.AppleDouble
+.LSOverride

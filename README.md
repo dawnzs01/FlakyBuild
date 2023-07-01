@@ -1,135 +1,117 @@
-<H1 align="center">PojavLauncher</H1>
+<img src="src/main/resources/assets/sodium/icon.png" width="128">
 
-<img src="https://github.com/CriticalRange/PojavLauncher/blob/v3_openjdk/app_pojavlauncher/src/main/assets/pojavlauncher.png" align="left" width="130" height="150" alt="PojavLauncher logo">
+# Sodium (for Fabric)
+![GitHub license](https://img.shields.io/github/license/CaffeineMC/sodium-fabric.svg)
+![GitHub issues](https://img.shields.io/github/issues/CaffeineMC/sodium-fabric.svg)
+![GitHub tag](https://img.shields.io/github/tag/CaffeineMC/sodium-fabric.svg)
 
-[![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)](https://github.com/PojavLauncherTeam/PojavLauncher/actions)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/PojavLauncherTeam/PojavLauncher)](https://github.com/PojavLauncherTeam/PojavLauncher/actions)
-[![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
-[![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/6RpEJda) 
-[![Twitter Follow](https://img.shields.io/twitter/follow/plaunchteam?color=blue&style=flat-square)](https://twitter.com/PLaunchTeam)
----------
-* From [Boardwalk](https://github.com/zhuowei/Boardwalk)'s ashes here comes PojavLauncher!
+Sodium is a free and open-source optimization mod for the Minecraft client that improves frame rates, reduces
+micro-stutter, and fixes graphical issues in Minecraft. 
 
-* PojavLauncher is a launcher that allows you to play Minecraft: Java Edition on your Android device!
+:warning: Sodium has had a lot of time to shape up lately, but the mod is still alpha software. You may run into minor
+graphical issues or crashes while using it. Additionally, the
+[Fabric Rendering API](https://fabricmc.net/wiki/documentation:rendering) is not yet supported, which may cause crashes
+and other issues with some mods.
 
-* It can run almost every version of the Minecraft, allowing you to use .jar only installers to install modloaders such as [Forge](https://files.minecraftforge.net/) and [Fabric](http://fabricmc.net/), mods like [OptiFine](https://optifine.net) and [LabyMod](https://www.labymod.net/en), as well as hack clients like [Wurst](https://www.wurstclient.net/), and much more!
+---
 
-* For more details [check out our wiki](https://github.com/PojavLauncherTeam/PojavLauncher/wiki)
-## Some notes to start with
-- We do not have an official TikTok account. No one from the dev team makes TikTok videos. 
-- The official Twitter for PojavLauncher is [@PLaunchTeam](https://twitter.com/PLaunchTeam). Any others (most notably @PojavLauncher) are fake, please report them to Twitter's moderation team.
+## Installation
 
-## Navigation
-- [Introduction](#introduction)  
-- [Getting PojavLauncher](#getting-pojavlauncher)
-- [Building](#building) 
-- [Current status](#current-status) 
-- [License](#license) 
-- [Contributing](#contributing) 
-- [Credits & Third party components and their licenses](#credits--third-party-components-and-their-licenses-if-available)
+### Manual installation (recommended)
 
-## Introduction 
-* PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). 
-* This launcher can launch almost all available Minecraft versions ranging from rd-132211 to 1.19 snapshots (including Combat Test versions). 
-* Modding via Forge and Fabric are also supported. 
-* This repository contains source code for Android. 
-* For iOS/iPadOS, check out [PojavLauncher_iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS).
+You will need Fabric Loader 0.10.x or newer installed in your game in order to load Sodium. If you haven't installed
+Fabric mods before, you can find a variety of community guides for doing so [here](https://fabricmc.net/wiki/install).
 
-## Getting PojavLauncher
+#### Stable releases
 
-You can get PojavLauncher via three methods:
+![GitHub release](https://img.shields.io/github/release/CaffeineMC/sodium-fabric.svg)
 
-1. You can get the prebuilt app from [stable releases](https://github.com/PojavLauncherTeam/PojavLauncher/releases) or [automatic builds](https://github.com/PojavLauncherTeam/PojavLauncher/actions).
+The latest releases of Sodium are published to our [Modrinth](https://modrinth.com/mod/sodium) and
+[GitHub release](https://github.com/CaffeineMC/sodium-fabric/releases) pages. Releases are considered by our team to be
+**suitable for general use**, but they are not guaranteed to be free of bugs and other issues.
 
-2. You can get it from Google Play by clicking on this badge:
-[![Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch)
+Usually, releases will be made available on GitHub slightly sooner than other locations.
 
-3. You can [build](#building) from source.
-## Building
-If you want to build from source code, follow the steps below.
-### Java Runtime Environment (JRE)
-- JRE for Android is [here](https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u), and the build script is [here](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch).
-- Follow build instruction on build script [README.md](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/blob/buildjre8/README.md).
-- You can also get [CI auto builds](https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/actions) if you are lazy or are failing to build it for some reason.
-* Either get the `jre8-pojav` artifact from auto builds, or split all artifacts by yourself:</br>
-   - Get JREs for all of 4 supported architectures (arm, arm64, x86, x86_64) </br> 
-      - Split JRE into parts:</br>
-                Platform-independent: .jar files, libraries, configs, etc...</br>
-                Platform-dependent: .so files, etc...</br>
-        - Create:</br>
-                A file named `universal.tar.xz` with all platform-independent files</br>
-                4 files named `bin-<arch>.tar.xz` with all platform-dependent files per-architecture</br>
-        - Put these in the `assets/components/jre/` folder</br>
-        - (If needed) update the Version file with the current date</br>
+#### Bleeding-edge builds (unstable)
 
-### LWJGL
-- **Coming soon**
+[![GitHub build status](https://img.shields.io/github/actions/workflow/status/CaffeineMC/sodium-fabric/gradle.yml)](https://github.com/CaffeineMC/sodium-fabric/actions/workflows/gradle.yml)
 
-### The Launcher
-- Because languages are auto-added by Crowdin, you need to run the language list generator before building. In the project directory, run:
+If you are a player who is looking to get your hands on the latest **bleeding-edge changes for testing**, consider
+taking a look at the automated builds produced through our [GitHub Actions workflow](https://github.com/CaffeineMC/sodium-fabric/actions/workflows/gradle.yml?query=event%3Apush).
+This workflow automatically runs every time a change is pushed to the repository, and as such, the builds it produces
+will generally reflect the latest snapshot of development.
 
-* On Linux, Mac OS:
-```
-chmod +x scripts/languagelist_updater.sh
-bash scripts/languagelist_updater.sh
-```
-* On Windows:
-```
-scripts\languagelist_updater.bat
-```
-Then, run these commands ~~or build using Android Studio~~.
+Bleeding edge builds will often include unfinished code that hasn't been extensively tested. That code may introduce
+incomplete features, bugs, crashes, and all other kinds of weird issues. You **should not use these bleeding edge builds**
+unless you know what you are doing and are comfortable with software debugging. If you report issues using these builds,
+we will expect that this is the case. Caveat emptor.
 
-* Build GLFW stub:
-```
-./gradlew :jre_lwjgl3glfw:build
-```       
-* Build the launcher
-```
-./gradlew :app_pojavlauncher:assembleDebug
-```
-(Replace `gradlew` with `gradlew.bat` if you are building on Windows).
+---
 
-## Current status
-- [x] ~~OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.~~ Replaced by JRE8.
-- [x] OpenJDK 8 Mobile port: ARM32, ARM64, x86, x86_64
-- [x] OpenJDK 17 Mobile port: ARM32, ARM64, x86, x86_64
-- [x] Headless mod installer
-- [x] Mod installer with GUI. Used `Caciocavallo` project for AWT without X11.
-- [x] OpenGL in OpenJDK environment
-- [x] OpenAL (works on most devices)
-- [x] Support for Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
-- [x] Support for Minecraft 1.13 and above. Used [GLFW stub](https://github.com/PojavLauncherTeam/lwjgl3-glfw-java).
-- [x] Support for Minecraft 1.17 (22w13a to be exact) and above. Used [Holy GL4ES](https://github.com/PojavLauncherTeam/gl4es-114-extra)
-- [x] Game surface zooming.
-- [x] New input pipe rewritten to native code to boost performance.
-- [x] Rewritten entire controls system (thanks to @Mathias-Boulay)
-- [ ] More to come!
+### Reporting Issues
 
-## Known Issues
-- Controller mods aren't working.
-- Random crashes could happen very often on Android 5.x when loading the game or joining a world.
-- With big modpacks textures could be messed up
-- Probably more, that's why we have a bug tracker ;) 
+You can report bugs and crashes by opening an issue on our [issue tracker](https://github.com/CaffeineMC/sodium-fabric/issues).
+Before opening a new issue, use the search tool to make sure that your issue has not already been reported and ensure
+that you have completely filled out the issue template. Issues that are duplicates or do not contain the necessary
+information to triage and debug may be closed. 
 
-## License
-- PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
+Please note that while the issue tracker is open to feature requests, development is primarily focused on
+improving hardware compatibility, performance, and finishing any unimplemented features necessary for parity with
+the vanilla renderer.
 
-## Contributing
-Contributions are welcome! We welcome any type of contribution, not only code. For example, you can help the wiki shape up. You can help the [translation](https://crowdin.com/project/pojavlauncher) too!
+### Community
+[![Discord chat](https://img.shields.io/badge/chat%20on-discord-7289DA?logo=discord&logoColor=white)](https://jellysquid.me/discord)
+
+We have an [official Discord community](https://jellysquid.me/discord) for all of our projects. By joining, you can:
+- Get installation help and technical support with all of our mods 
+- Be notified of the latest developments as they happen
+- Get involved and collaborate with the rest of our team
+- ... and just hang out with the rest of our community.
+
+---
+
+### Building from sources
+
+Support is not provided for setting up build environments or compiling the mod. We ask that
+users who are looking to get their hands dirty with the code have a basic understanding of compiling Java/Gradle
+projects. The basic overview is provided here for those familiar.
+
+#### Requirements
+
+- JRE 8 or newer (for running Gradle)
+- JDK 8 (optional)
+  - If you neither have JDK 8 available on your shell's path or installed through a supported package manager (such as
+[SDKMAN](https://sdkman.io)), Gradle will automatically download a suitable toolchain from the [AdoptOpenJDK project](https://adoptopenjdk.net/)
+and use it to compile the project. For more information on what package managers are supported and how you can
+customize this behavior on a system-wide level, please see [Gradle's Toolchain user guide](https://docs.gradle.org/current/userguide/toolchains.html).
+- Gradle 6.7 or newer (optional)
+  - The [Gradle wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:using_wrapper) is provided in
+    this repository can be used instead of installing a suitable version of Gradle yourself. However, if you are building
+    many projects, you may prefer to install it yourself through a suitable package manager as to save disk space and to
+    avoid many different Gradle daemons sitting around in memory.
+
+#### Building with Gradle
+
+Sodium uses a typical Gradle project structure and can be built by simply running the default `build` task. After Gradle
+finishes building the project, you can find the build artifacts (typical mod binaries, and their sources) in
+`build/libs`.
+
+**Tip:** If this is a one-off build, and you would prefer the Gradle daemon does not stick around in memory afterwards,
+try adding the [`--no-daemon` flag](https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:disabling_the_daemon)
+to ensure that the daemon is torn down after the build is complete. However, subsequent builds of the project will
+[start more slowly](https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:why_the_daemon) if the Gradle
+daemon is not available to be re-used.
 
 
-Any code change to this repository (or iOS) should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
+Build artifacts ending in `dev` are outputs containing the sources and compiled classes
+before they are remapped into stable intermediary names. If you are working in a developer environment and would
+like to add the mod to your game, you should prefer to use the `modRuntime` or `modCompile` configurations provided by
+Loom instead of these outputs.
 
-## Credits & Third party components and their licenses (if available)
-- [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
-- Android Support Libraries: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
-- [GL4ES](https://github.com/PojavLauncherTeam/gl4es): [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
-- [OpenJDK](https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u): [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).<br>
-- [LWJGL3](https://github.com/PojavLauncherTeam/lwjgl3): [BSD-3 License](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md).
-- [LWJGLX](https://github.com/PojavLauncherTeam/lwjglx) (LWJGL2 API compatibility layer for LWJGL3): unknown license.<br>
-- [Mesa 3D Graphics Library](https://gitlab.freedesktop.org/mesa/mesa): [MIT License](https://docs.mesa3d.org/license.html).
-- [pro-grade](https://github.com/pro-grade/pro-grade) (Java sandboxing security manager): [Apache License 2.0](https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt).
-- [xHook](https://github.com/iqiyi/xHook) (Used for exit code trapping): [MIT and BSD-style licenses](https://github.com/iqiyi/xHook/blob/master/LICENSE).
-- [libepoxy](https://github.com/anholt/libepoxy): [MIT License](https://github.com/anholt/libepoxy/blob/master/COPYING).
-- [virglrenderer](https://github.com/PojavLauncherTeam/virglrenderer): [MIT License](https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING).
-- Thanks to [MCHeads](https://mc-heads.net) for providing Minecraft avatars.
+---
+### License
+
+Sodium is licensed under GNU LGPLv3, a free and open-source license. For more information, please see the
+[license file](https://github.com/CaffeineMC/sodium-fabric/blob/1.16.x/dev/LICENSE.txt).
+
+The "Nicer Fast Leaves" pack included in Sodium is by [Vanilla Tweaks](https://vanillatweaks.net/), licensed for Sodium under the GNU LGPLv3.
