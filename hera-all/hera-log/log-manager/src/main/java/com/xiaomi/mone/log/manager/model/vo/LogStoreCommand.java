@@ -1,1 +1,0 @@
-package com.xiaomi.mone.log.manager.model.vo;

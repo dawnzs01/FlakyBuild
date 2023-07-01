@@ -1,1 +1,0 @@
-+ Basic class library for scheduling system

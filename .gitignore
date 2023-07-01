@@ -1,20 +1,37 @@
-.idea
-.java-version
-*.bak
-.classpath
-*.diff
-.DS_Store
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# eclipse
+
+*.launch
+
+# idea
+
 .idea/
 *.iml
-logs/
-.project
+*.ipr
+*.iws
+
+# vscode
+
 .settings/
-.tags*
-target/
-schedule/target/
-test-output/
-nohup*
-*.log
-*.swp
-*.pyc
-*.class
+.vscode/
+bin/
+.classpath
+.project
+.factorypath
+
+# macos
+
+*.DS_Store
+
+# fabric
+
+run/
+**/TestEventHandler*
+/.apt_generated_tests/
+src/test/java/com/aizistral/nochatreports/debug/Main.java
