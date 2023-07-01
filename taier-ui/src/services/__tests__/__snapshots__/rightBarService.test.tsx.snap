@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test RightBarService Should have correct component 1`] = `<DocumentFragment />`;
+
+exports[`Test RightBarService Should have correct component 2`] = `
+<DocumentFragment>
+  <div>
+    taskInfo
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Test RightBarService Should have correct component 3`] = `
+<DocumentFragment>
+  <div>
+    schedulingConfig
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Test RightBarService Should have correct component 4`] = `
+<DocumentFragment>
+  <div>
+    taskParams
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Test RightBarService Should have correct component 5`] = `
+<DocumentFragment>
+  <div>
+    envParams
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Test RightBarService Should have correct component 6`] = `
+<DocumentFragment>
+  <div>
+    taskConfig
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Test RightBarService Should have correct component 7`] = `
+<DocumentFragment>
+  <div>
+    flinkSource
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Test RightBarService Should have correct component 8`] = `
+<DocumentFragment>
+  <div>
+    flinkResult
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Test RightBarService Should have correct component 9`] = `
+<DocumentFragment>
+  <div>
+    flinkDimension
+  </div>
+</DocumentFragment>
+`;
