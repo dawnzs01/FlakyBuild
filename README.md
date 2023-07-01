@@ -1,68 +1,120 @@
-# Arclight
+<p align="center">
 
-A Bukkit server implementation utilizing Mixin.
+<img alt="CATS" width="400" src="https://raw.githubusercontent.com/Endava/cats/master/images/cats.png"  />
 
-![Downloads](https://img.shields.io/github/downloads/IzzelAliz/Arclight/total?style=flat-square)  ![GitHub](https://img.shields.io/github/license/IzzelAliz/Arclight?style=flat-square)
+</p>
+<p align="center">
 
-|       Release        |  Forge  | Status |                                                                                                        Build                                                                                                         |
-|:--------------------:|:-------:|:------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Trials (1.20-1.20.1) | 47.0.3  | ACTIVE |   [![1.19.4 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=Trials&style=flat-square)](https://github.com/IzzelAliz/Arclight/actions?query=branch%3ATrials)   |
-| Executions (1.19.4)  | 45.1.0  |  LTS   | [![1.19.4 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=Executions&style=flat-square)](https://github.com/IzzelAliz/Arclight/actions?query=branch%3AExecutions) |
-|        1.18.x        | 40.1.80 |  LTS   |              [![1.18 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=1.18&style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-18)              |
-|        1.16.x        | 36.2.39 |  LTS   |              [![1.16 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=1.16&style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-16)              |
+![CI](https://img.shields.io/github/actions/workflow/status/Endava/cats/main.yml?style=for-the-badge&logo=git&logoColor=white)
+[![Commits](https://img.shields.io/github/commit-activity/m/Endava/cats?style=for-the-badge&logo=git&logoColor=white)](https://github.com/Endava/cats/pulse)
 
-**Legacy versions**:
 
-<details>
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cats&metric=alert_status)](https://sonarcloud.io/dashboard?id=cats)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=cats&metric=sqale_index)](https://sonarcloud.io/dashboard?id=cats)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cats&metric=coverage)](https://sonarcloud.io/dashboard?id=cats)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cats&metric=bugs)](https://sonarcloud.io/dashboard?id=cats)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=cats&metric=code_smells)](https://sonarcloud.io/dashboard?id=cats)
 
-| Release |  Forge  |                                    Status                                    |                                                                         Build                                                                          |
-|:-------:|:-------:|:----------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Great Horn (1.19.3) | 44.1.22 | [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/GreatHorn/1.0.3) | [![1.19 Status](https://img.shields.io/github/actions/workflow/status/IzzelAliz/Arclight/gradle.yml?branch=GreatHorn&style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-19) |
-| Horn (1.19-1.19.2)  | 43.2.11 |   [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/horn/1.0.2)    | [![Horn Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight-19?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-19) |
-| 1.17.x  | 37.1.0  |   [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/1.17/1.0.2)    | [![1.17 Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight-17?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-17) |
-| 1.15.x  | 31.2.48 |   [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/1.15/1.0.19)   | [![1.15 Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight-15?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight-15) |
-| 1.14.x  | 28.2.0  |      [LEGACY](https://github.com/IzzelAliz/Arclight/releases/tag/1.0.6)      |    [![1.14 Status](https://img.shields.io/appveyor/build/IzzelAliz/arclight?style=flat-square)](https://ci.appveyor.com/project/IzzelAliz/arclight)    |
+</p>
 
-* Legacy version still accepts pull requests.
+> CATS documentation is available at [https://endava.github.io/cats/](https://endava.github.io/cats/)
 
-</details>
+**REST API fuzzer and negative testing tool. Run thousands of self-healing API tests within minutes with no coding effort!**
 
-![](.github/arclightlogo.jpg)
+- **Comprehensive**: tests are generated automatically based on a large number scenarios and cover **every** field and header
+- **Intelligent**: tests are generated based on data types and constraints; each Fuzzer has specific expectations depending on the scenario under test
+- **Highly Configurable**: high amount of customization: you can filter specific Fuzzers, HTTP response codes, HTTP methods, request paths, provide business context and a lot more
+- **Self-Healing**: as tests are generated, any OpenAPI spec change is picked up automatically
+- **Simple to Learn**: flat learning curve, with intuitive configuration and syntax
+- **Fast**: automatic process for write, run and report tests which covers thousands of scenarios within minutes
 
-## Installing
+<p align="center"></p>
 
-* Download the jar from [release page](https://github.com/IzzelAliz/Arclight/releases) or build server. (see the table
-  above)
-* Launch with command `java -jar arclight-forge-<mc>-<version>.jar nogui`. The `nogui` argument will disable the server
-  control panel.
+> Short on time? Check out the [1-minute Quick Start Guide](https://endava.github.io/cats/docs/intro)!
 
-## Support
+# Overview
+By using a simple and minimal syntax, with a flat learning curve, CATS (**C**ontract **A**uto-generated **T**ests for **S**wagger) enables you to generate thousands of API tests within minutes with **no coding effort**.
+All tests are **generated, run and reported automatically** based on a pre-defined set of **100+ Fuzzers**. 
+The Fuzzers cover a wide range of boundary testing and negative scenarios from fully random large Unicode values to well crafted, context dependant values based on the request data types and constraints. 
+Even more, you can leverage the fact that CATS generates request payloads dynamically and write simple end-to-end functional tests.
 
-Read [FAQ](https://github.com/IzzelAliz/Arclight/wiki/FAQ) before reporting issue.
+<div align="center">
+  <img alt="CATS" width="100%" src="images/run_result.png"/>
+</div>
 
-Discord server https://discord.gg/ZvTY5SC
+# Tutorials on how to use CATS
 
-QQ Group chat 3556966
+This is a list of articles with step-by-step guides on how to use CATS:
+* [Testing the GitHub API with CATS](https://ludovicianul.github.io/2020/10/05/github-api-testing/)
+* [How to write self-healing functional tests with no coding effort](https://ludovicianul.github.io/2020/09/09/cats/)
 
-## Contributing
+# Some bugs found by CATS
 
-Please read this [wiki section](https://github.com/IzzelAliz/Arclight/wiki/Contributing).
+- https://github.com/hashicorp/vault/issues/13274 | https://github.com/hashicorp/vault/issues/13273
+- https://github.com/hashicorp/vault/issues/13225 | https://github.com/hashicorp/vault/issues/13232
+- https://github.com/go-gitea/gitea/issues/19397  | https://github.com/go-gitea/gitea/issues/19398
+- https://github.com/go-gitea/gitea/issues/19399
 
-## License
+# Installation
 
-This project is licensed under [GPL v3](LICENSE).
+## Homebrew
 
-## Sponsor
+```shell
+> brew tap endava/tap
+> brew install cats
+```
 
-[![](https://www.yourkit.com/images/yklogo.png)](https://www.yourkit.com)
+## Manual
+CATS is bundled both as an executable JAR or a native binary. The native binaries do not need Java installed. 
 
-YourKit supports open source projects with innovative and intelligent tools for monitoring and profiling Java and .NET
-applications. YourKit is the creator of <a href="https://www.yourkit.com/java/profiler/">YourKit Java Profiler</a>,
-<a href="https://www.yourkit.com/.net/profiler/">YourKit .NET Profiler</a>,
-and <a href="https://www.yourkit.com/youmonitor/">YourKit YouMonitor</a>.
+After downloading your OS native binary, you can add it to PATH so that you can execute it as any other command line tool:
 
-[![](.github/jetbrains.png)](https://www.jetbrains.com/?from=Arclight)
+```shell
+sudo cp cats /usr/local/bin/cats
+```
 
-[![](.github/nexusnode.gif)](https://nexusnode.com/minecraft.php)
+You can also get autocomplete by downloading the [cats_autocomplete](cats_autocomplete) script and do:
 
-Get 10% off hosting server with promocode **ARCLIGHT** at [NEXUSNODE](https://nexusnode.com/minecraft.php)
+```shell
+source cats_autocomplete
+```
+
+To get persistent autocomplete, add the above line in `.zshrc` or `.bashrc`, but make sure you put the fully qualified path for the `cats_autocomplete` script.
+
+You can also check the `cats_autocomplete` source for alternative setup.
+
+There is no native binary for Windows, but you can use the uberjar version. This requires Java 17+ to be installed.
+
+You can run it as `java -jar cats.jar`.
+
+Head to the releases page to download the latest version: [https://github.com/Endava/cats/releases](https://github.com/Endava/cats/releases).
+
+## Build from sources
+
+You can build CATS from sources on you local box. You need [Java 17+](https://sdkman.io/jdks). Maven is already bundled.
+
+> Before running the first build, please make sure you do a `./mvnw clean`. CATS uses a fork of [OKHttp](https://square.github.io/okhttp/) which will install locally
+under the `4.10.0-CATS` version, so don't worry about overriding the official versions.
+
+
+You can use the following Maven command to build the project as an uberjar:
+
+`./mvnw package -Dquarkus.package.type=uber-jar`
+
+
+You will end up with a `cats-runner.jar` in the `target` folder. You can run it wih `java -jar cats-runner.jar ...`.
+
+You can also build native images using a [GraalVM Java version](https://www.graalvm.org/).
+
+`./mvnw package -Pnative`
+
+> You will need to configure Maven with a [GitHub PAT](https://docs.github.com/en/free-pro-team@latest/packages/guides/configuring-apache-maven-for-use-with-github-packages) with `read-packages` scope to get some dependencies for the build.
+
+
+### Notes on Unit Tests
+
+You may see some `error` log messages while running the Unit Tests. Those are expected behaviour for testing the negative scenarios of the Fuzzers.
+
+
+# Contributing
+Please refer to [CONTRIBUTING.md](CONTRIBUTING.md). 
