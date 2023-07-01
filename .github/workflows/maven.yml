@@ -1,8 +1,11 @@
-name: maven compile test
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
 
 on:
   push:
-    branches: [ sonic-server ]
+    branches: [ erupt ]
 
 
 
@@ -14,19 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '5.7'
-          mysql database: 'sonic'
-          mysql root password: 'Sonic!@#123'
-          mysql user: 'root'
-          mysql password: 'Sonic!@#123'
-      - name: Validate and Compile with Maven
-        run: mvn test
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
