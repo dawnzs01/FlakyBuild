@@ -1,8 +1,0 @@
-all:
-  test1:
-    description: XSS strings
-    targetFields:
-      - name
-    stringsFile: xss.txt
-    httpMethod: ALL
-    expectedResponseCode: 200
